@@ -7,6 +7,7 @@ public class TestDomi : MonoBehaviour
     private void Awake() {
         controls.ItemUseEvent += OnItemUse;
         controls.SkillEvent += OnSkill;
+        controls.InteractEvent += OnInteract;
     }
 
     private void OnItemUse() {
@@ -15,6 +16,10 @@ public class TestDomi : MonoBehaviour
 
     private void OnSkill() {
         print("OnSkill!");
+    }
+
+    private void OnInteract(bool isDown) {
+        print($"OnInteract {isDown}");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,6 +31,7 @@ public class TestDomi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Vector2 pos = controls.GetMoveDirection();
+        // print(pos);
     }
 }

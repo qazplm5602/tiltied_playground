@@ -12,7 +12,9 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
 {
     [SerializeField] ControlType playerType;
     public event Action ItemUseEvent;
+    public event Action ItemChangeEvent;
     public event Action SkillEvent;
+    public event Action<bool> InteractEvent;
     
     private Controls controls = null;
 
@@ -22,6 +24,10 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
         LoadKeyBind();
 
         controls.Player.Enable(); // 켜ㅓㅓ
+    }
+
+    private void OnDisable() {
+        controls.Player.Disable();
     }
     
     private void LoadKeyBind() {
@@ -38,14 +44,19 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
         controls.LoadBindingOverridesFromJson(data.ToString());
     }
 
+    public Vector2 GetMoveDirection() {
+        return controls.Player.Move.ReadValue<Vector2>();
+    }
+
     public void OnInteraction(InputAction.CallbackContext context)
     {
-
+        if (context.performed || context.canceled)
+            InteractEvent?.Invoke(context.performed);
     }
 
     public void OnItemChange(InputAction.CallbackContext context)
     {
-
+        ItemChangeEvent?.Invoke();
     }
 
     public void OnItemUse(InputAction.CallbackContext context)
@@ -54,10 +65,7 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
             ItemUseEvent?.Invoke();
     }
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
-
-    }
+    public void OnMove(InputAction.CallbackContext context) {}
 
     public void OnSkill(InputAction.CallbackContext context)
     {
