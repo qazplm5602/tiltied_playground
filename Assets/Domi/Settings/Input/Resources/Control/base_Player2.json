@@ -1,0 +1,25 @@
+{
+  "bindings": [
+    {
+      "action": "Player/ItemUse",
+      "id": "ee6b114a-4608-4d8b-bfce-de4067129ef2",
+      "path": "<Keyboard>/o",
+      "interactions": "null",
+      "processors": "null"
+    },
+    {
+      "action": "Player/Skill",
+      "id": "ba94a56a-7c5b-48a4-8de1-e4b03658d16a",
+      "path": "<Keyboard>/u",
+      "interactions": "null",
+      "processors": "null"
+    },
+    {
+      "action": "Player/Interaction",
+      "id": "838024c4-01c5-412d-8f16-602aea7f5654",
+      "path": "<Keyboard>/;",
+      "interactions": "null",
+      "processors": "null"
+    }
+  ]
+}

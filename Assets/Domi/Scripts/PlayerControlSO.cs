@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,8 @@ enum ControlType : byte {
 public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
 {
     [SerializeField] ControlType playerType;
+    public event Action ItemUseEvent;
+    public event Action SkillEvent;
     
     private Controls controls = null;
 
@@ -27,9 +30,11 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
         // ... code
         
         // defualt 키 지정
+        Debug.Log($"Load Key Bind... Control/base_{playerType.ToString()}");
         TextAsset data = Resources.Load<TextAsset>($"Control/base_{playerType.ToString()}");
         if (data == null) return; // 없는디??
 
+        Debug.Log("Loaded Key Bind!");
         controls.LoadBindingOverridesFromJson(data.ToString());
     }
 
@@ -45,7 +50,8 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
 
     public void OnItemUse(InputAction.CallbackContext context)
     {
-
+        if (context.performed)
+            ItemUseEvent?.Invoke();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -55,6 +61,7 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
 
     public void OnSkill(InputAction.CallbackContext context)
     {
-
+        if (context.performed)
+            SkillEvent?.Invoke();
     }
 }
