@@ -7,8 +7,8 @@ public class SimulationBallViewer : MonoBehaviour
     [SerializeField] private float maxTime = 20;
     [SerializeField] private float amount = 20;
     [SerializeField] private float gravity = 9.8f;
-    [SerializeField] private Vector3 pos;
-    [SerializeField] private Vector3 velocity;
+    [SerializeField] public Vector3 pos;
+    [SerializeField] public Vector3 velocity;
     [SerializeField] private GameObject prefab;
 
     private float lastTime;
@@ -44,7 +44,8 @@ public class SimulationBallViewer : MonoBehaviour
 
             float x = pos.x + velocity.x * nowTime;
             float y = pos.y + velocity.y * nowTime - ((gravity * Mathf.Pow(nowTime, 2)) / 2f);
-            entity.transform.position = new Vector3(x, y, pos.z);
+            float z = pos.z + velocity.z * nowTime;
+            entity.transform.position = new Vector3(x, y, z);
 
             debugObjects.Add(entity);
         }
