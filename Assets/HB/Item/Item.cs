@@ -7,8 +7,7 @@ public class Item : MonoBehaviour
     [SerializeField] private ItemSO[] _itemSO;
     public int buffTime;
 
-
-    public IEnumerator GetItem(Player player)
+    private IEnumerator GetItem(Player player)
     {
         for (int i = 0; i < _itemSO.Length; i++)
         {

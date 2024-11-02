@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using UnityEditorInternal;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "SO/Stat/PlayerStats")]
-public class PlayerStats : ScriptableObject
+public class PlayerStatsSO : ScriptableObject
 {
     [Header("선수 프로필")]
     [Tooltip("이름")] public string playerName;
@@ -32,7 +31,7 @@ public class PlayerStats : ScriptableObject
     {
         _statDictionary = new Dictionary<StatType, Stat>();
 
-        Type agentStatType = typeof(PlayerStats);
+        Type agentStatType = typeof(PlayerStatsSO);
 
         foreach (StatType enumType in Enum.GetValues(typeof(StatType)))
         {
