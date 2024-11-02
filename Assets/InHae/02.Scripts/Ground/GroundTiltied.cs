@@ -1,41 +1,22 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class Ground : MonoBehaviour
+public class GroundTiltied : MonoBehaviour, IGroundCompo
 {
-    [SerializeField] private Vector3 _searchSize;
-    [SerializeField] private LayerMask _objLayer;
     [SerializeField] private float _rotRimit;
     [SerializeField] private float _rotTime = 1f;
     [SerializeField] private Transform _endPoint;
     
-    public List<MassHaveObj> _onGroundObj = new List<MassHaveObj>();
-    public Collider[] _colliders;
-    
+    private Ground _ground;
     private float _currentRotZ;
+
+    public void Initialize(Ground ground)
+    {
+        _ground = ground;
+    }
     
     private void FixedUpdate()
     {
-        //OnFieldObjSearch();
         CalculateRot();
-    }
-
-    private void OnFieldObjSearch()
-    {
-        int size = Physics.OverlapBoxNonAlloc(transform.position, _searchSize * 0.5f, _colliders,
-            transform.rotation, _objLayer);
-
-        if (size > 0)
-        {
-            _onGroundObj = _colliders.ToList().ConvertAll(x =>
-            {
-                if (x.TryGetComponent(out MassHaveObj massHaveObj))
-                    return massHaveObj;
-                
-                return default;
-            });
-        }
     }
 
     private void CalculateRot()
@@ -43,7 +24,7 @@ public class Ground : MonoBehaviour
         float leftMassSum = 0;
         float rightMassSum = 0;
         
-        foreach (MassHaveObj obj in _onGroundObj)
+        foreach (MassHaveObj obj in _ground._onGroundObj)
         {
             Vector3 objPos = obj.transform.position;
             Vector3 groundPos = transform.position;
@@ -76,7 +57,7 @@ public class Ground : MonoBehaviour
 
     private float CalculateMass(float mass, Vector3 objPos, bool isLeft)
     {
-        float calculMass = mass;
+        float calculateMass;
         float lerpPos;
             
         Vector3 groundPos = transform.position;
@@ -84,32 +65,14 @@ public class Ground : MonoBehaviour
         if (!isLeft)
         {
             lerpPos = Mathf.InverseLerp(groundPos.x, groundPos.x + _endPoint.position.x, objPos.x);
-            calculMass = Mathf.Lerp(0, mass, lerpPos);
+            calculateMass = Mathf.Lerp(0, mass, lerpPos);
         }
         else
         {
             lerpPos = Mathf.InverseLerp(groundPos.x, groundPos.x - _endPoint.position.x, objPos.x);
-            calculMass = Mathf.Lerp(0, mass, lerpPos);
+            calculateMass = Mathf.Lerp(0, mass, lerpPos);
         }
         
-        return calculMass;
-    }
-    
-    private void OnCollisionEnter(Collision other)
-    {
-        if(other.collider.TryGetComponent(out MassHaveObj obj))
-            _onGroundObj.Add(obj);
-    }
-    
-    private void OnCollisionExit(Collision other)
-    {
-        if(other.collider.TryGetComponent(out MassHaveObj obj))
-            _onGroundObj.Remove(obj);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, _searchSize);
+        return calculateMass;
     }
 }
