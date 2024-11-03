@@ -61,4 +61,13 @@ public class PlayerStatsSO : ScriptableObject
     {
         _statDictionary[type].RemoveModifier(value);
     }
+
+    public void ShowStats()
+    {
+        Debug.Log($"{_player.gameObject.name}:");
+        Debug.Log($"{_player.Stat._statDictionary[StatType.GoalDecision].GetValue()}");
+        Debug.Log($"{_player.Stat._statDictionary[StatType.DefaultSpeed].GetValue()}");
+        Debug.Log($"{_player.Stat._statDictionary[StatType.RunSpeed].GetValue()}");
+        Debug.Log($"{_player.Stat._statDictionary[StatType.ShootPower].GetValue()}");
+    }
 }

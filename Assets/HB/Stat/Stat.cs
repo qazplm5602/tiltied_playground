@@ -12,10 +12,12 @@ public class Stat
     public int GetValue()
     {
         int finalValue = _baseValue;
-        foreach (int value in modifiers)
+
+        for (int i = 0; i < modifiers.Count; i++)
         {
-            finalValue += value;
+            finalValue += modifiers[i];
         }
+
         return finalValue;
     }
 

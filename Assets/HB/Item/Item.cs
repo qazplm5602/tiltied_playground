@@ -3,16 +3,21 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    private Player _player;
     [SerializeField] private ItemSO[] _itemSO;
     public int buffTime;
 
     private IEnumerator GetItem(Player player)
     {
+
         for (int i = 0; i < _itemSO.Length; i++)
         {
             player.Stat.AddModifier(_itemSO[i].statType, _itemSO[i].value);
-            yield return new WaitForSeconds(buffTime);
+        }
+
+        yield return new WaitForSeconds(buffTime);
+
+        for (int i = 0; i < _itemSO.Length; i++)
+        {
             player.Stat.RemoveModifier(_itemSO[i].statType, _itemSO[i].value);
         }
     }
@@ -23,7 +28,7 @@ public class Item : MonoBehaviour
         {
             if (other.TryGetComponent<Player>(out Player player))
             {
-                GetItem(player);
+                StartCoroutine(GetItem(player));
             }
         }
     }
