@@ -6,7 +6,7 @@ public class Item : MonoBehaviour
     [SerializeField] private ItemSO[] _itemSO;
     public int buffTime;
 
-    private IEnumerator GetItem(Player player)
+    private IEnumerator GetItem(HB_Player player)
     {
 
         for (int i = 0; i < _itemSO.Length; i++)
@@ -26,10 +26,9 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.attachedRigidbody)
         {
-            if (other.TryGetComponent<Player>(out Player player))
+            if (other.TryGetComponent<HB_Player>(out HB_Player player))
             {
                 StartCoroutine(GetItem(player));
-                gameObject.SetActive(false);
             }
         }
     }

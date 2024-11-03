@@ -19,10 +19,10 @@ public class PlayerStatsSO : ScriptableObject
     [Tooltip("°ñ °áÁ¤·Â")] public Stat goalDecision;
     [Tooltip("½¸ ÆÄ¿ö")] public Stat shootPower;
 
-    private Player _player;
+    private HB_Player _player;
     private Dictionary<StatType, Stat> _statDictionary;
 
-    public void SetOwner(Player player)
+    public void SetOwner(HB_Player player)
     {
         _player = player;
     }
