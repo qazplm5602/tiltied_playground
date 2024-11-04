@@ -1638,8 +1638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d74975926e6fda42a2381af69e9dc4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basePriority: 0
-  topPriority: 0
+  fadeOutDuration: 0.5
   screenName: CamScreen
 --- !u!1 &1459861478 stripped
 GameObject:
