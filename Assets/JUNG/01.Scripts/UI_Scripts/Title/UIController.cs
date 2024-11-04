@@ -17,15 +17,14 @@ public class UIController : MonoBehaviour
         _movingBG = root.Q<VisualElement>("MovingBG");
 
         _openSceneBtn = root.Q<Button>("OpenSceneBtn");
-        _openSceneBtn.RegisterCallback<ClickEvent>(vt =>
-        {
-            SceneManager.LoadScene(1);
-        });
+       
     }
 
-
-    // Update is called once per frame
     void Update()
     {
+        _openSceneBtn.RegisterCallback<ClickEvent>(vt =>
+        {
+            SceneManager.LoadScene("MainScene");
+        });
     }
 }
