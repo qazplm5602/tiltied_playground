@@ -148,9 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ec84ed907677840911de7cd91e0daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managers:
-  - {fileID: 1430128382}
-  - {fileID: 203194651}
 --- !u!4 &96072485
 Transform:
   m_ObjectHideFlags: 0
@@ -951,6 +948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controls: {fileID: 11400000, guid: 3b65716b6545d3540bdab38db3501e9b, type: 2}
+  ball: {fileID: 1459861482}
 --- !u!4 &810268192
 Transform:
   m_ObjectHideFlags: 0
@@ -3758,10 +3756,10 @@ SceneRoots:
   - {fileID: 96072485}
   - {fileID: 203194652}
   - {fileID: 1430128383}
+  - {fileID: 810268192}
   - {fileID: 1994756193}
   - {fileID: 604712594}
   - {fileID: 505702790}
-  - {fileID: 810268192}
   - {fileID: 5876611190160425430}
   - {fileID: 1143970015}
   - {fileID: 1854209250}
