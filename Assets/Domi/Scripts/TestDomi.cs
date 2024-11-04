@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TestDomi : MonoBehaviour
 {
     [SerializeField] PlayerControlSO controls;
+    [SerializeField] TestSoccerBallKick ball;
 
     // private void Awake() {
     //     controls.ItemUseEvent += OnItemUse;
@@ -34,4 +36,28 @@ public class TestDomi : MonoBehaviour
     //     Vector2 pos = controls.GetMoveDirection();
     //     // print(pos);
     // }
+
+    CameraManager cameraManager;
+
+    private void Awake() {
+        BallGoalSimulateManager simulateSys = ManagerManager.GetManager<BallGoalSimulateManager>();
+        simulateSys.onWillGoal += HandleWillGoal;
+
+        cameraManager = ManagerManager.GetManager<CameraManager>();
+    }
+
+    private void Update() {
+        if (Keyboard.current.gKey.wasPressedThisFrame)
+            ball.KickBall();
+    }
+
+    private void OnDestroy() {
+        BallGoalSimulateManager simulateSys = ManagerManager.GetManager<BallGoalSimulateManager>();
+        simulateSys.onWillGoal -= HandleWillGoal;
+    }
+
+    private void HandleWillGoal(BallAreaType type) {
+        Time.timeScale = 0.1f; // 시간 느리게
+        // cameraManager.Transition.
+    }
 }
