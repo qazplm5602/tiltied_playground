@@ -54,7 +54,7 @@ public class CameraTransition : MonoBehaviour
 
         // 애님
         process = DOTween.Sequence();
-        process.Append(screen.DOFade(0, fadeOutDuration).SetEase(Ease.Linear).SetUpdate(true));
+        process.Append(screen.DOFade(0, fadeOutDuration).SetEase(Ease.Linear).SetUpdate(true)).SetUpdate(true);
         process.OnStart(() => {
             oldCam.targetTexture = renderTexture;
             nowCam.targetDisplay = 0;
