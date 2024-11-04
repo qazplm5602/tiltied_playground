@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class HB_Player : MonoBehaviour
 {
     // 나중에 본후 플레이어로 바꿀거임
 
