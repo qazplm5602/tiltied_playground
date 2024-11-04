@@ -20,7 +20,7 @@ public struct CameraData {
 
 public class CameraManager : MonoSingleton<CameraManager>
 {
-    private Dictionary<CameraType, CinemachineCamera> cameraList;
+    private Dictionary<CameraType, Camera> cameraList;
     [field: SerializeField] public CameraTransition Transition { get; private set; }
 
     protected override void Awake() {
@@ -35,7 +35,7 @@ public class CameraManager : MonoSingleton<CameraManager>
     private void OnSceneLoad(Scene scene, LoadSceneMode mode) {
         cameraList = new(); // 다시 파
         
-        CinemachineCamera[] cameras = FindObjectsByType<CinemachineCamera>(FindObjectsSortMode.None);
+        Camera[] cameras = FindObjectsByType<Camera>(FindObjectsSortMode.None);
         print($"find camera length: {cameras.Length}");
         
         foreach (var item in cameras)
@@ -53,7 +53,7 @@ public class CameraManager : MonoSingleton<CameraManager>
         print($"camera insert count: {cameraList.Count}");
     }
 
-    public CinemachineCamera GetCamera(CameraType type) {
+    public Camera GetCamera(CameraType type) {
         if (cameraList.TryGetValue(type, out var cam))
             return cam;
 

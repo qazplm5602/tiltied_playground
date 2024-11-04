@@ -35,16 +35,26 @@ public class CameraTransition : MonoBehaviour
             CreateRenderTexture();
         }
 
-        // 활성화
-        screen.enabled = true;
-        screen.color = Color.white;
+        Camera oldCam = CameraManager.Instance.GetCamera(currentCamType);
+        // oldCam.targetDisplay = 2; // 렌더 텍스쳐 적용하면 필요 없어짐 ㅎㅎ
+        oldCam.targetTexture = renderTexture;
 
-        CinemachineCamera oldCam = CameraManager.Instance.GetCamera(currentCamType);
-        // oldCam.
+        Camera nowCam = CameraManager.Instance.GetCamera(cam);
+        nowCam.targetDisplay = 0;
+
+        // 활성화
+        screen.gameObject.SetActive(true);
+        screen.color = Color.white;
     }
 
     private void CreateRenderTexture() {
-        renderTexture = new RenderTexture(Screen.width, Screen.height, 16);
+        // renderTexture = new RenderTexture(Screen.width, Screen.height, 16);
+        renderTexture = new RenderTexture(1920, 1080, 32);
         screen.texture = renderTexture;
+    }
+
+    [ContextMenu("Transition Cam")]
+    private void TestCode() {
+        FadeChangeCam(CameraType.Blue_R);
     }
 }
