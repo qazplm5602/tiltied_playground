@@ -2,6 +2,7 @@ using System.Linq;
 using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -45,6 +46,8 @@ public class CameraTransition : MonoBehaviour
 
         Camera nowCam = CameraManager.Instance.GetCamera(cam);
 
+        // print($"{currentCamType} -> {cam}");
+
         // 활성화
         screen.gameObject.SetActive(true);
         screen.color = Color.white;
@@ -74,6 +77,12 @@ public class CameraTransition : MonoBehaviour
 
     [ContextMenu("Transition Cam")]
     private void TestCode() {
-        FadeChangeCam(CameraType.Blue_R);
+        FadeChangeCam((CameraType)(((int)currentCamType + 1) % 5));
+    }
+
+    
+    private void Update() {
+        // if (Keyboard.current.gKey.wasPressedThisFrame)
+            // TestCode();
     }
 }
