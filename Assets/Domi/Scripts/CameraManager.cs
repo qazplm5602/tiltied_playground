@@ -18,13 +18,13 @@ public struct CameraData {
     CinemachineCamera cam;
 }
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : MonoSingleton<CameraManager>
 {
-    // [SerializeField] CameraData[] cameraList;
-    Dictionary<CameraType, CinemachineCamera> cameraList;
+    private Dictionary<CameraType, CinemachineCamera> cameraList;
     [field: SerializeField] public CameraTransition Transition { get; private set; }
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         SceneManager.sceneLoaded += OnSceneLoad;
     }
 
@@ -51,5 +51,12 @@ public class CameraManager : MonoBehaviour
         }
 
         print($"camera insert count: {cameraList.Count}");
+    }
+
+    public CinemachineCamera GetCamera(CameraType type) {
+        if (cameraList.TryGetValue(type, out var cam))
+            return cam;
+
+        return null;
     }
 }
