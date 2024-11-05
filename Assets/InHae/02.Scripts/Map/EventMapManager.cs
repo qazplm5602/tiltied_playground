@@ -14,15 +14,18 @@ public class EventMapManager : MonoBehaviour
     private void Awake()
     {
         _mapSoDictionary = new Dictionary<EventMapEnum, EventMapSO>();
+        _mapObjDictionary = new Dictionary<EventMapEnum, GameObject>();
         _mapSos.ForEach(x => _mapSoDictionary.Add(x.mapType, x));
     }
 
     private void Update()
     {
+#if UNITY_EDITOR
         if (Keyboard.current.pKey.wasPressedThisFrame)
         {
             MapInit(EventMapEnum.Volcano);
         }
+#endif
     }
 
     public void MapInit(EventMapEnum type)
@@ -35,7 +38,7 @@ public class EventMapManager : MonoBehaviour
         }
 
         _mapObjDictionary[type].SetActive(true);
-        _currentMap = _mapObjDictionary[type].GetComponentInChildren<EventMapBase>();
+        _currentMap = _mapObjDictionary[type].GetComponent<EventMapBase>();
         _currentMap.MapInit(_mapSoDictionary[type]);
     }
 }

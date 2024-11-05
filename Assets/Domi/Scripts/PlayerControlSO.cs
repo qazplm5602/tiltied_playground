@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-enum ControlType : byte {
+enum ControlType : byte
+{
     Player1 = 0,
     Player2
 }
@@ -14,11 +15,13 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
     public event Action ItemUseEvent;
     public event Action ItemChangeEvent;
     public event Action SkillEvent;
+    public event Action MoveEvent;
     public event Action<bool> InteractEvent;
-    
+
     private Controls controls = null;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         controls = new();
         controls.Player.SetCallbacks(this);
         LoadKeyBind();
@@ -26,15 +29,17 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
         controls.Player.Enable(); // 켜ㅓㅓ
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         controls.Player.Disable();
     }
-    
-    private void LoadKeyBind() {
+
+    private void LoadKeyBind()
+    {
         // 아직 저장기능이 구현 안되어있음
         // 저장된 바인딩 데이터가 있으면 그걸로 적용함
         // ... code
-        
+
         // defualt 키 지정
         Debug.Log($"Load Key Bind... Control/base_{playerType.ToString()}");
         TextAsset data = Resources.Load<TextAsset>($"Control/base_{playerType.ToString()}");
@@ -44,7 +49,8 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
         controls.LoadBindingOverridesFromJson(data.ToString());
     }
 
-    public Vector2 GetMoveDirection() {
+    public Vector2 GetMoveDirection()
+    {
         return controls.Player.Move.ReadValue<Vector2>();
     }
 
@@ -65,7 +71,11 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
             ItemUseEvent?.Invoke();
     }
 
-    public void OnMove(InputAction.CallbackContext context) {}
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            ItemUseEvent?.Invoke();
+    }
 
     public void OnSkill(InputAction.CallbackContext context)
     {
