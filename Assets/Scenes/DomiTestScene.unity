@@ -575,6 +575,7 @@ GameObject:
   m_Component:
   - component: {fileID: 319392014}
   - component: {fileID: 319392013}
+  - component: {fileID: 319392015}
   m_Layer: 0
   m_Name: Decal
   m_TagString: Untagged
@@ -589,7 +590,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319392012}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
   m_Name: 
@@ -621,6 +622,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1459861483}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &319392015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319392012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3f6f51d5810dc4e9c10e318314785c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistance: 5
+  maxDistance: 1000
+  margin: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &444106049 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8034566619726561690, guid: 70a12507ca0819d459180cd4d52d975c, type: 3}
