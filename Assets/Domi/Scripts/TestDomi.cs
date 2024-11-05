@@ -68,6 +68,6 @@ public class TestDomi : MonoBehaviour
         CameraType nearCam = cameras[0];
         cameraManager.Transition.FadeChangeCam(nearCam);
 
-        DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 1, 1f).SetEase(Ease.OutQuad);
+        DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 1, 1f).SetEase(Ease.OutQuad).SetUpdate(true);
     }
 }
