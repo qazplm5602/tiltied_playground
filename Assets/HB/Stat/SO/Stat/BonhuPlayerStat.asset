@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea44e0299a2903e4e85c0beffd5234bc, type: 3}
   m_Name: BonhuPlayerStat
   m_EditorClassIdentifier: 
-  playerName: "\uC774\uD55C\uBCC4"
+  playerName: "\uAD6C\uBCF8\uD6C4"
   nationlity: "\uB300\uD55C\uBBFC\uAD6D"
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   height: 175
