@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea44e0299a2903e4e85c0beffd5234bc, type: 3}
-  m_Name: HanbyulPlayerStats
+  m_Name: HanbyulPlayerStat
   m_EditorClassIdentifier: 
   playerName: "\uC774\uD55C\uBCC4"
   nationlity: "\uB300\uD55C\uBBFC\uAD6D"
