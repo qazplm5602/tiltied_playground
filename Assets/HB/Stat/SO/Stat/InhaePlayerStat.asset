@@ -15,17 +15,17 @@ MonoBehaviour:
   playerName: "\uC774\uC778\uD574"
   nationlity: "\uB300\uD55C\uBBFC\uAD6D"
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  height: 175
-  weight: 65
+  height: 172
+  weight: 60
   defaultSpeed:
-    _baseValue: 5
+    _baseValue: 7
     modifiers: 
   runSpeed:
-    _baseValue: 6
+    _baseValue: 10
     modifiers: 
   goalDecision:
-    _baseValue: 50
+    _baseValue: 15
     modifiers: 
   shootPower:
-    _baseValue: 5
+    _baseValue: 2
     modifiers: 
