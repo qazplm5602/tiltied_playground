@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundTiltied : MonoBehaviour, IGroundCompo
@@ -8,6 +9,9 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
     
     private Ground _ground;
     private float _currentRotZ;
+    
+    [SerializeField] private float _leftMassSum;
+    [SerializeField] private float _rightMassSum;
 
     public void Initialize(Ground ground)
     {
@@ -21,23 +25,24 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
 
     private void CalculateRot()
     {
-        float leftMassSum = 0;
-        float rightMassSum = 0;
-        
-        foreach (MassHaveObj obj in _ground._onGroundObj)
+        _leftMassSum = 0;
+        _rightMassSum = 0;
+
+        List<MassHaveObj> onGroundObj = _ground._onGroundObj;     
+        for (int i = 0; i < onGroundObj.Count; i++)
         {
-            Vector3 objPos = obj.transform.position;
+            Vector3 objPos = onGroundObj[i].transform.position;
             Vector3 groundPos = transform.position;
 
             bool isLeft = objPos.x < groundPos.x;
 
             if (isLeft)
-                leftMassSum += CalculateMass(obj.GetMass(), objPos, true);
+                _leftMassSum += CalculateMass(onGroundObj[i].GetMass(), objPos, true);
             else
-                rightMassSum += CalculateMass(obj.GetMass(), objPos, false);
+                _rightMassSum += CalculateMass(onGroundObj[i].GetMass(), objPos, false);
         }
 
-        ApplyRotate(leftMassSum, rightMassSum);
+        ApplyRotate(_leftMassSum, _rightMassSum);
     }
 
     private void ApplyRotate(float leftMassSum, float rightMassSum)

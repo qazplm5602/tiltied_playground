@@ -12,12 +12,18 @@ public class GroundObjFinder : MonoBehaviour, IGroundCompo
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out MassHaveObj massHaveObj))
+        {
+            massHaveObj.SetGround(_ground);
             _ground._onGroundObj.Add(massHaveObj);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out MassHaveObj massHaveObj))
+        {
+            massHaveObj.SetGround(null);
             _ground._onGroundObj.Remove(massHaveObj);
+        }
     }
 }

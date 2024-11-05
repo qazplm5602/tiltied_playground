@@ -6,13 +6,13 @@ using UnityEngine;
 public class Ground : MonoBehaviour
 {
     public List<MassHaveObj> _onGroundObj = new List<MassHaveObj>();
+    public Transform _fallAbleArea;
     
     private Dictionary<Type, IGroundCompo> _groundCompos;
 
     private void Awake()
     {
         _groundCompos = new Dictionary<Type, IGroundCompo>();
-
         GetComponentsInChildren<IGroundCompo>()
             .ToList()
             .ForEach(x => _groundCompos.Add(x.GetType(), x));
@@ -21,5 +21,7 @@ public class Ground : MonoBehaviour
         {
             groundCompo.Initialize(this);
         }
+
+        _fallAbleArea = transform.Find("FallAreaTrm");
     }
 }

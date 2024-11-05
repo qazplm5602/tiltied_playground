@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: VolcanoEventMapSO
   m_EditorClassIdentifier: 
   mapType: 0
-  mapPrefab: {fileID: 0}
+  mapPrefab: {fileID: 6658943075110010759, guid: af37a1ed7717b07419e947191d7fe6c8, type: 3}
   minEventTime: 1
   maxEventTime: 5
   eventDurationTime: 30

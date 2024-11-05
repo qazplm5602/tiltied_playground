@@ -1,15 +1,15 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class MassHaveObj : MonoBehaviour
 {
     [SerializeField] private bool _isMove;
     [SerializeField] private float _mass;
     [SerializeField] private float _speed;
-    [SerializeField] private LayerMask _ground;
+    [SerializeField] private LayerMask _groundLayer;
 
     private Rigidbody _rigidbody;
+
+    private Ground _ground;
 
     private void Awake()
     {
@@ -26,10 +26,16 @@ public class MassHaveObj : MonoBehaviour
         _rigidbody.linearVelocity= new Vector3(x * _speed, _rigidbody.linearVelocity.y, 0);
     }
 
+    private void OnDestroy()
+    {
+        if (_ground != null)
+            _ground._onGroundObj.Remove(this);
+    }
+
     private void TiltiedApply()
     {
         bool isHit = Physics.Raycast(transform.position, Vector3.down,
-            out RaycastHit hit,3f, _ground);
+            out RaycastHit hit,3f, _groundLayer);
 
         if (isHit)
         {
@@ -39,5 +45,9 @@ public class MassHaveObj : MonoBehaviour
         }
     }
 
+    public void SetGround(Ground ground)
+    {
+        _ground = ground;
+    }
     public float GetMass() => _mass;
 }
