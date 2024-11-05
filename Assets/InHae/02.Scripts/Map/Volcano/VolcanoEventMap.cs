@@ -24,7 +24,7 @@ public class VolcanoEventMap : EventMapBase
         base.MapEventStop();
         foreach (Meteor meteor in _meteorList)
         {
-            Destroy(meteor.gameObject);
+            meteor.MeltProcess();
         }
         
         _meteorList.Clear();

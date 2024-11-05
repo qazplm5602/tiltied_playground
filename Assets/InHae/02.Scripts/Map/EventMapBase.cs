@@ -43,6 +43,7 @@ public abstract class EventMapBase : MonoBehaviour
     {
         _mapSo = so;
         _randomEventTime = Random.Range(_mapSo.minEventTime, _mapSo.maxEventTime);
+        MapEventStop();
     }
 
     private void MapEventEndCheck()

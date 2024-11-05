@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EventMapManager : MonoBehaviour
+public class EventMapManager : MonoSingleton<EventMapManager>
 {
     [SerializeField] private List<EventMapSO> _mapSos;
     
@@ -27,7 +27,7 @@ public class EventMapManager : MonoBehaviour
         }
 #endif
     }
-
+    
     public void MapInit(EventMapEnum type)
     {
         if (!_mapObjDictionary.ContainsKey(type))
