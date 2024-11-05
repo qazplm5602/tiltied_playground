@@ -74,7 +74,7 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.performed)
-            ItemUseEvent?.Invoke();
+            MoveEvent?.Invoke();
     }
 
     public void OnSkill(InputAction.CallbackContext context)
