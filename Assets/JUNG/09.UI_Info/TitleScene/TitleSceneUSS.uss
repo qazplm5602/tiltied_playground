@@ -1,0 +1,34 @@
+.button-start {
+    width: 300px;
+    height: 100px;
+    font-size: 56px;
+    -unity-font-definition: url("project://database/Assets/JUNG/09.UI_Info/NEXON_Maplestory_Font/Maplestory%20Bold%20SDF.asset?fileID=11400000&guid=322bcf8acb4e433449e0e95aa2a0ec4e&type=2#Maplestory Bold SDF");
+    flex-shrink: 1;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    background-color: rgba(255, 255, 255, 0);
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    -unity-font-style: normal;
+    text-overflow: clip;
+    white-space: normal;
+    transition-timing-function: ease-out-bounce;
+    transition-duration: 0.2s;
+}
+
+.button-start:hover {
+    scale: 1.2 1.2;
+    rotate: 5deg;
+    transition-timing-function: ease-out-bounce;
+    transition-duration: 0.2s;
+}
+
+.button-start:active {
+    transition-timing-function: ease-in;
+    transition-duration: 0s;
+    color: rgb(255, 255, 255);
+}

@@ -12,6 +12,9 @@ TagManager:
   - Water
   - UI
   - MassObj
+  - Ball
+  - Obstacle
+  - Ground
   - 
   - 
   - 
