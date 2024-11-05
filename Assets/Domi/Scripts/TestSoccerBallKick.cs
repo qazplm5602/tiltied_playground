@@ -8,7 +8,7 @@ public class TestSoccerBallKick : MonoBehaviour
     [SerializeField] private BallGoalSimulateManager ballSimulater;
 
     [ContextMenu("kick")]
-    private void KickBall() {
+    public void KickBall() {
         rigid.AddForce(direction, ForceMode.Impulse);
         ballSimulater.SimulateBall(rigid.transform.position, direction);
         // viewer.pos = rigid.transform.position;

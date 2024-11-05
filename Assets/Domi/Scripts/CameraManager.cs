@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -58,5 +59,24 @@ public class CameraManager : MonoSingleton<CameraManager>
             return cam;
 
         return null;
+    }
+
+    public enum NearType { Near, Far }
+
+    // 그니까 카메라 타입들을 넣으면 가까운거 순으로 함 (아님 말고)
+    public List<CameraType> GetNearCam(NearType type, CameraType[] types, Vector3 pos) {
+        List<CameraType> list = types.ToList();
+        list.Sort((a, b) => {
+            float dist1 = Vector3.Distance(cameraList[a].transform.position, pos);
+            float dist2 = Vector3.Distance(cameraList[b].transform.position, pos);
+        
+            if (dist1 > dist2) {
+                return type == NearType.Near ? -1 : 1;
+            } else if (dist1 < dist2) {
+                return type == NearType.Near ? 1 : -1;
+            } else return 0;
+        });
+
+        return list;
     }
 }

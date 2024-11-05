@@ -20,26 +20,30 @@ public class BallGoalSimulateManager : MonoBehaviour
     [SerializeField] private LayerMask whatIsObstacle;
     [SerializeField] private Collider point; // 이걸로 공이 충돌 하는지 체크함
     [SerializeField] private BallArea[] areas;
+
+    public event Action<BallAreaType> onWillGoal;
     
-    private Dictionary<BallAreaType, Action> callbacks = new();
+    // private Dictionary<BallAreaType, Action> callbacks = new();
 
     
-    public void RegisterCallback(BallAreaType type, Action cb) {
-        if (callbacks.TryGetValue(type, out Action value)) {
-            callbacks[type] += cb;
-        } else callbacks[type] = cb;
-    }
+    // public void RegisterCallback(BallAreaType type, Action cb) {
+    //     if (callbacks.TryGetValue(type, out Action value)) {
+    //         callbacks[type] += cb;
+    //     } else callbacks[type] = cb;
+    // }
 
-    public void UnRegisterCallback(BallAreaType type, Action cb) {
-        callbacks[type] -= cb;
+    // public void UnRegisterCallback(BallAreaType type, Action cb) {
+    //     callbacks[type] -= cb;
         
-        if (callbacks[type] == null)
-            callbacks.Remove(type);
-    }
+    //     if (callbacks[type] == null)
+    //         callbacks.Remove(type);
+    // }
 
     private void SendCallback(BallAreaType type) {
-        if (callbacks.TryGetValue(type, out Action cb))
-            cb?.Invoke();
+        // if (callbacks.TryGetValue(type, out Action cb))
+        //     cb?.Invoke();
+
+        onWillGoal?.Invoke(type);
     }
 
     public void SimulateBall(Vector3 ballPos, Vector3 kickDir /* 힘도 있음 */) {
