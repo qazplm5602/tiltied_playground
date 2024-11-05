@@ -42,7 +42,6 @@ public abstract class EventMapBase : MonoBehaviour
     public void MapInit(EventMapSO so)
     {
         _mapSo = so;
-        _randomEventTime = Random.Range(_mapSo.minEventTime, _mapSo.maxEventTime);
         MapEventStop();
     }
 

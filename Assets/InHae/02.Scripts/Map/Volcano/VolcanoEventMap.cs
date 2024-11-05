@@ -53,9 +53,4 @@ public class VolcanoEventMap : EventMapBase
             yield return new WaitForSeconds(_intervalTime);
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-    }
 }
