@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class GameModeDefault : GameMode
 {
-    bool progress = false; // 경기 진행중
-    BallGoalSimulateManager simulateManager;
+    public GameModeUI IngameUI { get; protected set; }
+    private bool progress = false; // 경기 진행중
+    private BallGoalSimulateManager simulateManager;
 
     protected override void Awake()
     {
         base.Awake();
+        IngameUI = new(this);
     }
 
     protected override void OnDestroy()
@@ -25,6 +27,11 @@ public class GameModeDefault : GameMode
     protected override void HandleBallGoal(BallAreaType type)
     {
         if (!progress) return;
+
+        if (type == BallAreaType.Blue)
+            BlueScore ++;
+        else
+            RedScore ++;
 
         StartCoroutine(WaitBallReset());
     }

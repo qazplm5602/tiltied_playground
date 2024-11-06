@@ -2,9 +2,26 @@ using UnityEngine;
 
 public abstract class GameMode : MonoBehaviour
 {
-    public int RedScore { get; protected set; }
-    public int BlueScore { get; protected set; }
+    private int redScore;
+    private int blueScore;
+
+    public int RedScore {
+        get => redScore;
+        protected set {
+            redScore = value;
+            OnScoreChange?.Invoke(BallAreaType.Red, value);
+        }
+    }
+    public int BlueScore { 
+        get => blueScore;
+        protected set {
+            blueScore = value;
+            OnScoreChange?.Invoke(BallAreaType.Blue, value);
+        }
+     }
     protected SoccerBall soccerBall; // 축구 없는 게임모드는 없으니까 여기에 있어도 되것지???
+
+    public event System.Action<BallAreaType, int> OnScoreChange;
     
     protected virtual void Awake() {
         // 현재는 있는 축구공을 불러오지만 나중에는 소환 하는 방법으로도 할 수 있음 ㅁㄴㅇㄹ
