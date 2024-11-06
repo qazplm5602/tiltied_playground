@@ -95,7 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5971552772640841496}
-  - component: {fileID: 4965423431601250772}
+  - component: {fileID: 3277097000482189438}
   m_Layer: 0
   m_Name: MoonMap
   m_TagString: Untagged
@@ -120,7 +120,7 @@ Transform:
   - {fileID: 8867119264510472190}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4965423431601250772
+--- !u!114 &3277097000482189438
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,14 +129,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3456556670848960018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e3035d1ab8f1b4468885e2aafcc565e, type: 3}
+  m_Script: {fileID: 11500000, guid: 911bb26617569ab4fa27cd0b4dc784f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meteor: {fileID: 311042333556333033, guid: a0e9afc82bbbfeb41bd6113c6f67225a, type: 3}
-  _meteorStartPos: {fileID: 0}
-  _minMeteorCount: 3
-  _maxMeteorCount: 3
-  _intervalTime: 3
 --- !u!1 &3981780145596431239
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,14 +156,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3981780145596431239}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.15868154, z: -0, w: 0.98732984}
-  m_LocalPosition: {x: -0.06931259, y: -20.2, z: 78.85186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.06931259, y: -20.2, z: 95.1}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7224668087675189936}
   m_Father: {fileID: 5971552772640841496}
-  m_LocalEulerAnglesHint: {x: 0, y: -18.261, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4936879694361957380
 PrefabInstance:
   m_ObjectHideFlags: 0

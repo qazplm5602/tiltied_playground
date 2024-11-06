@@ -6,6 +6,7 @@ public class Meteor : MonoBehaviour
     [SerializeField] private float _power;
     [SerializeField] private float _distance;
     [SerializeField] private LayerMask _groundMask;
+    [SerializeField] private ParticleSystem _smokeEffect;
     
     private bool _isStruck;
     private Rigidbody _rigidbody;
@@ -15,6 +16,7 @@ public class Meteor : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
+        _smokeEffect.Stop();
     }
 
     private void Update()
@@ -40,6 +42,8 @@ public class Meteor : MonoBehaviour
 
     public void MeltProcess()
     {
+        _smokeEffect.Clear();
+        _smokeEffect.Stop();
         Vector3 endValue = transform.position;
         endValue.y -= 10;
         transform.DOMove(endValue, 2f).OnComplete(() => Destroy(gameObject));
@@ -61,11 +65,24 @@ public class Meteor : MonoBehaviour
     {
         if (other.name.Equals("Floor"))
         {
-            _isStruck = true;
-            _rigidbody.linearVelocity = Vector3.zero;
-            _rigidbody.isKinematic = true; 
-            _collider.isTrigger = false;
+            StruckSetting();
+            StartSmoking();
             transform.parent = other.transform;
         }
+    }
+
+    private void StartSmoking()
+    {
+        _smokeEffect.Play();
+        _smokeEffect.transform.localPosition = Vector3.zero;
+        _smokeEffect.transform.rotation = Quaternion.LookRotation(Vector3.up);
+    }
+
+    private void StruckSetting()
+    {
+        _isStruck = true;
+        _rigidbody.linearVelocity = Vector3.zero;
+        _rigidbody.isKinematic = true; 
+        _collider.isTrigger = false;
     }
 }

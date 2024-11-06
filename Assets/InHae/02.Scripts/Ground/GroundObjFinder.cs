@@ -14,7 +14,7 @@ public class GroundObjFinder : MonoBehaviour, IGroundCompo
         if (other.TryGetComponent(out MassHaveObj massHaveObj))
         {
             massHaveObj.SetGround(_ground);
-            _ground._onGroundObj.Add(massHaveObj);
+            _ground.onGroundObj.Add(massHaveObj);
         }
     }
 
@@ -23,7 +23,7 @@ public class GroundObjFinder : MonoBehaviour, IGroundCompo
         if (other.TryGetComponent(out MassHaveObj massHaveObj))
         {
             massHaveObj.SetGround(null);
-            _ground._onGroundObj.Remove(massHaveObj);
+            _ground.onGroundObj.Remove(massHaveObj);
         }
     }
 }

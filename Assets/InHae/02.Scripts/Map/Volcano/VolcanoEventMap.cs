@@ -6,17 +6,23 @@ using Random = UnityEngine.Random;
 public class VolcanoEventMap : EventMapBase
 {
     [SerializeField] private Meteor _meteor;
-    [SerializeField] private Transform _meteorStartPos;
     
+    [Header("Particle Setting")]
+    [SerializeField] private ParticleSystem _explodeEffect;
+    
+    [Header("Meteor Setting")]
+    [SerializeField] private Transform _meteorStartPos;
     [SerializeField] private int _minMeteorCount;
     [SerializeField] private int _maxMeteorCount;
     [SerializeField] private float _intervalTime;
-
+    
     private List<Meteor> _meteorList = new List<Meteor>();
+
+    private Coroutine _fallRoutine;
     protected override void MapEventStart()
     {
         base.MapEventStart();
-        StartCoroutine(StartFallMeteor());
+        _fallRoutine = StartCoroutine(StartFallMeteor());
     }
 
     protected override void MapEventStop()
@@ -30,12 +36,25 @@ public class VolcanoEventMap : EventMapBase
         _meteorList.Clear();
     }
 
+    public override void MapClear()
+    {
+        if (_fallRoutine != null)
+            StopCoroutine(_fallRoutine);
+        
+        foreach (Meteor meteor in _meteorList)
+        {
+            Destroy(meteor.gameObject);
+        }
+        
+        _meteorList.Clear();
+    }
+
     private IEnumerator StartFallMeteor()
     {
         int randMeteorCount = Random.Range(_minMeteorCount, _maxMeteorCount + 1);
 
-        Vector3 minPoint = _ground._fallAbleArea.Find("MinPoint").position;
-        Vector3 maxPoint = _ground._fallAbleArea.Find("MaxPoint").position;
+        Vector3 minPoint = _ground.minFallPoint.position;
+        Vector3 maxPoint = _ground.maxFallPoint.position;
 
         for (int i = 0; i < randMeteorCount; i++)
         {
@@ -47,9 +66,11 @@ public class VolcanoEventMap : EventMapBase
             targetPos.x = x;
             targetPos.z = z;
 
+            _explodeEffect.Play();
             Meteor meteor = Instantiate(_meteor, _meteorStartPos.position, Quaternion.identity);
-            meteor.Init(targetPos);
             _meteorList.Add(meteor);
+            meteor.Init(targetPos);
+            
             yield return new WaitForSeconds(_intervalTime);
         }
     }
