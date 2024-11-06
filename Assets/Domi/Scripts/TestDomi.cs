@@ -59,15 +59,6 @@ public class TestDomi : MonoBehaviour
     }
 
     private void HandleWillGoal(BallAreaType type) {
-        if (type != BallAreaType.Blue && type != BallAreaType.Red) return;
-        
-        Time.timeScale = 0.1f; // 시간 느리게
-        List<CameraType> cameras = cameraManager.GetNearCam(CameraManager.NearType.Near, new CameraType[] { type == BallAreaType.Blue ? CameraType.Blue_L : CameraType.Orange_L, type == BallAreaType.Blue ? CameraType.Blue_R : CameraType.Orange_R }, ball.transform.position);
 
-        // 가까운거는
-        CameraType nearCam = cameras[0];
-        cameraManager.Transition.FadeChangeCam(nearCam);
-
-        DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 1, 1f).SetEase(Ease.OutQuad).SetUpdate(true);
     }
 }
