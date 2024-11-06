@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 27232b968fef0be4e8eeafdde9bb877a
+guid: 65fe4dcd041973f47b748d65abfa8def
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -97,23 +97,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: border_0
+      name: circle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 101
-        height: 100
+        width: 126
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 25, y: 25, z: 25, w: 25}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb58dbc77569f6344a755ec7a1feaf40
-      internalID: -1486882070
+      spriteID: 1c4c3a6e9f876f840ac37610639f129e
+      internalID: 1347361666
       vertices: []
       indices: 
       edges: []
@@ -122,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4c485ff2f2989914394e8068eba64635
+    spriteID: 966ecd9d07b966343aae03e30285f275
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      border_0: -1486882070
+      circle_0: 1347361666
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
