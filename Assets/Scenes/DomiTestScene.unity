@@ -2007,6 +2007,9 @@ MonoBehaviour:
   rigid: {fileID: 1459861480}
   viewer: {fileID: 1854209249}
   ballSimulater: {fileID: 203194651}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!4 &1459861483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8384331328541956103, guid: 67ef0f6ba6f68c04faddc87ad4523210, type: 3}

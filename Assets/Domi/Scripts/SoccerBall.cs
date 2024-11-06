@@ -4,6 +4,7 @@ public class SoccerBall : MonoBehaviour
 {
     public event System.Action<BallAreaType> OnGoal; // 골대에 들어감
     public event System.Action OnOut; // 공 나가짐
+    public event System.Action OnReset;
 
     [SerializeField] private string outAreaTag = "OutArea";
     [SerializeField] private string spawnPointName = "BallSpawnPoint";
@@ -36,5 +37,6 @@ public class SoccerBall : MonoBehaviour
     public void BallReset() {
         rigid.linearVelocity = Vector3.zero;
         transform.position = spawnPoint.position;
+        OnReset?.Invoke();
     }
 }
