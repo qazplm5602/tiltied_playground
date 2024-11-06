@@ -18,4 +18,6 @@ public class GameManager : MonoBehaviour
     public void GameStart() {
         mode.GameStart();
     }
+
+    public GameMode GetMode() => mode;
 }

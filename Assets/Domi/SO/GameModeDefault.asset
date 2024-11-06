@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d09ea1d9ff0aa24887981ff40a9c72c, type: 3}
   m_Name: GameModeDefault
   m_EditorClassIdentifier: 
-  gameName: 
+  gameName: Default
   icon: {fileID: 0}
   system: {fileID: 3552916239682931610, guid: 82ee9c169a68a9d409c4f47969bcdb82, type: 3}
