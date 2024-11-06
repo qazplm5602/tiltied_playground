@@ -41,9 +41,9 @@ public class GameModeDefault : GameMode
 
         yield return new WaitForSeconds(5f);
 
-        soccerBall.BallReset();
-        CameraManager.Instance.Transition.FadeChangeCam(CameraType.Main);
-
-        progress = true;
+        CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main, () => {
+            soccerBall.BallReset();
+            progress = true;
+        });
     }
 }
