@@ -32,6 +32,8 @@ public class CameraTransition : MonoBehaviour
     }
 
     public void FadeChangeCam(CameraType cam) {
+        if (cam == currentCamType) return; // 같은 카메라는 안ㅇ해 (인해 아님)
+
         if (process != null) {
             process.Kill(true);
         }
@@ -68,6 +70,8 @@ public class CameraTransition : MonoBehaviour
 
         currentCamType = cam;
     }
+
+    public CameraType GetCurrentCam() => currentCamType;
 
     private void CreateRenderTexture() {
         // renderTexture = new RenderTexture(Screen.width, Screen.height, 16);
