@@ -24,7 +24,7 @@ public class VolcanoEventMap : EventMapBase
         base.MapEventStop();
         foreach (Meteor meteor in _meteorList)
         {
-            Destroy(meteor.gameObject);
+            meteor.MeltProcess();
         }
         
         _meteorList.Clear();
@@ -52,10 +52,5 @@ public class VolcanoEventMap : EventMapBase
             _meteorList.Add(meteor);
             yield return new WaitForSeconds(_intervalTime);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
     }
 }
