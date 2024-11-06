@@ -2,17 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EventMapManager : MonoBehaviour
+public class EventMapManager : MonoSingleton<EventMapManager>
 {
     [SerializeField] private List<EventMapSO> _mapSos;
-    
+    [SerializeField] private EventMapEnum _eventMapEnum;
     private Dictionary<EventMapEnum, EventMapSO> _mapSoDictionary;
     private Dictionary<EventMapEnum, GameObject> _mapObjDictionary;
 
     private EventMapBase _currentMap;
-    
-    private void Awake()
+
+    protected override void Awake()
     {
+        base.Awake();
         _mapSoDictionary = new Dictionary<EventMapEnum, EventMapSO>();
         _mapObjDictionary = new Dictionary<EventMapEnum, GameObject>();
         _mapSos.ForEach(x => _mapSoDictionary.Add(x.mapType, x));
@@ -23,11 +24,11 @@ public class EventMapManager : MonoBehaviour
 #if UNITY_EDITOR
         if (Keyboard.current.pKey.wasPressedThisFrame)
         {
-            MapInit(EventMapEnum.Volcano);
+            MapInit(_eventMapEnum);
         }
 #endif
     }
-
+    
     public void MapInit(EventMapEnum type)
     {
         if (!_mapObjDictionary.ContainsKey(type))
@@ -37,6 +38,12 @@ public class EventMapManager : MonoBehaviour
             _mapObjDictionary.Add(type, mapObj);
         }
 
+        if (_currentMap != null)
+        {
+           _currentMap.MapClear(); 
+            _currentMap.gameObject.SetActive(false);
+        }
+        
         _mapObjDictionary[type].SetActive(true);
         _currentMap = _mapObjDictionary[type].GetComponent<EventMapBase>();
         _currentMap.MapInit(_mapSoDictionary[type]);

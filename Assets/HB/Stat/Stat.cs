@@ -32,9 +32,4 @@ public class Stat
         if (value != 0)
             modifiers.Remove(value);
     }
-
-    public void SetDefaultValue(int value)
-    {
-        _baseValue = value;
-    }
 }

@@ -29,7 +29,7 @@ public class MassHaveObj : MonoBehaviour
     private void OnDestroy()
     {
         if (_ground != null)
-            _ground._onGroundObj.Remove(this);
+            _ground.onGroundObj.Remove(this);
     }
 
     private void TiltiedApply()

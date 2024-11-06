@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2445487876922303932}
   - component: {fileID: 6890593593999893406}
   - component: {fileID: 311042333556333033}
-  - component: {fileID: 3647057804698514444}
   - component: {fileID: 7826832778876471943}
   m_Layer: 0
   m_Name: Meteor
@@ -32,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,7 +104,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -123,25 +122,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c72af029537974c8995feb82a46eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _power: 20
---- !u!114 &3647057804698514444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3366581551800350701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 191a85f2ac838fe4b9fd4b254a6dc1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isMove: 0
-  _mass: 2
-  _speed: 0
-  _groundLayer:
+  _power: 45
+  _distance: 20
+  _groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!54 &7826832778876471943
 Rigidbody:
   m_ObjectHideFlags: 0

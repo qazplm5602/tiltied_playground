@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Ball
+  - Item
   - OutArea
   layers:
   - Default
@@ -17,9 +19,6 @@ TagManager:
   - Obstacle
   - Ground
   - Simulate
-  - 
-  - 
-  - 
   - 
   - 
   - 

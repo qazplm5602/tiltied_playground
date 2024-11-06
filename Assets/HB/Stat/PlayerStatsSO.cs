@@ -10,13 +10,13 @@ public class PlayerStatsSO : ScriptableObject
     [Tooltip("이름")] public string playerName;
     [Tooltip("국적")] public string nationlity;
     [Tooltip("이미지")] public Sprite icon;
-    [Tooltip("키")] public float height;
-    [Tooltip("몸무게")] public float weight;
+    [Tooltip("키 (cm)")] public float height;
+    [Tooltip("몸무게 (kg)")] public float weight;
 
     [Header("능력치")]
-    [Tooltip("기본 속도 ")] public Stat defaultSpeed;
+    [Tooltip("기본 속도")] public Stat defaultSpeed;
     [Tooltip("달리기 속도")] public Stat runSpeed;
-    [Tooltip("골 결정력")] public Stat goalDecision;
+    [Tooltip("골 결정력 (%)")] public Stat goalDecision;
     [Tooltip("슛 파워")] public Stat shootPower;
 
     private HB_Player _player;
@@ -60,14 +60,5 @@ public class PlayerStatsSO : ScriptableObject
     public void RemoveModifier(StatType type, int value)
     {
         _statDictionary[type].RemoveModifier(value);
-    }
-
-    public void ShowStats()
-    {
-        Debug.Log($"{_player.gameObject.name}:");
-        Debug.Log($"{_player.Stat._statDictionary[StatType.GoalDecision].GetValue()}");
-        Debug.Log($"{_player.Stat._statDictionary[StatType.DefaultSpeed].GetValue()}");
-        Debug.Log($"{_player.Stat._statDictionary[StatType.RunSpeed].GetValue()}");
-        Debug.Log($"{_player.Stat._statDictionary[StatType.ShootPower].GetValue()}");
     }
 }
