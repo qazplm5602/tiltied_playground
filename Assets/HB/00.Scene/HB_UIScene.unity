@@ -801,6 +801,7 @@ GameObject:
   - component: {fileID: 342506670}
   - component: {fileID: 342506672}
   - component: {fileID: 342506671}
+  - component: {fileID: 342506673}
   m_Layer: 5
   m_Name: TimeBoard
   m_TagString: Untagged
@@ -866,6 +867,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342506669}
   m_CullTransparentMesh: 1
+--- !u!114 &342506673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342506669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de83e7e044fbfc34bbdf701c3b7a3744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeText: {fileID: 0}
 --- !u!1 &361860701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,6 +1660,7 @@ GameObject:
   - component: {fileID: 628192018}
   - component: {fileID: 628192020}
   - component: {fileID: 628192019}
+  - component: {fileID: 628192021}
   m_Layer: 5
   m_Name: Board
   m_TagString: Untagged
@@ -1713,6 +1728,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628192017}
   m_CullTransparentMesh: 1
+--- !u!114 &628192021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628192017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2403b8fcfe4483647a5a7bdd65522572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _redScoreText: {fileID: 0}
+  _blueScoreText: {fileID: 0}
+  _redScore: 0
+  _blueScore: 0
 --- !u!1 &652563178
 GameObject:
   m_ObjectHideFlags: 0
