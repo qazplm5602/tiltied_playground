@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ball
   - Item
+  - OutArea
   layers:
   - Default
   - TransparentFX
@@ -17,10 +18,7 @@ TagManager:
   - Ball
   - Obstacle
   - Ground
-  - 
-  - 
-  - 
-  - 
+  - Simulate
   - 
   - 
   - 

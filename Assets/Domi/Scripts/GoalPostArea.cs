@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GoalPostArea : MonoBehaviour
 {
+    [SerializeField] BallAreaType areaType;
     [SerializeField] LayerMask pointLayer;
     BoxCollider boxCollider;
 
@@ -14,4 +15,6 @@ public class GoalPostArea : MonoBehaviour
         int amount = Physics.OverlapBoxNonAlloc(transform.position + boxCollider.center, boxCollider.size / 2f, detectColliders, transform.rotation, pointLayer);
         return amount > 0;
     }
+
+    public BallAreaType GetArea() => areaType;
 }

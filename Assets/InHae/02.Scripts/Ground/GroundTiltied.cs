@@ -30,7 +30,7 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
         _leftMassSum = 0;
         _rightMassSum = 0;
 
-        List<MassHaveObj> onGroundObj = _ground._onGroundObj;     
+        List<MassHaveObj> onGroundObj = _ground.onGroundObj;     
         for (int i = 0; i < onGroundObj.Count; i++)
         {
             Vector3 objPos = onGroundObj[i].transform.position;

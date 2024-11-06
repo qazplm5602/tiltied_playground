@@ -40,9 +40,10 @@ public class TestDomi : MonoBehaviour
     // }
 
     CameraManager cameraManager;
+     BallGoalSimulateManager simulateSys;
 
     private void Awake() {
-        BallGoalSimulateManager simulateSys = ManagerManager.GetManager<BallGoalSimulateManager>();
+        simulateSys = ManagerManager.GetManager<BallGoalSimulateManager>();
         simulateSys.onWillGoal += HandleWillGoal;
 
         cameraManager = ManagerManager.GetManager<CameraManager>();
@@ -54,7 +55,6 @@ public class TestDomi : MonoBehaviour
     }
 
     private void OnDestroy() {
-        BallGoalSimulateManager simulateSys = ManagerManager.GetManager<BallGoalSimulateManager>();
         simulateSys.onWillGoal -= HandleWillGoal;
     }
 
