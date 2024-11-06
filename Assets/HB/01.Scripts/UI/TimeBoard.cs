@@ -1,13 +1,14 @@
 using System.Collections;
-using System.Xml.Schema;
 using TMPro;
 using UnityEngine;
 
 public class TimeBoard : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _timerText;
+
     public int m, s;
     private int time;
+
     private bool _isTimerRunning = false;
 
     private void Start()
