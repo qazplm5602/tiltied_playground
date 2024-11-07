@@ -55,9 +55,9 @@ public class Meteor : MonoBehaviour
         dir.y += Physics.gravity.y * -1 + _power;
         
         //_rigidbody.AddForce(dir - transform.position, ForceMode.Impulse);
-        //_rigidbody.AddTorque(_rigidbody.linearVelocity, ForceMode.Impulse);
+        //_rigidbody.AddTorque(_rigidbody.linearVelocity * 0.5f, ForceMode.Impulse);
         
-        _rigidbody.linearVelocity = (dir - transform.position);
+        _rigidbody.linearVelocity = dir - transform.position;
         _rigidbody.useGravity = true;
     }
 

@@ -40,14 +40,11 @@ public class MassHaveObj : MonoBehaviour
         if (isHit)
         {
             Vector3 rot = transform.rotation.eulerAngles;
-            rot.x = hit.transform.eulerAngles.z;
+            rot.x = hit.transform.rotation.eulerAngles.z;
             transform.rotation = Quaternion.Euler(rot);
         }
     }
 
-    public void SetGround(Ground ground)
-    {
-        _ground = ground;
-    }
+    public void SetGround(Ground ground) => _ground = ground;
     public float GetMass() => _mass;
 }

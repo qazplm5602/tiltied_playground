@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class MoonEventMap : EventMapBase
 {
-    [SerializeField] private float _eventGravity = -9.8f;
     private Vector3 _defaultGravity;
     private Vector3 _applyGravity;
     
@@ -10,7 +9,7 @@ public class MoonEventMap : EventMapBase
     {
         base.MapEventStart();
         _defaultGravity = Physics.gravity;
-        _applyGravity.y = _eventGravity;
+        _applyGravity.y = Physics.gravity.y / 6;
         Physics.gravity = _applyGravity;
     }
 
