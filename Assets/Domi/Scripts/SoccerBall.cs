@@ -35,7 +35,7 @@ public class SoccerBall : MonoBehaviour
     }
 
     public void BallReset() {
-        rigid.linearVelocity = Vector3.zero;
+        rigid.linearVelocity = rigid.angularVelocity = Vector3.zero;
         transform.position = spawnPoint.position;
         OnReset?.Invoke();
     }
