@@ -1632,6 +1632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1052925457}
+  - component: {fileID: 1052925458}
   m_Layer: 0
   m_Name: CheerPlayer
   m_TagString: Untagged
@@ -1655,6 +1656,19 @@ Transform:
   - {fileID: 1325962541}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1052925458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052925456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515b753f255a90544b9f8e68803e6103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allowSeat: 1
 --- !u!1 &1143970011
 GameObject:
   m_ObjectHideFlags: 0
@@ -3187,6 +3201,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd73872b05b15034faf2ea447d5959b5, type: 3}
+--- !u!1 &2094414722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2094414723}
+  m_Layer: 0
+  m_Name: Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2094414723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094414722}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.08857403, z: 2.2204463e-16, w: 0.9960696}
+  m_LocalPosition: {x: 130.9, y: 72, z: -252.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2048611654524846017}
+  m_LocalEulerAnglesHint: {x: 0, y: -10.163, z: 0}
 --- !u!1 &2116198337
 GameObject:
   m_ObjectHideFlags: 0
@@ -3614,7 +3659,8 @@ Transform:
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2094414723}
   m_Father: {fileID: 4391883859115684904}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2088316679762710677
@@ -3720,10 +3766,10 @@ Animator:
   m_GameObject: {fileID: 4641700351312496444}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6147421752a2bb54a8a935dbf4aabd71, type: 3}
-  m_Controller: {fileID: 9100000, guid: c35795527b4e4e3478f71c15fc238eae, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3082232ae9cd71241b1ddc8bee97b51f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
