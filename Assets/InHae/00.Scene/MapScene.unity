@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 753552732}
   - component: {fileID: 753552731}
   - component: {fileID: 753552730}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,9 +413,13 @@ MonoBehaviour:
   _isMove: 1
   _mass: 30
   _speed: 5
+  _rayDistance: 2.5
   _groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  _massHaveLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!54 &753552731
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -549,7 +553,7 @@ GameObject:
   - component: {fileID: 794021424}
   - component: {fileID: 794021423}
   - component: {fileID: 794021422}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,9 +575,13 @@ MonoBehaviour:
   _isMove: 1
   _mass: 20
   _speed: 5
+  _rayDistance: 2.5
   _groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  _massHaveLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!54 &794021423
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -685,14 +693,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794021421}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.09229599, y: -0.7010574, z: -0.09229599, w: 0.7010574}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 24.6, y: 10.07, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 855667429}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -15, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &838667395
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,7 +856,7 @@ MonoBehaviour:
   _mapSos:
   - {fileID: 11400000, guid: fbdd6ea300a15604380bb0d450c5535f, type: 2}
   - {fileID: 11400000, guid: c72c0357098e4fe468e84dce9e09c9a9, type: 2}
-  _eventMapEnum: 1
+  _eventMapEnum: 0
 --- !u!1 &855667428
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,9 +1001,13 @@ MonoBehaviour:
   _isMove: 0
   _mass: 20
   _speed: 5
+  _rayDistance: 0
   _groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  _massHaveLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!54 &1763085397
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1264,9 +1276,13 @@ MonoBehaviour:
   _isMove: 1
   _mass: 3
   _speed: 5
+  _rayDistance: 0
   _groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  _massHaveLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

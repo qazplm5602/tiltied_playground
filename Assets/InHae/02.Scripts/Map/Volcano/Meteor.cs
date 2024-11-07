@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 
@@ -7,16 +9,19 @@ public class Meteor : MonoBehaviour
     [SerializeField] private float _distance;
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private ParticleSystem _smokeEffect;
+    [SerializeField] private ParticleSystem _struckEffect;
     
     private bool _isStruck;
     private Rigidbody _rigidbody;
     private Collider _collider;
 
+    private MassHaveObj _massHaveObj;
+
     private void Awake()
     {
+        _massHaveObj = GetComponent<MassHaveObj>();
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
-        _smokeEffect.Stop();
     }
 
     private void Update()
@@ -65,17 +70,26 @@ public class Meteor : MonoBehaviour
     {
         if (other.name.Equals("Floor"))
         {
+            StartStruckEffect();
             StruckSetting();
             StartSmoking();
             transform.parent = other.transform;
+            DOVirtual.DelayedCall(0.5f, () => _massHaveObj.SetMass(0));
         }
     }
 
     private void StartSmoking()
     {
-        _smokeEffect.Play();
         _smokeEffect.transform.localPosition = Vector3.zero;
         _smokeEffect.transform.rotation = Quaternion.LookRotation(Vector3.up);
+        _smokeEffect.Play();
+    }
+
+    private void StartStruckEffect()
+    {
+        _struckEffect.transform.localPosition = Vector3.zero;
+        _struckEffect.transform.rotation = Quaternion.LookRotation(Vector3.up);
+        _struckEffect.Play();
     }
 
     private void StruckSetting()
@@ -84,5 +98,6 @@ public class Meteor : MonoBehaviour
         _rigidbody.linearVelocity = Vector3.zero;
         _rigidbody.isKinematic = true; 
         _collider.isTrigger = false;
+        _massHaveObj.SetDefaultMass(0f);
     }
 }

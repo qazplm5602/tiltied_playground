@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MoonEventMap : EventMapBase
 {
-    private Vector3 _defaultGravity;
+    private Vector3 _defaultGravity = Physics.gravity;
     private Vector3 _applyGravity;
     
     protected override void MapEventStart()
