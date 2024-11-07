@@ -6,10 +6,13 @@ using UnityEngine.UI;
 public class UI_Char_Selector : MonoBehaviour
 {
 
+    [SerializeField] private GameObject mapSelectUI;
+
     [SerializeField] private UI_Characters[] _characters;
     [SerializeField] private PlayerControlSO _inputSO1;
     [SerializeField] private PlayerControlSO _inputSO2;
     [SerializeField] private int rightMaxIdx = 0;  // 오른쪽으로 몇개까지 캐릭터가 있는가. 아래있는 캐릭터를 charIndex % 이값으로 나타날 예정.
+
 
     [SerializeField] private PlayerStatsSO selectSO1 = null;
     [SerializeField] private PlayerStatsSO selectSO2 = null;
@@ -17,18 +20,23 @@ public class UI_Char_Selector : MonoBehaviour
     private int charIndex1 = 0;
     private int charIndex2 = 0;
 
-
-
-    private void Start()
+    private event Action isReady;
+    private void OnEnable()
     {
         _characters = GetComponentsInChildren<UI_Characters>();
+
         _inputSO1.ItemUseEvent += HandleSelectCharacter1;
         _inputSO1.MoveEvent += HandleMoveEvent1;
 
         _inputSO2.ItemUseEvent += HandleSelectCharacter2;
         _inputSO2.MoveEvent += HandleMoveEvent2;
+        isReady += HandleGoToMapSelect;
     }
-
+    private void HandleGoToMapSelect()
+    {
+        UI_Manager.Instance.UIOpenOrClose(mapSelectUI, true);
+        gameObject.SetActive(false);
+    }
 
     private void HandleMoveEvent1()
     {
@@ -51,8 +59,11 @@ public class UI_Char_Selector : MonoBehaviour
     private void HandleSelectCharacter1()
     {
         selectSO1 = _characters[charIndex1].SelectCharacter1();
+        if (_characters[charIndex1].IsSelected1 == true && _characters[charIndex2].IsSelected2 == true)
+        {
+            isReady?.Invoke();
+        }
     }
-
 
     private void HandleMoveEvent2()
     {
@@ -74,9 +85,15 @@ public class UI_Char_Selector : MonoBehaviour
     private void HandleSelectCharacter2()
     {
         selectSO2 = _characters[charIndex2].SelectCharacter2();
-    }
 
-    public void IsOnUp(int objIdx)  // 여기서 능력치를 보여줘야해.. 움직일때마다 캐릭터를 바꿔주니까 _character[charIndex1]에서 statSO값 가져와서 이미지에 넣어주자..
+        if (_characters[charIndex1].IsSelected1 == true && _characters[charIndex2].IsSelected2 == true)
+        {
+            isReady?.Invoke();
+        }
+    }
+    public void IsOnUp(int objIdx)  // 여기서 능력치를 보여줘야해..
+                                    // 움직일때마다 캐릭터를 바꿔주니까
+                                    // _character[charIndex1]에서 statSO값 가져와서 이미지에 넣어주자..
     {
         if (objIdx == 1)
         {
@@ -97,10 +114,11 @@ public class UI_Char_Selector : MonoBehaviour
     }
 
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         _inputSO1.ItemUseEvent -= HandleSelectCharacter1;
         _inputSO2.ItemUseEvent -= HandleSelectCharacter2;
+        isReady -= HandleGoToMapSelect;
     }
 
     public void ResetSelect(int idx)

@@ -29,6 +29,18 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
         controls.Player.Enable(); // 켜ㅓㅓ
     }
 
+    public void ControlSetting(bool isActive)
+    {
+        if (isActive)
+        {
+            controls.Player.Enable();
+        }
+        else
+        {
+            controls.Player.Disable();
+        }
+    }
+
     private void OnDisable()
     {
         controls.Player.Disable();
