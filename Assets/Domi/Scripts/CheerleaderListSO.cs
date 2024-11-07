@@ -4,4 +4,8 @@ using UnityEngine;
 public class CheerleaderListSO : ScriptableObject
 {
     [SerializeField] CheerleaderNPC[] characters;
+
+    public CheerleaderNPC GetRandom() {
+        return characters[Random.Range(0, characters.Length)];
+    }
 }
