@@ -2,22 +2,24 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class GameModeDefault : GameMode
+public class GameModeDefault : GameMode, IGameModeTimer
 {
     public GameModeUI IngameUI { get; protected set; }
-    public SoccerTimer Timer { get; protected set; }
+    SoccerTimer IGameModeTimer.Timer { get => timer; }
+    private SoccerTimer timer;
+
     private bool progress = false; // 경기 진행중
     private BallGoalSimulateManager simulateManager;
 
     protected override void Awake()
     {
         base.Awake();
+        timer = new(this); // 타이머가 먼저임
         IngameUI = new(this);
-        Timer = new(this);
     }
 
     private void Update() {
-        Timer.Loop();
+        timer.Loop();
     }
 
     protected override void OnDestroy()
@@ -28,6 +30,10 @@ public class GameModeDefault : GameMode
     {
         soccerBall.BallReset();
         progress = true;
+
+        // 시간
+        timer.SetTime(60 * 90);
+        timer.Play();
     }
 
     protected override void HandleBallGoal(BallAreaType type)

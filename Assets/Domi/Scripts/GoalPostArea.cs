@@ -13,7 +13,6 @@ public class GoalPostArea : MonoBehaviour
     Collider[] detectColliders = new Collider[1]; // 이거 쓸떄가 있지 않을가????
     public bool HasPointIn() {
         int amount = Physics.OverlapBoxNonAlloc(simulateBox.transform.position + simulateBox.center, simulateBox.size / 2f, detectColliders, simulateBox.transform.rotation, pointLayer);
-        print($"HasPointIn { amount }");
         return amount > 0;
     }
 

@@ -8,7 +8,12 @@ public class GameModeUI : GameModeCompo
 
     public GameModeUI(GameMode gameMode) : base(gameMode) {
         scoreBoard = GameObject.FindAnyObjectByType<ScoreBoard>();
+        timeBoard = GameObject.FindAnyObjectByType<TimeBoard>();
         gm.OnScoreChange += HandleScoreChange;
+        
+        if (gameMode is IGameModeTimer mode) {
+            mode.Timer.OnChangeValue += HandleTimeChange;
+        }
     }
 
     private void HandleScoreChange(BallAreaType team, int value)
@@ -18,4 +23,6 @@ public class GameModeUI : GameModeCompo
         else
             scoreBoard.UpdateRedScoreText(value);
     }
+
+    private void HandleTimeChange(float value) => timeBoard.UpdateTimerText((int)value);
 }

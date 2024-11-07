@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SoccerTimer : GameModeCompo
 {
-    private readonly float SPEED = 2;
+    private readonly float SPEED = 10;
 
     private bool isPlay = false;
     private float time = 0;
@@ -19,11 +19,14 @@ public class SoccerTimer : GameModeCompo
         SetTime(Mathf.Max(time - Time.deltaTime * SPEED, 0));
     }
     
-    private void SetTime(float value) {
+    public void SetTime(float value) {
         time = value;
         OnChangeValue?.Invoke(value);
 
         if (value <= 0 && isPlay)
             isPlay = false; // 끗
     }
+
+    public void Play() => isPlay = true;
+    public void Pause() => isPlay = false;
 }
