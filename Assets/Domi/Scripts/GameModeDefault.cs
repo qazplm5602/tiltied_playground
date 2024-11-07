@@ -2,14 +2,24 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class GameModeDefault : GameMode
+public class GameModeDefault : GameMode, IGameModeTimer
 {
-    bool progress = false; // 경기 진행중
-    BallGoalSimulateManager simulateManager;
+    public GameModeUI IngameUI { get; protected set; }
+    SoccerTimer IGameModeTimer.Timer { get => timer; }
+    private SoccerTimer timer;
+
+    private bool progress = false; // 경기 진행중
+    private BallGoalSimulateManager simulateManager;
 
     protected override void Awake()
     {
         base.Awake();
+        timer = new(this); // 타이머가 먼저임
+        IngameUI = new(this);
+    }
+
+    private void Update() {
+        timer.Loop();
     }
 
     protected override void OnDestroy()
@@ -20,11 +30,20 @@ public class GameModeDefault : GameMode
     {
         soccerBall.BallReset();
         progress = true;
+
+        // 시간
+        timer.SetTime(60 * 90);
+        timer.Play();
     }
 
     protected override void HandleBallGoal(BallAreaType type)
     {
         if (!progress) return;
+
+        if (type == BallAreaType.Blue)
+            BlueScore ++;
+        else
+            RedScore ++;
 
         StartCoroutine(WaitBallReset());
     }
@@ -41,9 +60,9 @@ public class GameModeDefault : GameMode
 
         yield return new WaitForSeconds(5f);
 
-        soccerBall.BallReset();
-        CameraManager.Instance.Transition.FadeChangeCam(CameraType.Main);
-
-        progress = true;
+        CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main, () => {
+            soccerBall.BallReset();
+            progress = true;
+        });
     }
 }

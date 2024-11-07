@@ -37,7 +37,7 @@ public class TimeBoard : MonoBehaviour
         }
     }
 
-    private void UpdateTimerText(int time)
+    public void UpdateTimerText(int time)
     {
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
