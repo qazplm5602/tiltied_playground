@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using DG.Tweening;
 using Unity.Cinemachine;
@@ -32,6 +33,8 @@ public class CameraTransition : MonoBehaviour
     }
 
     public void FadeChangeCam(CameraType cam) {
+        if (cam == currentCamType) return; // 같은 카메라는 안ㅇ해 (인해 아님)
+
         if (process != null) {
             process.Kill(true);
         }
@@ -69,6 +72,24 @@ public class CameraTransition : MonoBehaviour
         currentCamType = cam;
     }
 
+    public void FadeChangeCamNoLive(CameraType cam, System.Action cb) {
+        if (process != null) { // 하고 있으면 끈엉
+            process.Kill(true);
+        }
+
+        if (renderTexture == null) {
+            CreateRenderTexture();
+        }
+
+        StartCoroutine(FadeScreenshot(cam, cb));
+    }
+
+    public void FadeChangeCamNoLive(CameraType cam) {
+        FadeChangeCamNoLive(cam, null);
+    }
+
+    public CameraType GetCurrentCam() => currentCamType;
+
     private void CreateRenderTexture() {
         // renderTexture = new RenderTexture(Screen.width, Screen.height, 16);
         renderTexture = new RenderTexture(1920, 1080, 32);
@@ -84,5 +105,45 @@ public class CameraTransition : MonoBehaviour
     private void Update() {
         // if (Keyboard.current.gKey.wasPressedThisFrame)
             // TestCode();
+    }
+
+    IEnumerator FadeScreenshot(CameraType cam, System.Action onNextFrame) {
+        Canvas[] uiFrames = FindObjectsByType<Canvas>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        
+        // 전부다 ui를 끄고
+        foreach (var item in uiFrames)
+            item.enabled = false;
+    
+        yield return new WaitForEndOfFrame(); // 반영될때까지 ㄱㄷ
+
+        var texture = ScreenCapture.CaptureScreenshotAsTexture(); // 찰칵
+
+        onNextFrame?.Invoke();
+
+        // 다시 켜
+        foreach (var item in uiFrames)
+            item.enabled = true;
+        
+        Camera oldCam = CameraManager.Instance.GetCamera(currentCamType);
+        Camera newCam = CameraManager.Instance.GetCamera(cam);
+
+        screen.color = Color.white;
+        screen.texture = texture;
+
+        process = DOTween.Sequence();
+        process.Append(screen.DOFade(0, fadeOutDuration).SetEase(Ease.Linear));
+        process.OnStart(() => {
+            screen.gameObject.SetActive(true);
+
+            if (oldCam == newCam) return;
+
+            oldCam.targetDisplay = 2;
+            newCam.targetDisplay = 0;
+        });
+        process.OnComplete(() => {
+            screen.gameObject.SetActive(false);
+        });
+
+        currentCamType = cam;
     }
 }
