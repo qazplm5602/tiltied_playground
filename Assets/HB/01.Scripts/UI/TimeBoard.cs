@@ -10,6 +10,7 @@ public class TimeBoard : MonoBehaviour
     private int time;
 
     private bool _isTimerRunning = false;
+    private bool _isPaused = false;
 
     private void Start()
     {
@@ -19,20 +20,39 @@ public class TimeBoard : MonoBehaviour
         StartCoroutine(UpdateTimer());
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            PauseTimer();
+        }
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            ResumeTimer();
+        }
+    }
+
     private IEnumerator UpdateTimer()
     {
         while (_isTimerRunning)
         {
-            if (time > 0)
+            if (!_isPaused)
             {
-                time -= 1;
-                UpdateTimerText(time);
-                yield return new WaitForSeconds(1);
+                if (time > 0)
+                {
+                    time -= 1;
+                    UpdateTimerText(time);
+                    yield return new WaitForSeconds(1);
+                }
+                else
+                {
+                    time = 0;
+                    _isTimerRunning = false;
+                }
             }
             else
             {
-                time = 0;
-                _isTimerRunning = false;
+                yield return null;
             }
         }
     }
@@ -43,5 +63,15 @@ public class TimeBoard : MonoBehaviour
         int seconds = Mathf.FloorToInt(time % 60);
 
         _timerText.text = $"{minutes}:{seconds}";
+    }
+
+    public void PauseTimer()
+    {
+        _isPaused = true;
+    }
+
+    public void ResumeTimer()
+    {
+        _isPaused = false;
     }
 }
