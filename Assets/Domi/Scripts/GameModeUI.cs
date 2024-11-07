@@ -1,16 +1,12 @@
 using System;
 using UnityEngine;
 
-public class GameModeUI
+public class GameModeUI : GameModeCompo
 {
     private ScoreBoard scoreBoard;
     private TimeBoard timeBoard;
 
-    private GameMode gm;
-
-    public GameModeUI(GameMode gameMode) {
-        gm = gameMode;
-
+    public GameModeUI(GameMode gameMode) : base(gameMode) {
         scoreBoard = GameObject.FindAnyObjectByType<ScoreBoard>();
         gm.OnScoreChange += HandleScoreChange;
     }

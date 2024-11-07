@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameModeDefault : GameMode
 {
     public GameModeUI IngameUI { get; protected set; }
+    public SoccerTimer Timer { get; protected set; }
     private bool progress = false; // 경기 진행중
     private BallGoalSimulateManager simulateManager;
 
@@ -12,6 +13,11 @@ public class GameModeDefault : GameMode
     {
         base.Awake();
         IngameUI = new(this);
+        Timer = new(this);
+    }
+
+    private void Update() {
+        Timer.Loop();
     }
 
     protected override void OnDestroy()
