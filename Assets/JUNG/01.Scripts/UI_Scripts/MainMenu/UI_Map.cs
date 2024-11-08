@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Characters : MonoBehaviour
+public class UI_Map : MonoBehaviour
 {
     private UI_Char_Selector _selector;
     public Image _selectImage1;
@@ -11,7 +10,7 @@ public class UI_Characters : MonoBehaviour
     public Image _isOnTopImage2;
     public bool IsSelected1;
     public bool IsSelected2;
-    public PlayerStatsSO playerStat;
+    public EventMapSO mapData;
 
     private void Start()
     {
@@ -22,7 +21,7 @@ public class UI_Characters : MonoBehaviour
         _isOnTopImage2 = transform.GetChild(3).gameObject.GetComponent<Image>();
     }
 
-    public PlayerStatsSO SelectCharacter1()
+    public EventMapSO SelectMap1()
     {
         if (IsSelected1)
         {
@@ -30,16 +29,16 @@ public class UI_Characters : MonoBehaviour
             _selectImage1.enabled = false;
             return null;
         }
-        _selector.ResetSelectCharacter(1);
+        _selector.ResetSelectMap(1);
 
         _selectImage1.enabled = true;
         IsSelected1 = true;
 
 
-        return playerStat;
+        return mapData;
     }
 
-    public PlayerStatsSO SelectCharacter2()
+    public EventMapSO SelectMap2()
     {
         if (IsSelected2)
         {
@@ -47,12 +46,12 @@ public class UI_Characters : MonoBehaviour
             _selectImage2.enabled = false;
             return null;
         }
-        _selector.ResetSelectCharacter(2);
+        _selector.ResetSelectMap(2);
 
         _selectImage2.enabled = true;
         IsSelected2 = true;
 
 
-        return playerStat;
+        return mapData;
     }
 }

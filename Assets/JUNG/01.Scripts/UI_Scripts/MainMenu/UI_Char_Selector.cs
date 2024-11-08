@@ -9,6 +9,7 @@ public class UI_Char_Selector : MonoBehaviour
     [SerializeField] private GameObject mapSelectUI;
 
     [SerializeField] private UI_Characters[] _characters;
+    [SerializeField] private UI_Map[] _maps;
     [SerializeField] private PlayerControlSO _inputSO1;
     [SerializeField] private PlayerControlSO _inputSO2;
     [SerializeField] private int rightMaxIdx = 0;  // 오른쪽으로 몇개까지 캐릭터가 있는가. 아래있는 캐릭터를 charIndex % 이값으로 나타날 예정.
@@ -20,7 +21,7 @@ public class UI_Char_Selector : MonoBehaviour
     private int charIndex1 = 0;
     private int charIndex2 = 0;
 
-    private event Action isReady;
+    private event Action IsReady;
     private void OnEnable()
     {
         _characters = GetComponentsInChildren<UI_Characters>();
@@ -30,7 +31,7 @@ public class UI_Char_Selector : MonoBehaviour
 
         _inputSO2.ItemUseEvent += HandleSelectCharacter2;
         _inputSO2.MoveEvent += HandleMoveEvent2;
-        isReady += HandleGoToMapSelect;
+        IsReady += HandleGoToMapSelect;
     }
     private void HandleGoToMapSelect()
     {
@@ -61,7 +62,7 @@ public class UI_Char_Selector : MonoBehaviour
         selectSO1 = _characters[charIndex1].SelectCharacter1();
         if (_characters[charIndex1].IsSelected1 == true && _characters[charIndex2].IsSelected2 == true)
         {
-            isReady?.Invoke();
+            IsReady?.Invoke();
         }
     }
 
@@ -88,7 +89,7 @@ public class UI_Char_Selector : MonoBehaviour
 
         if (_characters[charIndex1].IsSelected1 == true && _characters[charIndex2].IsSelected2 == true)
         {
-            isReady?.Invoke();
+            IsReady?.Invoke();
         }
     }
     public void IsOnUp(int objIdx)  // 여기서 능력치를 보여줘야해..
@@ -118,10 +119,10 @@ public class UI_Char_Selector : MonoBehaviour
     {
         _inputSO1.ItemUseEvent -= HandleSelectCharacter1;
         _inputSO2.ItemUseEvent -= HandleSelectCharacter2;
-        isReady -= HandleGoToMapSelect;
+        IsReady -= HandleGoToMapSelect;
     }
 
-    public void ResetSelect(int idx)
+    public void ResetSelectCharacter(int idx)
     {
         if (idx == 1)
         {
@@ -137,6 +138,26 @@ public class UI_Char_Selector : MonoBehaviour
             {
                 _characters[i].IsSelected2 = false;
                 _characters[i]._selectImage2.enabled = false; // 선택 된거 표현 해줄 그림 꺼주기.
+            }
+        }
+    }
+
+    public void ResetSelectMap(int idx)
+    {
+        if (idx == 1)
+        {
+            for (int i = 0; i < _maps.Length; i++)
+            {
+                _maps[i].IsSelected1 = false;
+                _maps[i]._selectImage1.enabled = false; // 선택 된거 표현 해줄 그림 꺼주기.
+            }
+        }
+        else
+        {
+            for (int i = 0; i < _maps.Length; i++)
+            {
+                _maps[i].IsSelected2 = false;
+                _maps[i]._selectImage2.enabled = false; // 선택 된거 표현 해줄 그림 꺼주기.
             }
         }
     }
