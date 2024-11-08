@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CheerleaderManager : MonoBehaviour
@@ -8,7 +9,12 @@ public class CheerleaderManager : MonoBehaviour
     private List<CheerleaderNPC> redCheers;
     private List<CheerleaderNPC> blueCheers;
 
+    private SoccerBall ball;
+
     private void Awake() {
+        ball = FindAnyObjectByType<SoccerBall>();
+        ball.OnGoal += HandleBallGoal;
+
         CreatePeople();
     }
 
@@ -29,9 +35,15 @@ public class CheerleaderManager : MonoBehaviour
             npc.transform.position = item.transform.position;
             npc.transform.rotation = item.transform.rotation;
 
-            (item.Team == BallAreaType.Blue ? blueCheers : redCheers).Add(npc);
+            GetNpcs(item.Team).Add(npc);
         }
+    }
 
+    List<CheerleaderNPC> GetNpcs(BallAreaType team) => team == BallAreaType.Blue ? blueCheers : redCheers;
 
+    private void HandleBallGoal(BallAreaType team) {
+        List<CheerleaderNPC> npcs = GetNpcs(team)
+            .Where(v => Random.Range(0, 50) == Random.Range(0, 50)) // 골 넣어도 응원 안하는 사람도 있지 않나?? (좀 적음)
+            .ToList();
     }
 }

@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowSeat: 1
+  anim: {fileID: 6614983031380275097}
+  cheerRange: {x: 10, y: 20}
 --- !u!1001 &767777618335945224
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,5 +128,10 @@ PrefabInstance:
 --- !u!4 &949424787801093603 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cd73872b05b15034faf2ea447d5959b5, type: 3}
+  m_PrefabInstance: {fileID: 767777618335945224}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6614983031380275097 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: cd73872b05b15034faf2ea447d5959b5, type: 3}
   m_PrefabInstance: {fileID: 767777618335945224}
   m_PrefabAsset: {fileID: 0}
