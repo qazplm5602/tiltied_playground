@@ -42,8 +42,12 @@ public abstract class EventMapBase : MonoBehaviour
     public void MapInit(EventMapSO so)
     {
         _mapSo = so;
-        _randomEventTime = Random.Range(_mapSo.minEventTime, _mapSo.maxEventTime);
+        RenderSettings.skybox = _mapSo.skyBox;
+        SettingInit();
+        _randomEventTime = Random.Range(_mapSo.minEventTime, _mapSo.maxEventTime + 1);
     }
+
+    public abstract void MapClear();
 
     private void MapEventEndCheck()
     {
@@ -59,6 +63,13 @@ public abstract class EventMapBase : MonoBehaviour
         }
     }
 
+    private void SettingInit()
+    {
+        _isEventing = false;
+        _isEventEnd = false;
+        _currentDeltaTime = 0;
+    }
+
     protected virtual void MapEventStart()
     {
         _isEventing = true;
@@ -67,9 +78,7 @@ public abstract class EventMapBase : MonoBehaviour
 
     protected virtual void MapEventStop()
     {
-        _isEventing = false;
-        _isEventEnd = false;
-        _currentDeltaTime = 0;
-        _randomEventTime = Random.Range(_mapSo.minEventTime, _mapSo.maxEventTime);
+        SettingInit();
+        _randomEventTime = Random.Range(_mapSo.minEventTime, _mapSo.maxEventTime + 1);
     }
 }

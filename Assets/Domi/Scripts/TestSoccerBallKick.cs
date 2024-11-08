@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TestSoccerBallKick : MonoBehaviour
@@ -6,6 +7,8 @@ public class TestSoccerBallKick : MonoBehaviour
     [SerializeField] private Rigidbody rigid;
     [SerializeField] private SimulationBallViewer viewer;
     [SerializeField] private BallGoalSimulateManager ballSimulater;
+
+    [SerializeField] LayerMask obstacleLayer;
 
     [ContextMenu("kick")]
     public void KickBall() {
