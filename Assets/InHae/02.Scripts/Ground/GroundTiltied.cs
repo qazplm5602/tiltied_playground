@@ -5,7 +5,7 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
 {
     [SerializeField] private float _rotRimit;
     [SerializeField] private float _rotWeight = 1f;
-    [SerializeField] private float _rotTime = 1f;
+    [SerializeField] private float _rotTime;
     [SerializeField] private Transform _endPoint;
     
     private Ground _ground;
@@ -33,6 +33,7 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
         List<MassHaveObj> onGroundObj = _ground.onGroundObj;     
         for (int i = 0; i < onGroundObj.Count; i++)
         {
+            
             Vector3 objPos = onGroundObj[i].transform.position;
             Vector3 groundPos = transform.position;
 
@@ -51,6 +52,7 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
     private void ApplyRotate()
     {
         float rotValue = Mathf.Abs(_leftMassSum - _rightMassSum) * _rotWeight;
+        _rotTime = Mathf.Clamp(rotValue * 0.5f, 1, 5);
         
         // 지속되는 버전 ex) 레드 무게 2 -> 2의 힘으로 레드쪽으로 계속 기울어짐
         // if (_leftMassSum > _rightMassSum)
@@ -62,7 +64,9 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
         if (_leftMassSum < _rightMassSum)
             rotValue *= -1;
 
-        _currentRotZ = Mathf.Clamp(rotValue, -_rotRimit, _rotRimit);
+        _currentRotZ = Mathf.Lerp(_currentRotZ, rotValue, Time.deltaTime * _rotTime);
+        _currentRotZ = Mathf.Clamp(_currentRotZ, -_rotRimit, _rotRimit);
+        
         transform.rotation = Quaternion.Slerp(transform.rotation, 
             Quaternion.Euler(new Vector3(0, 0, _currentRotZ)),
             Time.deltaTime * _rotTime);
