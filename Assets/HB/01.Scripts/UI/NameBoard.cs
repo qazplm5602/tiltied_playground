@@ -8,7 +8,7 @@ public class NameBoard : MonoBehaviour
 
     private void SetPlayerName(string p1Name, string p2Name)
     {
-        _p1Name.text = p1Name;
-        _p2Name.text = p2Name;
+        _p1Name.text = GameDataManager.Instance.player1_StatData.playerName;
+        _p2Name.text = GameDataManager.Instance.player2_StatData.playerName;
     }
 }
