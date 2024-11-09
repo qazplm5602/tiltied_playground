@@ -43,7 +43,15 @@ public class CheerleaderManager : MonoBehaviour
 
     private void HandleBallGoal(BallAreaType team) {
         List<CheerleaderNPC> npcs = GetNpcs(team)
-            .Where(v => Random.Range(0, 50) == Random.Range(0, 50)) // 골 넣어도 응원 안하는 사람도 있지 않나?? (좀 적음)
+            .Where(v => Random.Range(0, 20) != Random.Range(0, 20)) // 골 넣어도 응원 안하는 사람도 있지 않나?? (좀 적음)
             .ToList();
+
+        foreach (var item in npcs)
+        {
+            if (Random.Range(0, 5) == Random.Range(0, 5)) // 소수의 사람은 그냥 박수만 침
+                item.CheerPlay();
+            else
+                item.Dance(); // 춤춤춤
+        }
     }
 }

@@ -46,11 +46,11 @@ public class CheerleaderNPC : MonoBehaviour
     }
 
     public void CheerPlay(bool force = false) {
-        cheerTime = force ? 0 : Random.Range(0, 2f);
+        cheerTime = force ? 0 : Random.Range(0, 1f);
     }
 
     public void Dance(bool force = false) {
-        StartCoroutine(WaitDance(force ? 0 : Random.Range(0, 2f)));
+        StartCoroutine(WaitDance(force ? 0 : Random.Range(0, 1f)));
     }
 
     IEnumerator WaitDance(float wait) {
