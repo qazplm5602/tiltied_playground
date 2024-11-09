@@ -15,8 +15,6 @@ public class UI_Char_Selector : MonoBehaviour
     [SerializeField] private int rightMaxIdx = 0;  // 오른쪽으로 몇개까지 캐릭터가 있는가. 아래있는 캐릭터를 charIndex % 이값으로 나타날 예정.
 
 
-    [SerializeField] private PlayerStatsSO selectSO1 = null;
-    [SerializeField] private PlayerStatsSO selectSO2 = null;
 
     private int charIndex1 = 0;
     private int charIndex2 = 0;
@@ -59,7 +57,7 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleSelectCharacter1()
     {
-        selectSO1 = _characters[charIndex1].SelectCharacter1();
+        GameDataManager.Instance.player1_StatData = _characters[charIndex1].SelectCharacter1();
         if (_characters[charIndex1].IsSelected1 == true && _characters[charIndex2].IsSelected2 == true)
         {
             IsReady?.Invoke();
@@ -85,7 +83,7 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleSelectCharacter2()
     {
-        selectSO2 = _characters[charIndex2].SelectCharacter2();
+        GameDataManager.Instance.player2_StatData = _characters[charIndex2].SelectCharacter2();
 
         if (_characters[charIndex1].IsSelected1 == true && _characters[charIndex2].IsSelected2 == true)
         {

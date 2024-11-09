@@ -39,6 +39,8 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Image sliderUI;
     #endregion
 
+
+
     private bool isTweening = false;
 
 
@@ -51,7 +53,7 @@ public class UI_Manager : MonoBehaviour
         UIOpenOrClose(settingUI, true);
     }
 
-    public void UIOpenOrClose(GameObject ui_obj, bool isActive )
+    public void UIOpenOrClose(GameObject ui_obj, bool isActive)
     {
         isTweening = true;
         Sequence sq = DOTween.Sequence();
