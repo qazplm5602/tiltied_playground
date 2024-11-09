@@ -28,6 +28,14 @@ public class UI_Map_Selector : MonoBehaviour
         _inputSO2.ItemUseEvent += HandleSelectCharacter2;
         _inputSO2.MoveEvent += HandleMoveEvent2;
     }
+    private void OnDisable()
+    {
+        _inputSO1.ItemUseEvent -= HandleMapSelectEvent1;
+        _inputSO1.MoveEvent -= HandleMoveEvent1;
+
+        _inputSO2.ItemUseEvent -= HandleSelectCharacter2;
+        _inputSO2.MoveEvent -= HandleMoveEvent2;
+    }
 
     private void HandleMoveEvent2()
     {

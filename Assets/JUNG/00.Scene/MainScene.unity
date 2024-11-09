@@ -4247,11 +4247,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSelectUI: {fileID: 1084986600}
   _characters: []
+  _maps: []
   _inputSO1: {fileID: 11400000, guid: 3b65716b6545d3540bdab38db3501e9b, type: 2}
   _inputSO2: {fileID: 11400000, guid: 0fff30bdbaa22294798e38b62d448d34, type: 2}
   rightMaxIdx: 5
-  selectSO1: {fileID: 0}
-  selectSO2: {fileID: 0}
 --- !u!1 &1624112148
 GameObject:
   m_ObjectHideFlags: 0
@@ -4723,6 +4722,8 @@ MonoBehaviour:
   settingUI: {fileID: 1793509578}
   noTouchUI: {fileID: 148124648}
   sliderUI: {fileID: 2100827333}
+  selectSO1: {fileID: 0}
+  selectSO2: {fileID: 0}
 --- !u!1 &1684619331
 GameObject:
   m_ObjectHideFlags: 0
