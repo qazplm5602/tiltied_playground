@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class UI_Map : MonoBehaviour
 {
-    private UI_Char_Selector _selector;
+    private UI_Map_Selector _selector;
     public Image _selectImage1;
     public Image _selectImage2;
     public Image _isOnTopImage1;
@@ -14,7 +14,7 @@ public class UI_Map : MonoBehaviour
 
     private void Start()
     {
-        _selector = GetComponentInParent<UI_Char_Selector>();
+        _selector = GetComponentInParent<UI_Map_Selector>();
         _selectImage1 = transform.GetChild(0).gameObject.GetComponent<Image>();
         _selectImage2 = transform.GetChild(1).gameObject.GetComponent<Image>();
         _isOnTopImage1 = transform.GetChild(2).gameObject.GetComponent<Image>();

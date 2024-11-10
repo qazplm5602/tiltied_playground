@@ -9,7 +9,6 @@ public class UI_Char_Selector : MonoBehaviour
     [SerializeField] private GameObject mapSelectUI;
 
     [SerializeField] private UI_Characters[] _characters;
-    [SerializeField] private UI_Map[] _maps;
     [SerializeField] private PlayerControlSO _inputSO1;
     [SerializeField] private PlayerControlSO _inputSO2;
     [SerializeField] private int rightMaxIdx = 0;  // 오른쪽으로 몇개까지 캐릭터가 있는가. 아래있는 캐릭터를 charIndex % 이값으로 나타날 예정.
@@ -20,21 +19,32 @@ public class UI_Char_Selector : MonoBehaviour
     private int charIndex2 = 0;
 
     private event Action IsReady;
-    private void OnEnable()
+    private void Start()
     {
         _characters = GetComponentsInChildren<UI_Characters>();
+    }
+    private void OnEnable()
+    {
 
         _inputSO1.ItemUseEvent += HandleSelectCharacter1;
         _inputSO1.MoveEvent += HandleMoveEvent1;
 
         _inputSO2.ItemUseEvent += HandleSelectCharacter2;
         _inputSO2.MoveEvent += HandleMoveEvent2;
+
+        _inputSO1.CloseUIEvent += HandleCloseUIEvent;
         IsReady += HandleGoToMapSelect;
     }
+
+    private void HandleCloseUIEvent()
+    {
+        UI_Manager.Instance.UIOpenOrClose(mapSelectUI, false, transform.parent.gameObject);
+        Debug.Log("SDFSFfsfsf");
+    }
+
     private void HandleGoToMapSelect()
     {
-        UI_Manager.Instance.UIOpenOrClose(mapSelectUI, true);
-        transform.parent.gameObject.SetActive(false);
+        UI_Manager.Instance.UIOpenOrClose(mapSelectUI, true, transform.parent.gameObject);
     }
 
     private void HandleMoveEvent1()
@@ -45,6 +55,7 @@ public class UI_Char_Selector : MonoBehaviour
         }
         Vector2 dir = _inputSO1.GetMoveDirection().normalized;
         int tmpindex = charIndex1;
+        Debug.Log(charIndex1);
         charIndex1 += (int)dir.x;
         charIndex1 += rightMaxIdx * -(int)dir.y;  //-1 이 들어오면..
         if (charIndex1 >= _characters.Length || charIndex1 < 0)
@@ -116,7 +127,12 @@ public class UI_Char_Selector : MonoBehaviour
     private void OnDisable()
     {
         _inputSO1.ItemUseEvent -= HandleSelectCharacter1;
+        _inputSO1.MoveEvent -= HandleMoveEvent1;
+
         _inputSO2.ItemUseEvent -= HandleSelectCharacter2;
+        _inputSO2.MoveEvent -= HandleMoveEvent2;
+
+        _inputSO1.CloseUIEvent -= HandleCloseUIEvent;
         IsReady -= HandleGoToMapSelect;
     }
 
@@ -136,26 +152,6 @@ public class UI_Char_Selector : MonoBehaviour
             {
                 _characters[i].IsSelected2 = false;
                 _characters[i]._selectImage2.enabled = false; // 선택 된거 표현 해줄 그림 꺼주기.
-            }
-        }
-    }
-
-    public void ResetSelectMap(int idx)
-    {
-        if (idx == 1)
-        {
-            for (int i = 0; i < _maps.Length; i++)
-            {
-                _maps[i].IsSelected1 = false;
-                _maps[i]._selectImage1.enabled = false; // 선택 된거 표현 해줄 그림 꺼주기.
-            }
-        }
-        else
-        {
-            for (int i = 0; i < _maps.Length; i++)
-            {
-                _maps[i].IsSelected2 = false;
-                _maps[i]._selectImage2.enabled = false; // 선택 된거 표현 해줄 그림 꺼주기.
             }
         }
     }

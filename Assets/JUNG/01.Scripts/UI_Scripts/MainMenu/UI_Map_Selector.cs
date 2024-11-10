@@ -5,6 +5,8 @@ using UnityEngine.TextCore.Text;
 public class UI_Map_Selector : MonoBehaviour
 {
 
+    [SerializeField] private GameObject _charSelectUI;
+
     [SerializeField] private PlayerControlSO _inputSO1;
     [SerializeField] private PlayerControlSO _inputSO2;
     [SerializeField] private UI_Map[] _maps;
@@ -24,18 +26,29 @@ public class UI_Map_Selector : MonoBehaviour
         _inputSO1.ItemUseEvent += HandleMapSelectEvent1;
         _inputSO1.MoveEvent += HandleMoveEvent1;
 
+        _inputSO1.CloseUIEvent += HandleCloseUiEvent;
+
         _inputSO2.ItemUseEvent += HandleSelectCharacter2;
         _inputSO2.MoveEvent += HandleMoveEvent2;
 
     }
+
     private void OnDisable()
     {
         _inputSO1.ItemUseEvent -= HandleMapSelectEvent1;
         _inputSO1.MoveEvent -= HandleMoveEvent1;
 
+        _inputSO1.CloseUIEvent -= HandleCloseUiEvent;
+
         _inputSO2.ItemUseEvent -= HandleSelectCharacter2;
         _inputSO2.MoveEvent -= HandleMoveEvent2;
     }
+
+    private void HandleCloseUiEvent()
+    {
+        UI_Manager.Instance.UIOpenOrClose(_charSelectUI, true, gameObject);
+    }
+
 
     private void HandleMoveEvent2()
     {
@@ -108,23 +121,43 @@ public class UI_Map_Selector : MonoBehaviour
             _maps[charIndex2]._isOnTopImage2.enabled = true;
         }
     }
+    public void ResetSelectMap(int idx)
+    {
+        if (idx == 1)
+        {
+            for (int i = 0; i < _maps.Length; i++)
+            {
+                _maps[i].IsSelected1 = false;
+                _maps[i]._selectImage1.enabled = false; // 선택 된거 표현 해줄 그림 꺼주기.
+            }
+        }
+        else
+        {
+            for (int i = 0; i < _maps.Length; i++)
+            {
+                _maps[i].IsSelected2 = false;
+                _maps[i]._selectImage2.enabled = false; // 선택 된거 표현 해줄 그림 꺼주기.
+            }
+        }
+    }
 
     private void PercentSelect()
     {
         if (selectSO1 == selectSO2)
         {
+            SceneManager.LoadScene($"{selectSO1.mapType}Map");
             //SceneManager.LoadScene() 맵 // selectSO1 에 있는 MapName 을 해주자 .
         }
         else
         {
             int randIdx = Random.Range(1, 3);
-            if(randIdx == 1)
+            if (randIdx == 1)
             {
-
+                SceneManager.LoadScene($"{selectSO1.mapType}Map");
             }
-            else if(randIdx == 2)
+            else if (randIdx == 2)
             {
-
+                SceneManager.LoadScene($"{selectSO2.mapType}Map");
             }
         }
     }

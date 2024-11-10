@@ -3416,7 +3416,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1084986601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3486,6 +3486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a440a1d53286ab245b747eca3d882a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _charSelectUI: {fileID: 1684619331}
   _inputSO1: {fileID: 11400000, guid: 3b65716b6545d3540bdab38db3501e9b, type: 2}
   _inputSO2: {fileID: 11400000, guid: 0fff30bdbaa22294798e38b62d448d34, type: 2}
   _maps: []
@@ -4184,7 +4185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1537636875
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4266,7 +4267,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSelectUI: {fileID: 1084986600}
   _characters: []
-  _maps: []
   _inputSO1: {fileID: 11400000, guid: 3b65716b6545d3540bdab38db3501e9b, type: 2}
   _inputSO2: {fileID: 11400000, guid: 0fff30bdbaa22294798e38b62d448d34, type: 2}
   rightMaxIdx: 5
@@ -4759,7 +4759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1684619332
 RectTransform:
   m_ObjectHideFlags: 0
