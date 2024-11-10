@@ -2572,8 +2572,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c89f2bf3e816484daece235768f96be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goalCheers:
-  - {fileID: 11400000, guid: 63ae7529b9d475f4189a23e940aa4101, type: 2}
+  goalCheer:
+    list:
+    - {fileID: 11400000, guid: 63ae7529b9d475f4189a23e940aa4101, type: 2}
+    - {fileID: 11400000, guid: 1d86476f734f9e94e8b22995d7d60ea7, type: 2}
+  lowCheer:
+    list:
+    - {fileID: 11400000, guid: 009cd2bc34366974e977fc7506e65786, type: 2}
+    - {fileID: 11400000, guid: f613262738e4ebd49b0de68d6858c843, type: 2}
 --- !u!1001 &766396496
 PrefabInstance:
   m_ObjectHideFlags: 0

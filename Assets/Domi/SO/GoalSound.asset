@@ -17,7 +17,7 @@ MonoBehaviour:
   isLoop: 0
   isRandomizePitch: 1
   is3DSound: 0
-  randomPitchModifier: 0.3
+  randomPitchModifier: 0.2
   volume: 1
   pitch: 1
   startTime: 5

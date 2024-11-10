@@ -11,6 +11,8 @@ public class SoundPlayer : MonoBehaviour, IPoolable
     public PoolType Type => _poolType;
     public GameObject GameObject => gameObject;
 
+    public event System.Action OnPlayEnd;
+
     [SerializeField] private AudioMixerGroup _sfxGroup, _bgmGroup;
 
     private Pool _myPool;
@@ -78,6 +80,7 @@ public class SoundPlayer : MonoBehaviour, IPoolable
     private void GotoPool()
     {
         _audioSource.Stop();
+        OnPlayEnd?.Invoke();
         _myPool.Push(this);
     }
 
@@ -88,6 +91,7 @@ public class SoundPlayer : MonoBehaviour, IPoolable
 
     public void ResetItem()
     {
+        OnPlayEnd = null; // 이벤트 초기화
         _audioSource.volume = 1f;
     }
 }
