@@ -17,6 +17,7 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
     public event Action SkillEvent;
     public event Action MoveEvent;
     public event Action<bool> InteractEvent;
+    public event Action CloseUIEvent;
 
     private Controls controls = null;
 
@@ -27,18 +28,6 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
         LoadKeyBind();
 
         controls.Player.Enable(); // 켜ㅓㅓ
-    }
-
-    public void ControlSetting(bool isActive)
-    {
-        if (isActive)
-        {
-            controls.Player.Enable();
-        }
-        else
-        {
-            controls.Player.Disable();
-        }
     }
 
     private void OnDisable()
@@ -93,5 +82,11 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
     {
         if (context.performed)
             SkillEvent?.Invoke();
+    }
+
+    public void OnEscape(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            CloseUIEvent?.Invoke();
     }
 }
