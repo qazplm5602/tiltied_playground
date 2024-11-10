@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 
@@ -7,6 +5,8 @@ public class Meteor : MonoBehaviour
 {
     [SerializeField] private float _power;
     [SerializeField] private float _distance;
+    [SerializeField] private float _massDisableTime;
+    
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private ParticleSystem _smokeEffect;
     [SerializeField] private ParticleSystem _struckEffect;
@@ -59,9 +59,6 @@ public class Meteor : MonoBehaviour
         Vector3 dir = Vector3.Lerp(transform.position, targetPos, 0.3f);
         dir.y += Physics.gravity.y * -1 + _power;
         
-        //_rigidbody.AddForce(dir - transform.position, ForceMode.Impulse);
-        //_rigidbody.AddTorque(_rigidbody.linearVelocity * 0.5f, ForceMode.Impulse);
-        
         _rigidbody.linearVelocity = dir - transform.position;
         _rigidbody.useGravity = true;
     }
@@ -70,23 +67,19 @@ public class Meteor : MonoBehaviour
     {
         if (other.name.Equals("Floor"))
         {
-            StartStruckEffect();
             StruckSetting();
-            StartSmoking();
+            StartEffect();
             transform.parent = other.transform;
-            DOVirtual.DelayedCall(0.5f, () => _massHaveObj.SetMass(0));
+            DOVirtual.DelayedCall(0.5f, () => _massHaveObj.MassLerp(_massDisableTime, 0));
         }
     }
 
-    private void StartSmoking()
+    private void StartEffect()
     {
         _smokeEffect.transform.localPosition = Vector3.zero;
         _smokeEffect.transform.rotation = Quaternion.LookRotation(Vector3.up);
         _smokeEffect.Play();
-    }
-
-    private void StartStruckEffect()
-    {
+        
         _struckEffect.transform.localPosition = Vector3.zero;
         _struckEffect.transform.rotation = Quaternion.LookRotation(Vector3.up);
         _struckEffect.Play();

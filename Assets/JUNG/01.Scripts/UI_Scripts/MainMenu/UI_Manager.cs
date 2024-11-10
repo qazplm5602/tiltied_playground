@@ -46,20 +46,29 @@ public class UI_Manager : MonoBehaviour
 
     public void StartButton()
     {
-        UIOpenOrClose(charectorSelectUI, true);
+        UIOpenOrClose(charectorSelectUI, true, null);
     }
     public void SettingButton()
     {
-        UIOpenOrClose(settingUI, true);
+        UIOpenOrClose(settingUI, true, null);
     }
 
-    public void UIOpenOrClose(GameObject ui_obj, bool isActive)
+    public void UIOpenOrClose(GameObject ui_obj, bool isActive, GameObject ui_closeObj)
     {
+        if (isTweening)
+            return;
         isTweening = true;
         Sequence sq = DOTween.Sequence();
         sq.AppendCallback(() => noTouchUI.gameObject.SetActive(true));
         sq.Append(sliderUI.rectTransform.DOLocalMoveY(0, 0.5f).SetEase(Ease.OutExpo));
-        sq.AppendCallback(() => ui_obj.SetActive(isActive));
+        sq.AppendCallback(() =>
+        {
+            ui_obj.SetActive(isActive);
+            if (ui_closeObj != null)
+            {
+                ui_closeObj.SetActive(false);
+            }
+        });
         sq.AppendInterval(0.2f);
         sq.Append(sliderUI.rectTransform.DOLocalMoveY(-1080, 0.5f).SetEase(Ease.OutExpo));
         sq.AppendCallback(() =>
