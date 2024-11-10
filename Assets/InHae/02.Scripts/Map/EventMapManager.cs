@@ -6,6 +6,8 @@ public class EventMapManager : MonoSingleton<EventMapManager>
 {
     [SerializeField] private List<EventMapSO> _mapSos;
     [SerializeField] private EventMapEnum _eventMapEnum;
+    [SerializeField] private SoundSO _shortWhitle;
+    [SerializeField] private SoundSO _gameEndWhitle;
     private Dictionary<EventMapEnum, EventMapSO> _mapSoDictionary;
     private Dictionary<EventMapEnum, GameObject> _mapObjDictionary;
 
@@ -25,6 +27,16 @@ public class EventMapManager : MonoSingleton<EventMapManager>
         if (Keyboard.current.pKey.wasPressedThisFrame)
         {
             MapInit(_eventMapEnum);
+        }
+        
+        if (Keyboard.current.lKey.wasPressedThisFrame)
+        {
+            SoundManager.Instance.PlaySFX(transform.position, _shortWhitle);
+        }
+        
+        if (Keyboard.current.mKey.wasPressedThisFrame)
+        {
+            SoundManager.Instance.PlaySFX(transform.position, _gameEndWhitle);
         }
 #endif
     }
