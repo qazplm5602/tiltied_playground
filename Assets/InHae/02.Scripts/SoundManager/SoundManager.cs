@@ -19,10 +19,12 @@ public class SoundManager : MonoSingleton<SoundManager>
         _currentBGMPlayer.PlaySound(clip);
     }
 
-    public void PlaySFX(Vector3 pos, SoundSO clip)
+    public SoundPlayer PlaySFX(Vector3 pos, SoundSO clip)
     {
         SoundPlayer player = _poolManager.Pop(PoolType.SoundPlayer) as SoundPlayer;
         player.transform.position = pos;
         player.PlaySound(clip);
+        
+        return player;
     }
 }
