@@ -11,6 +11,7 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
     private Ground _ground;
     private float _currentRotZ;
     
+    //Debug 용도로 직렬화
     [SerializeField] private float _leftMassSum;
     [SerializeField] private float _rightMassSum;
 
@@ -79,6 +80,7 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
             
         Vector3 groundPos = transform.position;
         
+        //무게 중심 계산 (가운데 있을 경우 무게 = 0, 가운데는 무게/2, 끝 쪽에 있으면 무게)
         if (!isLeft)
         {
             lerpPos = Mathf.InverseLerp(groundPos.x, groundPos.x + _endPoint.position.x, objPos.x);
