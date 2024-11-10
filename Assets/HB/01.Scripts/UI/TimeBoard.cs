@@ -22,11 +22,11 @@ public class TimeBoard : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             PauseTimer();
         }
-        if(Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             ResumeTimer();
         }
@@ -62,7 +62,7 @@ public class TimeBoard : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
 
-        _timerText.text = $"{minutes}:{seconds}";
+        _timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void PauseTimer()

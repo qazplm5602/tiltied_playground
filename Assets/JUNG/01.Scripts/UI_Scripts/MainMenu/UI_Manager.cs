@@ -1,6 +1,5 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 public class UI_Manager : MonoBehaviour
 {
@@ -40,39 +39,28 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Image sliderUI;
     #endregion
 
-    private GameObject isOpenObj;
-    private int openCount = 0;
+
+
     private bool isTweening = false;
 
 
     public void StartButton()
     {
-        openCount++;
         UIOpenOrClose(charectorSelectUI, true);
     }
     public void SettingButton()
     {
-        openCount++;
         UIOpenOrClose(settingUI, true);
     }
 
-    public void CloseCurrentPanel()
-    {
-        openCount--;
-        UIOpenOrClose(isOpenObj, false);
-    }
-
-
-
     public void UIOpenOrClose(GameObject ui_obj, bool isActive)
     {
-        isOpenObj = ui_obj;
         isTweening = true;
         Sequence sq = DOTween.Sequence();
         sq.AppendCallback(() => noTouchUI.gameObject.SetActive(true));
         sq.Append(sliderUI.rectTransform.DOLocalMoveY(0, 0.5f).SetEase(Ease.OutExpo));
         sq.AppendCallback(() => ui_obj.SetActive(isActive));
-        sq.AppendInterval(1f);
+        sq.AppendInterval(0.2f);
         sq.Append(sliderUI.rectTransform.DOLocalMoveY(-1080, 0.5f).SetEase(Ease.OutExpo));
         sq.AppendCallback(() =>
         {
@@ -82,11 +70,5 @@ public class UI_Manager : MonoBehaviour
         });
     }
 
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && isTweening == false && openCount > 0)
-            CloseCurrentPanel();
-    }
     public void GameExit() => Application.Quit();
 }
