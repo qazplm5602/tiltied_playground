@@ -47,6 +47,8 @@ public class SoundPlayer : MonoBehaviour, IPoolable
         _audioSource.clip = clipData.clip;
         _audioSource.loop = clipData.isLoop;
 
+        _audioSource.time = clipData.startTime;
+
         if (!clipData.isLoop)
         {
             float time = _audioSource.clip.length + 0.2f;
