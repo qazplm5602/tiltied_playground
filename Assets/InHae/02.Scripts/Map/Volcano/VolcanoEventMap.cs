@@ -67,6 +67,7 @@ public class VolcanoEventMap : EventMapBase
             targetPos.z = z;
 
             _explodeEffect.Play();
+            
             Meteor meteor = Instantiate(_meteor, _meteorStartPos.position, Quaternion.identity);
             _meteorList.Add(meteor);
             meteor.Init(targetPos);

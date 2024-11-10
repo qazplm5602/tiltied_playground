@@ -187,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _power: 45
   _distance: 20
-  _matMass: 20
+  _massDisableTime: 1
   _groundMask:
     serializedVersion: 2
     m_Bits: 512
@@ -205,16 +205,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191a85f2ac838fe4b9fd4b254a6dc1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isMove: 0
   _mass: 20
-  _speed: 0
   _rayDistance: 0
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
   _massHaveLayer:
     serializedVersion: 2
     m_Bits: 64
+  _isMove: 0
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _speed: 0
 --- !u!1001 &3591192680207575650
 PrefabInstance:
   m_ObjectHideFlags: 0

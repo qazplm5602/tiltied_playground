@@ -172,6 +172,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5971552772640841496}
     m_Modifications:
+    - target: {fileID: 834247439062909085, guid: 9588052b1128ab4448a86d672d4f9e30, type: 3}
+      propertyPath: m_Size.x
+      value: 11.000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 834247439062909085, guid: 9588052b1128ab4448a86d672d4f9e30, type: 3}
+      propertyPath: m_Size.z
+      value: 0.553922
+      objectReference: {fileID: 0}
+    - target: {fileID: 834247439062909085, guid: 9588052b1128ab4448a86d672d4f9e30, type: 3}
+      propertyPath: m_Center.x
+      value: 2.8508757e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 834247439062909085, guid: 9588052b1128ab4448a86d672d4f9e30, type: 3}
+      propertyPath: m_Center.z
+      value: 0.22303903
+      objectReference: {fileID: 0}
     - target: {fileID: 6042015048170688593, guid: 9588052b1128ab4448a86d672d4f9e30, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -215,6 +231,22 @@ PrefabInstance:
     - target: {fileID: 7230885430890159829, guid: 9588052b1128ab4448a86d672d4f9e30, type: 3}
       propertyPath: m_Name
       value: Stadium
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492460127622670366, guid: 9588052b1128ab4448a86d672d4f9e30, type: 3}
+      propertyPath: m_Size.x
+      value: 11.000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492460127622670366, guid: 9588052b1128ab4448a86d672d4f9e30, type: 3}
+      propertyPath: m_Size.z
+      value: 0.553922
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492460127622670366, guid: 9588052b1128ab4448a86d672d4f9e30, type: 3}
+      propertyPath: m_Center.x
+      value: 2.8508757e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492460127622670366, guid: 9588052b1128ab4448a86d672d4f9e30, type: 3}
+      propertyPath: m_Center.z
+      value: 0.22303903
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

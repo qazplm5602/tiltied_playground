@@ -1,14 +1,16 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class MassHaveObj : MonoBehaviour
 {
-    [SerializeField] private bool _isMove;
     [SerializeField] private float _mass;
-    [SerializeField] private float _speed;
     [SerializeField] private float _rayDistance;
-    [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _massHaveLayer;
+    
+    [SerializeField] private bool _isMove;
+    [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private float _speed;
 
     private Rigidbody _rigidbody;
     private RaycastHit _lastHit;
@@ -90,6 +92,9 @@ public class MassHaveObj : MonoBehaviour
     public void SetGround(Ground ground) => _ground = ground;
     public float GetMass() => _mass;
     public void SetMass(float mass) => _mass = mass;
+
+    public void MassLerp(float time, float targetMass) => DOTween.To(() => _mass, 
+        currentMass => _mass = currentMass, targetMass, time);
     public void SetDefaultMass(float mass) => _defaultMass = mass;
     
 
