@@ -34,7 +34,7 @@ public class UI_Char_Selector : MonoBehaviour
     private void HandleGoToMapSelect()
     {
         UI_Manager.Instance.UIOpenOrClose(mapSelectUI, true);
-        gameObject.SetActive(false);
+        transform.parent.gameObject.SetActive(false);
     }
 
     private void HandleMoveEvent1()

@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 
 public class UI_Map_Selector : MonoBehaviour
@@ -18,7 +18,6 @@ public class UI_Map_Selector : MonoBehaviour
     private int charIndex1 = 0;
     private int charIndex2 = 0;
 
-    private event Action IsReady;
 
     private void OnEnable()
     {
@@ -27,6 +26,7 @@ public class UI_Map_Selector : MonoBehaviour
 
         _inputSO2.ItemUseEvent += HandleSelectCharacter2;
         _inputSO2.MoveEvent += HandleMoveEvent2;
+
     }
     private void OnDisable()
     {
@@ -59,7 +59,7 @@ public class UI_Map_Selector : MonoBehaviour
         selectSO2 = _maps[charIndex2].SelectMap2();
         if (_maps[charIndex1].IsSelected1 == true && _maps[charIndex2].IsSelected2 == true)
         {
-            IsReady?.Invoke();
+            PercentSelect();
         }
     }
 
@@ -85,7 +85,7 @@ public class UI_Map_Selector : MonoBehaviour
         selectSO1 = _maps[charIndex1].SelectMap1();
         if (_maps[charIndex1].IsSelected1 == true && _maps[charIndex2].IsSelected2 == true)
         {
-            IsReady?.Invoke();
+            PercentSelect();
         }
     }
 
@@ -109,9 +109,23 @@ public class UI_Map_Selector : MonoBehaviour
         }
     }
 
-
     private void PercentSelect()
     {
+        if (selectSO1 == selectSO2)
+        {
+            //SceneManager.LoadScene() 맵 // selectSO1 에 있는 MapName 을 해주자 .
+        }
+        else
+        {
+            int randIdx = Random.Range(1, 3);
+            if(randIdx == 1)
+            {
 
+            }
+            else if(randIdx == 2)
+            {
+
+            }
+        }
     }
 }
