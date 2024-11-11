@@ -4,12 +4,29 @@ using DG.Tweening;
 
 public class MoonStone : MonoBehaviour
 {
-    [SerializeField] private float _loopTime;
+    private Sequence _sequence;
 
-    private Tween _currentTween;
-    
-    private void Awake()
+    public void GravityOff()
     {
-        _currentTween = transform.DOMoveY(transform.position.y + 15f, _loopTime).SetLoops(-1, LoopType.Yoyo);
+        
     }
+
+    public void GravityOn(float loopTime)
+    {
+        
+        
+        float defaultY = transform.position.y;
+
+        _sequence = DOTween.Sequence();
+        
+        _sequence.Append(transform.DOMoveY(defaultY + 15f, loopTime).SetEase(Ease.InOutQuad));
+        _sequence.AppendInterval(0.05f);
+        _sequence.Append(transform.DOMoveY(defaultY, loopTime).SetEase(Ease.InOutQuad));
+
+        _sequence.SetLoops(-1, LoopType.Restart);
+        
+        
+    }
+    
+    
 }
