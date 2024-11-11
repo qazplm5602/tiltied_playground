@@ -11,8 +11,30 @@ public class SoccerBall : MonoBehaviour
 
     private Transform spawnPoint;
     private Rigidbody rigid;
+    private SoccerBallRemoteTrigger remoteEvent;
 
-    private void OnTriggerEnter(Collider other) {
+    private void Awake() {
+        rigid = GetComponent<Rigidbody>();
+        remoteEvent = GetComponentInChildren<SoccerBallRemoteTrigger>();
+        // remoteEvent.TriggerEnter += HandleTriggerEnter;
+
+        spawnPoint = GameObject.Find(spawnPointName)?.transform;
+
+        if (spawnPoint == null)
+            Debug.LogWarning("Not Found Ball Spawn Point");
+    }
+
+    private void OnDestroy() {
+        // remoteEvent.TriggerEnter -= HandleTriggerEnter;
+    }
+
+    public void BallReset() {
+        rigid.linearVelocity = rigid.angularVelocity = Vector3.zero;
+        transform.position = spawnPoint.position;
+        OnReset?.Invoke();
+    }
+
+    void OnTriggerEnter(Collider other) {
         if (other.CompareTag(outAreaTag)) {
             OnOut?.Invoke();
             print("Out!!");
@@ -23,20 +45,5 @@ public class SoccerBall : MonoBehaviour
             OnGoal?.Invoke(area);
             print($"Goal!! {area}");
         }
-    }
-
-    private void Awake() {
-        rigid = GetComponent<Rigidbody>();
-
-        spawnPoint = GameObject.Find(spawnPointName)?.transform;
-
-        if (spawnPoint == null)
-            Debug.LogWarning("Not Found Ball Spawn Point");
-    }
-
-    public void BallReset() {
-        rigid.linearVelocity = rigid.angularVelocity = Vector3.zero;
-        transform.position = spawnPoint.position;
-        OnReset?.Invoke();
     }
 }

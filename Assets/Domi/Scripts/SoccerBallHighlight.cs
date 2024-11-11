@@ -12,7 +12,7 @@ public class SoccerBallHighlight : MonoBehaviour
     private bool isHighlight = false;
     
     private void Awake() {
-        soccerBall = GetComponent<SoccerBall>();
+        soccerBall = transform.GetComponent<SoccerBall>();
         simulateManager = ManagerManager.GetManager<BallGoalSimulateManager>();
 
         simulateManager.onWillGoal += HandleWillGoal;
