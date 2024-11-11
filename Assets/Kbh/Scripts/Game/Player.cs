@@ -60,12 +60,14 @@ public class Player : MonoBehaviour
       inputDir.Normalize();
       Vector3 moveDir = new ( inputDir.x, 0, inputDir.y);
 
-      RigidbodyComponent.linearVelocity
-         = moveDir * PlayerStatSO.defaultSpeed.GetValue();
+
+
+      transform.localPosition
+         += moveDir * PlayerStatSO.defaultSpeed.GetValue() * Time.fixedDeltaTime;
       
       transform.localRotation
          = Quaternion.Lerp(transform.localRotation, 
-         Quaternion.Euler(0, -Mathf.Atan2(moveDir.z, moveDir.x) * Mathf.Rad2Deg, 0), 0.1f);
+         Quaternion.Euler(0, Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg, 0), 0.1f);
    }
 
    private void OnDestroy()
@@ -94,7 +96,8 @@ public class Player : MonoBehaviour
 
    private void Shooting()
    {
-      _ballController.PushBall(transform.right * PlayerStatSO.shootPower.GetValue());
+        Debug.Log(transform.forward);
+      _ballController.PushBall(transform.forward * PlayerStatSO.shootPower.GetValue());
       this.Release(_ballController);
    }
 
