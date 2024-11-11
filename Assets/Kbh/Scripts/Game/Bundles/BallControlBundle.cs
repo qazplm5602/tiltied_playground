@@ -35,7 +35,10 @@ public class BallControlBundle : Bundle
    public bool BallIsFree() => _ballOwner == null;
    public void PushBall(Vector3 force)
    {
-      _ballRigid.AddForce(force, ForceMode.Impulse);
+        DOVirtual.DelayedCall(Time.fixedDeltaTime * 2, () =>
+        {
+            _ballRigid.AddForce(force, ForceMode.Impulse);
+        });
    }
 
    public override bool Registe(object obj = null)
@@ -53,9 +56,10 @@ public class BallControlBundle : Bundle
          case BallControlType.Player:
             _ballOwner = obj as Player;
             _ballVisual.SetParent(_ballOwner.transform);
+            _ballRigid.isKinematic = true;
             _ballRigid.Sleep();
 
-            _ballMoveTween = _ballVisual.DOLocalMove(endValue: new (1.5f, 0.5f), duration: 0.2f).SetRelative(false);
+            _ballMoveTween = _ballVisual.DOLocalMove(endValue: new (0, 0.5f, 1.5f), duration: 0.2f).SetRelative(false);
 
             break;
 
@@ -72,7 +76,6 @@ public class BallControlBundle : Bundle
    public override bool Update(object obj = null)
    {
       if (!base.Update()) return false;
-      // Do nothing
       return true;
    }
 
@@ -82,10 +85,12 @@ public class BallControlBundle : Bundle
       if(_ballOwner == obj as Player)
       {
          _ballVisual.SetParent(_ballRigid.transform);
-         _ballRigid.WakeUp();
 
-         if (_ballMoveTween is not null && _ballMoveTween.active)
-            _ballMoveTween.Kill();
+          _ballRigid.isKinematic = false;
+          _ballRigid.WakeUp();
+
+          if (_ballMoveTween is not null && _ballMoveTween.active)
+          _ballMoveTween.Kill();
 
          _ballOwner = null;
       }
