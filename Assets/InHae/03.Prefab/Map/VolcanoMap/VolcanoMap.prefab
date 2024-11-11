@@ -22389,6 +22389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3035d1ab8f1b4468885e2aafcc565e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mapSo: {fileID: 11400000, guid: fbdd6ea300a15604380bb0d450c5535f, type: 2}
   _meteor: {fileID: 6988105265130593598, guid: 8ce7869f4ec92d44c90c52d9336f75be, type: 3}
   _explodeEffect: {fileID: 5786792837312957976}
   _meteorStartPos: {fileID: 6687648916183888312}

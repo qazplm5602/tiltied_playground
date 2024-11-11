@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using DG.Tweening;
 
@@ -13,8 +12,6 @@ public class MoonStone : MonoBehaviour
 
     public void GravityOn(float loopTime)
     {
-        
-        
         float defaultY = transform.position.y;
 
         _sequence = DOTween.Sequence();
@@ -27,6 +24,4 @@ public class MoonStone : MonoBehaviour
         
         
     }
-    
-    
 }

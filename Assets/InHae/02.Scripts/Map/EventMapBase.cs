@@ -10,10 +10,11 @@ public enum EventMapEnum
 
 public abstract class EventMapBase : MonoBehaviour
 {
+    [SerializeField] protected EventMapSO _mapSo;
+    
     private float _currentDeltaTime;
     private int _randomEventTime;
 
-    protected EventMapSO _mapSo;
     protected bool _isEventing;
     protected bool _isEventEnd;
 
@@ -22,6 +23,7 @@ public abstract class EventMapBase : MonoBehaviour
     protected virtual void Awake()
     {
         _ground = GetComponentInChildren<Ground>();
+        MapInit();
     }
 
     private void Update()
@@ -42,6 +44,12 @@ public abstract class EventMapBase : MonoBehaviour
     public void MapInit(EventMapSO so)
     {
         _mapSo = so;
+        SettingInit();
+        _randomEventTime = Random.Range(_mapSo.minEventTime, _mapSo.maxEventTime + 1);
+    }
+
+    private void MapInit()
+    {
         SettingInit();
         _randomEventTime = Random.Range(_mapSo.minEventTime, _mapSo.maxEventTime + 1);
     }
