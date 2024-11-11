@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Loading.unity
     guid: 8404b8d04d8cd78428629cb85d4ba39c
+  - enabled: 1
+    path: Assets/InHae/01.Scene/VolcanoScene.unity
+    guid: 8b95cc71506c8ab4db881cef974ce2a4
+  - enabled: 1
+    path: Assets/InHae/01.Scene/MoonScene.unity
+    guid: 1528cb5a3d041974381e02771e397d5d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
