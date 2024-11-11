@@ -20,6 +20,10 @@ public class UI_Map_Selector : MonoBehaviour
     private int charIndex1 = 0;
     private int charIndex2 = 0;
 
+    private void Start()
+    {
+        _maps = GetComponentsInChildren<UI_Map>();
+    }
 
     private void OnEnable()
     {
@@ -46,7 +50,7 @@ public class UI_Map_Selector : MonoBehaviour
 
     private void HandleCloseUiEvent()
     {
-        UI_Manager.Instance.UIOpenOrClose(_charSelectUI, true, gameObject);
+        UI_Manager.Instance.UIOpenOrClose(_charSelectUI, true, transform.parent.gameObject);
     }
 
 
