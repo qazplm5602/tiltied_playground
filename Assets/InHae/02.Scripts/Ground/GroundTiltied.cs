@@ -31,7 +31,7 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
         _leftMassSum = 0;
         _rightMassSum = 0;
 
-        List<MassHaveObj> onGroundObj = _ground.onGroundObj;     
+        List<MassHaveObj> onGroundObj = _ground.GetMassObjs();     
         for (int i = 0; i < onGroundObj.Count; i++)
         {
             
