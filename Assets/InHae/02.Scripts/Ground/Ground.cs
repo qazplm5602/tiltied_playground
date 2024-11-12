@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour
 {
-    public List<MassHaveObj> onGroundObj = new List<MassHaveObj>();
+    private List<MassHaveObj> _onGroundObj = new List<MassHaveObj>();
     [HideInInspector] public Transform minFallPoint;
     [HideInInspector] public Transform maxFallPoint;
     
@@ -29,5 +29,33 @@ public class Ground : MonoBehaviour
     {
         minFallPoint = transform.Find("FallAreaTrm").Find("MinPoint");
         maxFallPoint = transform.Find("FallAreaTrm").Find("MaxPoint");
+    }
+
+    public void ResetGround()
+    {
+        GetCompo<GroundTiltied>().ResetTilt();
+    }
+    
+    public void AddMassObj(MassHaveObj obj)
+    {
+        if(!_onGroundObj.Contains(obj))
+            _onGroundObj.Add(obj);
+    }
+    
+    public void RemoveMassObj(MassHaveObj obj)
+    {
+        if(_onGroundObj.Contains(obj))
+            _onGroundObj.Remove(obj);
+    }
+
+    public List<MassHaveObj> GetMassObjs() => _onGroundObj;
+    
+    public T GetCompo<T>() where T : class
+    {
+        if(_groundCompos.TryGetValue(typeof(T), out IGroundCompo compo))
+        {
+            return compo as T;
+        }
+        return default;
     }
 }
