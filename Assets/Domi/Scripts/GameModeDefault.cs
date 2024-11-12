@@ -60,4 +60,14 @@ public class GameModeDefault : GameMode, IGameModeTimer
             IsPlay = true;
         });
     }
+
+    public override void GameStop()
+    {
+        IsPlay = false;
+        
+        WhistleSound whistle = ManagerManager.GetManager<WhistleSound>();
+        
+        if (whistle) // 휘슬 시스템이 있당
+            whistle.PlayEndSound();
+    }
 }

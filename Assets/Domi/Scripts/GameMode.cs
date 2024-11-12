@@ -37,6 +37,7 @@ public abstract class GameMode : MonoBehaviour
     }
 
     public abstract void GameStart();
+    public abstract void GameStop(); // 게임이 끝남
 
     // ===== 축구공 관련
     protected abstract void HandleBallGoal(BallAreaType type);

@@ -325,6 +325,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c80045adcde8b94f97b03d9765ad7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &96072485 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6701024620334265320, guid: e9cd10c405cb33c45960f66801738235, type: 3}
+  m_PrefabInstance: {fileID: 536992263555761433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &203194651 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 975968107827588176, guid: e9cd10c405cb33c45960f66801738235, type: 3}
@@ -808,7 +813,7 @@ Transform:
   m_GameObject: {fileID: 579563996}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4583538, y: 32.17, z: 0.09009081}
+  m_LocalPosition: {x: -0.28, y: 32.17, z: -10.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1579,6 +1584,52 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1 &1287152731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1287152732}
+  - component: {fileID: 1287152733}
+  m_Layer: 0
+  m_Name: WhistleSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1287152732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287152731}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 96072485}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1287152733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287152731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85112d0c33c96f44c8d85ad85d9c53ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEndSound: {fileID: 11400000, guid: 75c3b2c271ca18240b70e4462b2b22d2, type: 2}
+  ballOutSound: {fileID: 11400000, guid: a1ef85b8f7ea8584e8e94edb153c7c96, type: 2}
 --- !u!1 &1459861478 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3192714760936088323, guid: 67ef0f6ba6f68c04faddc87ad4523210, type: 3}
@@ -2432,7 +2483,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6701024620334265320, guid: e9cd10c405cb33c45960f66801738235, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1287152732}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9cd10c405cb33c45960f66801738235, type: 3}
 --- !u!4 &599214469532515366
