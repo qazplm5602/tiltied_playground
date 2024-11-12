@@ -8,7 +8,6 @@ public class GameModeDefault : GameMode, IGameModeTimer
     SoccerTimer IGameModeTimer.Timer { get => timer; }
     private SoccerTimer timer;
 
-    private bool progress = false; // 경기 진행중
     private BallGoalSimulateManager simulateManager;
 
     protected override void Awake()
@@ -29,7 +28,7 @@ public class GameModeDefault : GameMode, IGameModeTimer
     public override void GameStart()
     {
         soccerBall.BallReset();
-        progress = true;
+        IsPlay = true;
 
         // 시간
         timer.SetTime(60 * 90);
@@ -38,8 +37,6 @@ public class GameModeDefault : GameMode, IGameModeTimer
 
     protected override void HandleBallGoal(BallAreaType type)
     {
-        if (!progress) return;
-
         if (type == BallAreaType.Blue)
             BlueScore ++;
         else
@@ -50,19 +47,17 @@ public class GameModeDefault : GameMode, IGameModeTimer
 
     protected override void HandleBallOut()
     {
-        if (!progress) return;
-
         StartCoroutine(WaitBallReset());
     }
 
     IEnumerator WaitBallReset() {
-        progress = false; // 진행 중단 ㄱㄱㄱㄱ
+        IsPlay = false; // 진행 중단 ㄱㄱㄱㄱ
 
         yield return new WaitForSeconds(5f);
 
         CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main, () => {
             soccerBall.BallReset();
-            progress = true;
+            IsPlay = true;
         });
     }
 }

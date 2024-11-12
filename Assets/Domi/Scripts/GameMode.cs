@@ -20,7 +20,7 @@ public abstract class GameMode : MonoBehaviour
         }
      }
     protected SoccerBall soccerBall; // 축구 없는 게임모드는 없으니까 여기에 있어도 되것지???
-
+    public bool IsPlay { get; protected set; } // 경기 진행중
     public event System.Action<BallAreaType, int> OnScoreChange;
     
     protected virtual void Awake() {
