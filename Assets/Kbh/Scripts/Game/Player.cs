@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
    private const int MAX_ITEM_COUNT = 2;
    [SerializeField] private int[] _itemIDs;
 
-   [Tooltip("¾ÆÀÌÅÛ ¹Ì¸®º¸±â¸¦ À§ÇÑ ÀÌ¹ÌÁöµé")] 
+   [Tooltip("ì•„ì´í…œ ë¯¸ë¦¬ë³´ê¸°ë¥¼ ìœ„í•œ ì´ë¯¸ì§€ë“¤")] 
    [SerializeField] private Sprite[] _itemImages;
 
    [SerializeField] private bool isKnockback = false;
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
    {
       if(isKnockback)
       {
-         // ´Ù¸¥ ÇÃ·¹ÀÌ¾î·ÎºÎÅÍ Å¸°İÀ» ¹Ş¾ÒÀ» °æ¿ì
+         // ë‹¤ë¥¸ í”Œë ˆì´ì–´ë¡œë¶€í„° íƒ€ê²©ì„ ë°›ì•˜ì„ ê²½ìš°
       }
       else
       {
@@ -98,13 +98,13 @@ public class Player : MonoBehaviour
    {
         Debug.Log(transform.forward);
       _ballController.PushBall(transform.forward * PlayerStatSO.shootPower.GetValue());
-      this.Release(_ballController);
+      // this.Release(_ballController);
    }
 
    private void HandleItemUse()
    {
-      // itemIDs[0]¸¦ »ç¿ëÇÏ°í
-      _itemIDs[0] = 0; // ºñ¿î´Ù. 
+      // itemIDs[0]ë¥¼ ì‚¬ìš©í•˜ê³ 
+      _itemIDs[0] = 0; // ë¹„ìš´ë‹¤. 
    }
 
    private void HandleItemChange()
@@ -114,8 +114,8 @@ public class Player : MonoBehaviour
 
    private void OnCollisionEnter(Collision collision)
    {
-      if (collision.collider.CompareTag(_ballTag) // °ø¿¡ ´ê¾Ò°í
-         && _ballController.BallIsFree()) // °øÀÌ ÀÚÀ¯·Ó´Ù¸é
+      if (collision.collider.CompareTag(_ballTag) // ê³µì— ë‹¿ì•˜ê³ 
+         && _ballController.BallIsFree()) // ê³µì´ ììœ ë¡­ë‹¤ë©´
       {
          this.Registe(_ballController);
       }
@@ -124,7 +124,3 @@ public class Player : MonoBehaviour
 
 
 }
-
-
-
-

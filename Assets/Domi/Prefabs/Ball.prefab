@@ -10,10 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6637390945519154142}
   - component: {fileID: 5600818334334802661}
+  - component: {fileID: 8823389667716883042}
+  - component: {fileID: 7648748447957842054}
   - component: {fileID: 8961932620776045738}
+  - component: {fileID: 2708511074234955866}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,9 +29,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705643168332404277}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.22, y: 0.71, z: -0.6700001}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 950842510777879833}
@@ -60,7 +63,42 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
+--- !u!135 &8823389667716883042
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705643168332404277}
+  m_Material: {fileID: 13400000, guid: 6adca01a87296344dabfd80e1354d12b, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.64
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7648748447957842054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705643168332404277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb7494c381b3c54f85a3bd34fb2397c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outAreaTag: OutArea
+  spawnPointName: BallSpawnPoint
 --- !u!114 &8961932620776045738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,13 +111,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c81042349ba28648b46c196b53a67e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 100, y: 0, z: 0}
+  direction: {x: 300, y: 230, z: 0}
   rigid: {fileID: 5600818334334802661}
   viewer: {fileID: 0}
   ballSimulater: {fileID: 0}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &2708511074234955866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705643168332404277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2465bf13de4b014e982650d413ba6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &4239187902265941265
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,9 +228,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 950842510777879833}
-  - component: {fileID: 962040435375206269}
-  - component: {fileID: 6280146387288910181}
-  - component: {fileID: 6089365338987080297}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Ball
@@ -202,56 +252,6 @@ Transform:
   - {fileID: 4819525097898974349}
   m_Father: {fileID: 6637390945519154142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &962040435375206269
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7468322415569400776}
-  m_Material: {fileID: 13400000, guid: 6adca01a87296344dabfd80e1354d12b, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.64
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6280146387288910181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7468322415569400776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdb7494c381b3c54f85a3bd34fb2397c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outAreaTag: OutArea
-  spawnPointName: BallSpawnPoint
---- !u!114 &6089365338987080297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7468322415569400776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2465bf13de4b014e982650d413ba6a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!1 &7738834878896903190
 GameObject:
   m_ObjectHideFlags: 0

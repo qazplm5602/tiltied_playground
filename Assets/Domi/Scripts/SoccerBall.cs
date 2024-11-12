@@ -11,12 +11,15 @@ public class SoccerBall : MonoBehaviour
 
     private Transform spawnPoint;
     private Rigidbody rigid;
-    private SoccerBallRemoteTrigger remoteEvent;
+    private Transform visual;
+    private Player owner; // 공 가지고 잇는 사람
+    private BallControlBundle ownerControl;
+    private BallGoalSimulateManager ballSimulater;
 
     private void Awake() {
         rigid = GetComponent<Rigidbody>();
-        remoteEvent = GetComponentInChildren<SoccerBallRemoteTrigger>();
-        // remoteEvent.TriggerEnter += HandleTriggerEnter;
+        ballSimulater = ManagerManager.GetManager<BallGoalSimulateManager>();
+        visual = GameObject.Find("Visual").transform;
 
         spawnPoint = GameObject.Find(spawnPointName)?.transform;
 
@@ -24,8 +27,10 @@ public class SoccerBall : MonoBehaviour
             Debug.LogWarning("Not Found Ball Spawn Point");
     }
 
-    private void OnDestroy() {
-        // remoteEvent.TriggerEnter -= HandleTriggerEnter;
+    private void Update() {
+        if (owner == null) return; // owner 이 없으면 분리 되어있지 않음
+        
+        transform.position = visual.position;
     }
 
     public void BallReset() {
@@ -45,5 +50,39 @@ public class SoccerBall : MonoBehaviour
             OnGoal?.Invoke(area);
             print($"Goal!! {area}");
         }
+    }
+
+    public Transform TakePlayerBall(Player ballOwner, BallControlBundle ballControl) {
+        owner = ballOwner;
+        ownerControl = ballControl;
+
+        visual.SetParent(ballOwner.transform, true);
+
+        rigid.isKinematic = true;
+        rigid.Sleep();
+
+        return visual;
+    }
+
+    public void RemoveOwner(bool controlRequest = true) {
+        if (owner == null) return;
+
+        visual.SetParent(transform, true);
+
+        if (controlRequest)
+            ownerControl.Release(owner);
+
+        rigid.isKinematic = false;
+        rigid.WakeUp();
+        
+        owner = null;
+        ownerControl = null;
+    }
+
+    public void Kick(Vector3 direction) {
+        RemoveOwner(); // 자동 삭제
+
+        rigid.AddForce(direction, ForceMode.Impulse);
+        ballSimulater.SimulateBall(rigid.transform.position, direction);
     }
 }
