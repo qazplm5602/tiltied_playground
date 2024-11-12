@@ -31,6 +31,11 @@ public class Ground : MonoBehaviour
         maxFallPoint = transform.Find("FallAreaTrm").Find("MaxPoint");
     }
 
+    public void ResetGround()
+    {
+        GetCompo<GroundTiltied>().ResetTilt();
+    }
+    
     public void AddMassObj(MassHaveObj obj)
     {
         if(!_onGroundObj.Contains(obj))
@@ -44,4 +49,13 @@ public class Ground : MonoBehaviour
     }
 
     public List<MassHaveObj> GetMassObjs() => _onGroundObj;
+    
+    public T GetCompo<T>() where T : class
+    {
+        if(_groundCompos.TryGetValue(typeof(T), out IGroundCompo compo))
+        {
+            return compo as T;
+        }
+        return default;
+    }
 }
