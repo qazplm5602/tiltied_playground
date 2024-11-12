@@ -31,7 +31,9 @@ public class GameModeDefault : GameMode, IGameModeTimer
         IsPlay = true;
 
         // 시간
-        timer.SetTime(60 * 90);
+        timer.OnFinishTime += GameStop;
+
+        timer.SetTime(60 /* * 90 */);
         timer.Play();
     }
 
@@ -63,6 +65,7 @@ public class GameModeDefault : GameMode, IGameModeTimer
 
     public override void GameStop()
     {
+        timer.OnFinishTime -= GameStop;
         IsPlay = false;
         
         WhistleSound whistle = ManagerManager.GetManager<WhistleSound>();

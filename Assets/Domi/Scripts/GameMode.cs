@@ -36,6 +36,15 @@ public abstract class GameMode : MonoBehaviour
         soccerBall.OnOut -= HandleBallOut;
     }
 
+    public BallAreaType? GetWinTeam() {
+        if (redScore == blueScore)
+            return null;
+        else if (redScore > blueScore)
+            return BallAreaType.Red;
+        else
+            return BallAreaType.Blue;
+    }
+
     public abstract void GameStart();
     public abstract void GameStop(); // 게임이 끝남
 
