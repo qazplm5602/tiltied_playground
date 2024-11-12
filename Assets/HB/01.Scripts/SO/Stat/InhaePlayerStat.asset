@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: "\uC774\uC778\uD574"
   nationlity: "\uB300\uD55C\uBBFC\uAD6D"
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 21300000, guid: c8dcd97fa5819ea41aa95f1aa06715d6, type: 3}
   height: 172
   weight: 60
   defaultSpeed:
