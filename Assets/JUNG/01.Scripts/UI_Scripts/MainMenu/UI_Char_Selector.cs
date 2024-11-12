@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class UI_Char_Selector : MonoBehaviour
 {
+    [SerializeField] private Image _player1PosCam;
+    [SerializeField] private Image _player2PosCam;
+
 
     [SerializeField] private GameObject mapSelectUI;
 
@@ -39,7 +42,6 @@ public class UI_Char_Selector : MonoBehaviour
     private void HandleCloseUIEvent()
     {
         UI_Manager.Instance.UIOpenOrClose(mapSelectUI, false, transform.parent.gameObject);
-        Debug.Log("SDFSFfsfsf");
     }
 
     private void HandleGoToMapSelect()
@@ -107,6 +109,7 @@ public class UI_Char_Selector : MonoBehaviour
     {
         if (objIdx == 1)
         {
+            //_player1PosCam = _characters[charIndex1].   여기 하기   /   stat SO 안에 Pos사진을 넣어줘야해 한별
             for (int i = 0; i < _characters.Length; i++)
             {
                 _characters[i]._isOnTopImage1.enabled = false;
