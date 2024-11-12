@@ -248,18 +248,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 616940153561361992, guid: 598b670cb4efc6341bb4d104dbf55770, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 616940153561361992, guid: 598b670cb4efc6341bb4d104dbf55770, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 616940153561361992, guid: 598b670cb4efc6341bb4d104dbf55770, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3456556670848960018, guid: 598b670cb4efc6341bb4d104dbf55770, type: 3}
       propertyPath: m_Name
       value: MoonMap
