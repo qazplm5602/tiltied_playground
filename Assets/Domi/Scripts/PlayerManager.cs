@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,11 +19,20 @@ public class PlayerManager : MonoBehaviour
         CreatePlayer();
     }
 
-    void FindSpawnPos() {
-        // .....
+    private void FindSpawnPos() {
+        foreach (BallAreaType item in Enum.GetValues(typeof(BallAreaType)))
+        {
+            Transform pointTrm = GameObject.Find($"PlayerSpawnPoints/{item}").transform;
+            if (pointTrm == null) {
+                Debug.LogWarning($"{item} spawn point not found.");
+                continue;
+            }
+
+            spawnPos.Add(item, pointTrm);
+        }
     }
 
-    void CreatePlayer() {
+    private void CreatePlayer() {
         GameDataManager data = GameDataManager.Instance;
         if (data == null) {
             Debug.LogWarning("Game Data Missing! Can Not Create Player.");
@@ -37,7 +47,15 @@ public class PlayerManager : MonoBehaviour
         Player player_2 = Instantiate(basePlayer);
         player_2.SetControl(control2);
 
-        players.Add(BallAreaType.Red, player_1);
-        players.Add(BallAreaType.Blue, player_2);
+        players.Add(BallAreaType.Blue, player_1);
+        players.Add(BallAreaType.Red, player_2);
+    }   
+
+    public void ResetPos() {
+        foreach (var item in players)
+        {
+            if (spawnPos.TryGetValue(item.Key, out Transform point))
+                item.Value.transform.position = point.position;
+        }
     }
 }

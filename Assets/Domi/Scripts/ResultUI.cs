@@ -14,7 +14,7 @@ public class ResultUI : MonoBehaviour
     }
 
     private void Start() {
-        ShowResult(200, 50);
+        // ShowResult(200, 50); // test
     }
 
     public void ShowResult(int red, int blue) {

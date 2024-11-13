@@ -9,12 +9,15 @@ public class GameModeDefault : GameMode, IGameModeTimer
     private SoccerTimer timer;
 
     private BallGoalSimulateManager simulateManager;
+    private PlayerManager playerManager;
 
     protected override void Awake()
     {
         base.Awake();
         timer = new(this); // 타이머가 먼저임
         IngameUI = new(this);
+
+        playerManager = ManagerManager.GetManager<PlayerManager>();
     }
 
     private void Update() {
@@ -28,12 +31,13 @@ public class GameModeDefault : GameMode, IGameModeTimer
     public override void GameStart()
     {
         soccerBall.BallReset();
+        playerManager.ResetPos();
         IsPlay = true;
 
         // 시간
         timer.OnFinishTime += GameStop;
 
-        timer.SetTime(60 /* * 90 */);
+        timer.SetTime(60  * 90);
         timer.Play();
     }
 
@@ -59,6 +63,7 @@ public class GameModeDefault : GameMode, IGameModeTimer
 
         CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main, () => {
             soccerBall.BallReset();
+            playerManager.ResetPos();
             IsPlay = true;
         });
     }
