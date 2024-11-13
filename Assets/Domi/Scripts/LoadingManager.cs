@@ -24,7 +24,8 @@ public class LoadingManager : MonoBehaviour
 
     private void Update() {
         forceWaitTime -= Time.deltaTime;
-        if (!operation.isDone || forceWaitTime > 0) return;
+        // print($"{operation.isDone} / {operation.progress} / {forceWaitTime}");
+        if (operation.progress > 0.9f || forceWaitTime > 0) return;
 
         operation.allowSceneActivation = true;
 
