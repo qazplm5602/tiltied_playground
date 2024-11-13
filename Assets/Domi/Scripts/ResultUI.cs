@@ -7,9 +7,14 @@ public class ResultUI : MonoBehaviour
 {
     [SerializeField] RectTransform redScore;
     [SerializeField] RectTransform blueScore;
+    [SerializeField] Button backBtn;
+
+    private void Awake() {
+        backBtn.onClick.AddListener(HandleBackClick);
+    }
 
     private void Start() {
-        ShowResult(20, 5);
+        ShowResult(200, 50);
     }
 
     public void ShowResult(int red, int blue) {
@@ -46,8 +51,24 @@ public class ResultUI : MonoBehaviour
 
             sequence.Append(winner.DOScale(Vector2.one * 1.2f, 0.3f).SetEase(Ease.OutBack));
             sequence.Join(loser.DOScale(Vector2.one * 0.8f, 0.3f).SetEase(Ease.OutBack));
+
+            if (red > blue) {
+                sequence.Join(redScore.DOAnchorPosX(-440 + 60, 0.5f).SetEase(Ease.OutBack));
+                // sequence.Join(blueScore.DOAnchorPosX(-193 + 60, 0.5f).SetEase(Ease.OutBack));
+            } else {
+                sequence.Join(redScore.DOAnchorPosX(-440 - 60, 0.5f).SetEase(Ease.OutBack));
+            }
         }
+    
+        // 돌아가기 버튼임
+        CanvasGroup btnGroup = backBtn.GetComponent<CanvasGroup>();
+        btnGroup.blocksRaycasts = true;
+        btnGroup.interactable = true;
 
+        sequence.Append(btnGroup.DOFade(1, 0.5f));
+    }
 
+    private void HandleBackClick() {
+        LoadingManager.LoadScene("TitleScene");
     }
 }
