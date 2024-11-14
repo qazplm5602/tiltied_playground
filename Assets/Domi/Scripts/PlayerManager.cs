@@ -58,4 +58,11 @@ public class PlayerManager : MonoBehaviour
                 item.Value.transform.position = point.position;
         }
     }
+
+    public Player GetPlayer(BallAreaType team) {
+        if (players.TryGetValue(team, out var player))
+            return player;
+
+        return null;
+    }
 }
