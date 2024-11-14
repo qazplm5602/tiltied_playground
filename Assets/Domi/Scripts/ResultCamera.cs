@@ -1,11 +1,15 @@
 using System.Collections;
+using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
 
 public class ResultCamera : MonoBehaviour
 {
     [SerializeField] private Vector3 camMargin;
+    [SerializeField] private float maxY;
     [SerializeField] private CinemachineCamera cinemachine;
+    [SerializeField] private float endDuration = 2f;
+    [SerializeField] private AnimationCurve animEase;
 
     private void Start() {
         // TEST
@@ -25,7 +29,10 @@ public class ResultCamera : MonoBehaviour
         Vector3 startCamPos = hit.position + dir;
 
         Transform hitTrm = new GameObject("ResultHitPoint").transform;
-        hitTrm.SetParent(transform.parent);
+        hitTrm.SetParent(hit);
+
+        hitTrm.position = hit.position + hit.TransformDirection(new Vector3(camMargin.x, camMargin.y, 0));
+
 
         cinemachine.Follow = hitTrm;
 
@@ -33,6 +40,7 @@ public class ResultCamera : MonoBehaviour
 
         print($"{dir} / {hit.position} / {startCamPos}");
 
-        cinemachine.transform.position = startCamPos;
+        cinemachine.transform.position = new Vector3(startCamPos.x, startCamPos.y + maxY, startCamPos.z);
+        cinemachine.transform.DOLocalMoveY(startCamPos.y, endDuration).SetEase(animEase);
     }
 }

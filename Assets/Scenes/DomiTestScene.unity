@@ -727,7 +727,7 @@ MonoBehaviour:
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 1.92, y: 0.74, z: 0}
+  TargetOffset: {x: 0, y: 0, z: 0}
   Damping: {x: 0.5, y: 0.5}
   Lookahead:
     Enabled: 0
@@ -955,8 +955,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bfb8450481d2d488a8a92c05f898a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camMargin: {x: -5, y: 1, z: 5}
+  camMargin: {x: -3, y: 1.5, z: 5}
+  maxY: 100
   cinemachine: {fileID: 311744262}
+  endDuration: 5
+  animEase:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.5945993
+      outSlope: 0.5945993
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.30121166
+      value: 0.17910025
+      inSlope: 0.35479417
+      outSlope: 0.35479417
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.32100257
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6003011
+      value: 0.8332715
+      inSlope: 0.7270397
+      outSlope: 0.7270397
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.82985
+      outWeight: 0.34149468
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.41713524
+      outSlope: 0.41713524
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &505702789
 GameObject:
   m_ObjectHideFlags: 0
