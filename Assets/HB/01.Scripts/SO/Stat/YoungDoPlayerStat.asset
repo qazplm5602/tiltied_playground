@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea44e0299a2903e4e85c0beffd5234bc, type: 3}
-  m_Name: BonhuPlayerStat
+  m_Name: YoungDoPlayerStat
   m_EditorClassIdentifier: 
-  playerName: "\uAD6C\uBCF8\uD6C4"
+  playerName: "\uC815\uC138\uD604"
   nationlity: "\uB300\uD55C\uBBFC\uAD6D"
-  icon: {fileID: 21300000, guid: 201970a8475776c4f89cdf49d769a30e, type: 3}
-  height: 175
-  weight: 65
+  icon: {fileID: 21300000, guid: d586e89d87661b34082741fedef6e4a8, type: 3}
+  height: 180
+  weight: 70
   defaultSpeed:
-    _baseValue: 8
+    _baseValue: 6
     modifiers: 
   runSpeed:
-    _baseValue: 14
+    _baseValue: 10
     modifiers: 
   goalDecision:
-    _baseValue: 60
+    _baseValue: 40
     modifiers: 
   shootPower:
-    _baseValue: 10
+    _baseValue: 4
     modifiers: 

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UI_Char_Selector : MonoBehaviour
 {
-    [SerializeField] private Image _player1PosCam;
-    [SerializeField] private Image _player2PosCam;
+    [SerializeField] private Image _player1PosImg;
+    [SerializeField] private Image _player2PosImg;
 
 
     [SerializeField] private GameObject mapSelectUI;
@@ -110,6 +110,7 @@ public class UI_Char_Selector : MonoBehaviour
         if (objIdx == 1)
         {
             //_player1PosCam = _characters[charIndex1].   여기 하기   /   stat SO 안에 Pos사진을 넣어줘야해 한별
+            _player1PosImg.sprite = _characters[charIndex1].playerStat.icon;
             for (int i = 0; i < _characters.Length; i++)
             {
                 _characters[i]._isOnTopImage1.enabled = false;
@@ -118,6 +119,7 @@ public class UI_Char_Selector : MonoBehaviour
         }
         else
         {
+            _player2PosImg.sprite = _characters[charIndex2].playerStat.icon;
             for (int i = 0; i < _characters.Length; i++)
             {
                 _characters[i]._isOnTopImage2.enabled = false;

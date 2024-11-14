@@ -19,7 +19,8 @@ public class MoonEventMap : EventMapBase
         base.Awake();
         
         _moonStones = new List<MoonStone>();
-        _moonStones = _stoneParent.GetComponentsInParent<MoonStone>().ToList();
+        _moonStones = _stoneParent.GetComponentsInChildren<MoonStone>().ToList();
+        _moonStones.ForEach(x => x.gameObject.SetActive(false));
     }
 
     protected override void MapEventStart()
