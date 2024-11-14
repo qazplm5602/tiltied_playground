@@ -39,6 +39,23 @@ public class BallGoalSimulateManager : MonoBehaviour
     //         callbacks.Remove(type);
     // }
 
+    private void Awake() {
+        // 자동으로 넣기
+        GoalPostArea[] list = FindObjectsByType<GoalPostArea>(FindObjectsSortMode.None);
+        
+        areas = new BallArea[list.Length];
+        for (int i = 0; i < list.Length; i++)
+        {
+            BallAreaType type = list[i].GetArea();
+            // 하지만 반대로 해야댐 (골 넣는 곳이 아니라 골 점수가 들어가는 곳이라...)
+            
+            areas[i] = new BallArea() {
+                area = list[i],
+                type = type == BallAreaType.Blue ? BallAreaType.Red : BallAreaType.Blue
+            };
+        }
+    }
+
     private void SendCallback(BallAreaType type) {
         // if (callbacks.TryGetValue(type, out Action cb))
         //     cb?.Invoke();
