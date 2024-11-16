@@ -10,6 +10,7 @@ public class GameModeDefault : GameMode, IGameModeTimer
 
     private BallGoalSimulateManager simulateManager;
     private PlayerManager playerManager;
+    private ResultUI resultUI;
 
     protected override void Awake()
     {
@@ -18,6 +19,7 @@ public class GameModeDefault : GameMode, IGameModeTimer
         IngameUI = new(this);
 
         playerManager = ManagerManager.GetManager<PlayerManager>();
+        resultUI = FindAnyObjectByType<ResultUI>();
     }
 
     private void Update() {
@@ -72,10 +74,21 @@ public class GameModeDefault : GameMode, IGameModeTimer
     {
         timer.OnFinishTime -= GameStop;
         IsPlay = false;
-        
+
         WhistleSound whistle = ManagerManager.GetManager<WhistleSound>();
         
         if (whistle) // 휘슬 시스템이 있당
             whistle.PlayEndSound();
+
+        if (resultUI)
+            resultUI.StartScene();
+    }
+
+    [ContextMenu("testGameStop")]
+    private void ImmediatelyGameStopTest() {
+        RedScore = UnityEngine.Random.Range(1, 50);
+        BlueScore = UnityEngine.Random.Range(0, 50);
+
+        timer.SetTime(5);
     }
 }

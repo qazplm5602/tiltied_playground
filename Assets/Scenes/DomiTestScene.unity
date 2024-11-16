@@ -728,7 +728,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 0.5, y: 0.5}
+  Damping: {x: 0, y: 0}
   Lookahead:
     Enabled: 0
     Time: 0
@@ -1127,7 +1127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &546752543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1228,6 +1228,7 @@ MonoBehaviour:
   redScore: {fileID: 2068522252}
   blueScore: {fileID: 1637829542}
   backBtn: {fileID: 243395880}
+  ingameUI: {fileID: 759706398}
 --- !u!1 &547265297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,6 +1729,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2068184220}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &759706393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4763303255125304034, guid: 029690f30ab1f2a45804d54fc7e910d4, type: 3}
+  m_PrefabInstance: {fileID: 1549251717}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &759706398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759706393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c158cc6ecfae94886cb791adf2d9dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!225 &759706399
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759706393}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &810268190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,7 +2468,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4763303255125304034, guid: 029690f30ab1f2a45804d54fc7e910d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 759706399}
+    - targetCorrespondingSourceObject: {fileID: 4763303255125304034, guid: 029690f30ab1f2a45804d54fc7e910d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 759706398}
   m_SourcePrefab: {fileID: 100100000, guid: 029690f30ab1f2a45804d54fc7e910d4, type: 3}
 --- !u!1001 &1637829541
 PrefabInstance:

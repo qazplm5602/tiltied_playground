@@ -16,7 +16,7 @@ public class ResultCamera : MonoBehaviour
         Player player = ManagerManager.GetManager<PlayerManager>().GetPlayer(BallAreaType.Red);
         
         // StartCam(player.transform);
-        StartCoroutine(WaitRun(player.transform));
+        // StartCoroutine(WaitRun(player.transform));
     }
 
     IEnumerator WaitRun(Transform hit) {
@@ -43,4 +43,6 @@ public class ResultCamera : MonoBehaviour
         cinemachine.transform.position = new Vector3(startCamPos.x, startCamPos.y + maxY, startCamPos.z);
         cinemachine.transform.DOLocalMoveY(startCamPos.y, endDuration).SetEase(animEase);
     }
+
+    public float GetDuration() => endDuration;
 }
