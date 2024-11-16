@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using DG.Tweening;
@@ -70,6 +71,9 @@ public class CameraTransition : MonoBehaviour
         });
 
         currentCamType = cam;
+    }
+    public void FadeChangeCam(string camName) { // 타임라인 지원
+        FadeChangeCam((CameraType)Enum.Parse(typeof(CameraType), camName));
     }
 
     public void FadeChangeCamNoLive(CameraType cam, System.Action cb) {
