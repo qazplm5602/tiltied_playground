@@ -36,6 +36,8 @@ public class SoccerBallHighlight : MonoBehaviour
         Time.timeScale = 0.1f; // 시간 느리게
         List<CameraType> cameras = CameraManager.Instance.GetNearCam(CameraManager.NearType.Near, new CameraType[] { type == BallAreaType.Blue ? CameraType.Blue_L : CameraType.Orange_L, type == BallAreaType.Blue ? CameraType.Blue_R : CameraType.Orange_R }, transform.position);
 
+        print($"[{type}] {(type == BallAreaType.Blue ? CameraType.Blue_L : CameraType.Orange_L)}, {(type == BallAreaType.Blue ? CameraType.Blue_R : CameraType.Orange_R)}");
+
         // 가까운거는
         CameraType nearCam = cameras[0];
         CameraManager.Instance.Transition.FadeChangeCam(nearCam);

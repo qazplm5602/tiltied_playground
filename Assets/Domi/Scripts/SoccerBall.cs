@@ -40,6 +40,8 @@ public class SoccerBall : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
+        if (!ManagerManager.GetManager<GameManager>().GetMode().IsPlay) return; // 정지 상태이면 안함 ㅅㄱ
+
         if (other.CompareTag(outAreaTag)) {
             OnOut?.Invoke();
             print("Out!!");
