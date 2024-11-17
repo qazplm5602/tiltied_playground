@@ -27,6 +27,9 @@ public class UI_Char_Selector : MonoBehaviour
     private void Start()
     {
         _characters = GetComponentsInChildren<UI_Characters>();
+
+        showingStat1.OnStatChange(_characters[charIndex1].playerStat);
+        showingStat2.OnStatChange(_characters[charIndex2].playerStat);
     }
     private void OnEnable()
     {

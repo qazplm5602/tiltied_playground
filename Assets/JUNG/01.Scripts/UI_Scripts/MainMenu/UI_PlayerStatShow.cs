@@ -1,22 +1,32 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_PlayerStatShow : MonoBehaviour
 {
+
+    [Header("Player Stat Image")]
+
     [SerializeField] private Image heightValue;
     [SerializeField] private Image weightValue;
     [SerializeField] private Image speedValue;
     [SerializeField] private Image powerValue;
 
-    float normalizedheightValue;
-    float normalizedweightValue;
-    float normalizedspeedValue;
-    float normalizedpowerValue;
+    private float normalizedheightValue;
+    private float normalizedweightValue;
+    private float normalizedspeedValue;
+    private float normalizedpowerValue;
+
+    [Header("Player Skill Image")]
+    [SerializeField] private Image playerSkill;
+    [SerializeField] private TextMeshProUGUI skillInfoText;
 
 
     public void OnStatChange(PlayerStatsSO stat)
     {
+        playerSkill.sprite = stat
+
         normalizedheightValue = Mathf.Clamp01(stat.height / 250f) * 100f + 50f;
         normalizedweightValue = Mathf.Clamp01(stat.weight / 250f) * 100f + 50f;
         normalizedspeedValue = Mathf.Clamp01(stat.defaultSpeed.GetValue() / 250f) * 100f + 50f;
@@ -26,5 +36,10 @@ public class UI_PlayerStatShow : MonoBehaviour
         weightValue.rectTransform.DOSizeDelta(new Vector2(normalizedweightValue, 50), 0.2f);
         speedValue.rectTransform.DOSizeDelta(new Vector2(normalizedspeedValue, 50), 0.2f);
         powerValue.rectTransform.DOSizeDelta(new Vector2(normalizedpowerValue, 50), 0.2f);
+    }
+
+    public void OnSkillChange()
+    {
+            skillInfoText
     }
 }
