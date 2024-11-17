@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public abstract class SkillBase : MonoBehaviour
 {
@@ -31,6 +29,9 @@ public abstract class SkillBase : MonoBehaviour
 
     public virtual bool SkillUseAbleCheck()
     {
+        if (skillType == PlayerSkillType.None)
+            return false;
+        
         if (currentCool <= 0)
         {
             currentCool = defaultCool;
