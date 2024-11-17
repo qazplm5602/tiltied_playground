@@ -26,9 +26,9 @@ public class Ground : MonoBehaviour
     }
 
     private void Start()
-    {
-        // minFallPoint = transform.Find("FallAreaTrm").Find("MinPoint");
-        // maxFallPoint = transform.Find("FallAreaTrm").Find("MaxPoint");
+    { 
+        minFallPoint = transform.Find("FallAreaTrm").Find("MinPoint");
+        maxFallPoint = transform.Find("FallAreaTrm").Find("MaxPoint");
     }
 
     public void ResetGround()

@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mass: 20
-  _rayDistance: 3
+  _rayDistance: 1.5
   _massHaveLayer:
     serializedVersion: 2
     m_Bits: 64

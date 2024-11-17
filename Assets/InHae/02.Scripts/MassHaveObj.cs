@@ -42,7 +42,7 @@ public class MassHaveObj : MonoBehaviour
     // 오브젝트 위에 올라갔을 경우 아래 오브젝트에 자신의 무게를 더 해줌
     private void AddWeight()
     {
-        bool isHit = Physics.BoxCast(_castTrm.position, _castSize * 0.5f, Vector3.down, 
+        bool isHit = Physics.BoxCast(transform.position, _castSize * 0.5f, Vector3.down, 
             out RaycastHit hit, Quaternion.identity, _rayDistance,_massHaveLayer);
         
         if (isHit)
@@ -67,6 +67,7 @@ public class MassHaveObj : MonoBehaviour
             {
                 _lastUnderObj.SetMass(_lastUnderObj.GetMass() - GetMass());
                 _lastUnderObj = null;
+                _lastHit = default;
             }
         }
     }
@@ -118,7 +119,10 @@ public class MassHaveObj : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay (_castTrm.position, Vector3.down * _lastHit.distance);
-        Gizmos.DrawWireCube (_castTrm.position + Vector3.down * _lastHit.distance, _castSize );
+        Gizmos.DrawWireCube (_castTrm.position, _castSize);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay (transform.position, Vector3.down * _rayDistance);
+        Gizmos.DrawWireCube (transform.position + Vector3.down * _rayDistance, _castSize );
     }
 }
