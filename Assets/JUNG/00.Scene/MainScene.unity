@@ -4726,14 +4726,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player1PosImg: {fileID: 654833422}
-  _player2PosImg: {fileID: 0}
+  _player2PosImg: {fileID: 1297709898}
   mapSelectUI: {fileID: 1425735046}
   _characters: []
   _inputSO1: {fileID: 11400000, guid: 3b65716b6545d3540bdab38db3501e9b, type: 2}
   _inputSO2: {fileID: 11400000, guid: 0fff30bdbaa22294798e38b62d448d34, type: 2}
   rightMaxIdx: 5
   showingStat1: {fileID: 81947610}
-  showingStat2: {fileID: 0}
+  showingStat2: {fileID: 2063850545}
 --- !u!1 &1544946513
 GameObject:
   m_ObjectHideFlags: 0
@@ -5449,7 +5449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1684619332
 RectTransform:
   m_ObjectHideFlags: 0
