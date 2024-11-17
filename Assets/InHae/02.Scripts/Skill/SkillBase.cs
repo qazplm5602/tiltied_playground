@@ -1,21 +1,39 @@
-using System;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public abstract class SkillBase : MonoBehaviour
 {
-    private float _defaultCool;
-    private float _currentCool;
-
-    private void Update()
+    public PlayerSkillType skillType;
+    
+    public float defaultCool;
+    public Sprite skillIcon;
+    
+    [HideInInspector] public float currentCool;
+    [HideInInspector] public Player player;
+    
+    public void Init(Player player)
     {
-        _currentCool -= Time.deltaTime;
+        this.player = player;
+    }
+
+    protected virtual void Update()
+    {
+        if (currentCool > 0)
+        {
+            currentCool -= Time.deltaTime;
+            if (currentCool <= 0)
+            {
+                currentCool = 0;
+            }
+        }
     }
 
     public virtual bool SkillUseAbleCheck()
     {
-        if (_currentCool <= 0)
+        if (currentCool <= 0)
         {
-            _currentCool = _defaultCool;
+            currentCool = defaultCool;
             return true;
         }
 
