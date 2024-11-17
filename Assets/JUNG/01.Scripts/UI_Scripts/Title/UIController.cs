@@ -24,7 +24,7 @@ public class UIController : MonoBehaviour
     {
         _openSceneBtn.RegisterCallback<ClickEvent>(vt =>
         {
-            SceneManager.LoadScene("MainScene");
+            LoadingManager.LoadScene("MainScene");
         });
     }
 }
