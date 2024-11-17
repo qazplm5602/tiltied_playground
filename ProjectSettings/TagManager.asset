@@ -37,9 +37,18 @@ TagManager:
   - 
   - 
   - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Obj
+    uniqueID: 1209009643
+    locked: 0
+  - name: UI
+    uniqueID: 2781593339
     locked: 0
   m_RenderingLayers:
   - Default
