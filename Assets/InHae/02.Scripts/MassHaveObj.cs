@@ -5,14 +5,14 @@ using UnityEngine;
 public class MassHaveObj : MonoBehaviour
 {
     [SerializeField] private float _mass;
+    [SerializeField] private float _rayDistance;
     [SerializeField] private LayerMask _massHaveLayer;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private Transform _castTrm;
     [SerializeField] private Vector3 _castSize;
     
-    private Collider _lastCollider;
+    private RaycastHit _lastHit;
     private Collider[] _groundColliders = new Collider[1];
-    private Collider[] _massObjColliders = new Collider[2];
 
     private float _defaultMass;
 
@@ -42,23 +42,21 @@ public class MassHaveObj : MonoBehaviour
     // 오브젝트 위에 올라갔을 경우 아래 오브젝트에 자신의 무게를 더 해줌
     private void AddWeight()
     {
-        int cnt = Physics.OverlapBoxNonAlloc(_castTrm.position, _castSize * 0.5f,
-            _massObjColliders, Quaternion.identity, _massHaveLayer);
+        bool isHit = Physics.BoxCast(_castTrm.position, _castSize * 0.5f, Vector3.down, 
+            out RaycastHit hit, Quaternion.identity, _rayDistance,_massHaveLayer);
         
-        if (cnt > 1)
+        if (isHit)
         {
-            Collider selfIgnoreCol = FindIgnoreSelfCollider(_massObjColliders);
-
             // 처음 오브젝트 위에 올라갔거나 오브젝트를 건너간 경우
-            if (_lastUnderObj is null || _lastCollider != selfIgnoreCol)
+            if (_lastUnderObj is null || _lastHit.collider != hit.collider)
             {
                 if (_lastUnderObj is not null)
                 {
                     _lastUnderObj.SetMass(_lastUnderObj.GetMass() - GetMass());
                 }
                 
-                _lastCollider = selfIgnoreCol;
-                _lastUnderObj = selfIgnoreCol.GetComponent<MassHaveObj>();
+                _lastHit = hit;
+                _lastUnderObj = hit.collider.GetComponent<MassHaveObj>();
                 _lastUnderObj.SetMass(GetMass() + _lastUnderObj._defaultMass);
             }
         }
@@ -71,22 +69,6 @@ public class MassHaveObj : MonoBehaviour
                 _lastUnderObj = null;
             }
         }
-    }
-
-    private Collider FindIgnoreSelfCollider(Collider[] colliders)
-    {
-        Collider selfIgnoreCol = colliders[0];
-
-        foreach (Collider col in colliders)
-        {
-            if (col.transform != transform)
-            {
-                selfIgnoreCol = col;
-                break;
-            }
-        }
-
-        return selfIgnoreCol;
     }
 
     private void UpdateMass(float mass)
@@ -136,6 +118,7 @@ public class MassHaveObj : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(_castTrm.position, _castSize);
+        Gizmos.DrawRay (_castTrm.position, Vector3.down * _lastHit.distance);
+        Gizmos.DrawWireCube (_castTrm.position + Vector3.down * _lastHit.distance, _castSize );
     }
 }
