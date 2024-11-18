@@ -5,11 +5,15 @@ using UnityEngine;
 public class MassHaveObj : MonoBehaviour
 {
     [SerializeField] private float _mass;
+    
+    [Header("BoxCast Setting")]
     [SerializeField] private float _rayDistance;
     [SerializeField] private LayerMask _massHaveLayer;
-    [SerializeField] private LayerMask _groundLayer;
+    
+    [Header("OverlapBox Setting")]
     [SerializeField] private Transform _castTrm;
     [SerializeField] private Vector3 _castSize;
+    [SerializeField] private LayerMask _groundLayer;
     
     private RaycastHit _lastHit;
     private Collider[] _groundColliders = new Collider[1];
