@@ -31,7 +31,7 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
         _leftMassSum = 0;
         _rightMassSum = 0;
 
-        List<MassHaveObj> onGroundObj = _ground.onGroundObj;     
+        List<MassHaveObj> onGroundObj = _ground.GetMassObjs();     
         for (int i = 0; i < onGroundObj.Count; i++)
         {
             
@@ -93,5 +93,13 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
         }
         
         return calculateMass;
+    }
+
+    public void ResetTilt()
+    {
+        _leftMassSum = 0;
+        _rightMassSum = 0;
+        _currentRotZ = 0;
+        transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 }

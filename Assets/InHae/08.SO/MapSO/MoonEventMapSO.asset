@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: MoonEventMapSO
   m_EditorClassIdentifier: 
   mapType: 1
-  mapPrefab: {fileID: 3456556670848960018, guid: 598b670cb4efc6341bb4d104dbf55770, type: 3}
-  skyBox: {fileID: 2100000, guid: 369b9ebe3a62b904dbc19bd332b44086, type: 2}
-  minEventTime: 10
+  mapPrefab: {fileID: 1397352850207293207, guid: 598b670cb4efc6341bb4d104dbf55770, type: 3}
+  minEventTime: 3
   maxEventTime: 15
   eventDurationTime: 30

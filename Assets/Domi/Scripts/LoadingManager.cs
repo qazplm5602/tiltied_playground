@@ -15,6 +15,7 @@ public class LoadingManager : MonoBehaviour
 
     ///////////////////// instance
     private AsyncOperation operation;
+    private float forceWaitTime = 3f; // 3초는 기다려야함 (로딩시간 포함)
 
     private void Start() {
         operation = SceneManager.LoadSceneAsync(toScene);
@@ -22,7 +23,10 @@ public class LoadingManager : MonoBehaviour
     }
 
     private void Update() {
-        if (operation.isDone) return;
+        forceWaitTime -= Time.deltaTime;
+        // print($"{operation.isDone} / {operation.progress} / {forceWaitTime}");
+        if (operation.progress > 0.9f || forceWaitTime > 0) return;
+
         operation.allowSceneActivation = true;
 
         lastScreenTex = ScreenCapture.CaptureScreenshotAsTexture(); // 혹시 쓸 수도 있으니..

@@ -1,15 +1,41 @@
-using System;
 using UnityEngine;
 using DG.Tweening;
 
 public class MoonStone : MonoBehaviour
 {
-    [SerializeField] private float _loopTime;
-
-    private Tween _currentTween;
+    [SerializeField] private float _firstUpValue;
     
-    private void Awake()
+    private Sequence _sequence;
+    private float _defaultY;
+    private float _loopTime;
+    
+    public void GravityOff()
     {
-        _currentTween = transform.DOMoveY(transform.position.y + 15f, _loopTime).SetLoops(-1, LoopType.Yoyo);
+        _sequence.Kill();
+        transform.DOMoveY(_defaultY, _loopTime).OnComplete(() => gameObject.SetActive(false));
+    }
+
+    public void GravityOn(float loopTime)
+    {
+        _loopTime = loopTime;
+        _defaultY = transform.position.y;
+        gameObject.SetActive(true);
+
+        transform.DOMoveY(_defaultY + _firstUpValue, _loopTime).OnComplete(() =>
+        {
+            SequenceCreate(transform.position.y);
+            _sequence.Play();
+        });
+    }
+
+    private void SequenceCreate(float defaultY)
+    {
+        _sequence = DOTween.Sequence();
+        
+        _sequence.Append(transform.DOMoveY(defaultY + 15f, _loopTime).SetEase(Ease.InOutQuad));
+        _sequence.AppendInterval(0.05f);
+        _sequence.Append(transform.DOMoveY(defaultY, _loopTime).SetEase(Ease.InOutQuad));
+
+        _sequence.SetLoops(-1, LoopType.Restart);
     }
 }

@@ -20,6 +20,10 @@ public class UI_Map_Selector : MonoBehaviour
     private int charIndex1 = 0;
     private int charIndex2 = 0;
 
+    private void Start()
+    {
+        _maps = GetComponentsInChildren<UI_Map>();
+    }
 
     private void OnEnable()
     {
@@ -46,7 +50,7 @@ public class UI_Map_Selector : MonoBehaviour
 
     private void HandleCloseUiEvent()
     {
-        UI_Manager.Instance.UIOpenOrClose(_charSelectUI, true, gameObject);
+        UI_Manager.Instance.UIOpenOrClose(_charSelectUI, true, transform.parent.gameObject);
     }
 
 
@@ -145,7 +149,7 @@ public class UI_Map_Selector : MonoBehaviour
     {
         if (selectSO1 == selectSO2)
         {
-            SceneManager.LoadScene($"{selectSO1.mapType}Map");
+            LoadingManager.LoadScene($"{selectSO1.mapType}Scene");
             //SceneManager.LoadScene() 맵 // selectSO1 에 있는 MapName 을 해주자 .
         }
         else
@@ -153,11 +157,11 @@ public class UI_Map_Selector : MonoBehaviour
             int randIdx = Random.Range(1, 3);
             if (randIdx == 1)
             {
-                SceneManager.LoadScene($"{selectSO1.mapType}Map");
+                LoadingManager.LoadScene($"{selectSO1.mapType}Scene");
             }
             else if (randIdx == 2)
             {
-                SceneManager.LoadScene($"{selectSO2.mapType}Map");
+                LoadingManager.LoadScene($"{selectSO2.mapType}Scene");
             }
         }
     }

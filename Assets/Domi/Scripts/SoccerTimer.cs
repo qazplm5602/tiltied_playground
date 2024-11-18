@@ -9,6 +9,7 @@ public class SoccerTimer : GameModeCompo
     private float time = 0;
 
     public event System.Action<float> OnChangeValue;
+    public event System.Action OnFinishTime;
 
     public SoccerTimer(GameMode mode) : base(mode)
     {
@@ -23,8 +24,10 @@ public class SoccerTimer : GameModeCompo
         time = value;
         OnChangeValue?.Invoke(value);
 
-        if (value <= 0 && isPlay)
+        if (value <= 0 && isPlay) {
             isPlay = false; // 끗
+            OnFinishTime?.Invoke();
+        }
     }
 
     public void Play() => isPlay = true;

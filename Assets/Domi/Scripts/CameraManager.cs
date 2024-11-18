@@ -10,7 +10,10 @@ public enum CameraType {
     Blue_R,
     Blue_L,
     Orange_R,
-    Orange_L
+    Orange_L,
+    Result_Player,
+    Custom_1, // 이건 그냥 자유롭게 쓰는거
+    Custom_2
 }
 
 [System.Serializable]
