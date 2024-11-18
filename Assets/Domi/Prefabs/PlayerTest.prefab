@@ -343,12 +343,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mass: 10
-  _rayDistance: 0
   _massHaveLayer:
     serializedVersion: 2
     m_Bits: 0
-  _isMove: 0
   _groundLayer:
     serializedVersion: 2
     m_Bits: 0
-  _speed: 0
+  _castTrm: {fileID: 5616252950667325332}
+  _castSize: {x: 1.02, y: 0.11, z: 0.82}

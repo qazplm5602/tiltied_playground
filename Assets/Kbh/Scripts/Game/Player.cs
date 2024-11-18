@@ -125,4 +125,8 @@ public class Player : MonoBehaviour
    public void SetControl(PlayerControlSO control) {
       PlayerControlSO = control;
    }
+
+   public void SetStat(PlayerStatsSO stat) {
+      PlayerStatSO = stat;
+   }
 }
