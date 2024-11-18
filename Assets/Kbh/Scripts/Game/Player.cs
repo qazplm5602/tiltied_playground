@@ -28,13 +28,15 @@ public class Player : MonoBehaviour
    {
       PlayerStatSO = Instantiate(PlayerStatSO);
 
-      PlayerControlSO.ItemChangeEvent += HandleItemChange;
-      PlayerControlSO.ItemUseEvent += HandleItemUse;
-      PlayerControlSO.InteractEvent += HandleInterect;
-
       RigidbodyComponent = GetComponent<Rigidbody>();
       _itemIDs = new int[MAX_ITEM_COUNT];
       _ballTag = TagHandle.GetExistingTag("Ball");
+   }
+
+   private void Start() {
+      PlayerControlSO.ItemChangeEvent += HandleItemChange;
+      PlayerControlSO.ItemUseEvent += HandleItemUse;
+      PlayerControlSO.InteractEvent += HandleInterect;
    }
 
 

@@ -17,7 +17,7 @@
     {
       "action": "Player/Interaction",
       "id": "838024c4-01c5-412d-8f16-602aea7f5654",
-      "path": "<Keyboard>/;",
+      "path": "<Keyboard>/semicolon",
       "interactions": "null",
       "processors": "null"
     },
