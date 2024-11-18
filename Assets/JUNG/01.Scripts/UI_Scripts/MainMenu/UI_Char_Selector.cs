@@ -127,7 +127,7 @@ public class UI_Char_Selector : MonoBehaviour
             {
                 _characters[i]._isOnTopImage2.enabled = false;
             }
-            showingStat1.OnStatChange(_characters[charIndex2].playerStat);
+            showingStat2.OnStatChange(_characters[charIndex2].playerStat);
             _characters[charIndex2]._isOnTopImage2.enabled = true;
         }
     }
