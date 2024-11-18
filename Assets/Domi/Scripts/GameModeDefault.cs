@@ -12,6 +12,7 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
     private PlayerManager playerManager;
     private ResultUI resultUI;
     private SoccerCutscene startCutscene;
+    private Ground soccerGround;
 
     protected override void Awake()
     {
@@ -19,6 +20,7 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
         timer = new(this); // 타이머가 먼저임
         IngameUI = new(this);
 
+        soccerGround = FindAnyObjectByType<Ground>();
         playerManager = ManagerManager.GetManager<PlayerManager>();
         resultUI = FindAnyObjectByType<ResultUI>();
         startCutscene = new(this, "StartDirector");
@@ -41,10 +43,11 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
     public void CutsceneFinish()
     {
         // 캠캠캠
-        CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main);
+        CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main, () => {
+            soccerBall.BallReset();
+            playerManager.ResetPos();
+        });
 
-        soccerBall.BallReset();
-        playerManager.ResetPos();
         IsPlay = true;
 
         // 시간
@@ -77,6 +80,7 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
         CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main, () => {
             soccerBall.BallReset();
             playerManager.ResetPos();
+            soccerGround.ResetGround();
             IsPlay = true;
         });
     }

@@ -4,21 +4,57 @@ using UnityEngine;
 
 public class SoccerBallHighlight : MonoBehaviour
 {
-    [SerializeField] private LayerMask obstacleLayer;
-
     private SoccerBall soccerBall;
     private BallGoalSimulateManager simulateManager;
+    private Rigidbody rigid;
+    [SerializeField] private float expireTime = 8f;
 
     private bool isHighlight = false;
+    private Vector3 lastGoalPostPos;
     
     private void Awake() {
         soccerBall = transform.GetComponent<SoccerBall>();
         simulateManager = ManagerManager.GetManager<BallGoalSimulateManager>();
+        rigid = GetComponent<Rigidbody>();
 
         simulateManager.onWillGoal += HandleWillGoal;
         soccerBall.OnReset += HandleBallReset;
         soccerBall.OnGoal += HandleBallGoal;
         soccerBall.OnOut += DisableHighlight;
+    }
+
+    private float lastVelocity;
+    private float lastGoalPostDist;
+    private float distWarning = 0; // 골대랑 멀리 가는거 시간 체크
+    private float highlightTime = 0;
+    
+    private void Update() {
+        if (!isHighlight) return;
+
+        float velocity = rigid.linearVelocity.magnitude;
+        float distance = Vector3.Distance(lastGoalPostPos, transform.position);
+
+        highlightTime += Time.deltaTime;
+        if (highlightTime > expireTime) { // 시간끗.
+            CancelHighlight();
+            return;
+        }
+
+        if (lastVelocity > velocity && (lastVelocity - velocity) >= 10) { // 힘이 급격하게 줄어듬 ㅅㄱ
+            print("velocity 즉시 slow.");
+            CancelHighlight();
+            return;
+        }
+
+        if (lastGoalPostDist < distance) { // 거리가 멀어짐 ㄷㄷ
+            distWarning += Time.deltaTime;
+        } else distWarning = 0;
+
+        if (distWarning >= 2f) // 2초동안 계속 멀어짐..
+            CancelHighlight();
+
+        lastVelocity = velocity;
+        lastGoalPostDist = distance;
     }
 
     private void OnDestroy() {
@@ -32,6 +68,11 @@ public class SoccerBallHighlight : MonoBehaviour
     {
         if (type != BallAreaType.Blue && type != BallAreaType.Red) return;
         isHighlight = true;
+        lastGoalPostPos = ManagerManager.GetManager<BallGoalSimulateManager>().GetGoalPost(type).transform.position;
+
+        lastVelocity = rigid.linearVelocity.magnitude;
+        lastGoalPostDist = Vector3.Distance(lastGoalPostPos, transform.position);
+        distWarning = highlightTime = 0;
 
         Time.timeScale = 0.1f; // 시간 느리게
         List<CameraType> cameras = CameraManager.Instance.GetNearCam(CameraManager.NearType.Near, new CameraType[] { type == BallAreaType.Blue ? CameraType.Blue_L : CameraType.Orange_L, type == BallAreaType.Blue ? CameraType.Blue_R : CameraType.Orange_R }, transform.position);
@@ -59,16 +100,8 @@ public class SoccerBallHighlight : MonoBehaviour
         isHighlight = false;
     }
 
-    private void OnCollisionEnter(Collision other) {
-        if (!isHighlight) return;
-
-        int layerMask = 1 << other.gameObject.layer;
-        print($"{obstacleLayer} & {layerMask}");
-        if ((obstacleLayer & layerMask) != 0) { // ㅓ 머야 충돌했네
-            isHighlight = false; // 취소 취소 warning 공을 찼는데 아쉽게도 다시 돌아옴
-
-            // 다시 돌려
-            CameraManager.Instance.Transition.FadeChangeCam(CameraType.Main);
-        }
+    private void CancelHighlight() {
+        DisableHighlight();
+        CameraManager.Instance.Transition.FadeChangeCam(CameraType.Main);
     }
 }
