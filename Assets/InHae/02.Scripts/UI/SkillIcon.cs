@@ -12,16 +12,13 @@ public class SkillIcon : MonoBehaviour
     private Player _owner;
     private SkillBase _skill;
 
-    private void Awake()
+    private void Start()
     {
         _owner = ManagerManager.GetManager<PlayerManager>().GetPlayer(_areaType);
         _skill = _owner.CurrentSkill;
         
         _skillImage.sprite = _skill.skillData.skillIcon;
-    }
-
-    private void Start()
-    {
+        
         _skill.coolChangeEvent += HandleCooltimeChange;
         _skill.coolChangeEvent += HandleTextChange;
     }

@@ -11,6 +11,8 @@ public class Ground : MonoBehaviour
     
     private Dictionary<Type, IGroundCompo> _groundCompos;
 
+    public event Action _clearEvent;
+
     private void Awake()
     {
         _groundCompos = new Dictionary<Type, IGroundCompo>();
@@ -33,6 +35,7 @@ public class Ground : MonoBehaviour
 
     public void ResetGround()
     {
+        _clearEvent?.Invoke();
         GetCompo<GroundTiltied>().ResetTilt();
     }
     

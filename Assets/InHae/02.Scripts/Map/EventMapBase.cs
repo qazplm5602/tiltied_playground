@@ -24,6 +24,13 @@ public abstract class EventMapBase : MonoBehaviour
     {
         _ground = FindAnyObjectByType<Ground>();
         MapInit();
+
+        _ground._clearEvent += MapClear;
+    }
+
+    private void OnDestroy()
+    {
+        _ground._clearEvent -= MapClear;
     }
 
     private void Update()

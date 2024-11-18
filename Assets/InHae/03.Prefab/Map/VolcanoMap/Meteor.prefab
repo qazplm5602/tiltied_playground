@@ -215,7 +215,7 @@ MonoBehaviour:
   _castSize: {x: 7.83, y: 4.01, z: 5.48}
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
 --- !u!1 &6685381541095463432
 GameObject:
   m_ObjectHideFlags: 0
