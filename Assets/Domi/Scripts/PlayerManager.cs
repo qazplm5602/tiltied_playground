@@ -6,14 +6,21 @@ public class PlayerManager : MonoBehaviour
 {
     private Dictionary<BallAreaType, Player> players;
     private Dictionary<BallAreaType, Transform> spawnPos;
-    [SerializeField] Player basePlayer;
+    [SerializeField] private Player basePlayer;
+    [SerializeField] private string spawnParentName;
 
-    [SerializeField] PlayerControlSO control1;
-    [SerializeField] PlayerControlSO control2;
+    [SerializeField] private PlayerControlSO control1;
+    [SerializeField] private PlayerControlSO control2;
+
+    private Transform spawnParent;
 
     private void Awake() {
         players = new();
         spawnPos = new();
+
+        spawnParent = GameObject.Find(spawnParentName)?.transform;
+        if (spawnParent == null)
+            Debug.LogWarning("Not Found Player Spawn Parent.");
 
         FindSpawnPos();
         CreatePlayer();
@@ -41,10 +48,10 @@ public class PlayerManager : MonoBehaviour
         
         // (이거 data에 있는 prefab 으로 생성할 예정...)
         // 데이터에 있는거 꺼내와서 적용할꺼
-        Player player_1 = Instantiate(basePlayer);
+        Player player_1 = Instantiate(basePlayer, spawnParent);
         player_1.SetControl(control1);
 
-        Player player_2 = Instantiate(basePlayer);
+        Player player_2 = Instantiate(basePlayer, spawnParent);
         player_2.SetControl(control2);
 
         // 임시 스탯 적용

@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
 
         float currentGauge = Time.time - _prevShootKeyDownTime;
 
-        _ballController.PushBall(new Vector3(1, 1.3f, 0) * currentGauge * PlayerStatSO.shootPower.GetValue() * 50);
+        _ballController.PushBall((transform.forward + transform.up).normalized * currentGauge * PlayerStatSO.shootPower.GetValue() * 50);
         this.Release(_ballController);
 
         _prevShootKeyDown = false;
