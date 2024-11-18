@@ -25,8 +25,8 @@ public class UI_PlayerStatShow : MonoBehaviour
 
     public void OnStatChange(PlayerStatsSO stat)
     {
-        playerSkill.sprite = stat.skillIcon; // 스킬 아이콘 , 스킬 정보 초기화
-        skillInfoText.text = stat.skillInfo;
+        playerSkill.sprite = stat.skillData.skillIcon; // 스킬 아이콘 , 스킬 정보 초기화
+        skillInfoText.text = stat.skillData.skillInfo;
 
         normalizedheightValue = Mathf.Clamp01(stat.height / 250f) * 100f + 50f;
         normalizedweightValue = Mathf.Clamp01(stat.weight / 250f) * 100f + 50f;

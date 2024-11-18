@@ -18,8 +18,7 @@ public class PlayerStatsSO : ScriptableObject
     [Tooltip("달리기 속도")] public Stat runSpeed;
     [Tooltip("골 결정력 (%)")] public Stat goalDecision;
     [Tooltip("슛 파워")] public Stat shootPower;
-    [Tooltip("스킬 이미지")] public Sprite skillIcon;
-    [Tooltip("스킬 정보")] public string skillInfo;
+    [Tooltip("슛 파워")] public SkillDataSO skillData;
 
     private Player _player;
     private Dictionary<StatType, Stat> _statDictionary;

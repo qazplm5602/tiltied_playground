@@ -1,40 +1,42 @@
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public abstract class SkillBase : MonoBehaviour
 {
-    public PlayerSkillType skillType;
+    public SkillDataSO skillData;
+    public event Action<float, float> coolChangeEvent; 
     
-    public float defaultCool;
-    public Sprite skillIcon;
-    
-    [HideInInspector] public float currentCool;
-    [HideInInspector] public Player player;
+    protected float _currentCool;
+    protected Player _player;
     
     public void Init(Player player)
     {
-        this.player = player;
+        this._player = player;
     }
 
     protected virtual void Update()
     {
-        if (currentCool > 0)
+        if (_currentCool > 0)
         {
-            currentCool -= Time.deltaTime;
-            if (currentCool <= 0)
+            _currentCool -= Time.deltaTime;
+            if (_currentCool <= 0)
             {
-                currentCool = 0;
+                _currentCool = 0;
             }
+
+            coolChangeEvent?.Invoke(_currentCool, skillData.defaultCool);
         }
     }
 
     public virtual bool SkillUseAbleCheck()
     {
-        if (skillType == PlayerSkillType.None)
+        if (skillData.skillType == PlayerSkillType.None)
             return false;
         
-        if (currentCool <= 0)
+        if (_currentCool <= 0)
         {
-            currentCool = defaultCool;
+            _currentCool = skillData.defaultCool;
             return true;
         }
 
@@ -42,4 +44,6 @@ public abstract class SkillBase : MonoBehaviour
     }
 
     public abstract void UseSkill();
+
+    public PlayerSkillType GetSkillType() => skillData.skillType;
 }

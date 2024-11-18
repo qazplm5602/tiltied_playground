@@ -26,9 +26,13 @@ public class Player : MonoBehaviour
     private bool _prevShootKeyDown = false;
     private float _prevShootKeyDownTime = 0.0f;
 
+    private SkillBase _currentSkill;
+    public SkillBase CurrentSkill => _currentSkill;
+
     private void Awake()
     {
         PlayerStatSO = Instantiate(PlayerStatSO);
+        
 
         RigidbodyComponent = GetComponent<Rigidbody>();
         _itemIDs = new int[MAX_ITEM_COUNT];
@@ -39,8 +43,8 @@ public class Player : MonoBehaviour
       PlayerControlSO.ItemChangeEvent += HandleItemChange;
       PlayerControlSO.ItemUseEvent += HandleItemUse;
       PlayerControlSO.InteractEvent += HandleInterect;
+      PlayerControlSO.SkillEvent += HandleSkillUse;
    }
-
 
    private void FixedUpdate()
    {
@@ -79,6 +83,7 @@ public class Player : MonoBehaviour
         PlayerControlSO.ItemChangeEvent -= HandleItemChange;
         PlayerControlSO.ItemUseEvent -= HandleItemUse;
         PlayerControlSO.InteractEvent -= HandleInterect;
+        PlayerControlSO.SkillEvent -= HandleSkillUse;
     }
 
 
@@ -121,7 +126,13 @@ public class Player : MonoBehaviour
     {
         (_itemIDs[0], _itemIDs[1]) = (_itemIDs[1], _itemIDs[0]);
     }
-
+    
+    private void HandleSkillUse()
+    {
+        if (_currentSkill.SkillUseAbleCheck())
+            _currentSkill.UseSkill();
+    }
+ 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag(_ballTag) // 공에 닿았고
@@ -140,5 +151,12 @@ public class Player : MonoBehaviour
     public void SetStat(PlayerStatsSO stat)
     {
         PlayerStatSO = stat;
+        SkillInit();
+    }
+
+    private void SkillInit()
+    {
+        _currentSkill = Instantiate(SkillManager.Instance.GetSkill(PlayerStatSO.skillData.skillType), transform);
+        _currentSkill.Init(this);
     }
 }

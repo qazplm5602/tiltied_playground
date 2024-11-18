@@ -4,6 +4,10 @@ using UnityEngine;
 public enum PlayerSkillType
 {
     None,
+    //방귀
+    Fart,
+    //명상
+    Meditation,
 }
 
 public class SkillManager : MonoSingleton<SkillManager>
@@ -23,10 +27,10 @@ public class SkillManager : MonoSingleton<SkillManager>
     {
         foreach (SkillBase skillBase in _skillList)
         {
-            if(_skillBaseDic.ContainsKey(skillBase.skillType))
+            if(_skillBaseDic.ContainsKey(skillBase.GetSkillType()))
                 return;
 
-            _skillBaseDic.Add(skillBase.skillType, skillBase);
+            _skillBaseDic.Add(skillBase.GetSkillType(), skillBase);
         }
     }
 
