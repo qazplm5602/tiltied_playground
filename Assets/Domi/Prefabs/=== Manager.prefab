@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basePlayer: {fileID: 5901732841960936883, guid: 8b7d1357b04f60147949a7732876a7e5, type: 3}
-  spawnParentName: 
+  spawnParentName: PlayerList
   control1: {fileID: 11400000, guid: 3b65716b6545d3540bdab38db3501e9b, type: 2}
   control2: {fileID: 11400000, guid: 0fff30bdbaa22294798e38b62d448d34, type: 2}
 --- !u!1 &3526975386174117262
