@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour
 
     private SkillBase _currentSkill;
     public SkillBase CurrentSkill => _currentSkill;
+    public event Action ShootingStartEvent;
+    public event Action ShootingEndEvent;
 
     private void Awake()
     {
@@ -92,7 +95,11 @@ public class Player : MonoBehaviour
         if (HasBall())
         {
             if (isPerformed)
+            {
                 TryInterect();
+
+                StartCoroutine(ShootTimer());
+            }
             else
                 Shooting();
         }
@@ -102,6 +109,8 @@ public class Player : MonoBehaviour
     {
         _prevShootKeyDown = true;
         _prevShootKeyDownTime = Time.time;
+
+        ShootingStartEvent?.Invoke();
     }
 
     private void Shooting()
@@ -110,10 +119,19 @@ public class Player : MonoBehaviour
 
         float currentGauge = Time.time - _prevShootKeyDownTime;
 
-        _ballController.PushBall((transform.forward + transform.up).normalized * currentGauge * PlayerStatSO.shootPower.GetValue() * 50);
+        _ballController.PushBall((transform.forward + transform.up).normalized * currentGauge * PlayerStatSO.shootPower.GetValue() * 30);
         this.Release(_ballController);
 
         _prevShootKeyDown = false;
+
+        ShootingEndEvent?.Invoke();
+    }
+
+    private IEnumerator ShootTimer()
+    {
+        yield return new WaitForSeconds(5);
+
+        Shooting();
     }
 
     private void HandleItemUse()
