@@ -41,10 +41,11 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
     public void CutsceneFinish()
     {
         // 캠캠캠
-        CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main);
+        CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main, () => {
+            soccerBall.BallReset();
+            playerManager.ResetPos();
+        });
 
-        soccerBall.BallReset();
-        playerManager.ResetPos();
         IsPlay = true;
 
         // 시간

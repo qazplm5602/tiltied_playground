@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
 --- !u!114 &844809519104194740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,12 +147,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mass: 5
+  _rayDistance: 0
   _massHaveLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   _castTrm: {fileID: 6637390945519154142}
   _castSize: {x: 1.68, y: 1.68, z: 1.59}
 --- !u!1 &4239187902265941265
