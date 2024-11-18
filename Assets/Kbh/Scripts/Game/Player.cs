@@ -30,33 +30,35 @@ public class Player : MonoBehaviour
     {
         PlayerStatSO = Instantiate(PlayerStatSO);
 
-        PlayerControlSO.ItemChangeEvent += HandleItemChange;
-        PlayerControlSO.ItemUseEvent += HandleItemUse;
-        PlayerControlSO.InteractEvent += HandleInterect;
-
         RigidbodyComponent = GetComponent<Rigidbody>();
         _itemIDs = new int[MAX_ITEM_COUNT];
         _ballTag = TagHandle.GetExistingTag("Ball");
     }
 
+   private void Start() {
+      PlayerControlSO.ItemChangeEvent += HandleItemChange;
+      PlayerControlSO.ItemUseEvent += HandleItemUse;
+      PlayerControlSO.InteractEvent += HandleInterect;
+   }
 
-    private void FixedUpdate()
-    {
-        if (isKnockback)
-        {
-            // 다른 플레이어로부터 타격을 받았을 경우
-        }
-        else
-        {
-            Movement();
-        }
-    }
+
+   private void FixedUpdate()
+   {
+      if(isKnockback)
+      {
+         // 다른 플레이어로부터 타격을 받았을 경우
+      }
+      else
+      {
+         Movement();
+      }
+   }
 
 
 
     private void Movement()
     {
-        Vector2 inputDir = PlayerControlSO.GetMoveDirection();
+        Vector2 inputDir = -PlayerControlSO.GetMoveDirection(); // 카메라가 반대라서 인풋도 반대임 ㅋㅋ
         if (inputDir.x == 0 && inputDir.y == 0) return;
 
         inputDir.Normalize();
@@ -103,7 +105,7 @@ public class Player : MonoBehaviour
 
         float currentGauge = Time.time - _prevShootKeyDownTime;
 
-        _ballController.PushBall(new Vector3(1, 1.3f, 0) * currentGauge * PlayerStatSO.shootPower.GetValue() * 50);
+        _ballController.PushBall((transform.forward + transform.up).normalized * currentGauge * PlayerStatSO.shootPower.GetValue() * 50);
         this.Release(_ballController);
 
         _prevShootKeyDown = false;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum BallAreaType {
@@ -125,5 +126,9 @@ public class BallGoalSimulateManager : MonoBehaviour
 
         type = default;
         return false;
+    }
+
+    public GoalPostArea GetGoalPost(BallAreaType type) {
+        return areas.First(v => v.type == type).area;
     }
 }
