@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -8,16 +9,24 @@ public class ResultUI : MonoBehaviour
     [SerializeField] RectTransform redScore;
     [SerializeField] RectTransform blueScore;
     [SerializeField] Button backBtn;
+    [SerializeField] FadeEffectUI ingameUI;
+
+    private ResultCamera resultCam;
 
     private void Awake() {
         backBtn.onClick.AddListener(HandleBackClick);
+        resultCam = FindAnyObjectByType<ResultCamera>();
     }
 
     private void Start() {
         // ShowResult(200, 50); // test
     }
 
-    public void ShowResult(int red, int blue) {
+    public void StartScene() {
+        StartCoroutine(SceneSequence());
+    }
+
+    private void ShowResult(int red, int blue) {
         CanvasGroup redGroup = redScore.GetComponent<CanvasGroup>();
         CanvasGroup blueGroup = blueScore.GetComponent<CanvasGroup>();
 
@@ -70,5 +79,24 @@ public class ResultUI : MonoBehaviour
 
     private void HandleBackClick() {
         LoadingManager.LoadScene("TitleScene");
+    }
+
+    IEnumerator SceneSequence() {
+        GameMode gameMode = ManagerManager.GetManager<GameManager>().GetMode();
+        BallAreaType? winTeam = gameMode.GetWinTeam();
+        if (winTeam == null) yield break; // 음.. 무승부는 어케하지
+
+        Player winPlayer = ManagerManager.GetManager<PlayerManager>().GetPlayer(winTeam.Value);
+
+    
+        ingameUI.Hide(1f);
+
+        yield return new WaitForSecondsRealtime(5f);
+
+        CameraManager.Instance.Transition.FadeChangeCam(CameraType.Result_Player);
+        resultCam.StartCam(winPlayer.transform);
+        yield return new WaitForSecondsRealtime(resultCam.GetDuration() - 0.5f);
+
+        ShowResult(gameMode.RedScore, gameMode.BlueScore);
     }
 }

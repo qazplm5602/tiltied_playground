@@ -147,15 +147,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mass: 5
-  _rayDistance: 0
   _massHaveLayer:
     serializedVersion: 2
     m_Bits: 0
-  _isMove: 0
   _groundLayer:
     serializedVersion: 2
     m_Bits: 0
-  _speed: 0
+  _castTrm: {fileID: 6637390945519154142}
+  _castSize: {x: 1.68, y: 1.68, z: 1.59}
 --- !u!1 &4239187902265941265
 GameObject:
   m_ObjectHideFlags: 0

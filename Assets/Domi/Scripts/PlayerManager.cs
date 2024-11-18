@@ -47,6 +47,12 @@ public class PlayerManager : MonoBehaviour
         Player player_2 = Instantiate(basePlayer);
         player_2.SetControl(control2);
 
+        // 임시 스탯 적용
+        if (data) {
+            player_1.SetStat(data.player1_StatData);
+            player_2.SetStat(data.player2_StatData);
+        }
+
         players.Add(BallAreaType.Blue, player_1);
         players.Add(BallAreaType.Red, player_2);
     }   
