@@ -7,6 +7,7 @@ public class SoccerBallHighlight : MonoBehaviour
     private SoccerBall soccerBall;
     private BallGoalSimulateManager simulateManager;
     private Rigidbody rigid;
+    [SerializeField] private float expireTime = 8f;
 
     private bool isHighlight = false;
     private Vector3 lastGoalPostPos;
@@ -25,12 +26,19 @@ public class SoccerBallHighlight : MonoBehaviour
     private float lastVelocity;
     private float lastGoalPostDist;
     private float distWarning = 0; // 골대랑 멀리 가는거 시간 체크
+    private float highlightTime = 0;
+    
     private void Update() {
         if (!isHighlight) return;
 
         float velocity = rigid.linearVelocity.magnitude;
         float distance = Vector3.Distance(lastGoalPostPos, transform.position);
 
+        highlightTime += Time.deltaTime;
+        if (highlightTime > expireTime) { // 시간끗.
+            CancelHighlight();
+            return;
+        }
 
         if (lastVelocity > velocity && (lastVelocity - velocity) >= 10) { // 힘이 급격하게 줄어듬 ㅅㄱ
             print("velocity 즉시 slow.");
@@ -64,7 +72,7 @@ public class SoccerBallHighlight : MonoBehaviour
 
         lastVelocity = rigid.linearVelocity.magnitude;
         lastGoalPostDist = Vector3.Distance(lastGoalPostPos, transform.position);
-        distWarning = 0;
+        distWarning = highlightTime = 0;
 
         Time.timeScale = 0.1f; // 시간 느리게
         List<CameraType> cameras = CameraManager.Instance.GetNearCam(CameraManager.NearType.Near, new CameraType[] { type == BallAreaType.Blue ? CameraType.Blue_L : CameraType.Orange_L, type == BallAreaType.Blue ? CameraType.Blue_R : CameraType.Orange_R }, transform.position);
