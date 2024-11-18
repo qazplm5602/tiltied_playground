@@ -2,8 +2,8 @@
     <Style src="project://database/Assets/JUNG/09.UI_Info/TitleScene/TitleSceneUSS.uss?fileID=7433441132597879392&amp;guid=0cd416c51b4df444da46fbfad730c806&amp;type=3#TitleSceneUSS" />
     <engine:VisualElement name="VisualElement" style="width: 100%; height: 100%;">
         <engine:VisualElement name="TitleBackGround" style="flex-grow: 1; width: 100%; height: 100%; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0);">
-            <engine:Label text="Tiltied&#10;Play &#10;Ground&#10;" style="width: 800px; height: 700px; -unity-font-definition: url(&quot;project://database/Assets/Downloads/Font/NEXON_Maplestory_Font/Maplestory%20Bold.ttf?fileID=12800000&amp;guid=c638f63216099674b8c954bd806d195f&amp;type=3#Maplestory Bold&quot;); font-size: 190px; -unity-text-align: middle-center; color: rgb(255, 114, 127); -unity-font-style: bold; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 6px;" />
-            <engine:Button text="START!" name="OpenSceneBtn" class="button-start" style="color: rgb(63, 88, 255); -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(0, 0, 0);" />
+            <engine:Label text="Tiltied&#10;Play &#10;Ground&#10;" name="TitleLabel" style="width: 800px; height: 700px; -unity-font-definition: url(&quot;project://database/Assets/Downloads/Font/NEXON_Maplestory_Font/Maplestory%20Bold.ttf?fileID=12800000&amp;guid=c638f63216099674b8c954bd806d195f&amp;type=3#Maplestory Bold&quot;); font-size: 190px; -unity-text-align: middle-center; color: rgb(255, 207, 239); -unity-font-style: bold; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 3px;" />
+            <engine:Button text="START!" name="OpenSceneBtn" class="button-start" style="color: rgb(0, 255, 229); -unity-text-outline-width: -14px; -unity-text-outline-color: rgb(0, 0, 0);" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

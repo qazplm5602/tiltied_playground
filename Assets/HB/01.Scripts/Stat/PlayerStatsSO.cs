@@ -9,7 +9,7 @@ public class PlayerStatsSO : ScriptableObject
     [Header("선수 프로필")]
     [Tooltip("이름")] public string playerName;
     [Tooltip("국적")] public string nationlity;
-    [Tooltip("이미지")] public Sprite icon;
+    [Tooltip("이미지")] public Sprite playerIcon;
     [Tooltip("키 (cm)")] public float height;
     [Tooltip("몸무게 (kg)")] public float weight;
 
@@ -18,6 +18,8 @@ public class PlayerStatsSO : ScriptableObject
     [Tooltip("달리기 속도")] public Stat runSpeed;
     [Tooltip("골 결정력 (%)")] public Stat goalDecision;
     [Tooltip("슛 파워")] public Stat shootPower;
+    [Tooltip("스킬 이미지")] public Sprite skillIcon;
+    [Tooltip("스킬 정보")] public string skillInfo;
 
     private Player _player;
     private Dictionary<StatType, Stat> _statDictionary;

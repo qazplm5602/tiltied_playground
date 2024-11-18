@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -6,7 +5,7 @@ using static Unity.Burst.Intrinsics.X86;
 public class UIController : MonoBehaviour
 {
     private VisualElement _movingBG;
-
+    private Label _tweenLabel;
     private Button _openSceneBtn;
 
     void Start()
@@ -17,14 +16,14 @@ public class UIController : MonoBehaviour
         _movingBG = root.Q<VisualElement>("MovingBG");
 
         _openSceneBtn = root.Q<Button>("OpenSceneBtn");
-       
+
     }
 
     void Update()
     {
         _openSceneBtn.RegisterCallback<ClickEvent>(vt =>
         {
-            LoadingManager.LoadScene("MainScene");
+            SceneManager.LoadScene("MainScene");
         });
     }
 }
