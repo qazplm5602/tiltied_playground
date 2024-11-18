@@ -16,6 +16,8 @@ public class UI_Char_Selector : MonoBehaviour
     [SerializeField] private PlayerControlSO _inputSO2;
     [SerializeField] private int rightMaxIdx = 0;  // 오른쪽으로 몇개까지 캐릭터가 있는가. 아래있는 캐릭터를 charIndex % 이값으로 나타날 예정.
 
+    [SerializeField] private UI_PlayerStatShow showingStat1;
+    [SerializeField] private UI_PlayerStatShow showingStat2;
 
 
     private int charIndex1 = 0;
@@ -115,6 +117,7 @@ public class UI_Char_Selector : MonoBehaviour
             {
                 _characters[i]._isOnTopImage1.enabled = false;
             }
+            showingStat1.OnStatChange(_characters[charIndex1].playerStat);
             _characters[charIndex1]._isOnTopImage1.enabled = true;
         }
         else
@@ -124,6 +127,7 @@ public class UI_Char_Selector : MonoBehaviour
             {
                 _characters[i]._isOnTopImage2.enabled = false;
             }
+            showingStat1.OnStatChange(_characters[charIndex2].playerStat);
             _characters[charIndex2]._isOnTopImage2.enabled = true;
         }
     }
