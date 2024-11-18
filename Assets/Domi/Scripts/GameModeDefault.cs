@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class GameModeDefault : GameMode, IGameModeTimer
+public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
 {
     public GameModeUI IngameUI { get; protected set; }
     SoccerTimer IGameModeTimer.Timer { get => timer; }
@@ -11,6 +11,7 @@ public class GameModeDefault : GameMode, IGameModeTimer
     private BallGoalSimulateManager simulateManager;
     private PlayerManager playerManager;
     private ResultUI resultUI;
+    private SoccerCutscene startCutscene;
 
     protected override void Awake()
     {
@@ -20,6 +21,7 @@ public class GameModeDefault : GameMode, IGameModeTimer
 
         playerManager = ManagerManager.GetManager<PlayerManager>();
         resultUI = FindAnyObjectByType<ResultUI>();
+        startCutscene = new(this, "StartDirector");
     }
 
     private void Update() {
@@ -32,6 +34,15 @@ public class GameModeDefault : GameMode, IGameModeTimer
     }
     public override void GameStart()
     {
+        print($"checked Cutscene {startCutscene.IsProgress()}");
+        startCutscene.Run();
+    }
+
+    public void CutsceneFinish()
+    {
+        // 캠캠캠
+        CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main);
+
         soccerBall.BallReset();
         playerManager.ResetPos();
         IsPlay = true;

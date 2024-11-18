@@ -7,10 +7,12 @@ public interface ICutsceneCallback {
 public class SoccerCutscene : GameModeCompo
 {
     private CutsceneEntity cutscene;
+    private ICutsceneCallback callback;
 
     public SoccerCutscene(GameMode mode, string directorName) : base(mode)
     {
         GameObject directorEntity = GameObject.Find(directorName);
+        callback = mode as ICutsceneCallback;
         
         if (directorEntity == null) {
             Debug.LogError($"찾을 수 없다. {directorName}"); // 영어 아님.
@@ -24,6 +26,8 @@ public class SoccerCutscene : GameModeCompo
     }
 
     public void Run() {
-        cutscene.Play(() => gm.GameStart());
+        cutscene.Play(() => callback.CutsceneFinish());
     }
+
+    public bool IsProgress() => cutscene.didStart;
 }
