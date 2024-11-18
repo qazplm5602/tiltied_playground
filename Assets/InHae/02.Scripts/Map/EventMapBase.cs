@@ -22,7 +22,7 @@ public abstract class EventMapBase : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _ground = GetComponentInChildren<Ground>();
+        _ground = FindAnyObjectByType<Ground>();
         MapInit();
     }
 

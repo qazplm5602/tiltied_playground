@@ -191,7 +191,7 @@ MonoBehaviour:
   _massDisableTime: 1
   _groundMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
   _smokeEffect: {fileID: 6053687301681358968}
   _struckEffect: {fileID: 4859117188694751345}
 --- !u!114 &1000803293112213236
@@ -211,11 +211,11 @@ MonoBehaviour:
   _massHaveLayer:
     serializedVersion: 2
     m_Bits: 64
+  _castTrm: {fileID: 3905230249914724261}
+  _castSize: {x: 7.83, y: 4.01, z: 5.48}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  _castTrm: {fileID: 3905230249914724261}
-  _castSize: {x: 7.83, y: 4.01, z: 5.48}
 --- !u!1 &6685381541095463432
 GameObject:
   m_ObjectHideFlags: 0

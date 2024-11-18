@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapType: 1
   mapPrefab: {fileID: 1397352850207293207, guid: 598b670cb4efc6341bb4d104dbf55770, type: 3}
-  minEventTime: 3
-  maxEventTime: 15
+  minEventTime: 10
+  maxEventTime: 30
   eventDurationTime: 30
