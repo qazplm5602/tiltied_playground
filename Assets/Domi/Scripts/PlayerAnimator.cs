@@ -1,4 +1,12 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+
+enum PlayerAnimState : byte {
+    Idle,
+    Walk,
+    Kick
+}
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -7,27 +15,58 @@ public class PlayerAnimator : MonoBehaviour
 
     [SerializeField] float kickDuration = 1f;
     [SerializeField] private Animator animator;
+    [SerializeField] private Dictionary<PlayerAnimState, int> animHashes;
 
     private Player player;
+    private PlayerAnimState currentState;
+
     private float kickTime = 0f;
     
     private void Awake() {
+        animHashes = new();
         player = GetComponent<Player>();
+
+        foreach (PlayerAnimState item in Enum.GetValues(typeof(PlayerAnimState)))
+        {
+            if ((byte)item != 0)
+                animHashes.Add(item, Animator.StringToHash(item.ToString()));
+        }
+    }
+
+    private void ChangeState(PlayerAnimState state) {
+        if (currentState != 0)
+            animator.SetBool(animHashes[currentState], false);
+        
+        if (state != 0)
+            animator.SetBool(animHashes[state], true);
+    
+        currentState = state;
     }
 
     private void Update() {
-        
+        if (kickTime > 0) {
+            kickTime -= Time.deltaTime;
+        } else if (currentState == PlayerAnimState.Kick)
+            ChangeState(PlayerAnimState.Idle);
+
+        Move();
     }
     
     private void Move() {
-        if (kickTime > 0) return;
+        if (currentState != PlayerAnimState.Idle && currentState != PlayerAnimState.Walk) return;
 
         Vector2 inputDir = player.PlayerControlSO.GetMoveDirection();
-        // animator.SetBool()
+        bool running = inputDir.sqrMagnitude > 0.1f;
+        
+        if (running && currentState == PlayerAnimState.Idle) {
+            ChangeState(PlayerAnimState.Walk);
+        } else if (!running && currentState == PlayerAnimState.Walk) {
+            ChangeState(PlayerAnimState.Idle);
+        }
     }
-
-    private void AllDisable() {
-        animator.SetBool(ANIM_WALK, false);
-        animator.SetBool(ANIM_KICK, false);
+    
+    private void Kick() {
+        kickTime = kickDuration;
+        ChangeState(PlayerAnimState.Kick);
     }
 }
