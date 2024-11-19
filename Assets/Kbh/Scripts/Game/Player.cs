@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         PlayerStatSO = Instantiate(PlayerStatSO);
-        
+        SkillInit();
 
         RigidbodyComponent = GetComponent<Rigidbody>();
         _itemIDs = new int[MAX_ITEM_COUNT];
@@ -174,6 +174,9 @@ public class Player : MonoBehaviour
 
     private void SkillInit()
     {
+        if(_currentSkill != null)
+            return;
+        
         _currentSkill = Instantiate(SkillManager.Instance.GetSkill(PlayerStatSO.skillData.skillType), transform);
         _currentSkill.Init(this);
     }
