@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: "\uC774\uD55C\uBCC4"
   nationlity: "\uB300\uD55C\uBBFC\uAD6D"
-  icon: {fileID: 21300000, guid: 3c08d390ef36f604cac9a1fc17428537, type: 3}
+  playerIcon: {fileID: 21300000, guid: 3c08d390ef36f604cac9a1fc17428537, type: 3}
   height: 175
   weight: 65
   defaultSpeed:
@@ -29,3 +29,4 @@ MonoBehaviour:
   shootPower:
     _baseValue: 7
     modifiers: 
+  skillData: {fileID: 11400000, guid: 0f371284f0ac8334ca5c91adc5406c44, type: 2}

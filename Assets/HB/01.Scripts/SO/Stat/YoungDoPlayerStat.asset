@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea44e0299a2903e4e85c0beffd5234bc, type: 3}
   m_Name: YoungDoPlayerStat
   m_EditorClassIdentifier: 
-  playerName: "\uC815\uC138\uD604"
+  playerName: "\uC815\uC601\uB3C4"
   nationlity: "\uB300\uD55C\uBBFC\uAD6D"
-  icon: {fileID: 21300000, guid: d586e89d87661b34082741fedef6e4a8, type: 3}
+  playerIcon: {fileID: 21300000, guid: d586e89d87661b34082741fedef6e4a8, type: 3}
   height: 180
   weight: 70
   defaultSpeed:
@@ -29,3 +29,7 @@ MonoBehaviour:
   shootPower:
     _baseValue: 4
     modifiers: 
+  skillIcon: {fileID: 21300000, guid: 1a117f60ec3f6264f9a777299d7f527d, type: 3}
+  skillInfo: "\uBC29\uAD6C\uB97C \uB00C\uC5B4\uC11C \uC55E\uC73C\uB85C \uB300\uC26C
+    \uD55C\uB2E4."
+  skillData: {fileID: 11400000, guid: 14678ae7c531a2b469a98f434e0ac889, type: 2}

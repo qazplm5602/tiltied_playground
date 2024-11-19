@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -26,9 +27,15 @@ public class Player : MonoBehaviour
     private bool _prevShootKeyDown = false;
     private float _prevShootKeyDownTime = 0.0f;
 
+    private SkillBase _currentSkill;
+    public SkillBase CurrentSkill => _currentSkill;
+    public event Action ShootingStartEvent;
+    public event Action ShootingEndEvent;
+
     private void Awake()
     {
         PlayerStatSO = Instantiate(PlayerStatSO);
+        
 
         RigidbodyComponent = GetComponent<Rigidbody>();
         _itemIDs = new int[MAX_ITEM_COUNT];
@@ -39,8 +46,8 @@ public class Player : MonoBehaviour
       PlayerControlSO.ItemChangeEvent += HandleItemChange;
       PlayerControlSO.ItemUseEvent += HandleItemUse;
       PlayerControlSO.InteractEvent += HandleInterect;
+      PlayerControlSO.SkillEvent += HandleSkillUse;
    }
-
 
    private void FixedUpdate()
    {
@@ -79,6 +86,7 @@ public class Player : MonoBehaviour
         PlayerControlSO.ItemChangeEvent -= HandleItemChange;
         PlayerControlSO.ItemUseEvent -= HandleItemUse;
         PlayerControlSO.InteractEvent -= HandleInterect;
+        PlayerControlSO.SkillEvent -= HandleSkillUse;
     }
 
 
@@ -87,7 +95,11 @@ public class Player : MonoBehaviour
         if (HasBall())
         {
             if (isPerformed)
+            {
                 TryInterect();
+
+                StartCoroutine(ShootTimer());
+            }
             else
                 Shooting();
         }
@@ -97,6 +109,8 @@ public class Player : MonoBehaviour
     {
         _prevShootKeyDown = true;
         _prevShootKeyDownTime = Time.time;
+
+        ShootingStartEvent?.Invoke();
     }
 
     private void Shooting()
@@ -105,10 +119,19 @@ public class Player : MonoBehaviour
 
         float currentGauge = Time.time - _prevShootKeyDownTime;
 
-        _ballController.PushBall((transform.forward + transform.up).normalized * currentGauge * PlayerStatSO.shootPower.GetValue() * 50);
+        _ballController.PushBall((transform.forward + transform.up).normalized * currentGauge * PlayerStatSO.shootPower.GetValue() * 30);
         this.Release(_ballController);
 
         _prevShootKeyDown = false;
+
+        ShootingEndEvent?.Invoke();
+    }
+
+    private IEnumerator ShootTimer()
+    {
+        yield return new WaitForSeconds(5);
+
+        Shooting();
     }
 
     private void HandleItemUse()
@@ -121,7 +144,13 @@ public class Player : MonoBehaviour
     {
         (_itemIDs[0], _itemIDs[1]) = (_itemIDs[1], _itemIDs[0]);
     }
-
+    
+    private void HandleSkillUse()
+    {
+        if (_currentSkill.SkillUseAbleCheck())
+            _currentSkill.UseSkill();
+    }
+ 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag(_ballTag) // 공에 닿았고
@@ -140,5 +169,12 @@ public class Player : MonoBehaviour
     public void SetStat(PlayerStatsSO stat)
     {
         PlayerStatSO = stat;
+        SkillInit();
+    }
+
+    private void SkillInit()
+    {
+        _currentSkill = Instantiate(SkillManager.Instance.GetSkill(PlayerStatSO.skillData.skillType), transform);
+        _currentSkill.Init(this);
     }
 }

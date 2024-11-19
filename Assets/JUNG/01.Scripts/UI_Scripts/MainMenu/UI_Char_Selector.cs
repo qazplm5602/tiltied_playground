@@ -27,6 +27,9 @@ public class UI_Char_Selector : MonoBehaviour
     private void Start()
     {
         _characters = GetComponentsInChildren<UI_Characters>();
+
+        showingStat1.OnStatChange(_characters[charIndex1].playerStat);
+        showingStat2.OnStatChange(_characters[charIndex2].playerStat);
     }
     private void OnEnable()
     {
@@ -112,23 +115,24 @@ public class UI_Char_Selector : MonoBehaviour
         if (objIdx == 1)
         {
             //_player1PosCam = _characters[charIndex1].   여기 하기   /   stat SO 안에 Pos사진을 넣어줘야해 한별
-            _player1PosImg.sprite = _characters[charIndex1].playerStat.icon;
+            _player1PosImg.sprite = _characters[charIndex1].playerStat.playerIcon;
             for (int i = 0; i < _characters.Length; i++)
             {
-                _characters[i]._isOnTopImage1.enabled = false;
+                _characters[i]._isOnTopImage1.gameObject.SetActive(false);
             }
             showingStat1.OnStatChange(_characters[charIndex1].playerStat);
-            _characters[charIndex1]._isOnTopImage1.enabled = true;
+            _characters[charIndex1]._isOnTopImage1.gameObject.SetActive(true);
+
         }
         else
         {
-            _player2PosImg.sprite = _characters[charIndex2].playerStat.icon;
+            _player2PosImg.sprite = _characters[charIndex2].playerStat.playerIcon;
             for (int i = 0; i < _characters.Length; i++)
             {
-                _characters[i]._isOnTopImage2.enabled = false;
+                _characters[i]._isOnTopImage2.gameObject.SetActive(false);
             }
-            showingStat1.OnStatChange(_characters[charIndex2].playerStat);
-            _characters[charIndex2]._isOnTopImage2.enabled = true;
+            showingStat2.OnStatChange(_characters[charIndex2].playerStat);
+            _characters[charIndex2]._isOnTopImage2.gameObject.SetActive(true);
         }
     }
 

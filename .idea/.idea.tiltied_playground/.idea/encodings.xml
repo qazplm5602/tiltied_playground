@@ -7,5 +7,6 @@
     <file url="file://$PROJECT_DIR$/Assets/HB/01.Scripts/Stat/PlayerStatsSO.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/JUNG/01.Scripts/UI_Scripts/MainMenu/UI_Char_Selector.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/JUNG/01.Scripts/UI_Scripts/MainMenu/UI_Map_Selector.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/JUNG/01.Scripts/UI_Scripts/MainMenu/UI_PlayerStatShow.cs" charset="x-windows-949" />
   </component>
 </project>

@@ -112,17 +112,17 @@ public class UI_Map_Selector : MonoBehaviour
         {
             for (int i = 0; i < _maps.Length; i++)
             {
-                _maps[i]._isOnTopImage1.enabled = false;
+                _maps[i]._isOnTopImage1.gameObject.SetActive( false);
             }
-            _maps[charIndex1]._isOnTopImage1.enabled = true;
+            _maps[charIndex1]._isOnTopImage1.gameObject.SetActive(true);
         }
         else
         {
             for (int i = 0; i < _maps.Length; i++)
             {
-                _maps[i]._isOnTopImage2.enabled = false;
+                _maps[i]._isOnTopImage2.gameObject.SetActive(false);
             }
-            _maps[charIndex2]._isOnTopImage2.enabled = true;
+            _maps[charIndex2]._isOnTopImage2.gameObject.SetActive(true);
         }
     }
     public void ResetSelectMap(int idx)
