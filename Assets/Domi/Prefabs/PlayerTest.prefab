@@ -361,9 +361,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5616252950667325332}
     m_Modifications:
+    - target: {fileID: 180415401427961390, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1417276509949206493, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272665499962245147, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272665499962245147, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272665499962245147, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3893756697913435241, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+      propertyPath: _fill
+      value: 
+      objectReference: {fileID: 6238665327005201180}
+    - target: {fileID: 4581524621462967912, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4581524621462967912, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4581524621462967912, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4581524621462967912, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182675424412481213, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
       propertyPath: m_Pivot.x
@@ -450,6 +490,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+--- !u!224 &6238665327005201180 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5182675424412481213, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+  m_PrefabInstance: {fileID: 1258965936324494753}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7950360762549156398 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}

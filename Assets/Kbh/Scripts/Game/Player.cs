@@ -96,12 +96,12 @@ public class Player : MonoBehaviour
         {
             if (isPerformed)
             {
-                TryInterect();
+                TryInterect(); // 시간 재기
 
-                StartCoroutine(ShootTimer());
+                StartCoroutine(ShootTimer()); // 타이머 시작
             }
             else
-                Shooting();
+                Shooting(); // 타이머가 지나면 강제로 슈팅
         }
     }
 
