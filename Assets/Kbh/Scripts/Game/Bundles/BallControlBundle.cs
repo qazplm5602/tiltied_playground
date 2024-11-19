@@ -36,6 +36,7 @@ public class BallControlBundle : Bundle
       // _ballVisual = _ballRigid.transform.Find("Visual");
    }
 
+   public static Player GetBallOwner() => _ballOwner;
    public bool BallIsFree() => _ballOwner == null;
    public void PushBall(Vector3 force)
    {
@@ -64,6 +65,9 @@ public class BallControlBundle : Bundle
             // _ballRigid.isKinematic = true;
             // _ballRigid.Sleep();
             Transform ballVisual = _soccerBall.TakePlayerBall(_ballOwner, this);
+
+            if (_ballMoveTween is not null && _ballMoveTween.active)
+               _ballMoveTween.Kill();
             _ballMoveTween = ballVisual.DOLocalMove(endValue: new (0, 0.5f, 1.5f), duration: 0.2f).SetRelative(false);
 
             break;

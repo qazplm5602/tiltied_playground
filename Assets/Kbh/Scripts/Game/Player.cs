@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     public SkillBase CurrentSkill => _currentSkill;
     public event Action ShootingStartEvent;
     public event Action ShootingEndEvent;
+    public event Action AttackEvent; // 공 없이 슈팅 누른 경우
 
     private void Awake()
     {
@@ -102,6 +103,8 @@ public class Player : MonoBehaviour
             }
             else
                 Shooting();
+        } else if (isPerformed) { // 축구공은 안가지고 있는데 슈팅 누름
+            AttackEvent?.Invoke();
         }
     }
 
@@ -150,7 +153,12 @@ public class Player : MonoBehaviour
         if (_currentSkill.SkillUseAbleCheck())
             _currentSkill.UseSkill();
     }
- 
+    
+    // 강제적으로 공 가져옴
+    public void ForceTakeBall() {
+        this.Registe(_ballController);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag(_ballTag) // 공에 닿았고
