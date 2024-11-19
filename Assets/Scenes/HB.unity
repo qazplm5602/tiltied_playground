@@ -951,6 +951,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652563178}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &697300530 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 906022031098467107, guid: 51223965ede0b9c4f9c16523c9956b63, type: 3}
+  m_PrefabInstance: {fileID: 8599939469073231126}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &697948582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,6 +1591,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 029690f30ab1f2a45804d54fc7e910d4, type: 3}
+--- !u!4 &1617400765 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6767825271968136560, guid: 51223965ede0b9c4f9c16523c9956b63, type: 3}
+  m_PrefabInstance: {fileID: 8599939469073231126}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1635057105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2409,6 +2419,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2972365741219389831, guid: e9cd10c405cb33c45960f66801738235, type: 3}
+      propertyPath: spawnAreaMax
+      value: 
+      objectReference: {fileID: 697300530}
+    - target: {fileID: 2972365741219389831, guid: e9cd10c405cb33c45960f66801738235, type: 3}
+      propertyPath: spawnAreaMin
+      value: 
+      objectReference: {fileID: 1617400765}
     - target: {fileID: 4419834668764410495, guid: e9cd10c405cb33c45960f66801738235, type: 3}
       propertyPath: m_Name
       value: === Manager
