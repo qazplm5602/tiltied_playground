@@ -44,8 +44,8 @@ public class ShootGauge : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        _canvasGroup.alpha = 1;
-        _fillImage.DOScaleX(0, 0);
+        _canvasGroup.alpha = 0;
+        _fillImage.localScale = new Vector3(0, 1, 1);
 
         yield return null;
     }
