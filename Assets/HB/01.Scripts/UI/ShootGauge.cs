@@ -49,21 +49,17 @@ public class ShootGauge : MonoBehaviour
     {
         _isShooting = true;
 
-        // 게이지 초기화
         _fill.localScale = new Vector3(0, 1, 1);
         _canvasGroup.alpha = 1;
 
-        // 기존 Tween 제거
         _colorSequence?.Kill();
         _scaleTweener?.Kill();
 
-        // 색상 변경 애니메이션
         _colorSequence = DOTween.Sequence()
             .Append(DOTween.To(() => _redValue, r => _redValue = r, 0, 5))
             .Join(DOTween.To(() => _greenValue, g => _greenValue = g, 1, 5))
             .SetEase(Ease.Linear);
 
-        // 게이지 채우기 애니메이션
         _scaleTweener = _fill.DOScaleX(1, 5).SetEase(Ease.Linear);
     }
 
@@ -75,7 +71,6 @@ public class ShootGauge : MonoBehaviour
 
     private IEnumerator ShootingEnd()
     {
-        // 애니메이션 종료
         _colorSequence?.Kill();
         _scaleTweener?.Kill();
 
