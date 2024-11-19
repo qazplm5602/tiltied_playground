@@ -29,6 +29,4 @@ MonoBehaviour:
   shootPower:
     _baseValue: 2
     modifiers: 
-  skillIcon: {fileID: 21300000, guid: 1a117f60ec3f6264f9a777299d7f527d, type: 3}
-  skillInfo: "\uBC29\uAD6C\uB97C \uB00C\uC5B4\uC11C \uC55E\uC73C\uB85C \uB300\uC26C
-    \uD55C\uB2E4."
+  skillData: {fileID: 11400000, guid: 0f371284f0ac8334ca5c91adc5406c44, type: 2}

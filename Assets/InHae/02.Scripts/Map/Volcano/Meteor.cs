@@ -65,7 +65,7 @@ public class Meteor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name.Equals("Floor"))
+        if (other.name.Equals("SoccerGround") || other.name.Equals("Ring"))
         {
             StruckSetting();
             StartEffect();
