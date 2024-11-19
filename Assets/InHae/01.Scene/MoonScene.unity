@@ -399,6 +399,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoonMap
       objectReference: {fileID: 0}
+    - target: {fileID: 5282891765385679019, guid: 598b670cb4efc6341bb4d104dbf55770, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -197
+      objectReference: {fileID: 0}
     - target: {fileID: 8577552124493778813, guid: 598b670cb4efc6341bb4d104dbf55770, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

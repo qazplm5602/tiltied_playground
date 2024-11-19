@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loopAmount: 30
-  gravity: 250
+  gravity: 1550
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 256

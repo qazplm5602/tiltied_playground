@@ -131,4 +131,9 @@ public class BallGoalSimulateManager : MonoBehaviour
     public GoalPostArea GetGoalPost(BallAreaType type) {
         return areas.First(v => v.type == type).area;
     }
+
+    public void SetGravity(float gravity)
+    {
+        this.gravity = gravity;
+    }
 }
