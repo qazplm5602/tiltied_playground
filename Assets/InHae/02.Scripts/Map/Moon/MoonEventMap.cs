@@ -30,6 +30,7 @@ public class MoonEventMap : EventMapBase
         _defaultGravity = Physics.gravity;
         _applyGravity.y = Physics.gravity.y / 6;
         Physics.gravity = _applyGravity;
+        ManagerManager.GetManager<BallGoalSimulateManager>().SetGravity(250);
 
         for (int i = 0; i < _stoneCount; i++)
         {
@@ -49,6 +50,7 @@ public class MoonEventMap : EventMapBase
         base.MapEventStop();
         
         Physics.gravity = _defaultGravity;
+        ManagerManager.GetManager<BallGoalSimulateManager>().SetGravity(1550);
         
         for (int i = _moonStones.Count - _stoneCount; i < _moonStones.Count; i++)
         {
