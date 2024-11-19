@@ -2612,6 +2612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShootGauge
       objectReference: {fileID: 0}
+    - target: {fileID: 3893756697913435241, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+      propertyPath: _fill
+      value: 
+      objectReference: {fileID: 3451691295829094658}
     - target: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2700,5 +2704,10 @@ PrefabInstance:
 --- !u!224 &1668501199196895280 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
+  m_PrefabInstance: {fileID: 7496893748806404031}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &3451691295829094658 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5182675424412481213, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
   m_PrefabInstance: {fileID: 7496893748806404031}
   m_PrefabAsset: {fileID: 0}
