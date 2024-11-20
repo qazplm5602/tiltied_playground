@@ -31,6 +31,7 @@ public class PlayerBallAttack : MonoBehaviour
         Vector3 corss = Vector3.Cross(ballOwner.transform.right, dirToTarget);
 
         if (corss.y > allowRange) return; // 플레이어 뒤에 있는데??
+        if (!player.IsLookObject(detectBall[0].transform)) return; // 뒤로 보면서 못뺏음 ㅅㄱ
 
         ballOwner.ForceReleseBall();
         player.ForceTakeBall(); // 강제적으로 공 뺏음
