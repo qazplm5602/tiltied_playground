@@ -20,12 +20,14 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] _itemImages;
 
     [SerializeField] private bool isKnockback = false;
+    [SerializeField] private float shootTakeDelay = 0.1f; // 슈팅 한 후 공을 가져갈 수 있는 쿨탐
 
     TagHandle _ballTag;
     private bool HasBall() => BallControlBundle.GetBallOwner() == this;
 
     private bool _prevShootKeyDown = false;
     private float _prevShootKeyDownTime = 0.0f;
+    private float shootTime;
 
     private SkillBase _currentSkill;
     public SkillBase CurrentSkill => _currentSkill;
@@ -126,6 +128,7 @@ public class Player : MonoBehaviour
         this.Release(_ballController);
 
         _prevShootKeyDown = false;
+        shootTime = Time.time;
 
         ShootingEndEvent?.Invoke();
     }
@@ -163,10 +166,12 @@ public class Player : MonoBehaviour
         this.Release(_ballController);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.collider.CompareTag(_ballTag) // 공에 닿았고
-           && _ballController.BallIsFree()) // 공이 자유롭다면
+           && _ballController.BallIsFree() // 공이 자유롭다면
+           && Time.time - shootTime > shootTakeDelay // 잡기 쿨탐
+        )
         {
             this.Registe(_ballController);
         }
