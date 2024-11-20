@@ -67,11 +67,11 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
         if (_leftMassSum < _rightMassSum)
             rotValue *= -1;
 
-        _currentRotZ = Mathf.Lerp(_currentRotZ, rotValue, Time.deltaTime * _rotTime);
+        _currentRotZ = Mathf.Lerp(_currentRotZ, rotValue, Time.fixedDeltaTime * _rotTime);
         _currentRotZ = Mathf.Clamp(_currentRotZ, -_rotRimit, _rotRimit);
         _rigidbody.MoveRotation(Quaternion.Slerp(transform.rotation, 
             Quaternion.Euler(new Vector3(0, 0, _currentRotZ)),
-            Time.deltaTime * _rotTime));
+            Time.fixedDeltaTime * _rotTime));
     }
 
     private float CalculateMass(float mass, Vector3 objPos, bool isLeft)
