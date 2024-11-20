@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 3469270460193836355}
   - component: {fileID: 2482449241301958918}
   - component: {fileID: 3033994069501878173}
+  - component: {fileID: 4415808178193058263}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -373,6 +374,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kickDuration: 0.5
   animator: {fileID: 6918701364576813612}
+--- !u!114 &4415808178193058263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935509706256349284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7c773bcb0eebf4f8401a7543ebca6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testPlayer: {fileID: 0}
+  takeDistance: 2
+  whatIsBall:
+    serializedVersion: 2
+    m_Bits: 128
+  allowRange: -0.5
 --- !u!1 &1022760386740726308
 GameObject:
   m_ObjectHideFlags: 0
