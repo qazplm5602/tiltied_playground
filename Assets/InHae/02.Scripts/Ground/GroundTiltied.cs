@@ -55,7 +55,7 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
     private void ApplyRotate()
     {
         float rotValue = Mathf.Abs(_leftMassSum - _rightMassSum) * _rotWeight;
-        _rotTime = Mathf.Clamp(rotValue * 0.5f, 1, 5);
+        _rotTime = Mathf.Clamp(rotValue * 0.5f, 1, 4);
         
         // 지속되는 버전 ex) 레드 무게 2 -> 2의 힘으로 레드쪽으로 계속 기울어짐
         // if (_leftMassSum > _rightMassSum)
