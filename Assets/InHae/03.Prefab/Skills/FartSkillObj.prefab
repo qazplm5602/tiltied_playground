@@ -47,3 +47,4 @@ MonoBehaviour:
   skillData: {fileID: 11400000, guid: 14678ae7c531a2b469a98f434e0ac889, type: 2}
   fartEffectPrefab: {fileID: 8979667309774899960, guid: cb696cd7e6e458e4e80e7b2cfc72b642, type: 3}
   massPrefab: {fileID: 2874497551790184300, guid: bc44e684a28d3d944b1a7d085d3defec, type: 3}
+  fartSound: {fileID: 11400000, guid: eb5fde178c2d944448ca4d2d2cc26825, type: 2}
