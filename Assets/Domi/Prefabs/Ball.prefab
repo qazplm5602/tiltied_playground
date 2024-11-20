@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8961932620776045738}
   - component: {fileID: 2708511074234955866}
   - component: {fileID: 844809519104194740}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ball
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -131,9 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2465bf13de4b014e982650d413ba6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 768
+  expireTime: 8
 --- !u!114 &844809519104194740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,11 +149,11 @@ MonoBehaviour:
   _massHaveLayer:
     serializedVersion: 2
     m_Bits: 64
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 512
   _castTrm: {fileID: 6637390945519154142}
   _castSize: {x: 1.68, y: 1.68, z: 1.59}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 768
 --- !u!1 &4239187902265941265
 GameObject:
   m_ObjectHideFlags: 0

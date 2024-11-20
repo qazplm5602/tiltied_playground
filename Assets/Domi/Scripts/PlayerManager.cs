@@ -60,6 +60,9 @@ public class PlayerManager : MonoBehaviour
             player_2.SetStat(data.player2_StatData);
         }
 
+        player_1.gameObject.SetActive(false);
+        player_2.gameObject.SetActive(false);
+
         players.Add(BallAreaType.Blue, player_1);
         players.Add(BallAreaType.Red, player_2);
     }   

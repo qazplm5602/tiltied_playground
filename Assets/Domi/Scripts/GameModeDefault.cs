@@ -45,6 +45,9 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
         // 캠캠캠
         CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main, () => {
             soccerBall.BallReset();
+            
+            playerManager.GetPlayer(BallAreaType.Blue)?.gameObject?.SetActive(true);
+            playerManager.GetPlayer(BallAreaType.Red)?.gameObject?.SetActive(true);
             playerManager.ResetPos();
         });
 
