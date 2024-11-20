@@ -12,6 +12,7 @@ public class UI_Characters : MonoBehaviour
     public bool IsSelected1;
     public bool IsSelected2;
     public PlayerStatsSO playerStat;
+    public GameObject playerObj;
 
     private void Start()
     {
@@ -22,7 +23,7 @@ public class UI_Characters : MonoBehaviour
         _isOnTopImage2 = transform.GetChild(3).gameObject.GetComponent<Image>();
     }
 
-    public PlayerStatsSO SelectCharacter1()
+    public GameObject SelectCharacter1()
     {
         if (IsSelected1)
         {
@@ -36,10 +37,10 @@ public class UI_Characters : MonoBehaviour
         IsSelected1 = true;
 
 
-        return playerStat;
+        return playerObj;
     }
 
-    public PlayerStatsSO SelectCharacter2()
+    public GameObject SelectCharacter2()
     {
         if (IsSelected2)
         {
@@ -53,6 +54,6 @@ public class UI_Characters : MonoBehaviour
         IsSelected2 = true;
 
 
-        return playerStat;
+        return playerObj;
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -35,6 +36,12 @@ public class Player : MonoBehaviour
     public event Action ShootingEndEvent;
     public event Action AttackEvent; // 공 없이 슈팅 누른 경우
 
+    private bool _isMeditation = false;
+    public bool IsMeditation {
+        get => _isMeditation;
+        set { _isMeditation = value; }
+    }
+
     private void Awake()
     {
         PlayerStatSO = Instantiate(PlayerStatSO);
@@ -53,6 +60,8 @@ public class Player : MonoBehaviour
 
    private void FixedUpdate()
    {
+      if (_isMeditation) return;
+
       if(isKnockback)
       {
          // 다른 플레이어로부터 타격을 받았을 경우
