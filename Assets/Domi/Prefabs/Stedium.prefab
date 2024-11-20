@@ -189,8 +189,8 @@ GameObject:
   - component: {fileID: 7189188999028822426}
   - component: {fileID: 6054756834750559521}
   - component: {fileID: 5343929085633181038}
-  m_Layer: 0
-  m_Name: Ring Blue.003_JS_Alpha_0
+  m_Layer: 8
+  m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 518270918542762099}
   - component: {fileID: 8211491695143076970}
   - component: {fileID: 4271101536253760786}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Goal Sensors.004_JS_Alpha_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,7 +1060,7 @@ GameObject:
   - component: {fileID: 935893806226778904}
   - component: {fileID: 2298776165880251113}
   - component: {fileID: 4685346464020400640}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Goal Sensors.002_JS_Alpha_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1291,7 +1291,7 @@ Transform:
   m_GameObject: {fileID: 8893736198428956117}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 53.2, y: 0, z: 0}
+  m_LocalPosition: {x: 66, y: 0, z: 0}
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
