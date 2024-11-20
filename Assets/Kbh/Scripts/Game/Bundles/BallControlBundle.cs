@@ -7,12 +7,7 @@ using UnityEngine;
 public class BallControlBundle : Bundle
 {
    static private bool _isInited = false;
-
-   static private Transform _mapTrm;
    static private SoccerBall _soccerBall;
-   static private Rigidbody _ballRigid;
-   static private Transform _ballVisual;
-
    static private Player _ballOwner = null;
    static private Tween _ballMoveTween = null;
 

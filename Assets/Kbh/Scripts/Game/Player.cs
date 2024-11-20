@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool isKnockback = false;
 
     TagHandle _ballTag;
-    private bool HasBall() => _ballController.isRegisted;
+    private bool HasBall() => BallControlBundle.GetBallOwner() == this;
 
     private bool _prevShootKeyDown = false;
     private float _prevShootKeyDownTime = 0.0f;
@@ -157,6 +157,10 @@ public class Player : MonoBehaviour
     // 강제적으로 공 가져옴
     public void ForceTakeBall() {
         this.Registe(_ballController);
+    }
+    // 강제적으로 공 뺏음 ㅅㄱ
+    public void ForceReleseBall() {
+        this.Release(_ballController);
     }
 
     private void OnCollisionEnter(Collision collision)

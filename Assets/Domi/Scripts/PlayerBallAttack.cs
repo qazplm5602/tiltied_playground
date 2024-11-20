@@ -32,6 +32,7 @@ public class PlayerBallAttack : MonoBehaviour
 
         if (corss.y > allowRange) return; // 플레이어 뒤에 있는데??
 
+        ballOwner.ForceReleseBall();
         player.ForceTakeBall(); // 강제적으로 공 뺏음
     }
 
