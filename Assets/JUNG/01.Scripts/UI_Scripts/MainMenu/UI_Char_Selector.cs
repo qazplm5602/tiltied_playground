@@ -75,7 +75,7 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleSelectCharacter1()
     {
-        GameDataManager.Instance.player1_StatData = _characters[charIndex1].SelectCharacter1();
+        GameDataManager.Instance.player1_ObjData = _characters[charIndex1].SelectCharacter1();
         if (_characters[charIndex1].IsSelected1 == true && _characters[charIndex2].IsSelected2 == true)
         {
             IsReady?.Invoke();
@@ -101,7 +101,7 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleSelectCharacter2()
     {
-        GameDataManager.Instance.player2_StatData = _characters[charIndex2].SelectCharacter2();
+        GameDataManager.Instance.player2_ObjData = _characters[charIndex2].SelectCharacter2();
 
         if (_characters[charIndex1].IsSelected1 == true && _characters[charIndex2].IsSelected2 == true)
         {
