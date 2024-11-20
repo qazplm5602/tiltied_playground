@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4204521347768094970
+--- !u!1 &2874497551790184300
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1973816152633921098}
-  - component: {fileID: 3759341793525325646}
+  - component: {fileID: 9118980830465175832}
+  - component: {fileID: 4340041091995408636}
   m_Layer: 0
-  m_Name: FartSkillObj
+  m_Name: EmptyMassObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1973816152633921098
+--- !u!4 &9118980830465175832
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4204521347768094970}
+  m_GameObject: {fileID: 2874497551790184300}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 21.98, y: 29.76, z: 5.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3759341793525325646
+--- !u!114 &4340041091995408636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4204521347768094970}
+  m_GameObject: {fileID: 2874497551790184300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c91c829fca6c6f54cadbdf035a9ea92d, type: 3}
+  m_Script: {fileID: 11500000, guid: 191a85f2ac838fe4b9fd4b254a6dc1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillData: {fileID: 11400000, guid: 14678ae7c531a2b469a98f434e0ac889, type: 2}
-  fartEffectPrefab: {fileID: 8979667309774899960, guid: cb696cd7e6e458e4e80e7b2cfc72b642, type: 3}
-  massPrefab: {fileID: 2874497551790184300, guid: bc44e684a28d3d944b1a7d085d3defec, type: 3}
+  _mass: 500
+  _rayDistance: 0
+  _massHaveLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _castTrm: {fileID: 9118980830465175832}
+  _castSize: {x: 5, y: 5, z: 5}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 768
