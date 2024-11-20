@@ -38,7 +38,6 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         PlayerStatSO = Instantiate(PlayerStatSO);
-        SkillInit();
 
         RigidbodyComponent = GetComponent<Rigidbody>();
         _itemIDs = new int[MAX_ITEM_COUNT];
