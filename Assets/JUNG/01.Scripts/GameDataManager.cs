@@ -33,6 +33,9 @@ public class GameDataManager : MonoBehaviour
     public PlayerStatsSO player1_StatData;
     public PlayerStatsSO player2_StatData;
 
+    public GameObject player1_ObjData;
+    public GameObject player2_ObjData;
+
     private void Start()
     {
         

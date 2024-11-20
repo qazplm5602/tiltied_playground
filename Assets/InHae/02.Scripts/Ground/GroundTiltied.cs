@@ -10,6 +10,7 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
     
     private Ground _ground;
     private float _currentRotZ;
+    private Rigidbody _rigidbody;
     
     //Debug 용도로 직렬화
     [SerializeField] private float _leftMassSum;
@@ -17,6 +18,7 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
 
     public void Initialize(Ground ground)
     {
+        _rigidbody = GetComponent<Rigidbody>();
         _ground = ground;
     }
     
@@ -53,7 +55,7 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
     private void ApplyRotate()
     {
         float rotValue = Mathf.Abs(_leftMassSum - _rightMassSum) * _rotWeight;
-        _rotTime = Mathf.Clamp(rotValue * 0.5f, 1, 5);
+        _rotTime = Mathf.Clamp(rotValue * 0.5f, 1, 4);
         
         // 지속되는 버전 ex) 레드 무게 2 -> 2의 힘으로 레드쪽으로 계속 기울어짐
         // if (_leftMassSum > _rightMassSum)
@@ -67,10 +69,9 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
 
         _currentRotZ = Mathf.Lerp(_currentRotZ, rotValue, Time.fixedDeltaTime * _rotTime);
         _currentRotZ = Mathf.Clamp(_currentRotZ, -_rotRimit, _rotRimit);
-        
-        transform.rotation = Quaternion.Slerp(transform.rotation, 
+        _rigidbody.MoveRotation(Quaternion.Slerp(transform.rotation, 
             Quaternion.Euler(new Vector3(0, 0, _currentRotZ)),
-            Time.fixedDeltaTime * _rotTime);
+            Time.fixedDeltaTime * _rotTime));
     }
 
     private float CalculateMass(float mass, Vector3 objPos, bool isLeft)

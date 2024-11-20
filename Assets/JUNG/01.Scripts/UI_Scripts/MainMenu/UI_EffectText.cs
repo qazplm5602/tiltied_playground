@@ -1,7 +1,10 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TypeChar
 {
@@ -17,6 +20,7 @@ public class TypeChar
 
     private Color _startColor;
     private Color _endColor;
+    private Image _image;
 
     public TypeChar(int start, Vector3[] vertices, Color32[] colors, Color startColor, Color endColor, float delayTime, float effectTime = 0.5f, float offset = 15f)
     {
@@ -40,6 +44,12 @@ public class TypeChar
         _endColor = endColor;
     }
 
+    public TypeChar SetImg(Image img)
+    {
+        _image = img;
+        return this;
+    }
+
     public void UpdateChar(Vector3[] vertices, Color32[] colors)
     {
         _currentTime += Time.deltaTime;
@@ -47,6 +57,7 @@ public class TypeChar
 
         float time = _currentTime - _delayTime;
         float percent = time / _effectTime;
+
 
         for (int i = 0; i < 4; ++i)
         {
@@ -70,9 +81,11 @@ public class TypeChar
         float time = _currentTime - _disappearDelay;
         float percent = time / _effectTime;
 
+
         // 왼쪽으로 이동하며 사라지도록 수정
         for (int i = 0; i < 4; ++i)
         {
+
             vertices[_startIndex + i] = Vector3.Lerp(_originPostion[i], _originPostion[i] - new Vector3(400f, 0, 0), percent);
             colors[_startIndex + i] = Color.Lerp(_endColor, _startColor, percent);
             colors[_startIndex + i].a = (byte)Mathf.Lerp(255, 0, percent); // 투명해짐
@@ -88,10 +101,14 @@ public class TypeChar
 
 public class UI_EffectText : MonoBehaviour
 {
+    [SerializeField] private Image _bgImg;
     [SerializeField]
     private float _oneCharacterTime = 0.2f;
     [SerializeField]
     private Color _startColor, _endColor;
+
+    private Image _bgColor1;
+    private Image _bgColor2;
 
     private bool _isType = false;
 
@@ -100,18 +117,22 @@ public class UI_EffectText : MonoBehaviour
     private void Awake()
     {
         _tmpText = GetComponent<TMP_Text>();
+        _bgColor1 = _bgImg.transform.GetChild(0).GetComponent<Image>();
+        _bgColor2 = _bgImg.transform.GetChild(1).GetComponent<Image>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A) && _isType == false)
         {
-            StartEffect("GOAL!");
+            StartEffect("GOAL!", Color.blue);
         }
     }
-
-    public void StartEffect(string text)
+    public void StartEffect(string text, Color overrideEndColor)
     {
+        _bgColor1.color = overrideEndColor;
+        _bgColor2.color = overrideEndColor;
+        _endColor = overrideEndColor;
         _tmpText.SetText(text);
         _tmpText.color = _endColor;
         _tmpText.ForceMeshUpdate();
@@ -134,7 +155,8 @@ public class UI_EffectText : MonoBehaviour
         {
             TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
             if (charInfo.isVisible == false) continue;
-            charList.Add(new TypeChar(charInfo.vertexIndex, vertices, vertexColor, _startColor, _endColor, i * 0.1f, _oneCharacterTime));
+            charList.Add(new TypeChar(charInfo.vertexIndex, vertices, vertexColor, _startColor, _endColor, i * 0.1f, _oneCharacterTime)
+                .SetImg(_bgImg));
         }
 
         _tmpText.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32 | TMP_VertexDataUpdateFlags.Vertices);
@@ -145,12 +167,16 @@ public class UI_EffectText : MonoBehaviour
 
     private IEnumerator TypeCoroutine(Vector3[] vertices, Color32[] colors, List<TypeChar> list)
     {
+        _bgImg.rectTransform.DOKill();
+        _bgImg.rectTransform.localPosition = new Vector3(1990, 350, 0);
+
         bool complete = false;
         int cnt = 0;
-
+        _bgImg.rectTransform.DOLocalMove(Vector3.zero, .5f).SetEase(Ease.OutCubic);//.SetEase(Ease.OutCirc);
         // 나타나는 애니메이션
         while (!complete)
         {
+
             yield return null;
             complete = true;
 
@@ -169,13 +195,13 @@ public class UI_EffectText : MonoBehaviour
                 break;
             }
         }
-
-        // 잠시 대기
         yield return new WaitForSeconds(0.7f);
+        // 잠시 대기
 
         // 왼쪽으로 사라지는 애니메이션
         complete = false;
         cnt = 0;
+        _bgImg.rectTransform.DOLocalMove(new Vector3(-1990, -350, 0), .7f).SetEase(Ease.InCubic);
 
         while (!complete)
         {
@@ -187,8 +213,8 @@ public class UI_EffectText : MonoBehaviour
                 c.DisappearChar(vertices, colors);
                 if (!c.IsDisappearComplete) complete = false;
             }
-
             _tmpText.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32 | TMP_VertexDataUpdateFlags.Vertices);
+
 
             cnt++;
             if (cnt >= 1000000000)
