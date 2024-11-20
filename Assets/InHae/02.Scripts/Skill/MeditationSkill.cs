@@ -1,4 +1,6 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MeditationSkill : SkillBase
@@ -23,10 +25,12 @@ public class MeditationSkill : SkillBase
 
     private IEnumerator Meditation()
     {
-        _otherPlayer.IsMeditation = _ground.enabled = false;
+        _ground.enabled = false;
+        _otherPlayer.IsMeditation = true;
 
         yield return new WaitForSeconds(_meditationTime);
 
-        _otherPlayer.IsMeditation = _ground.enabled = true;
+        _ground.enabled = true;
+        _otherPlayer.IsMeditation = false;
     }
 }
