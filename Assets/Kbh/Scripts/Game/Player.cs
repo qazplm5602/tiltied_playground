@@ -20,17 +20,20 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] _itemImages;
 
     [SerializeField] private bool isKnockback = false;
+    [SerializeField] private float shootTakeDelay = 0.1f; // 슈팅 한 후 공을 가져갈 수 있는 쿨탐
 
     TagHandle _ballTag;
-    private bool HasBall() => _ballController.isRegisted;
+    private bool HasBall() => BallControlBundle.GetBallOwner() == this;
 
     private bool _prevShootKeyDown = false;
     private float _prevShootKeyDownTime = 0.0f;
+    private float shootTime;
 
     private SkillBase _currentSkill;
     public SkillBase CurrentSkill => _currentSkill;
     public event Action ShootingStartEvent;
     public event Action ShootingEndEvent;
+    public event Action AttackEvent; // 공 없이 슈팅 누른 경우
 
     private void Awake()
     {
@@ -102,6 +105,8 @@ public class Player : MonoBehaviour
             }
             else
                 Shooting();
+        } else if (isPerformed) { // 축구공은 안가지고 있는데 슈팅 누름
+            AttackEvent?.Invoke();
         }
     }
 
@@ -123,6 +128,7 @@ public class Player : MonoBehaviour
         this.Release(_ballController);
 
         _prevShootKeyDown = false;
+        shootTime = Time.time;
 
         ShootingEndEvent?.Invoke();
     }
@@ -150,11 +156,23 @@ public class Player : MonoBehaviour
         if (_currentSkill.SkillUseAbleCheck())
             _currentSkill.UseSkill();
     }
- 
-    private void OnCollisionEnter(Collision collision)
+    
+    // 강제적으로 공 가져옴
+    public void ForceTakeBall() {
+        this.Registe(_ballController);
+    }
+    // 강제적으로 공 뺏음 ㅅㄱ
+    public void ForceReleseBall() {
+        this.Release(_ballController);
+    }
+
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.collider.CompareTag(_ballTag) // 공에 닿았고
-           && _ballController.BallIsFree()) // 공이 자유롭다면
+           && _ballController.BallIsFree() // 공이 자유롭다면
+           && Time.time - shootTime > shootTakeDelay // 잡기 쿨탐
+           && IsLookObject(collision.transform) // 공 보고 있음??
+        )
         {
             this.Registe(_ballController);
         }
@@ -179,5 +197,15 @@ public class Player : MonoBehaviour
         
         _currentSkill = Instantiate(SkillManager.Instance.GetSkill(PlayerStatSO.skillData.skillType), transform);
         _currentSkill.Init(this);
+    }
+
+    [SerializeField] private float allowBallAngle = 60f; // 앞쪽 허용 각도 (60도)
+    public bool IsLookObject(Transform targetTrm) {
+        // 플레이어 위치와 방향
+        Vector3 playerForward = transform.forward;
+        Vector3 directionToTarget = (targetTrm.position - transform.position).normalized;
+        float dot = Vector3.Dot(playerForward, directionToTarget);
+        
+        return dot >= Mathf.Cos(allowBallAngle * Mathf.Deg2Rad);
     }
 }

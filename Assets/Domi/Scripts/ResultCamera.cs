@@ -41,7 +41,7 @@ public class ResultCamera : MonoBehaviour
         print($"{dir} / {hit.position} / {startCamPos}");
 
         cinemachine.transform.position = new Vector3(startCamPos.x, startCamPos.y + maxY, startCamPos.z);
-        cinemachine.transform.DOLocalMoveY(startCamPos.y, endDuration).SetEase(animEase);
+        cinemachine.transform.DOMoveY(startCamPos.y, endDuration).SetEase(animEase);
     }
 
     public float GetDuration() => endDuration;
