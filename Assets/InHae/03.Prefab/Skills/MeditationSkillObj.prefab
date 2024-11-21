@@ -45,3 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData: {fileID: 11400000, guid: 0f371284f0ac8334ca5c91adc5406c44, type: 2}
+  _meditationTime: 5
+  _mat: {fileID: 2100000, guid: 3bbec86f6be25854084b614ed51d91e0, type: 2}
+  _particlePrefab: {fileID: 7990868534346314278, guid: 7f3cc5d4b43bb5b48b8c820be2ddac84, type: 3}
+  _sfxSO: {fileID: 11400000, guid: 37419f33eaa9e5a47b0920f2c4db307d, type: 2}
