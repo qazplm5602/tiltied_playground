@@ -38,6 +38,7 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
     {
         print($"checked Cutscene {startCutscene.IsProgress()}");
         startCutscene.Run();
+        IngameUI.Start();
     }
 
     public void CutsceneFinish()
@@ -67,6 +68,11 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
         else
             RedScore ++;
 
+        // 축구공 소유권 빼기
+        Player ballOwner = BallControlBundle.GetBallOwner();
+        if (ballOwner)
+            ballOwner.ForceReleseBall();
+        
         StartCoroutine(WaitBallReset());
     }
 

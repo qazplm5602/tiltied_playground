@@ -186,7 +186,9 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.collider.CompareTag(_ballTag) // 공에 닿았고
+        if (
+            ManagerManager.GetManager<GameManager>().GetMode().IsPlay // 플레이 중이여야 함
+           && collision.collider.CompareTag(_ballTag) // 공에 닿았고
            && _ballController.BallIsFree() // 공이 자유롭다면
            && Time.time - shootTime > shootTakeDelay // 잡기 쿨탐
            && IsLookObject(collision.transform) // 공 보고 있음??
