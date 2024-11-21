@@ -29,4 +29,4 @@ MonoBehaviour:
   shootPower:
     _baseValue: 7
     modifiers: 
-  skillData: {fileID: 11400000, guid: 0f371284f0ac8334ca5c91adc5406c44, type: 2}
+  skillData: {fileID: 11400000, guid: 14eb648d46f2aad4ab0b7dcc8a0ed993, type: 2}
