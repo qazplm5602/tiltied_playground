@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     public event Action ShootingStartEvent;
     public event Action ShootingEndEvent;
     public event Action AttackEvent; // 공 없이 슈팅 누른 경우
+    public event Action<float> BlindEvent; // 블라인드 스킬을 맞은 경우
 
     private bool _isMeditation = false;
     public bool IsMeditation {
@@ -215,5 +216,10 @@ public class Player : MonoBehaviour
         float dot = Vector3.Dot(playerForward, directionToTarget);
         
         return dot >= Mathf.Cos(allowBallAngle * Mathf.Deg2Rad);
+    }
+
+    public void BlindSkill(float skillTime)
+    {
+        BlindEvent?.Invoke(skillTime);
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BlindSkill : SkillBase
 {
+    [SerializeField] private float _blindTime = 5.0f;
     private Player _otherPlayer;
 
     private void Start()
@@ -14,6 +15,6 @@ public class BlindSkill : SkillBase
 
     public override void UseSkill()
     {
-
+        _otherPlayer.BlindSkill(_blindTime);
     }
 }
