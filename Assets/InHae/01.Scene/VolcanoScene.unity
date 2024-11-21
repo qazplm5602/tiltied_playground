@@ -407,6 +407,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResultUI
       objectReference: {fileID: 0}
+    - target: {fileID: 9103498893955827572, guid: bd690626fbc25384e8d58ae5cd7e2b0b, type: 3}
+      propertyPath: ingameUI
+      value: 
+      objectReference: {fileID: 1912321206}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1399,6 +1403,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 029690f30ab1f2a45804d54fc7e910d4, type: 3}
+--- !u!114 &1912321206 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7798213741750972761, guid: 029690f30ab1f2a45804d54fc7e910d4, type: 3}
+  m_PrefabInstance: {fileID: 1912321204}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c158cc6ecfae94886cb791adf2d9dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2002081943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,6 +1540,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4329898192794287449, guid: e9cd10c405cb33c45960f66801738235, type: 3}
+      propertyPath: _skillList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329898192794287449, guid: e9cd10c405cb33c45960f66801738235, type: 3}
+      propertyPath: '_skillList.Array.data[2]'
+      value: 
+      objectReference: {fileID: 6741461255333806845, guid: 5fdf7b4634a5de04085a3bd02f6fc2b9, type: 3}
     - target: {fileID: 4419834668764410495, guid: e9cd10c405cb33c45960f66801738235, type: 3}
       propertyPath: m_Name
       value: === Manager

@@ -1629,6 +1629,7 @@ GameObject:
   - component: {fileID: 3271960964848731080}
   - component: {fileID: 6452156509588170744}
   - component: {fileID: 8792411211030899042}
+  - component: {fileID: -4395899645951427184}
   m_Layer: 0
   m_Name: DohyunPlayer
   m_TagString: Untagged
@@ -1724,6 +1725,8 @@ MonoBehaviour:
   _itemIDs: 
   _itemImages: []
   isKnockback: 0
+  shootTakeDelay: 0.1
+  allowBallAngle: 60
 --- !u!114 &6452156509588170744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1760,6 +1763,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kickDuration: 0.5
   animator: {fileID: 8894991216036260938}
+--- !u!114 &-4395899645951427184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7676940859624559385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7c773bcb0eebf4f8401a7543ebca6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testPlayer: {fileID: 0}
+  takeDistance: 2
+  whatIsBall:
+    serializedVersion: 2
+    m_Bits: 128
+  allowRange: -0.5
 --- !u!1 &7776973883071380232
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,10 +2351,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShootGauge
       objectReference: {fileID: 0}
-    - target: {fileID: 3893756697913435241, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
-      propertyPath: _fill
-      value: 
-      objectReference: {fileID: 2334772624587880751}
     - target: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2360,11 +2377,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 5.5
+      value: 5.533
       objectReference: {fileID: 0}
     - target: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0.7
+      value: 1.3997
       objectReference: {fileID: 0}
     - target: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2376,7 +2393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2400,7 +2417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 5.27
+      value: 5.57
       objectReference: {fileID: 0}
     - target: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2422,10 +2439,5 @@ PrefabInstance:
 --- !u!224 &1776578410351374365 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9164231663612493711, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
-  m_PrefabInstance: {fileID: 7460855456372445074}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &2334772624587880751 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5182675424412481213, guid: 96f76930ef1e44e49a36b17602e96167, type: 3}
   m_PrefabInstance: {fileID: 7460855456372445074}
   m_PrefabAsset: {fileID: 0}
