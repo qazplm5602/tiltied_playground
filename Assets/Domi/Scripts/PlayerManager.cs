@@ -65,8 +65,8 @@ public class PlayerManager : MonoBehaviour
         player_1.gameObject.SetActive(false);
         player_2.gameObject.SetActive(false);
 
-        players.Add(BallAreaType.Blue, player_1);
-        players.Add(BallAreaType.Red, player_2);
+        players.Add(BallAreaType.Red, player_1);
+        players.Add(BallAreaType.Blue, player_2);
     }   
 
     public void ResetPos() {

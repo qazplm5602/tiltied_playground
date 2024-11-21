@@ -2124,6 +2124,7 @@ GameObject:
   - component: {fileID: 794239151511993939}
   - component: {fileID: 2128106189768976961}
   - component: {fileID: 5439227355688439212}
+  - component: {fileID: -7860996683228841244}
   m_Layer: 0
   m_Name: SehyunPlayer
   m_TagString: Untagged
@@ -2257,6 +2258,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kickDuration: 0.5
   animator: {fileID: 4697459657440127441}
+--- !u!114 &-7860996683228841244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920147734351879009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7c773bcb0eebf4f8401a7543ebca6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testPlayer: {fileID: 0}
+  takeDistance: 2
+  whatIsBall:
+    serializedVersion: 2
+    m_Bits: 128
+  allowRange: -0.5
 --- !u!1 &9156170737370424925
 GameObject:
   m_ObjectHideFlags: 0
