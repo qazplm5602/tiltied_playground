@@ -3,11 +3,23 @@ using UnityEngine;
 
 public enum PlayerSkillType
 {
+    //없음
     None,
     //방귀
     Fart,
     //명상
     Meditation,
+    //대쉬
+    Dash,
+    //벽생성
+    BuildWall,
+    //거대해지기
+    Bigger,
+    //점프
+    Jump,
+    //시야
+    UnvisibleUi
+
 }
 
 public class SkillManager : MonoSingleton<SkillManager>
