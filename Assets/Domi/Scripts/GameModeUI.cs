@@ -25,4 +25,17 @@ public class GameModeUI : GameModeCompo
     }
 
     private void HandleTimeChange(float value) => timeBoard.UpdateTimerText((int)value);
+
+    public void Start() {
+        HandlePlayerChange(BallAreaType.Blue);
+        HandlePlayerChange(BallAreaType.Red);
+    }
+    private void HandlePlayerChange(BallAreaType type) {
+        Player player = ManagerManager.GetManager<PlayerManager>().GetPlayer(type);
+        
+        if (type == BallAreaType.Blue)
+            scoreBoard.SetBlueName(player.PlayerStatSO.playerName);
+        else if (type == BallAreaType.Red)
+            scoreBoard.SetRedName(player.PlayerStatSO.playerName);
+    }
 }

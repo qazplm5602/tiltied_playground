@@ -10,6 +10,7 @@ public class BuildWallSkill : SkillBase
     [SerializeField] private float _wallBuildTime;
     [SerializeField] private float _wallDurationTime;
     [SerializeField] private float _wallBuildDistance;
+    [SerializeField] private SoundSO _buildSound;
 
     [SerializeField] private LayerMask _groundMask;
 
@@ -20,6 +21,14 @@ public class BuildWallSkill : SkillBase
     private float _effectPosY;
     
     private ParticleSystem _buildParticle;
+
+    public override bool SkillUseAbleCheck()
+    {
+        if (_wallTrm is not null)
+            return false;
+        
+        return base.SkillUseAbleCheck();
+    }
 
     public override void UseSkill()
     {
@@ -33,35 +42,37 @@ public class BuildWallSkill : SkillBase
 
         if (isHit)
         {
-            _wallTrm = Instantiate(_wallPrefab, transform.position, Quaternion.LookRotation(transform.forward)).transform;
-            Transform wallVisualTrm = _wallTrm.Find("Visual");
-
-            _ground = hit.collider.GetComponentInParent<Ground>();
+            if(_ground == null)
+                _ground = hit.collider.GetComponentInParent<Ground>();
             _ground._clearEvent += DestroyWall;
+            
+            _wallTrm = Instantiate(_wallPrefab, transform.position, Quaternion.LookRotation(transform.forward)).transform;
+            _wallTrm.SetParent(_ground.transform);
+            _wallTrm.localRotation = Quaternion.Euler(0, _wallTrm.eulerAngles.y, 0);
                 
             _buildParticle = Instantiate(_buildEffect, _ground.transform);
-            _wallTrm.SetParent(_ground.transform);
             
             Vector3 defaultSpawnPos = hit.point;
             
-            _effectPosY = defaultSpawnPos.y + wallVisualTrm.localScale.y * 0.5f;
+            _effectPosY = defaultSpawnPos.y + _wallTrm.localScale.y * 1f;
             
             Vector3 downPos = defaultSpawnPos;
-            downPos.y -= wallVisualTrm.localScale.y * 0.5f + 1f;
+            downPos.y -= _wallTrm.localScale.y * 0.5f + 1f;
             _wallTrm.position = downPos;
 
-            WallLocalMoveProcess(_wallTrm, defaultSpawnPos,wallVisualTrm.localScale.y * 0.5f, false);
+            WallLocalMoveProcess(defaultSpawnPos,_wallTrm.localScale.y * 0.5f, false);
             
-            DOVirtual.DelayedCall(_wallDurationTime, () => WallLocalMoveProcess(_wallTrm, defaultSpawnPos,
-                -(wallVisualTrm.localScale.y * 0.5f) - 0.5f, true));
+            DOVirtual.DelayedCall(_wallDurationTime, () => WallLocalMoveProcess(defaultSpawnPos,
+                -(_wallTrm.localScale.y * 0.5f) - 0.5f, true));
         }
     }
 
-    private void WallLocalMoveProcess(Transform wallTrm, Vector3 defaultSpawnPos, float movePosY, bool isDestroy)
+    private void WallLocalMoveProcess(Vector3 defaultSpawnPos, float movePosY, bool isDestroy)
     {
-        BuildEffectStart(defaultSpawnPos, Quaternion.LookRotation(wallTrm.up));
+        SoundManager.Instance.PlaySFX(transform.position, _buildSound);
+        BuildEffectStart(defaultSpawnPos, Quaternion.LookRotation(_wallTrm.up));
         
-        wallTrm.DOLocalMoveY(movePosY, _wallBuildTime).OnComplete(() =>
+        _wallTrm.DOLocalMoveY(movePosY, _wallBuildTime).OnComplete(() =>
         {
             _buildParticle.Stop();
             if (isDestroy)
@@ -88,8 +99,16 @@ public class BuildWallSkill : SkillBase
     private void DestroyWall()
     {
         _ground._clearEvent -= DestroyWall;
-        Destroy(_wallTrm.gameObject);
-        Destroy(_buildParticle.gameObject);
+
+        if (_wallTrm is not null)
+        {
+            Destroy(_wallTrm.gameObject);
+            _wallTrm = null;
+        }
+        if (_buildParticle is not null)
+        {
+            Destroy(_buildParticle.gameObject);
+        }
     }
 
     private void OnDrawGizmos()
