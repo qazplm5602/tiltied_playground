@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class ShootGauge : MonoBehaviour
     private float _redValue = 1.0f;
     private float _greenValue = 0.0f;
     private bool _isShooting = false;
+    private bool _isBlind = false;
 
     private Sequence _colorSequence;
     private Tweener _scaleTweener;
@@ -25,6 +27,7 @@ public class ShootGauge : MonoBehaviour
 
         _player.ShootingStartEvent += HandleShootingStart;
         _player.ShootingEndEvent += HandleShootingEnd;
+        _player.BlindEvent += HandleBlindSkill;
 
         _canvasGroup.alpha = 0;
         _fillImage.color = new Color(1, 0, 0);
@@ -32,7 +35,7 @@ public class ShootGauge : MonoBehaviour
 
     private void Update()
     {
-        if (_isShooting)
+        if (_isShooting && !_isBlind)
         {
             _fillImage.color = new Color(_redValue, _greenValue, 0);
         }
@@ -40,7 +43,6 @@ public class ShootGauge : MonoBehaviour
 
     private void LateUpdate()
     {
-        // Canvas가 카메라를 바라보도록 회전
         transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward,
                          Camera.main.transform.rotation * Vector3.up);
     }
@@ -55,12 +57,20 @@ public class ShootGauge : MonoBehaviour
         _colorSequence?.Kill();
         _scaleTweener?.Kill();
 
-        _colorSequence = DOTween.Sequence()
-            .Append(DOTween.To(() => _redValue, r => _redValue = r, 0, 5))
-            .Join(DOTween.To(() => _greenValue, g => _greenValue = g, 1, 5))
-            .SetEase(Ease.Linear);
+        if (_isBlind)
+        {
+            _fillImage.color = Color.black;
+            _fill.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            _colorSequence = DOTween.Sequence()
+                .Append(DOTween.To(() => _redValue, r => _redValue = r, 0, 5))
+                .Join(DOTween.To(() => _greenValue, g => _greenValue = g, 1, 5))
+                .SetEase(Ease.Linear);
 
-        _scaleTweener = _fill.DOScaleX(1, 5).SetEase(Ease.Linear);
+            _scaleTweener = _fill.DOScaleX(1, 5).SetEase(Ease.Linear);
+        }
     }
 
     private void HandleShootingEnd()
@@ -80,6 +90,23 @@ public class ShootGauge : MonoBehaviour
         _greenValue = 0.0f;
         _canvasGroup.alpha = 0;
         _fill.localScale = new Vector3(0, 1, 1);
+    }
+
+    private void HandleBlindSkill(float skillTime)
+    {
+        StartCoroutine(BlindSkill(skillTime));
+    }
+
+    private IEnumerator BlindSkill(float skillTime)
+    {
+        SetSpecialMode(true);
+        yield return new WaitForSeconds(skillTime);
+        SetSpecialMode(false);
+    }
+
+    public void SetSpecialMode(bool isSpecial)
+    {
+        _isBlind = isSpecial;
     }
 
     private void OnDestroy()
