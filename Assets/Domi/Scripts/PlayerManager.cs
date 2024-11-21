@@ -48,10 +48,12 @@ public class PlayerManager : MonoBehaviour
         
         // (이거 data에 있는 prefab 으로 생성할 예정...)
         // 데이터에 있는거 꺼내와서 적용할꺼
-        Player player_1 = Instantiate(basePlayer, spawnParent);
+        Player player1_prefab = data?.player1_ObjData?.GetComponent<Player>();
+        Player player_1 = Instantiate(player1_prefab ?? basePlayer, spawnParent);
         player_1.SetControl(control1);
 
-        Player player_2 = Instantiate(basePlayer, spawnParent);
+        Player player2_prefab = data?.player2_ObjData?.GetComponent<Player>();
+        Player player_2 = Instantiate(player2_prefab ?? basePlayer, spawnParent);
         player_2.SetControl(control2);
 
         // 임시 스탯 적용
