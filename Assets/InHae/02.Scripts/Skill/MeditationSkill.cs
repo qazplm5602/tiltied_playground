@@ -9,13 +9,13 @@ public class MeditationSkill : SkillBase
     [SerializeField] private float _meditationTime = 5.0f;
     [SerializeField] private Material _mat;
     [SerializeField] private ParticleSystem _particlePrefab;
+    [SerializeField] private SoundSO _sfxSO;
     
     private Player _otherPlayer;
     private GroundTiltied _ground;
-    private SkinnedMeshRenderer[] _renderers;
+    private SkinnedMeshRenderer[] _targetRenderers;
 
     private void Awake() {
-        _renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
 
     private void Start()
@@ -25,6 +25,7 @@ public class MeditationSkill : SkillBase
         _ground = FindAnyObjectByType<GroundTiltied>();
 
         _otherPlayer = bluePlayer == _player ? redPlayer : bluePlayer;
+        _targetRenderers = _otherPlayer.GetComponentsInChildren<SkinnedMeshRenderer>();
     }
 
     public override void UseSkill()
@@ -37,23 +38,28 @@ public class MeditationSkill : SkillBase
         _ground.enabled = false;
         _otherPlayer.IsMeditation = true;
         
-        foreach (var item in _renderers)
+        foreach (var item in _targetRenderers)
         {
-            List<Material> mats = item.materials.ToListPooled();
-            item.materials = mats.ToArray();
+            List<Material> mats = item.sharedMaterials.ToListPooled();
+            mats.Add(_mat);
+
+            item.sharedMaterials = mats.ToArray();
         }
 
         // 이펙트
-        Instantiate(_particlePrefab, transform.position, Quaternion.identity);
+        Instantiate(_particlePrefab, _otherPlayer.transform.position, Quaternion.identity);
+
+        // 소리
+        SoundManager.Instance.PlaySFX(Vector3.zero, _sfxSO);
 
         yield return new WaitForSeconds(_meditationTime);
 
-        foreach (var item in _renderers)
+        foreach (var item in _targetRenderers)
         {
-            List<Material> mats = item.materials.ToListPooled();
+            List<Material> mats = item.sharedMaterials.ToListPooled();
             mats.Remove(_mat);
 
-            item.materials = mats.ToArray();
+            item.sharedMaterials = mats.ToArray();
         }
 
         _ground.enabled = true;
