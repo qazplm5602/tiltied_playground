@@ -114,8 +114,17 @@ public class Player : MonoBehaviour
             }
             else
                 Shooting();
-        } else if (isPerformed) { // 축구공은 안가지고 있는데 슈팅 누름
-            AttackEvent?.Invoke();
+        } 
+        else
+        {
+            if (isPerformed)
+            { // 축구공은 안가지고 있는데 슈팅 누름
+                AttackEvent?.Invoke();
+            }
+            else
+            {
+                ShootingEndEvent?.Invoke();
+            }
         }
     }
 
