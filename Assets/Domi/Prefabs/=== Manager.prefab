@@ -418,6 +418,7 @@ MonoBehaviour:
   _skillList:
   - {fileID: 3759341793525325646, guid: e3cc8255073b3bf489b273ee51f9f4b0, type: 3}
   - {fileID: 5163951792962438237, guid: b32e077913fe9aa4899b74aa52e37d9f, type: 3}
+  - {fileID: 8946760337633306988, guid: 1ea2d99f89eea2c4798831f0411da5cd, type: 3}
 --- !u!1 &6507337834483546394
 GameObject:
   m_ObjectHideFlags: 0

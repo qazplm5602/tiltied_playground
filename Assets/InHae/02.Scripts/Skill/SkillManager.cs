@@ -8,6 +8,13 @@ public enum PlayerSkillType
     Fart,
     //명상
     Meditation,
+    
+    
+    
+    
+    
+    //벽 만들기
+    BuildWall,
 }
 
 public class SkillManager : MonoSingleton<SkillManager>
