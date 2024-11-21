@@ -56,38 +56,4 @@ public class UI_Characters : MonoBehaviour
 
         return playerObj;
     }
-
-    public PlayerStatsSO SelectStat2()
-    {
-        if (IsSelected2)
-        {
-            IsSelected2 = false;
-            _selectImage2.enabled = false;
-            return null;
-        }
-        _selector.ResetSelectCharacter(2);
-
-        _selectImage2.enabled = true;
-        IsSelected2 = true;
-
-
-        return playerStat;
-    }
-
-    public PlayerStatsSO SelectStat1()
-    {
-        if (IsSelected1)
-        {
-            IsSelected1 = false;
-            _selectImage1.enabled = false;
-            return null;
-        }
-        _selector.ResetSelectCharacter(1);
-
-        _selectImage1.enabled = true;
-        IsSelected1 = true;
-
-
-        return playerStat;
-    }
 }

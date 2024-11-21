@@ -23,6 +23,8 @@ public class UI_Char_Selector : MonoBehaviour
     private int charIndex1 = 0;
     private int charIndex2 = 0;
 
+    private bool isBothSelected = false;
+
     private event Action IsReady;
     private void Start()
     {
@@ -34,6 +36,7 @@ public class UI_Char_Selector : MonoBehaviour
     private void OnEnable()
     {
 
+        isBothSelected = false;
         _inputSO1.ItemUseEvent += HandleSelectCharacter1;
         _inputSO1.MoveEvent += HandleMoveEvent1;
 
@@ -46,11 +49,13 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleCloseUIEvent()
     {
+
         UI_Manager.Instance.UIOpenOrClose(mapSelectUI, false, transform.parent.gameObject);
     }
 
     private void HandleGoToMapSelect()
     {
+        isBothSelected = true;
         UI_Manager.Instance.UIOpenOrClose(mapSelectUI, true, transform.parent.gameObject);
     }
 
@@ -75,8 +80,10 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleSelectCharacter1()
     {
+        if (isBothSelected)
+            return;
         GameDataManager.Instance.player1_ObjData = _characters[charIndex1].SelectCharacter1();
-        GameDataManager.Instance.player1_StatData = _characters[charIndex1].SelectStat1();
+        GameDataManager.Instance.player1_StatData = _characters[charIndex1].playerStat;
 
 
         if (_characters[charIndex1].IsSelected1 == true && _characters[charIndex2].IsSelected2 == true)
@@ -104,8 +111,10 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleSelectCharacter2()
     {
+        if (isBothSelected)
+            return;
         GameDataManager.Instance.player2_ObjData = _characters[charIndex2].SelectCharacter2();
-        GameDataManager.Instance.player2_StatData = _characters[charIndex2].SelectStat2();
+        GameDataManager.Instance.player2_StatData = _characters[charIndex2].playerStat;
 
         if (_characters[charIndex1].IsSelected1 == true && _characters[charIndex2].IsSelected2 == true)
         {
@@ -143,6 +152,7 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void OnDisable()
     {
+
         _inputSO1.ItemUseEvent -= HandleSelectCharacter1;
         _inputSO1.MoveEvent -= HandleMoveEvent1;
 
