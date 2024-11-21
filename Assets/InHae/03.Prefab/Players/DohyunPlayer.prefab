@@ -1724,6 +1724,8 @@ MonoBehaviour:
   _itemIDs: 
   _itemImages: []
   isKnockback: 0
+  shootTakeDelay: 0.1
+  allowBallAngle: 60
 --- !u!114 &6452156509588170744
 MonoBehaviour:
   m_ObjectHideFlags: 0
