@@ -38,6 +38,7 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
     {
         print($"checked Cutscene {startCutscene.IsProgress()}");
         startCutscene.Run();
+        IngameUI.Start();
     }
 
     public void CutsceneFinish()
