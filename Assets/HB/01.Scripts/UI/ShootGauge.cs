@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ public class ShootGauge : MonoBehaviour
 
     private bool _isShooting = false;
     private float _parentWidth;
+    private bool _isBlind = false;
 
     private Sequence _colorSequence;
     private Tweener _scaleTweener;
@@ -27,6 +29,7 @@ public class ShootGauge : MonoBehaviour
 
         _player.ShootingStartEvent += HandleShootingStart;
         _player.ShootingEndEvent += HandleShootingEnd;
+        _player.BlindEvent += HandleBlindSkill;
 
         _canvasGroup.alpha = 0;
         _fillImage.color = new Color(1, 0, 0);
@@ -34,12 +37,10 @@ public class ShootGauge : MonoBehaviour
 
     private void Update()
     {
-
     }
 
     private void LateUpdate()
     {
-        // Canvas가 카메라를 바라보도록 회전
         transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward,
                          Camera.main.transform.rotation * Vector3.up);
     }
@@ -54,11 +55,17 @@ public class ShootGauge : MonoBehaviour
         // _canvasGroup.alpha = 1;
         _fadeTweener = _canvasGroup.DOFade(1, 0.3f);
 
-
-        // _scaleTweener = _fill.DOAnchorMax(new Vector2(0, _fill.offsetMax.y), 5).SetEase(Ease.Linear);
-        _scaleTweener = DOTween.To(() =>  _fill.offsetMax.x, (value) => {
-            _fill.offsetMax = new Vector2(value, _fill.offsetMax.y);
-        }, 0, 5).SetEase(Ease.Linear);
+        if (_isBlind)
+        {
+            _fillImage.color = Color.black;
+            _fill.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            _scaleTweener = DOTween.To(() =>  _fill.offsetMax.x, (value) => {
+                _fill.offsetMax = new Vector2(value, _fill.offsetMax.y);
+            }, 0, 5).SetEase(Ease.Linear);
+        }
     }
 
     private void HandleShootingEnd()
@@ -75,6 +82,23 @@ public class ShootGauge : MonoBehaviour
 
         _fadeTweener = _canvasGroup.DOFade(0, 0.8f);
         // _fill.localScale = new Vector3(0, 1, 1);ssss
+    }
+
+    private void HandleBlindSkill(float skillTime)
+    {
+        StartCoroutine(BlindSkill(skillTime));
+    }
+
+    private IEnumerator BlindSkill(float skillTime)
+    {
+        SetSpecialMode(true);
+        yield return new WaitForSeconds(skillTime);
+        SetSpecialMode(false);
+    }
+
+    public void SetSpecialMode(bool isSpecial)
+    {
+        _isBlind = isSpecial;
     }
 
     private void OnDestroy()
