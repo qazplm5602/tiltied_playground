@@ -433,6 +433,7 @@ GameObject:
   - component: {fileID: 3972478590612555266}
   - component: {fileID: 4916211609596440531}
   - component: {fileID: 6420708033045843079}
+  - component: {fileID: 803747465248964120}
   m_Layer: 5
   m_Name: ControllerBox
   m_TagString: Untagged
@@ -503,6 +504,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.54
+--- !u!114 &803747465248964120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5369753315222552000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45636b991211cfa4cae459cf8d4ee3df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlName: {fileID: 5776930369510673542}
+  findBtn: {fileID: 5920898903875553199}
+  teamBorder: {fileID: 4392557699132536820}
+  teamBox: {fileID: 7916762806486354386}
+  teamText: {fileID: 953783687040627225}
 --- !u!1 &5974892475630669497
 GameObject:
   m_ObjectHideFlags: 0
