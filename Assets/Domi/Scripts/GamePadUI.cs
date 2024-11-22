@@ -42,7 +42,7 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
 
     private void Start() {
         ///////////////////// TEST
-        Open(); // 이거 테스트
+        // Open(); // 이거 테스트
         ///////////////////// TEST END
     }
 
@@ -119,18 +119,38 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
     }
 
     private void HandleDeviceAdd(InputDevice device) {
-        CreateDeviceBox(device);
         CheckPlayAllow();
+
+        if (isOpen) { // 그냥 ui 업뎃
+            CreateDeviceBox(device);
+            return;
+        }
+
+        if (!requireOpen) return; // 자동으로 열 필요 없는뎅
+
+        // 플레이 못하는 상태
+        if (!allowPlay)
+            Open(); // 설정해라.. ㅅㄱ
     }
 
     private void HandleDeviceRemove(InputDevice device, PlayerControlSO control) {
-        GamePadBoxUI box = controls.Find(v => v.GetDevice() == device);
-        if (box == null) return; // 엥??
-        
-        controls.Remove(box);
-        Destroy(box.gameObject);
+        if (control)
+            gamePadSys.RemoveControlDevice(control);
 
-        CheckPlayAllow();
+        if (isOpen) {
+            CheckPlayAllow();
+            GamePadBoxUI box = controls.Find(v => v.GetDevice() == device);
+            if (box == null) return; // 엥??
+            
+            controls.Remove(box);
+            Destroy(box.gameObject);
+            return;
+        }
+
+        if (!requireOpen) return; // 헤헤
+        Open(); // 설정해라
+
+        // 패드 다 없으면 키보드로 바꿈
     }
 
     private void CheckPlayAllow() {

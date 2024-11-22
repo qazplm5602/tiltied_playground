@@ -32,6 +32,11 @@ public class GamePadSystem : ScriptableObject
         return null;
     }
 
+    public void RemoveControlDevice(PlayerControlSO control) {
+        devices.Remove(control);
+        RequestSetDevice(control);
+    }
+
     public void SetDeviceControl(PlayerControlSO control, InputDevice device) {
         devices[control] = device;
         
