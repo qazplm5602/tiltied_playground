@@ -45,13 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData: {fileID: 11400000, guid: f0cf3163827c7b747bfd5d931642a1e8, type: 2}
-  _wallPrefab: {fileID: 617599436493139413, guid: e716a201c57059d409e854c4e3582629, type: 3}
+  _wallPrefab: {fileID: -2355655582543248928, guid: e716a201c57059d409e854c4e3582629, type: 3}
   _buildEffect: {fileID: 7420174577631144229, guid: d2cb015ced95cdd43a42d91351194b0d, type: 3}
-  _wallBuildTime: 1
-  _wallDurationTime: 10
-  _wallBuildDistance: 8
-  _buildSound: {fileID: 11400000, guid: 0d8e409c24ce59e4794c2e1019860333, type: 2}
-  _destroySound: {fileID: 11400000, guid: 0a023391fb28fd8418b7b66d8e0d504a, type: 2}
   _groundMask:
     serializedVersion: 2
     m_Bits: 768
+  _wallBuildDistance: 8
+  wallBuildTime: 1
+  wallDurationTime: 10
+  buildSound: {fileID: 11400000, guid: 0d8e409c24ce59e4794c2e1019860333, type: 2}
+  destroySound: {fileID: 11400000, guid: 0a023391fb28fd8418b7b66d8e0d504a, type: 2}
