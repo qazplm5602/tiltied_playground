@@ -29,11 +29,13 @@ public class Player : MonoBehaviour
     private bool _prevShootKeyDown = false;
     private float _prevShootKeyDownTime = 0.0f;
     private float shootTime;
+    private Coroutine shootWait;
 
     private SkillBase _currentSkill;
     public SkillBase CurrentSkill => _currentSkill;
-    public event Action ShootingStartEvent;
-    public event Action ShootingEndEvent;
+    public event Action ShootingStartEvent; // 슈팅 시작
+    public event Action ShootingEndEvent; // 슈팅 끝 (찼거나 아니면 취소 되었거나)
+    public event Action ShootingRunEvent; // 진짜 공 참
     public event Action AttackEvent; // 공 없이 슈팅 누른 경우
     public event Action<float> BlindEvent; // 블라인드 스킬을 맞은 경우
 
@@ -110,20 +112,18 @@ public class Player : MonoBehaviour
             {
                 TryInterect();
 
-                StartCoroutine(ShootTimer());
+                shootWait = StartCoroutine(ShootTimer());
             }
-            else
+            else {
                 Shooting();
+                ShootStop(false);
+            }
         } 
         else
         {
             if (isPerformed)
             { // 축구공은 안가지고 있는데 슈팅 누름
                 AttackEvent?.Invoke();
-            }
-            else
-            {
-                ShootingEndEvent?.Invoke();
             }
         }
     }
@@ -148,13 +148,25 @@ public class Player : MonoBehaviour
         _prevShootKeyDown = false;
         shootTime = Time.time;
 
+        ShootingRunEvent?.Invoke();
         ShootingEndEvent?.Invoke();
+    }
+
+    private void ShootStop(bool callEvent = true) {
+        if (shootWait == null) return;
+        StopCoroutine(shootWait);
+
+        _prevShootKeyDown = false;
+
+        if (callEvent)
+            ShootingEndEvent?.Invoke();
     }
 
     private IEnumerator ShootTimer()
     {
         yield return new WaitForSeconds(5);
 
+        shootWait = null;
         Shooting();
     }
 
@@ -181,6 +193,7 @@ public class Player : MonoBehaviour
     }
     // 강제적으로 공 뺏음 ㅅㄱ
     public void ForceReleseBall() {
+        ShootStop();
         this.Release(_ballController);
     }
 
