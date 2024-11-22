@@ -25,7 +25,7 @@ public class PlayerAnimator : MonoBehaviour
     private void Awake() {
         animHashes = new();
         player = GetComponent<Player>();
-        player.ShootingEndEvent += Kick;
+        player.ShootingRunEvent += Kick;
 
         foreach (PlayerAnimState item in Enum.GetValues(typeof(PlayerAnimState)))
         {
@@ -35,7 +35,7 @@ public class PlayerAnimator : MonoBehaviour
     }
 
     private void OnDestroy() {
-        player.ShootingEndEvent -= Kick;
+        player.ShootingRunEvent -= Kick;
     }
 
     private void ChangeState(PlayerAnimState state) {
