@@ -1021,6 +1021,7 @@ MonoBehaviour:
   _itemImages: []
   isKnockback: 0
   shootTakeDelay: 0.1
+  _shootingSound: {fileID: 11400000, guid: 75957826b2851ca4d8799c2d15f79fcc, type: 2}
   allowBallAngle: 60
 --- !u!114 &2527935785474447587
 MonoBehaviour:

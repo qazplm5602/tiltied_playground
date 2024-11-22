@@ -1,7 +1,6 @@
 public enum StatType
 {
     DefaultSpeed = 0,
-    RunSpeed,
-    GoalDecision,
+    DribbleSpeed,
     ShootPower
 }
