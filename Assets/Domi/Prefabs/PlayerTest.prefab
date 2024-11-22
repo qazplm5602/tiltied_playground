@@ -281,6 +281,9 @@ MonoBehaviour:
   _itemIDs: 
   _itemImages: []
   isKnockback: 0
+  shootTakeDelay: 0.1
+  _shootingSound: {fileID: 11400000, guid: 75957826b2851ca4d8799c2d15f79fcc, type: 2}
+  allowBallAngle: 60
 --- !u!54 &1075929220722661098
 Rigidbody:
   m_ObjectHideFlags: 0
