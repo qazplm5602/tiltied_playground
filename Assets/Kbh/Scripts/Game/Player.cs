@@ -85,8 +85,10 @@ public class Player : MonoBehaviour
 
 
 
+        int speedValue = HasBall() ? PlayerStatSO.dribbleSpeed.GetValue() : PlayerStatSO.defaultSpeed.GetValue();
+
         transform.localPosition
-           += moveDir * PlayerStatSO.defaultSpeed.GetValue() * Time.fixedDeltaTime;
+           += moveDir * speedValue * Time.fixedDeltaTime;
 
         transform.localRotation
            = Quaternion.Lerp(transform.localRotation,
