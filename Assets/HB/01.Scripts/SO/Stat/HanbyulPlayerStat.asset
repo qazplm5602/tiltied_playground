@@ -18,7 +18,7 @@ MonoBehaviour:
   height: 175
   weight: 65
   defaultSpeed:
-    _baseValue: 20
+    _baseValue: 17
     modifiers: 
   dribbleSpeed:
     _baseValue: 14
