@@ -18,13 +18,10 @@ MonoBehaviour:
   height: 160
   weight: 55
   defaultSpeed:
-    _baseValue: 5
+    _baseValue: 15
     modifiers: 
-  runSpeed:
-    _baseValue: 8
-    modifiers: 
-  goalDecision:
-    _baseValue: 20
+  dribbleSpeed:
+    _baseValue: 10
     modifiers: 
   shootPower:
     _baseValue: 4
