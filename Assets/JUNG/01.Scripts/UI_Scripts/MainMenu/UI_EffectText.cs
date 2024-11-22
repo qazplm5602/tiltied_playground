@@ -121,13 +121,7 @@ public class UI_EffectText : MonoBehaviour
         _bgColor2 = _bgImg.transform.GetChild(1).GetComponent<Image>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A) && _isType == false)
-        {
-            StartEffect("GOAL!", Color.blue);
-        }
-    }
+    
     public void StartEffect(string text, Color overrideEndColor)
     {
         _bgColor1.color = overrideEndColor;
@@ -168,7 +162,7 @@ public class UI_EffectText : MonoBehaviour
     private IEnumerator TypeCoroutine(Vector3[] vertices, Color32[] colors, List<TypeChar> list)
     {
         _bgImg.rectTransform.DOKill();
-        _bgImg.rectTransform.localPosition = new Vector3(1990, 350, 0);
+        _bgImg.rectTransform.localPosition = new Vector3(2500, 300, 0);
 
         bool complete = false;
         int cnt = 0;
@@ -201,7 +195,7 @@ public class UI_EffectText : MonoBehaviour
         // 왼쪽으로 사라지는 애니메이션
         complete = false;
         cnt = 0;
-        _bgImg.rectTransform.DOLocalMove(new Vector3(-1990, -350, 0), .7f).SetEase(Ease.InCubic);
+        _bgImg.rectTransform.DOLocalMove(new Vector3(-2500, -300, 0), .7f).SetEase(Ease.InCubic);
 
         while (!complete)
         {
