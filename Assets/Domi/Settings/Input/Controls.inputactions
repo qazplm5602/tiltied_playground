@@ -688,6 +688,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "GamePadSetUI",
+            "id": "5e8a6e9a-41c3-4cbc-8e15-8e364ce1fd27",
+            "actions": [
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "07484381-4958-4d80-bce9-11eadd8b01a3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skip",
+                    "type": "Button",
+                    "id": "aec8750d-0c47-4769-ba99-2f3f9e167c2d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7e2bd1b5-9707-4678-aa66-d0721432121f",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf50cd20-dfe7-432b-85cf-88644735c1be",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

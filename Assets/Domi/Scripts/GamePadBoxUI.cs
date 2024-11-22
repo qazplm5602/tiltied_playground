@@ -14,6 +14,7 @@ public class GamePadBoxUI : MonoBehaviour
 
     public BallAreaType? SelectTeam { get; private set; }
     private Gamepad myDevice;
+    public event System.Action OnChangeTeam;
 
     public void Init(InputDevice control) {
         myDevice = (Gamepad)control;
@@ -58,7 +59,11 @@ public class GamePadBoxUI : MonoBehaviour
         teamBorder.color = teamBox.color = color;
         teamText.text = teamT;
         SelectTeam = team;
+
+        OnChangeTeam?.Invoke();
     }
+
+    public InputDevice GetDevice() => myDevice;
 
     private bool runMoter = false;
     private void HandleFind() {

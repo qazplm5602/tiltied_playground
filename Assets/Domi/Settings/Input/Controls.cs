@@ -710,6 +710,54 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GamePadSetUI"",
+            ""id"": ""5e8a6e9a-41c3-4cbc-8e15-8e364ce1fd27"",
+            ""actions"": [
+                {
+                    ""name"": ""Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""07484381-4958-4d80-bce9-11eadd8b01a3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skip"",
+                    ""type"": ""Button"",
+                    ""id"": ""aec8750d-0c47-4769-ba99-2f3f9e167c2d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7e2bd1b5-9707-4678-aa66-d0721432121f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf50cd20-dfe7-432b-85cf-88644735c1be"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -795,12 +843,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // GamePadSetUI
+        m_GamePadSetUI = asset.FindActionMap("GamePadSetUI", throwIfNotFound: true);
+        m_GamePadSetUI_Start = m_GamePadSetUI.FindAction("Start", throwIfNotFound: true);
+        m_GamePadSetUI_Skip = m_GamePadSetUI.FindAction("Skip", throwIfNotFound: true);
     }
 
     ~@Controls()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Controls.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, Controls.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_GamePadSetUI.enabled, "This will cause a leak and performance issues, Controls.GamePadSetUI.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1062,6 +1115,60 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // GamePadSetUI
+    private readonly InputActionMap m_GamePadSetUI;
+    private List<IGamePadSetUIActions> m_GamePadSetUIActionsCallbackInterfaces = new List<IGamePadSetUIActions>();
+    private readonly InputAction m_GamePadSetUI_Start;
+    private readonly InputAction m_GamePadSetUI_Skip;
+    public struct GamePadSetUIActions
+    {
+        private @Controls m_Wrapper;
+        public GamePadSetUIActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Start => m_Wrapper.m_GamePadSetUI_Start;
+        public InputAction @Skip => m_Wrapper.m_GamePadSetUI_Skip;
+        public InputActionMap Get() { return m_Wrapper.m_GamePadSetUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GamePadSetUIActions set) { return set.Get(); }
+        public void AddCallbacks(IGamePadSetUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GamePadSetUIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GamePadSetUIActionsCallbackInterfaces.Add(instance);
+            @Start.started += instance.OnStart;
+            @Start.performed += instance.OnStart;
+            @Start.canceled += instance.OnStart;
+            @Skip.started += instance.OnSkip;
+            @Skip.performed += instance.OnSkip;
+            @Skip.canceled += instance.OnSkip;
+        }
+
+        private void UnregisterCallbacks(IGamePadSetUIActions instance)
+        {
+            @Start.started -= instance.OnStart;
+            @Start.performed -= instance.OnStart;
+            @Start.canceled -= instance.OnStart;
+            @Skip.started -= instance.OnSkip;
+            @Skip.performed -= instance.OnSkip;
+            @Skip.canceled -= instance.OnSkip;
+        }
+
+        public void RemoveCallbacks(IGamePadSetUIActions instance)
+        {
+            if (m_Wrapper.m_GamePadSetUIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGamePadSetUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GamePadSetUIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GamePadSetUIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GamePadSetUIActions @GamePadSetUI => new GamePadSetUIActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1128,5 +1235,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnScrollWheel(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IGamePadSetUIActions
+    {
+        void OnStart(InputAction.CallbackContext context);
+        void OnSkip(InputAction.CallbackContext context);
     }
 }

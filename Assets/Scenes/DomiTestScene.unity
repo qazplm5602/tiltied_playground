@@ -1925,6 +1925,7 @@ MonoBehaviour:
   requireOpen: 1
   controlListTrm: {fileID: 1460513057}
   controlBoxPrefab: {fileID: 803747465248964120, guid: d2a71a0fc70ddf84d995d8d1e7108ebd, type: 3}
+  errorText: {fileID: 1944400559}
 --- !u!1 &1262305912 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8655036131094282645, guid: e81cd3559aeb1f74aa4cb50600ec4c94, type: 3}
