@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
         set { _isMeditation = value; }
     }
 
+    [SerializeField] private SoundSO _shootingSound;
+
     private void Awake()
     {
         PlayerStatSO = Instantiate(PlayerStatSO);
@@ -146,6 +148,7 @@ public class Player : MonoBehaviour
 
         _ballController.PushBall((transform.forward + transform.up).normalized * currentGauge * PlayerStatSO.shootPower.GetValue() * 30);
         this.Release(_ballController);
+        SoundManager.Instance.PlaySFX(Vector3.zero, _shootingSound);
 
         _prevShootKeyDown = false;
         shootTime = Time.time;
