@@ -22,4 +22,12 @@ public class TeamControlsSO : ScriptableObject
         controls.TryGetValue(team, out var control);
         return control;
     }
+
+    public BallAreaType? GetTeamByControl(PlayerControlSO control) {
+        foreach (var item in controls)
+            if (item.Value == control)
+                return item.Key;
+                
+        return null;
+    }
 }

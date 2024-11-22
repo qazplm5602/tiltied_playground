@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,11 +13,18 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
     [SerializeField] private GamePadBoxUI controlBoxPrefab;
     [SerializeField] private TextMeshProUGUI errorText;
     [SerializeField] private TeamControlsSO teamControls;
+    [SerializeField] private float animDuration = 0.3f;
 
     private List<GamePadBoxUI> controls;
     private Controls globalControls;
     private bool isOpen = false;
     private bool allowPlay = false;
+
+    private Canvas mainScreen;
+    private RectTransform panel;
+    private CanvasGroup panelGroup;
+    
+    private Sequence animSequence;
 
     private void Awake() {
         controls = new();
@@ -26,6 +34,10 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
         // 뉴인풋
         globalControls = new();
         globalControls.GamePadSetUI.SetCallbacks(this);
+
+        mainScreen = GetComponentInParent<Canvas>();
+        panel = transform.GetChild(0) as RectTransform;
+        panelGroup = panel.GetComponent<CanvasGroup>();
     }
 
     private void Start() {
@@ -47,6 +59,22 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
 
         foreach (var item in Gamepad.all)
             CreateDeviceBox(item);
+
+        CheckPlayAllow();
+
+        // open 애니메이션
+        animSequence?.Kill(true);
+        mainScreen.sortingOrder = 1; // 우선순위
+
+        panelGroup.alpha = 0;
+        panelGroup.blocksRaycasts = true;
+        panelGroup.interactable = true;
+
+        panel.localScale = Vector3.one * 0.9f;
+
+        animSequence = DOTween.Sequence();
+        animSequence.Append(panelGroup.DOFade(1, animDuration));
+        animSequence.Join(panel.DOScale(Vector3.one, animDuration));
     }
 
     public void Close() {
@@ -57,6 +85,20 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
             Destroy(item.gameObject);
 
         controls.Clear();
+
+        // 닫는거 애니메이션
+        animSequence?.Kill(true);
+
+        panelGroup.blocksRaycasts = false;
+        panelGroup.interactable = false;
+
+        animSequence = DOTween.Sequence();
+        animSequence.Append(panelGroup.DOFade(0, animDuration));
+        animSequence.Join(panel.DOScale(Vector3.one *0.9f, animDuration));
+        
+        animSequence.OnComplete(() => {
+            mainScreen.sortingOrder = -1;
+        });
     }
 
     private void CreateDeviceBox(InputDevice device) {
@@ -65,7 +107,13 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
 
         box.OnChangeTeam += CheckPlayAllow; // 팀 바뀌면 체크 ㄱㄱ
 
-        // PlayerControlSO control = 
+        PlayerControlSO control = gamePadSys.GetControlByDevice(device);
+        if (control) { // 어 머야 팀이 있네
+            BallAreaType? team = teamControls.GetTeamByControl(control);
+            if (team == null) return; // 뭐지 사기치는건가
+            
+            box.SetTeam(team.Value);
+        }
         
         controls.Add(box);
     }
