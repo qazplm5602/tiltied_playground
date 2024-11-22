@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
         transform.localRotation
            = Quaternion.Lerp(transform.localRotation,
-           Quaternion.Euler(0, Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg, 0), 0.1f);
+           Quaternion.Euler(0, Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg, 0), 0.3f);
     }
 
     private void OnDestroy()
