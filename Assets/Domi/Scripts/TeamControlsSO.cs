@@ -11,7 +11,7 @@ public class TeamControlsSO : ScriptableObject
     }
 
     [SerializeField] private Value[] values;
-    private Dictionary<BallAreaType, PlayerControlSO> controls;
+    private Dictionary<BallAreaType, PlayerControlSO> controls = new();
 
     private void OnEnable() {
         foreach (var item in values)

@@ -14,6 +14,16 @@ public class GamePadSystem : ScriptableObject
         return data;
     }
 
+    public static void RequestSetDevice(PlayerControlSO control) {
+        List<InputDevice> results = new() { Keyboard.current }; // 기본값 키보드
+        InputDevice device = GetDeviceByControl(control);
+
+        if (device != null)
+            results.Add(device);
+
+        control.SetDevices(results);    
+    }
+
     public PlayerControlSO GetControlByDevice(InputDevice device) {
         foreach (var item in devices)
             if (item.Value == device)
@@ -24,13 +34,17 @@ public class GamePadSystem : ScriptableObject
 
     public void SetDeviceControl(PlayerControlSO control, InputDevice device) {
         devices[control] = device;
+        
         // 컨트롤러 한테 디바이스 적용 해야함
+        // control.SetDevices(new () { Keyboard.current, device }); // 그냥 키보드도 되게 함 ㅁㄴㅇㄹ
+        RequestSetDevice(control);
     }
 
     public void ClearAll() {
         foreach (var item in devices)
         {
             // 모든 contorller 한테 초기화 해야함
+            item.Key.SetDevices(new() { Keyboard.current }); // 키보드만 ㄱㄴ
         }
 
         devices.Clear();

@@ -1926,6 +1926,7 @@ MonoBehaviour:
   controlListTrm: {fileID: 1460513057}
   controlBoxPrefab: {fileID: 803747465248964120, guid: d2a71a0fc70ddf84d995d8d1e7108ebd, type: 3}
   errorText: {fileID: 1944400559}
+  teamControls: {fileID: 11400000, guid: 10310dc9380bc314fafb9c5239cee357, type: 2}
 --- !u!1 &1262305912 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8655036131094282645, guid: e81cd3559aeb1f74aa4cb50600ec4c94, type: 3}
@@ -2895,7 +2896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 935509706256349284, guid: 3008505a724bbff459ebf52b857e6124, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3469270460193836355, guid: 3008505a724bbff459ebf52b857e6124, type: 3}
       propertyPath: <PlayerControlSO>k__BackingField

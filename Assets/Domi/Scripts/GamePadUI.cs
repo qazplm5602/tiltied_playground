@@ -11,6 +11,7 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
     [SerializeField] private Transform controlListTrm;
     [SerializeField] private GamePadBoxUI controlBoxPrefab;
     [SerializeField] private TextMeshProUGUI errorText;
+    [SerializeField] private TeamControlsSO teamControls;
 
     private List<GamePadBoxUI> controls;
     private Controls globalControls;
@@ -44,9 +45,6 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
         isOpen = true;
         globalControls.GamePadSetUI.Enable();
 
-        foreach (var item in controls)
-            Destroy(item.gameObject);
-
         foreach (var item in Gamepad.all)
             CreateDeviceBox(item);
     }
@@ -54,6 +52,11 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
     public void Close() {
         isOpen = false;
         globalControls.GamePadSetUI.Disable();
+
+        foreach (var item in controls)
+            Destroy(item.gameObject);
+
+        controls.Clear();
     }
 
     private void CreateDeviceBox(InputDevice device) {
@@ -138,7 +141,19 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
     {
         if (!context.performed || !allowPlay) return; // 플레이 못함 ㅅㄱ
 
-        
+        gamePadSys.ClearAll(); // 전부 초기화
+        controls.ForEach(v => {
+            if (v.SelectTeam == null) return;
+
+            PlayerControlSO playerControl = teamControls.GetControlByTeam(v.SelectTeam.Value);
+            if (playerControl == null) {
+                Debug.LogError($"Not Found Player Control {v.SelectTeam.Value} team."); // 뭐해 ㅡㅡ;
+                return;
+            }
+
+            gamePadSys.SetDeviceControl(playerControl, v.GetDevice());
+        });
+
         Close();
         print("OnStart");
     }
