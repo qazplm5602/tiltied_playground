@@ -50,6 +50,8 @@ MonoBehaviour:
   _wallBuildTime: 1
   _wallDurationTime: 10
   _wallBuildDistance: 8
+  _buildSound: {fileID: 11400000, guid: 0d8e409c24ce59e4794c2e1019860333, type: 2}
+  _destroySound: {fileID: 11400000, guid: 0a023391fb28fd8418b7b66d8e0d504a, type: 2}
   _groundMask:
     serializedVersion: 2
     m_Bits: 768
