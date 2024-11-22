@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class GamePadSystem : ScriptableObject
 {
     private static Dictionary<PlayerControlSO, InputDevice> devices = new();
+    public static bool UseGamepad => devices.Count > 0;
     public event System.Action<InputDevice> OnAddDevice;
     public event System.Action<InputDevice, PlayerControlSO> OnRemoveDevice;
 

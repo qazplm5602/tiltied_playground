@@ -4,6 +4,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
 {
@@ -14,6 +15,9 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
     [SerializeField] private TextMeshProUGUI errorText;
     [SerializeField] private TeamControlsSO teamControls;
     [SerializeField] private float animDuration = 0.3f;
+    [SerializeField] private Sprite skipPad;
+    [SerializeField] private Sprite skipKey;
+    [SerializeField] private Image skipImage;
 
     private List<GamePadBoxUI> controls;
     private Controls globalControls;
@@ -61,6 +65,7 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
             CreateDeviceBox(item);
 
         CheckPlayAllow();
+        CheckOnlyKeyboard();
 
         // open 애니메이션
         animSequence?.Kill(true);
@@ -122,6 +127,7 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
         CheckPlayAllow();
 
         if (isOpen) { // 그냥 ui 업뎃
+            CheckOnlyKeyboard();
             CreateDeviceBox(device);
             return;
         }
@@ -134,11 +140,15 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
     }
 
     private void HandleDeviceRemove(InputDevice device, PlayerControlSO control) {
+        bool useGamepad = GamePadSystem.UseGamepad;
+
         if (control)
             gamePadSys.RemoveControlDevice(control);
 
+        CheckPlayAllow();
+
         if (isOpen) {
-            CheckPlayAllow();
+            CheckOnlyKeyboard();
             GamePadBoxUI box = controls.Find(v => v.GetDevice() == device);
             if (box == null) return; // 엥??
             
@@ -147,10 +157,10 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
             return;
         }
 
-        if (!requireOpen) return; // 헤헤
-        Open(); // 설정해라
+        if (!requireOpen || !useGamepad) return; // 헤헤
 
-        // 패드 다 없으면 키보드로 바꿈
+        if (!allowPlay) // 못함 ㅅㄱㄱㄱ
+            Open(); // 설정해라
     }
 
     private void CheckPlayAllow() {
@@ -203,6 +213,10 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
 
         errorText.text = string.Empty;
         allowPlay = true;
+    }
+
+    private void CheckOnlyKeyboard() {
+        skipImage.sprite = Gamepad.all.Count > 0 ? skipPad : skipKey;
     }
 
     public void OnStart(InputAction.CallbackContext context)
