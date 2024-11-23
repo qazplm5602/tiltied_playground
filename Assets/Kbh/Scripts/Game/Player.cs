@@ -169,7 +169,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator ShootTimer()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
 
         shootWait = null;
         Shooting();

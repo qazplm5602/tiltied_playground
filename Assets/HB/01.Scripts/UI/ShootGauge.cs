@@ -64,7 +64,7 @@ public class ShootGauge : MonoBehaviour
         {
             _scaleTweener = DOTween.To(() =>  _fill.offsetMax.x, (value) => {
                 _fill.offsetMax = new Vector2(value, _fill.offsetMax.y);
-            }, 0, 5).SetEase(Ease.Linear);
+            }, 0, 4).SetEase(Ease.Linear);
         }
     }
 
