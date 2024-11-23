@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
         Vector2 inputDir = -PlayerControlSO.GetMoveDirection(); // 카메라가 반대라서 인풋도 반대임 ㅋㅋ
         if (inputDir.x == 0 && inputDir.y == 0) return;
 
-        inputDir.Normalize();
+        // inputDir.Normalize();
         Vector3 moveDir = new(inputDir.x, 0, inputDir.y);
 
 

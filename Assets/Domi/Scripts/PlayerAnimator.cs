@@ -61,7 +61,7 @@ public class PlayerAnimator : MonoBehaviour
         if (currentState != PlayerAnimState.Idle && currentState != PlayerAnimState.Walk) return;
 
         Vector2 inputDir = player.PlayerControlSO.GetMoveDirection();
-        bool running = inputDir.sqrMagnitude > 0.1f;
+        bool running = !Mathf.Approximately(inputDir.sqrMagnitude, 0.0f);
         
         if (running && currentState == PlayerAnimState.Idle) {
             ChangeState(PlayerAnimState.Walk);

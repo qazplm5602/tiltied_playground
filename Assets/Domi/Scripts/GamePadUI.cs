@@ -57,6 +57,7 @@ public class GamePadUI : MonoBehaviour, Controls.IGamePadSetUIActions
         globalControls.GamePadSetUI.Disable();
     }
 
+    [ContextMenu("Open")]
     public void Open() {
         isOpen = true;
         globalControls.GamePadSetUI.Enable();
