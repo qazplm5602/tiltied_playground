@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoSingleton<SoundManager>
 {
     [SerializeField] private PoolManagerSO _poolManager;
+    [SerializeField] private AudioMixer _audioMixer;
     
     private SoundPlayer _currentBGMPlayer = null;
     
@@ -26,5 +28,16 @@ public class SoundManager : MonoSingleton<SoundManager>
         player.PlaySound(clip);
         
         return player;
+    }
+
+    public void SetAudioValue(string audioType, float value)
+    {
+        _audioMixer.SetFloat(audioType, Mathf.Log10(value) * 20);
+    }
+    
+    public float GetAudioValue(string audioType)
+    {
+        _audioMixer.GetFloat(audioType, out float v);
+        return v;
     }
 }
