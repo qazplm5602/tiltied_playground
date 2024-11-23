@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 759fce6bc06e37443835779f3615a542, type: 3}
-  m_Name: BuildingSoundSO
+  m_Name: WallDestroySoundSO
   m_EditorClassIdentifier: 
   audioType: 0
-  clip: {fileID: 8300000, guid: 2766ea743a979f04082570070c513647, type: 3}
+  clip: {fileID: 8300000, guid: 5c4567ddccafce34080d111f87c77227, type: 3}
   isLoop: 0
   isRandomizePitch: 0
   is3DSound: 0
   randomPitchModifier: 0.1
-  volume: 0.1
+  volume: 0.3
   pitch: 1
-  startTime: 0
+  startTime: 1.5

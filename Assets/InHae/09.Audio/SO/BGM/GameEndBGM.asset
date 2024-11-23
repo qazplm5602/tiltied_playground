@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameEndBGM
   m_EditorClassIdentifier: 
   audioType: 1
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 576a88a1a3d2ed945bd3d745b1ee6694, type: 3}
   isLoop: 1
   isRandomizePitch: 0
   is3DSound: 0
