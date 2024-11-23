@@ -45,6 +45,7 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
     public override void GameStart()
     {
         print($"checked Cutscene {startCutscene.IsProgress()}");
+        BallControlBundle.SetInit(false);
         startCutscene.Run();
         IngameUI.Start();
     }
@@ -117,8 +118,14 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
         timer.OnFinishTime -= GameStop;
         IsPlay = false;
 
-        WhistleSound whistle = ManagerManager.GetManager<WhistleSound>();
-
+        SoundPlayHelper soundPlayHelper = ManagerManager.GetManager<SoundPlayHelper>();
+        
+        WhistleSound whistle = soundPlayHelper.GetHelper<WhistleSound>();
+        GameBGMs gameBGM = soundPlayHelper.GetHelper<GameBGMs>();
+        
+        if (gameBGM)
+            gameBGM.GameEndSound();
+        
         if (whistle) // 휘슬 시스템이 있당
             whistle.PlayEndSound();
 

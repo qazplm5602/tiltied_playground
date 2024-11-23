@@ -25,12 +25,12 @@ public abstract class EventMapBase : MonoBehaviour
         _ground = FindAnyObjectByType<Ground>();
         MapInit();
 
-        _ground._clearEvent += MapClear;
+        _ground.OnClearEvent += MapOnClear;
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
-        _ground._clearEvent -= MapClear;
+        _ground.OnClearEvent -= MapOnClear;
     }
 
     private void Update()
@@ -61,7 +61,7 @@ public abstract class EventMapBase : MonoBehaviour
         _randomEventTime = Random.Range(_mapSo.minEventTime, _mapSo.maxEventTime + 1);
     }
 
-    public abstract void MapClear();
+    public abstract void MapOnClear();
 
     private void MapEventEndCheck()
     {

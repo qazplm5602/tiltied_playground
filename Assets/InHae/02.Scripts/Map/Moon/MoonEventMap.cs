@@ -23,6 +23,12 @@ public class MoonEventMap : EventMapBase
         _moonStones.ForEach(x => x.gameObject.SetActive(false));
     }
 
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        Physics.gravity = _defaultGravity;
+    }
+
     protected override void MapEventStart()
     {
         base.MapEventStart();
@@ -48,10 +54,10 @@ public class MoonEventMap : EventMapBase
     protected override void MapEventStop()
     {
         base.MapEventStop();
-        MapClear();
+        MapOnClear();
     }
     
-    public override void MapClear()
+    public override void MapOnClear()
     {
         Physics.gravity = _defaultGravity;
         ManagerManager.GetManager<BallGoalSimulateManager>().SetGravity(1550);

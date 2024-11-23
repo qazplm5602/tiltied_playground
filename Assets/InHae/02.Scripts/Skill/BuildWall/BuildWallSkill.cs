@@ -26,7 +26,7 @@ public class BuildWallSkill : SkillBase
     private void OnDestroy()
     {
         if(_ground!=null)
-            _ground._clearEvent -= DestroyWall;
+            _ground.OnClearEvent -= DestroyWall;
     }
 
     public override void UseSkill()
@@ -44,7 +44,7 @@ public class BuildWallSkill : SkillBase
             if (_ground == null)
             {
                 _ground = hit.collider.GetComponentInParent<Ground>();
-                _ground._clearEvent += DestroyWall;
+                _ground.OnClearEvent += DestroyWall;
             }
             
             _wall = Instantiate(_wallPrefab, transform.position, Quaternion.LookRotation(transform.forward));

@@ -54,7 +54,8 @@ public class SoccerBall : MonoBehaviour
         }
     }
 
-    public Transform TakePlayerBall(Player ballOwner, BallControlBundle ballControl) {
+    public Transform TakePlayerBall(Player ballOwner, BallControlBundle ballControl)
+    {
         owner = ballOwner;
         ownerControl = ballControl;
 
