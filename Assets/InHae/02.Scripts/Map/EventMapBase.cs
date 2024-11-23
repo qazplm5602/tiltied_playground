@@ -28,7 +28,7 @@ public abstract class EventMapBase : MonoBehaviour
         _ground.OnClearEvent += MapOnClear;
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         _ground.OnClearEvent -= MapOnClear;
     }

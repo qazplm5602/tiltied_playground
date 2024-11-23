@@ -11,7 +11,6 @@ public class BallControlBundle : Bundle
    static private Player _ballOwner = null;
    static private Tween _ballMoveTween = null;
 
-
    private enum BallControlType
    {
       Player,
@@ -19,7 +18,6 @@ public class BallControlBundle : Bundle
    }
 
    [SerializeField] private BallControlType _ballControlType;
-   
 
    private static void Init()
    {
@@ -32,6 +30,7 @@ public class BallControlBundle : Bundle
    }
 
    public static Player GetBallOwner() => _ballOwner;
+   public static void SetInit(bool isInit) => _isInited = isInit; 
    public bool BallIsFree() => _ballOwner == null;
    public void PushBall(Vector3 force)
    {
@@ -102,5 +101,4 @@ public class BallControlBundle : Bundle
 
       return true;
    }
-
 }
