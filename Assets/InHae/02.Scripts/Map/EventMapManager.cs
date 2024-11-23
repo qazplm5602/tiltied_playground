@@ -52,7 +52,7 @@ public class EventMapManager : MonoSingleton<EventMapManager>
 
         if (_currentMap != null)
         {
-           _currentMap.MapClear(); 
+           _currentMap.MapOnClear(); 
             _currentMap.gameObject.SetActive(false);
         }
         

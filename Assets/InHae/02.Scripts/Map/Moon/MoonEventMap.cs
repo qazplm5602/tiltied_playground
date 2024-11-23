@@ -48,10 +48,10 @@ public class MoonEventMap : EventMapBase
     protected override void MapEventStop()
     {
         base.MapEventStop();
-        MapClear();
+        MapOnClear();
     }
     
-    public override void MapClear()
+    public override void MapOnClear()
     {
         Physics.gravity = _defaultGravity;
         ManagerManager.GetManager<BallGoalSimulateManager>().SetGravity(1550);
