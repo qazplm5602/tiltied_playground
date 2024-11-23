@@ -45,6 +45,7 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
     public override void GameStart()
     {
         print($"checked Cutscene {startCutscene.IsProgress()}");
+        BallControlBundle.SetInit(false);
         startCutscene.Run();
         IngameUI.Start();
     }
