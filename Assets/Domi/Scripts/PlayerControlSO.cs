@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,6 +27,7 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
         controls = new();
         controls.Player.SetCallbacks(this);
         LoadKeyBind();
+        GamePadSystem.RequestSetDevice(this); // 컨트롤러 설정 해줭
 
         controls.Player.Enable(); // 켜ㅓㅓ
     }
@@ -48,6 +50,11 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
 
         Debug.Log("Loaded Key Bind!");
         controls.LoadBindingOverridesFromJson(data.ToString());
+    }
+
+    public void SetDevices(List<InputDevice> devices) {
+        Debug.Log($"SetDevices {devices}");
+        controls.devices = devices.ToArray();
     }
 
     public Vector2 GetMoveDirection()

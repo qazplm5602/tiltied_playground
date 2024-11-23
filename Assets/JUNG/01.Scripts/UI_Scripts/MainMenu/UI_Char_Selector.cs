@@ -22,6 +22,8 @@ public class UI_Char_Selector : MonoBehaviour
 
     private int charIndex1 = 0;
     private int charIndex2 = 0;
+    private float charDelay1 = 0;
+    private float charDelay2 = 0;
 
     private bool isBothSelected = false;
 
@@ -65,15 +67,36 @@ public class UI_Char_Selector : MonoBehaviour
         {
             return;
         }
+
+        float lastTime = charDelay1;
+        charDelay1 = Time.time;
+
+        if (GamePadSystem.UseGamepad && (Time.time - lastTime) < 0.1f) {
+            return;
+        }
+
         Vector2 dir = _inputSO1.GetMoveDirection().normalized;
+        
+        // bool movePos = Mathf.Abs(dir.x) > 0.3f || Mathf.Abs(dir.y) > 0.3f;
+        // print($"test1: {test1} / movePos: {movePos} / {dir}");
+        // if (!test1) {
+        //     if (!movePos)
+        //         test1 = true;
+
+        //     return;
+        // }
+        // else if (movePos) {
+        //     test1 = false;
+        // }
+
+
         int tmpindex = charIndex1;
         Debug.Log(charIndex1);
-        charIndex1 += (int)dir.x;
-        charIndex1 += rightMaxIdx * -(int)dir.y;  //-1 이 들어오면..
+        charIndex1 += Mathf.RoundToInt(dir.x);
+        charIndex1 += rightMaxIdx * -Mathf.RoundToInt(dir.y);  //-1 이 들어오면..
         if (charIndex1 >= _characters.Length || charIndex1 < 0)
         {
             charIndex1 = tmpindex;
-
         }
         IsOnUp(1);
     }
@@ -98,10 +121,18 @@ public class UI_Char_Selector : MonoBehaviour
         {
             return;
         }
-        Vector2 dir = _inputSO2.GetMoveDirection();
+
+        Vector2 dir = _inputSO2.GetMoveDirection().normalized;
+        float lastTime = charDelay2;
+        charDelay2 = Time.time;
+
+        if (GamePadSystem.UseGamepad && (Time.time - lastTime) < 0.1f) {
+            return;
+        }
+
         int tmpindex = charIndex2;
-        charIndex2 += (int)dir.x;
-        charIndex2 += rightMaxIdx * -(int)dir.y;  //-1 이 들어오면..
+        charIndex2 += Mathf.RoundToInt(dir.x);
+        charIndex2 += rightMaxIdx * -Mathf.RoundToInt(dir.y);  //-1 이 들어오면..
         if (charIndex2 >= _characters.Length || charIndex2 < 0)
         {
             charIndex2 = tmpindex;
