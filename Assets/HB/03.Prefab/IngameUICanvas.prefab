@@ -1555,7 +1555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9764706, g: 0.32941177, b: 0.32941177, a: 1}
+  m_Color: {r: 0.29803923, g: 0.7882353, b: 0.99607843, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2307,10 +2307,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2403b8fcfe4483647a5a7bdd65522572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _redScoreText: {fileID: 1096163187500400793}
-  _blueScoreText: {fileID: 3301574791842076366}
-  _redNameText: {fileID: 7183936332711938185}
-  _blueNameText: {fileID: 5009966718141476947}
+  _redScoreText: {fileID: 3301574791842076366}
+  _blueScoreText: {fileID: 1096163187500400793}
+  _redNameText: {fileID: 5009966718141476947}
+  _blueNameText: {fileID: 7183936332711938185}
 --- !u!1 &5503225691106633850
 GameObject:
   m_ObjectHideFlags: 0
@@ -3148,7 +3148,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10:10
+  m_text: 00:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e3ce7089c311ccb4eb7837f568128324, type: 2}
   m_sharedMaterial: {fileID: -8972375449305323394, guid: e3ce7089c311ccb4eb7837f568128324, type: 2}
@@ -3414,7 +3414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29803923, g: 0.7882353, b: 0.99607843, a: 1}
+  m_Color: {r: 0.9764706, g: 0.32941177, b: 0.32941177, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
