@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private bool isKnockback = false;
     [SerializeField] private float shootTakeDelay = 0.1f; // 슈팅 한 후 공을 가져갈 수 있는 쿨탐
+    [SerializeField] private AnimationCurve ballRotateCurve; // 조금 움직였는데 너무 안움직이는 공 떄문에 함 ㅅㄱ
 
     TagHandle _ballTag;
     private bool HasBall() => BallControlBundle.GetBallOwner() == this;
@@ -98,7 +99,8 @@ public class Player : MonoBehaviour
 
         if (HasBall()) {
             Vector3 rotateDir = new Vector3(moveDir.z, 0, -moveDir.x);
-            _ballController.SetBallRotate(rotateDir.normalized, speedValue * 20);
+            Debug.Log($"{Mathf.Max(rotateDir.magnitude, 0.3f)} / {ballRotateCurve.Evaluate(rotateDir.magnitude)} / {speedValue * 20}");
+            _ballController.SetBallRotate(rotateDir.normalized, speedValue * 20 * ballRotateCurve.Evaluate(rotateDir.magnitude));
         }
 
         transform.localPosition
