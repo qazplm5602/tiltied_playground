@@ -4,7 +4,8 @@ using UnityEngine.TextCore.Text;
 
 public class UI_Map_Selector : MonoBehaviour
 {
-
+    [SerializeField] private MenuSoundHelper _soundHelper;
+    
     [SerializeField] private GameObject _charSelectUI;
 
     [SerializeField] private PlayerControlSO _inputSO1;
@@ -58,6 +59,8 @@ public class UI_Map_Selector : MonoBehaviour
 
     private void HandleMoveEvent2()
     {
+        _soundHelper.ChangeSound();
+        
         if (_maps[charIndex2].IsSelected2)
         {
             return;
@@ -82,6 +85,8 @@ public class UI_Map_Selector : MonoBehaviour
 
     private void HandleSelectCharacter2()
     {
+        _soundHelper.SelectSound();
+        
         selectSO2 = _maps[charIndex2].SelectMap2();
         if (_maps[charIndex1].IsSelected1 == true && _maps[charIndex2].IsSelected2 == true)
         {
@@ -91,6 +96,8 @@ public class UI_Map_Selector : MonoBehaviour
 
     private void HandleMoveEvent1()
     {
+        _soundHelper.ChangeSound();
+        
         if (_maps[charIndex1].IsSelected1)
         {
             return;
@@ -116,6 +123,8 @@ public class UI_Map_Selector : MonoBehaviour
     }
     private void HandleMapSelectEvent1()
     {
+        _soundHelper.SelectSound();
+        
         selectSO1 = _maps[charIndex1].SelectMap1();
         if (_maps[charIndex1].IsSelected1 == true && _maps[charIndex2].IsSelected2 == true)
         {

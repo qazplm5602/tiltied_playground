@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UI_Char_Selector : MonoBehaviour
 {
+    [SerializeField] private MenuSoundHelper _soundHelper;
+    
     [SerializeField] private Image _player1PosImg;
     [SerializeField] private Image _player2PosImg;
 
@@ -63,6 +65,8 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleMoveEvent1()
     {
+        _soundHelper.ChangeSound();
+        
         if (_characters[charIndex1].IsSelected1)
         {
             return;
@@ -103,6 +107,8 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleSelectCharacter1()
     {
+        _soundHelper.SelectSound();
+        
         if (isBothSelected)
             return;
         GameDataManager.Instance.player1_ObjData = _characters[charIndex1].SelectCharacter1();
@@ -117,6 +123,8 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleMoveEvent2()
     {
+        _soundHelper.ChangeSound();
+
         if (_characters[charIndex2].IsSelected2)
         {
             return;
@@ -142,6 +150,8 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleSelectCharacter2()
     {
+        _soundHelper.SelectSound();
+        
         if (isBothSelected)
             return;
         GameDataManager.Instance.player2_ObjData = _characters[charIndex2].SelectCharacter2();
