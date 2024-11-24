@@ -82,7 +82,12 @@ public class Player : MonoBehaviour
     private void Movement()
     {
         Vector2 inputDir = -PlayerControlSO.GetMoveDirection(); // 카메라가 반대라서 인풋도 반대임 ㅋㅋ
-        if (inputDir.x == 0 && inputDir.y == 0) return;
+        if (inputDir.x == 0 && inputDir.y == 0) {
+            if (HasBall()) // 공 안굴러 감
+                _ballController.SetBallRotate(Vector3.zero, 0);
+
+            return;
+        }
 
         // inputDir.Normalize();
         Vector3 moveDir = new(inputDir.x, 0, inputDir.y);
@@ -90,6 +95,11 @@ public class Player : MonoBehaviour
 
 
         int speedValue = HasBall() ? PlayerStatSO.dribbleSpeed.GetValue() : PlayerStatSO.defaultSpeed.GetValue();
+
+        if (HasBall()) {
+            Vector3 rotateDir = new Vector3(moveDir.z, 0, -moveDir.x);
+            _ballController.SetBallRotate(rotateDir.normalized, speedValue * 20);
+        }
 
         transform.localPosition
            += moveDir * speedValue * Time.fixedDeltaTime;
