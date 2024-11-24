@@ -37,9 +37,8 @@ public class UI_Settings : MonoBehaviour
 
     private void HandleCloseUIEvent()
     {
-        UI_Manager.Instance.UIOpenOrClose(transform.parent.gameObject, false, transform.parent.gameObject);
+        UI_Manager.Instance.UIOpenOrClose(gameObject, false, gameObject);
     }
-
     private void OnDisable()
     {
         _inputSO1.CloseUIEvent -= HandleCloseUIEvent;

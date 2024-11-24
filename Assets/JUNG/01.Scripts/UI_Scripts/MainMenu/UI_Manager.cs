@@ -40,7 +40,6 @@ public class UI_Manager : MonoBehaviour
     #endregion
 
 
-
     private bool isTweening = false;
 
 
