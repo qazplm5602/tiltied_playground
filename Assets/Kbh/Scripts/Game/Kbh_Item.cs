@@ -12,7 +12,7 @@ public class Kbh_Item : MonoBehaviour
    [SerializeField] private Renderer _renderer;
 
    [SerializeField] private UnityEvent OnInit;
-   [SerializeField] private UnityEvent OnDestroy;
+   [SerializeField] public UnityEvent<Kbh_Item> OnDestroy;
 
    private void Awake()
    {
@@ -32,7 +32,24 @@ public class Kbh_Item : MonoBehaviour
       _itemInfo = itemSO;
       _IsActive = true;
       _collider.enabled = true;
+
       _renderer.material.mainTexture = _itemInfo.texture;
+      _renderer.material.color = Color.white;
+      _renderer.material.SetFloat("_Mode", 3);
+      _renderer.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+      _renderer.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+      _renderer.material.SetInt("_ZWrite", 0);
+      _renderer.material.DisableKeyword("_ALPHATEST_ON");
+      _renderer.material.EnableKeyword("_ALPHABLEND_ON");
+      _renderer.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+      _renderer.material.SetFloat("_Surface", 1);
+      _renderer.material.SetFloat("_AlphaClip", 0);
+      _renderer.material.SetFloat("_Blend", (float)UnityEditor.Rendering.BuiltIn.ShaderGraph.BuiltInBaseShaderGUI.BlendMode.Alpha);
+      _renderer.material.SetFloat("_Cull", 0.0f);
+      _renderer.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+      // _renderer.material.SetFloat("_SurfaceType", 0.0f);
+      // _renderer.material.SetFloat("_RenderQueueType", 1.0f);
+      
 
       OnInit?.Invoke();
    }
@@ -48,7 +65,7 @@ public class Kbh_Item : MonoBehaviour
          _IsActive = false;
       }
 
-      OnDestroy?.Invoke();
+      OnDestroy?.Invoke(this);
    }
 
 }
