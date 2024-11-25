@@ -2044,7 +2044,7 @@ GameObject:
   - component: {fileID: 473432478}
   - component: {fileID: 473432477}
   m_Layer: 5
-  m_Name: GoToMainBtn
+  m_Name: ExitUIBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5398,10 +5398,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playList:
   - {fileID: 11400000, guid: 158d2aab97da54c4f80c69d31f096dc5, type: 2}
-  - {fileID: 11400000, guid: 54a48399b6850134a9e0be8c4a7ed9bd, type: 2}
-  - {fileID: 11400000, guid: dfbf446f2f006084580d4d93ec8bfa54, type: 2}
-  - {fileID: 11400000, guid: 4cf456ad2e20f914f853dfaf1bc4d8b6, type: 2}
-  - {fileID: 11400000, guid: 9b22c162bd620ff4faedba1828de287a, type: 2}
 --- !u!1 &1108622432
 GameObject:
   m_ObjectHideFlags: 0
@@ -9029,7 +9025,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: KEY BOARD
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ae10ab0719837e4b88d812be9500a7c, type: 2}
   m_sharedMaterial: {fileID: -5186526545929831585, guid: 4ae10ab0719837e4b88d812be9500a7c, type: 2}
@@ -10763,7 +10759,7 @@ GameObject:
   - component: {fileID: 1914443750}
   - component: {fileID: 1914443749}
   m_Layer: 5
-  m_Name: ChangeKeyboard
+  m_Name: MainMenuUIBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10810,7 +10806,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.87169814, g: 0.87169814, b: 0.87169814, a: 1}
+    m_NormalColor: {r: 0.32419097, g: 0.8792453, b: 0, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -10832,7 +10828,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1914443750}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1793509582}
+        m_TargetAssemblyTypeName: UI_Settings, Assembly-CSharp
+        m_MethodName: HandleCloseUIEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1914443750
 MonoBehaviour:
   m_ObjectHideFlags: 0

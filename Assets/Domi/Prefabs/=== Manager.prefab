@@ -420,6 +420,7 @@ MonoBehaviour:
   - {fileID: 5163951792962438237, guid: b32e077913fe9aa4899b74aa52e37d9f, type: 3}
   - {fileID: 6741461255333806845, guid: 5fdf7b4634a5de04085a3bd02f6fc2b9, type: 3}
   - {fileID: 8946760337633306988, guid: 1ea2d99f89eea2c4798831f0411da5cd, type: 3}
+  - {fileID: 7407243574785347697, guid: c6252d31a7102b746b90e55b26612718, type: 3}
 --- !u!1 &6507337834483546394
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,4 +709,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolManager: {fileID: 11400000, guid: 5ed5dff61c0e8e34c8c7f421bfda1f65, type: 2}
-  _audioMixer: {fileID: 24100000, guid: e5be5776e635f894cbe57afab9695baa, type: 2}
+  _audioMixer: {fileID: 0}
