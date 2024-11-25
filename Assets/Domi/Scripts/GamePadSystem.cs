@@ -62,7 +62,7 @@ public class GamePadSystem : ScriptableObject
 
         devices.Clear();
 
-        if (lastUsed)
+        // if (lastUsed)
             OnChangeGamepad?.Invoke(false);
     }
 

@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,6 +17,7 @@ public class ItemSpawner : MonoBehaviour
    [SerializeField] private Kbh_Item _itemPrefab;
 
    [SerializeField] private List<Kbh_Item> _itemList = new();
+   [SerializeField] private int maxSpawnCount = 3;
 
    private float RandomPlusmn => (Random.value - 0.5f) * 2;
 
@@ -44,6 +46,7 @@ public class ItemSpawner : MonoBehaviour
    public void ClearSpawn()
    {
       _itemList.ForEach(x => Destroy(x));
+      _itemList.Clear();
    }
 
    private IEnumerator SpawnRoutine()
@@ -60,10 +63,14 @@ public class ItemSpawner : MonoBehaviour
       }
    }
 
-   
+   private bool CheckItemSpawn() {
+      return _itemList.Where(v => v != null).Count() < maxSpawnCount;
+   }
 
    private void SpawnAnyRandomItem()
    {
+      if (!CheckItemSpawn()) return;
+
       Vector2 randomPos = new(_itemSpawnRange.x / 2 * RandomPlusmn, _itemSpawnRange.y / 2 * RandomPlusmn);
       Vector3 worldPos
         = new(randomPos.x , transform.position.y, randomPos.y);
@@ -75,8 +82,13 @@ public class ItemSpawner : MonoBehaviour
       Kbh_Item itemObj = Instantiate(_itemPrefab, worldPos, Quaternion.identity, transform);
       _itemList.Add(itemObj);
       itemObj.Initialize(itemInfo);
+      itemObj.OnDestroy.AddListener(HandleEatItem);
    }
 
+   private void HandleEatItem(Kbh_Item item) {
+      _itemList.Remove(item);
+      Destroy(item.gameObject);
+   }
 
 #if UNITY_EDITOR
    private void OnDrawGizmosSelected()
