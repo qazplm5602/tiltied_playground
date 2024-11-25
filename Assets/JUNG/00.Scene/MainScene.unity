@@ -1689,6 +1689,7 @@ GameObject:
   - component: {fileID: 444006404}
   - component: {fileID: 444006403}
   - component: {fileID: 444006406}
+  - component: {fileID: 444006407}
   m_Layer: 5
   m_Name: SettingBtn
   m_TagString: Untagged
@@ -1832,6 +1833,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &444006407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444006401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32127d58d911e2b478a1e2157fcec83f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickSound: {fileID: 11400000, guid: 91fbad80a56602244a58dc025c7c4a1d, type: 2}
+  _onSound: {fileID: 11400000, guid: e9a377124c9c0ee45848fcc308e0f419, type: 2}
 --- !u!1 &473432475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2813,6 +2828,52 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &684045736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 684045738}
+  - component: {fileID: 684045737}
+  m_Layer: 0
+  m_Name: SoundHelper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &684045737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684045736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c77108b92431024e8ae8b3da8809a53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _changeSound: {fileID: 11400000, guid: 4c02b1b23883eb2458680a9b72d7cb0d, type: 2}
+  _selectSound: {fileID: 11400000, guid: 52b6baaeb5506374f9e9a64ffe113424, type: 2}
+--- !u!4 &684045738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684045736}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &692132009
 GameObject:
   m_ObjectHideFlags: 0
@@ -2901,6 +2962,7 @@ GameObject:
   - component: {fileID: 712695751}
   - component: {fileID: 712695750}
   - component: {fileID: 712695753}
+  - component: {fileID: 712695754}
   m_Layer: 5
   m_Name: VS_HumanBtn
   m_TagString: Untagged
@@ -3044,6 +3106,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &712695754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712695748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32127d58d911e2b478a1e2157fcec83f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickSound: {fileID: 11400000, guid: 91fbad80a56602244a58dc025c7c4a1d, type: 2}
+  _onSound: {fileID: 11400000, guid: e9a377124c9c0ee45848fcc308e0f419, type: 2}
 --- !u!1 &718739866
 GameObject:
   m_ObjectHideFlags: 0
@@ -4161,6 +4237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a440a1d53286ab245b747eca3d882a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundHelper: {fileID: 684045737}
   _charSelectUI: {fileID: 1684619331}
   _inputSO1: {fileID: 11400000, guid: 3b65716b6545d3540bdab38db3501e9b, type: 2}
   _inputSO2: {fileID: 11400000, guid: 0fff30bdbaa22294798e38b62d448d34, type: 2}
@@ -5282,6 +5359,7 @@ GameObject:
   - component: {fileID: 1146206694}
   - component: {fileID: 1146206693}
   - component: {fileID: 1146206696}
+  - component: {fileID: 1146206697}
   m_Layer: 5
   m_Name: ExitBtn
   m_TagString: Untagged
@@ -5425,6 +5503,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1146206697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146206691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32127d58d911e2b478a1e2157fcec83f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickSound: {fileID: 11400000, guid: 91fbad80a56602244a58dc025c7c4a1d, type: 2}
+  _onSound: {fileID: 11400000, guid: e9a377124c9c0ee45848fcc308e0f419, type: 2}
 --- !u!1 &1152881171
 GameObject:
   m_ObjectHideFlags: 0
@@ -6502,6 +6594,7 @@ GameObject:
   - component: {fileID: 1503202823}
   - component: {fileID: 1503202822}
   - component: {fileID: 1503202825}
+  - component: {fileID: 1503202826}
   m_Layer: 5
   m_Name: GamepadBtn
   m_TagString: Untagged
@@ -6645,6 +6738,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1503202826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503202820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32127d58d911e2b478a1e2157fcec83f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickSound: {fileID: 11400000, guid: 91fbad80a56602244a58dc025c7c4a1d, type: 2}
+  _onSound: {fileID: 11400000, guid: e9a377124c9c0ee45848fcc308e0f419, type: 2}
 --- !u!1 &1504672931
 GameObject:
   m_ObjectHideFlags: 0
@@ -7043,6 +7150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027b43e92a9ff094d8669e33e75a28c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundHelper: {fileID: 684045737}
   _player1PosImg: {fileID: 654833422}
   _player2PosImg: {fileID: 1297709898}
   mapSelectUI: {fileID: 1425735046}
@@ -12014,3 +12122,4 @@ SceneRoots:
   - {fileID: 1339587116}
   - {fileID: 289898650}
   - {fileID: 1572046468}
+  - {fileID: 684045738}
