@@ -5181,10 +5181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playList:
   - {fileID: 11400000, guid: 158d2aab97da54c4f80c69d31f096dc5, type: 2}
-  - {fileID: 11400000, guid: 54a48399b6850134a9e0be8c4a7ed9bd, type: 2}
-  - {fileID: 11400000, guid: dfbf446f2f006084580d4d93ec8bfa54, type: 2}
-  - {fileID: 11400000, guid: 4cf456ad2e20f914f853dfaf1bc4d8b6, type: 2}
-  - {fileID: 11400000, guid: 9b22c162bd620ff4faedba1828de287a, type: 2}
 --- !u!1 &1108622432
 GameObject:
   m_ObjectHideFlags: 0
