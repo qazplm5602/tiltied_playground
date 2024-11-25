@@ -24,6 +24,7 @@ public class UI_InGameSetting : MonoBehaviour
             {
                 IsDoingOpen = false;
                 IsPop = false;
+                Time.timeScale = 0;
             });
         }
         else if (IsPop == false && IsDoingOpen == false)
@@ -33,6 +34,7 @@ public class UI_InGameSetting : MonoBehaviour
             {
                 IsDoingOpen = false;
                 IsPop = true;
+                Time.timeScale = 1;
             });
 
         }
