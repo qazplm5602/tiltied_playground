@@ -21,7 +21,6 @@ public class UI_InGameSetting : MonoBehaviour
         {
             Time.timeScale = 1;
             IsDoingOpen = true;
-            keyboardSettingObj.SetActive(false);
             baseSettingObj.transform.DOLocalMoveY(1080f, 0.5f).SetEase(Ease.OutExpo).OnComplete(() =>
             {
                 IsDoingOpen = false;
@@ -41,10 +40,7 @@ public class UI_InGameSetting : MonoBehaviour
         }
     }
 
-    public void OpenKeyBoardSetting()
-    {
-        keyboardSettingObj.SetActive(true);
-    }
+    
 
     private void OnDestroy()
     {

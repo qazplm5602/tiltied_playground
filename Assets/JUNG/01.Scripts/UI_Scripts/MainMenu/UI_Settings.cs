@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_Settings : MonoBehaviour
@@ -49,5 +50,7 @@ public class UI_Settings : MonoBehaviour
             _inputSO1.CloseUIEvent -= HandleCloseUIEvent;
         }
     }
+
+    public void HandleMainMenu() => SceneManager.LoadScene("MainScene");
 
 }
