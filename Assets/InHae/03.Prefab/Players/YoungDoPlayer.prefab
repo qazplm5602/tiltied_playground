@@ -1551,6 +1551,39 @@ MonoBehaviour:
   _itemImages: []
   isKnockback: 0
   shootTakeDelay: 0.1
+  ballRotateCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.495847
+      outSlope: 3.495847
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.06791497
+      value: 0.23742035
+      inSlope: 1.0045453
+      outSlope: 1.0045453
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.062029246
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.8181439
+      outSlope: 0.8181439
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _shootingSound: {fileID: 11400000, guid: 75957826b2851ca4d8799c2d15f79fcc, type: 2}
   allowBallAngle: 60
 --- !u!114 &4055966981614733897

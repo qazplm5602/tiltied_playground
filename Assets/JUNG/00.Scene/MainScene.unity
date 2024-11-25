@@ -5135,6 +5135,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088878313}
   m_CullTransparentMesh: 1
+--- !u!1 &1096801337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1096801338}
+  - component: {fileID: 1096801339}
+  m_Layer: 0
+  m_Name: PlaylistBGM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1096801338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096801337}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27.623247, y: 37.134144, z: 28.477646}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1096801339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096801337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98538a00ead34af4da85338b34a02a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playList:
+  - {fileID: 11400000, guid: 158d2aab97da54c4f80c69d31f096dc5, type: 2}
+  - {fileID: 11400000, guid: 54a48399b6850134a9e0be8c4a7ed9bd, type: 2}
+  - {fileID: 11400000, guid: dfbf446f2f006084580d4d93ec8bfa54, type: 2}
+  - {fileID: 11400000, guid: 4cf456ad2e20f914f853dfaf1bc4d8b6, type: 2}
+  - {fileID: 11400000, guid: 9b22c162bd620ff4faedba1828de287a, type: 2}
 --- !u!1 &1108622432
 GameObject:
   m_ObjectHideFlags: 0
@@ -8519,10 +8569,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -12122,4 +12172,5 @@ SceneRoots:
   - {fileID: 1339587116}
   - {fileID: 289898650}
   - {fileID: 1572046468}
+  - {fileID: 1096801338}
   - {fileID: 684045738}

@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private bool isKnockback = false;
     [SerializeField] private float shootTakeDelay = 0.1f; // 슈팅 한 후 공을 가져갈 수 있는 쿨탐
+    [SerializeField] private AnimationCurve ballRotateCurve; // 조금 움직였는데 너무 안움직이는 공 떄문에 함 ㅅㄱ
 
     TagHandle _ballTag;
     private bool HasBall() => BallControlBundle.GetBallOwner() == this;
@@ -82,14 +83,25 @@ public class Player : MonoBehaviour
     private void Movement()
     {
         Vector2 inputDir = -PlayerControlSO.GetMoveDirection(); // 카메라가 반대라서 인풋도 반대임 ㅋㅋ
-        if (inputDir.x == 0 && inputDir.y == 0) return;
+        if (inputDir.x == 0 && inputDir.y == 0) {
+            if (HasBall()) // 공 안굴러 감
+                _ballController.SetBallRotate(Vector3.zero, 0);
 
-        inputDir.Normalize();
+            return;
+        }
+
+        // inputDir.Normalize();
         Vector3 moveDir = new(inputDir.x, 0, inputDir.y);
 
 
 
         int speedValue = HasBall() ? PlayerStatSO.dribbleSpeed.GetValue() : PlayerStatSO.defaultSpeed.GetValue();
+
+        if (HasBall()) {
+            Vector3 rotateDir = new Vector3(moveDir.z, 0, -moveDir.x);
+            Debug.Log($"{Mathf.Max(rotateDir.magnitude, 0.3f)} / {ballRotateCurve.Evaluate(rotateDir.magnitude)} / {speedValue * 20}");
+            _ballController.SetBallRotate(rotateDir.normalized, speedValue * 20 * ballRotateCurve.Evaluate(rotateDir.magnitude));
+        }
 
         transform.localPosition
            += moveDir * speedValue * Time.fixedDeltaTime;

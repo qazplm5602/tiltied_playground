@@ -14,11 +14,12 @@ public class SoundManager : MonoSingleton<SoundManager>
         _currentBGMPlayer = null;
     }
 
-    public void PlayBGM(SoundSO clip)
+    public SoundPlayer PlayBGM(SoundSO clip)
     {
         _currentBGMPlayer?.StopAndGotoPool(true);
         _currentBGMPlayer = _poolManager.Pop(PoolType.SoundPlayer) as SoundPlayer;
         _currentBGMPlayer.PlaySound(clip);
+        return _currentBGMPlayer;
     }
 
     public SoundPlayer PlaySFX(Vector3 pos, SoundSO clip)

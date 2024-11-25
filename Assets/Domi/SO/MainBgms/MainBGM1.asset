@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 759fce6bc06e37443835779f3615a542, type: 3}
-  m_Name: GameEndBGM
+  m_Name: MainBGM1
   m_EditorClassIdentifier: 
   audioType: 1
-  clip: {fileID: 8300000, guid: 576a88a1a3d2ed945bd3d745b1ee6694, type: 3}
-  isLoop: 1
+  clip: {fileID: 8300000, guid: a222539bc7348aa48a9dc5c9fb99a178, type: 3}
+  isLoop: 0
   isRandomizePitch: 0
   is3DSound: 0
   randomPitchModifier: 0.1
-  volume: 0.8
+  volume: 0.4
   pitch: 1
   startTime: 0
