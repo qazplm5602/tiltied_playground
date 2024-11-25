@@ -20,4 +20,6 @@ public class GameManager : MonoBehaviour
     }
 
     public GameMode GetMode() => mode;
+
+    public void Quit() => Application.Quit();
 }
