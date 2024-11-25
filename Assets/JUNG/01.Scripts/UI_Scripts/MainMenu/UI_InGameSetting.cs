@@ -11,7 +11,7 @@ public class UI_InGameSetting : MonoBehaviour
     private bool IsPop = false;
     void Start()
     {
-        childObj = GetComponentInChildren<GameObject>();
+        childObj = transform.GetChild(0).gameObject;
         escapeSO.CloseUIEvent += HandleOpenOrCloseStop;
     }
 
@@ -19,22 +19,22 @@ public class UI_InGameSetting : MonoBehaviour
     {
         if (IsPop == true && IsDoingOpen == false)
         {
+            Time.timeScale = 1;
             IsDoingOpen = true;
-            childObj.transform.DOMoveY(1080f, 0.3f).SetEase(Ease.OutExpo).OnComplete(() =>
+            childObj.transform.DOLocalMoveY(1080f, 0.5f).SetEase(Ease.OutExpo).OnComplete(() =>
             {
                 IsDoingOpen = false;
                 IsPop = false;
-                Time.timeScale = 0;
             });
         }
         else if (IsPop == false && IsDoingOpen == false)
         {
             IsDoingOpen = true;
-            childObj.transform.DOMoveY(0f, 0.3f).SetEase(Ease.OutExpo).OnComplete(() =>
+            childObj.transform.DOLocalMoveY(0f, 0.5f).SetEase(Ease.OutExpo).OnComplete(() =>
             {
                 IsDoingOpen = false;
                 IsPop = true;
-                Time.timeScale = 1;
+                Time.timeScale = 0;
             });
 
         }
