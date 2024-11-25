@@ -2475,7 +2475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e04d313c753849b4d9f538916717a676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputSO1: {fileID: 11400000, guid: 3b65716b6545d3540bdab38db3501e9b, type: 2}
+  _inputSO1: {fileID: 0}
   _sfxSlider: {fileID: 750717377}
   _bgmSlider: {fileID: 1388069641}
 --- !u!222 &1033842148
@@ -2698,6 +2698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b9897bd8aed48c4cae6d4e5c8a37b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  escapeSO: {fileID: 11400000, guid: 3b65716b6545d3540bdab38db3501e9b, type: 2}
 --- !u!1 &1127428808
 GameObject:
   m_ObjectHideFlags: 0
