@@ -1015,6 +1015,7 @@ Transform:
   - {fileID: 5082945673305150784}
   - {fileID: 2489037866437006137}
   - {fileID: 5183829521432506359}
+  - {fileID: 5093052204670190026}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &721537459263684038
@@ -1294,6 +1295,58 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2814386605380574398, guid: 9a7ceb62b9c33574d9d14172fbcc8a88, type: 3}
+--- !u!1 &8818710417148751561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5093052204670190026}
+  - component: {fileID: 1241522327232116594}
+  m_Layer: 0
+  m_Name: ItemSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5093052204670190026
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818710417148751561}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3600006, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5862436215310584205}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1241522327232116594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818710417148751561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80476189f7ac3e4abfc4ac5dab53510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemSOs:
+  - {fileID: 11400000, guid: f02edaabe5c441542b48b113304e109d, type: 2}
+  _itemSpawnRange: {x: 80, y: 40}
+  _itemSpawnDelayTime: {x: 4, y: 10}
+  _itemSpawnIteration: {x: 1, y: 2}
+  _itemPrefab: {fileID: 2402754194451819262, guid: e1200a68e5968634b855bd9491f1de83, type: 3}
+  _itemList: []
+  maxSpawnCount: 3
 --- !u!1 &8893736198428956117
 GameObject:
   m_ObjectHideFlags: 0
