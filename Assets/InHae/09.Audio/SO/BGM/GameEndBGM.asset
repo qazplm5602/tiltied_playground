@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759fce6bc06e37443835779f3615a542, type: 3}
+  m_Name: GameEndBGM
+  m_EditorClassIdentifier: 
+  audioType: 1
+  clip: {fileID: 8300000, guid: 576a88a1a3d2ed945bd3d745b1ee6694, type: 3}
+  isLoop: 1
+  isRandomizePitch: 0
+  is3DSound: 0
+  randomPitchModifier: 0.1
+  volume: 0.8
+  pitch: 1
+  startTime: 0

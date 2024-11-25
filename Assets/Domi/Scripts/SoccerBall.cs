@@ -12,6 +12,7 @@ public class SoccerBall : MonoBehaviour
     private Transform spawnPoint;
     private Rigidbody rigid;
     private Transform visual;
+    public SoccerBallRotate BallRotate { get; private set; }
     private Player owner; // 공 가지고 잇는 사람
     private BallControlBundle ownerControl;
     private BallGoalSimulateManager ballSimulater;
@@ -20,6 +21,7 @@ public class SoccerBall : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         ballSimulater = ManagerManager.GetManager<BallGoalSimulateManager>();
         visual = GameObject.Find("Visual").transform;
+        BallRotate = visual.GetComponent<SoccerBallRotate>();
 
         spawnPoint = GameObject.Find(spawnPointName)?.transform;
 
@@ -54,7 +56,8 @@ public class SoccerBall : MonoBehaviour
         }
     }
 
-    public Transform TakePlayerBall(Player ballOwner, BallControlBundle ballControl) {
+    public Transform TakePlayerBall(Player ballOwner, BallControlBundle ballControl)
+    {
         owner = ballOwner;
         ownerControl = ballControl;
 
@@ -70,9 +73,12 @@ public class SoccerBall : MonoBehaviour
         if (owner == null) return;
 
         visual.SetParent(transform, true);
+        visual.localPosition = Vector3.zero;
 
         if (controlRequest)
             ownerControl.Release(owner);
+
+        BallRotate.SetSpeed(0);
 
         rigid.isKinematic = false;
         rigid.WakeUp();

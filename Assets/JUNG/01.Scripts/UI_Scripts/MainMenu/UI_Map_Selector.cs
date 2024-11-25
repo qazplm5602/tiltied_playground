@@ -4,14 +4,15 @@ using UnityEngine.TextCore.Text;
 
 public class UI_Map_Selector : MonoBehaviour
 {
-
+    [SerializeField] private MenuSoundHelper _soundHelper;
+    
     [SerializeField] private GameObject _charSelectUI;
 
     [SerializeField] private PlayerControlSO _inputSO1;
     [SerializeField] private PlayerControlSO _inputSO2;
     [SerializeField] private UI_Map[] _maps;
 
-    [SerializeField] private int rightMaxIdx = 0;  // ¿À¸¥ÂÊÀ¸·Î ¸î°³±îÁö Ä³¸¯ÅÍ°¡ ÀÖ´Â°¡. ¾Æ·¡ÀÖ´Â Ä³¸¯ÅÍ¸¦ charIndex % ÀÌ°ªÀ¸·Î ³ªÅ¸³¯ ¿¹Á¤.
+    [SerializeField] private int rightMaxIdx = 0;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½î°³ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Ö´Â°ï¿½. ï¿½Æ·ï¿½ï¿½Ö´ï¿½ Ä³ï¿½ï¿½ï¿½Í¸ï¿½ charIndex % ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 
 
     [SerializeField] private EventMapSO selectSO1 = null;
@@ -19,6 +20,8 @@ public class UI_Map_Selector : MonoBehaviour
 
     private int charIndex1 = 0;
     private int charIndex2 = 0;
+    private float charDelay1 = 0;
+    private float charDelay2 = 0;
 
     private void Start()
     {
@@ -56,14 +59,23 @@ public class UI_Map_Selector : MonoBehaviour
 
     private void HandleMoveEvent2()
     {
+        _soundHelper.ChangeSound();
+        
         if (_maps[charIndex2].IsSelected2)
         {
             return;
         }
+        float lastTime = charDelay2;
+        charDelay2 = Time.time;
+
+        if (GamePadSystem.UseGamepad && (Time.time - lastTime) < 0.1f) {
+            return;
+        }
+
         Vector2 dir = _inputSO2.GetMoveDirection().normalized;
         int tmpindex = charIndex2;
-        charIndex2 += (int)dir.x;
-        charIndex2 += rightMaxIdx * -(int)dir.y;  //-1 ÀÌ µé¾î¿À¸é..
+        charIndex2 += Mathf.RoundToInt(dir.x);
+        charIndex2 += rightMaxIdx * -Mathf.RoundToInt(dir.y);  //-1 ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..
         if (charIndex2 >= _maps.Length || charIndex2 < 0)
         {
             charIndex2 = tmpindex;
@@ -73,6 +85,8 @@ public class UI_Map_Selector : MonoBehaviour
 
     private void HandleSelectCharacter2()
     {
+        _soundHelper.SelectSound();
+        
         selectSO2 = _maps[charIndex2].SelectMap2();
         if (_maps[charIndex1].IsSelected1 == true && _maps[charIndex2].IsSelected2 == true)
         {
@@ -82,14 +96,24 @@ public class UI_Map_Selector : MonoBehaviour
 
     private void HandleMoveEvent1()
     {
+        _soundHelper.ChangeSound();
+        
         if (_maps[charIndex1].IsSelected1)
         {
             return;
         }
+
+        float lastTime = charDelay1;
+        charDelay1 = Time.time;
+
+        if (GamePadSystem.UseGamepad && (Time.time - lastTime) < 0.1f) {
+            return;
+        }
+
         Vector2 dir = _inputSO1.GetMoveDirection().normalized;
         int tmpindex = charIndex1;
-        charIndex1 += (int)dir.x;
-        charIndex1 += rightMaxIdx * -(int)dir.y;  //-1 ÀÌ µé¾î¿À¸é..
+        charIndex1 += Mathf.RoundToInt(dir.x);
+        charIndex1 += rightMaxIdx * -Mathf.RoundToInt(dir.y);  //-1 ì´ ë“¤ì–´ì˜¤ë©´..
         if (charIndex1 >= _maps.Length || charIndex1 < 0)
         {
             charIndex1 = tmpindex;
@@ -99,6 +123,8 @@ public class UI_Map_Selector : MonoBehaviour
     }
     private void HandleMapSelectEvent1()
     {
+        _soundHelper.SelectSound();
+        
         selectSO1 = _maps[charIndex1].SelectMap1();
         if (_maps[charIndex1].IsSelected1 == true && _maps[charIndex2].IsSelected2 == true)
         {
@@ -132,7 +158,7 @@ public class UI_Map_Selector : MonoBehaviour
             for (int i = 0; i < _maps.Length; i++)
             {
                 _maps[i].IsSelected1 = false;
-                _maps[i]._selectImage1.enabled = false; // ¼±ÅÃ µÈ°Å Ç¥Çö ÇØÁÙ ±×¸² ²¨ÁÖ±â.
+                _maps[i]._selectImage1.enabled = false; // ï¿½ï¿½ï¿½ï¿½ ï¿½È°ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ ï¿½ï¿½ï¿½Ö±ï¿½.
             }
         }
         else
@@ -140,7 +166,7 @@ public class UI_Map_Selector : MonoBehaviour
             for (int i = 0; i < _maps.Length; i++)
             {
                 _maps[i].IsSelected2 = false;
-                _maps[i]._selectImage2.enabled = false; // ¼±ÅÃ µÈ°Å Ç¥Çö ÇØÁÙ ±×¸² ²¨ÁÖ±â.
+                _maps[i]._selectImage2.enabled = false; // ï¿½ï¿½ï¿½ï¿½ ï¿½È°ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ ï¿½ï¿½ï¿½Ö±ï¿½.
             }
         }
     }
@@ -150,7 +176,7 @@ public class UI_Map_Selector : MonoBehaviour
         if (selectSO1 == selectSO2)
         {
             LoadingManager.LoadScene($"{selectSO1.mapType}Scene");
-            //SceneManager.LoadScene() ¸Ê // selectSO1 ¿¡ ÀÖ´Â MapName À» ÇØÁÖÀÚ .
+            //SceneManager.LoadScene() ï¿½ï¿½ // selectSO1 ï¿½ï¿½ ï¿½Ö´ï¿½ MapName ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ .
         }
         else
         {

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -22,22 +23,36 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] _itemImages;
 
     [SerializeField] private bool isKnockback = false;
+    [SerializeField] private float shootTakeDelay = 0.1f; // 슈팅 한 후 공을 가져갈 수 있는 쿨탐
+    [SerializeField] private AnimationCurve ballRotateCurve; // 조금 움직였는데 너무 안움직이는 공 떄문에 함 ㅅㄱ
 
     TagHandle _ballTag, _itemTag;
     private bool HasBall() => _ballController.isRegisted;
 
     private bool _prevShootKeyDown = false;
     private float _prevShootKeyDownTime = 0.0f;
+    private float shootTime;
+    private Coroutine shootWait;
 
     private SkillBase _currentSkill;
     public SkillBase CurrentSkill => _currentSkill;
-    public event Action ShootingStartEvent;
-    public event Action ShootingEndEvent;
+    public event Action ShootingStartEvent; // 슈팅 시작
+    public event Action ShootingEndEvent; // 슈팅 끝 (찼거나 아니면 취소 되었거나)
+    public event Action ShootingRunEvent; // 진짜 공 참
+    public event Action AttackEvent; // 공 없이 슈팅 누른 경우
+    public event Action<float> BlindEvent; // 블라인드 스킬을 맞은 경우
+
+    private bool _isMeditation = false;
+    public bool IsMeditation {
+        get => _isMeditation;
+        set { _isMeditation = value; }
+    }
+
+    [SerializeField] private SoundSO _shootingSound;
 
     private void Awake()
     {
         PlayerStatSO = Instantiate(PlayerStatSO);
-        SkillInit();
 
         RigidbodyComponent = GetComponent<Rigidbody>();
         _items = new ItemSO[MAX_ITEM_COUNT];
@@ -55,6 +70,8 @@ public class Player : MonoBehaviour
 
    private void FixedUpdate()
    {
+      if (_isMeditation) return;
+
       if(isKnockback)
       {
          // 다른 플레이어로부터 타격을 받았을 경우
@@ -70,17 +87,32 @@ public class Player : MonoBehaviour
     private void Movement()
     {
         Vector2 inputDir = -PlayerControlSO.GetMoveDirection(); // 카메라가 반대라서 인풋도 반대임 ㅋㅋ
-        if (inputDir.x == 0 && inputDir.y == 0) return;
+        if (inputDir.x == 0 && inputDir.y == 0) {
+            if (HasBall()) // 공 안굴러 감
+                _ballController.SetBallRotate(Vector3.zero, 0);
 
-        inputDir.Normalize();
+            return;
+        }
+
+        // inputDir.Normalize();
         Vector3 moveDir = new(inputDir.x, 0, inputDir.y);
 
+
+
+        int speedValue = HasBall() ? PlayerStatSO.dribbleSpeed.GetValue() : PlayerStatSO.defaultSpeed.GetValue();
+
+        if (HasBall()) {
+            Vector3 rotateDir = new Vector3(moveDir.z, 0, -moveDir.x);
+            Debug.Log($"{Mathf.Max(rotateDir.magnitude, 0.3f)} / {ballRotateCurve.Evaluate(rotateDir.magnitude)} / {speedValue * 20}");
+            _ballController.SetBallRotate(rotateDir.normalized, speedValue * 20 * ballRotateCurve.Evaluate(rotateDir.magnitude));
+        }
+
         transform.localPosition
-           += moveDir * PlayerStatSO.defaultSpeed.GetValue() * Time.fixedDeltaTime;
+           += moveDir * speedValue * Time.fixedDeltaTime;
 
         transform.localRotation
            = Quaternion.Lerp(transform.localRotation,
-           Quaternion.Euler(0, Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg, 0), 0.1f);
+           Quaternion.Euler(0, Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg, 0), 0.3f);
     }
 
     private void OnDestroy()
@@ -101,8 +133,17 @@ public class Player : MonoBehaviour
                 TryInterect();
                 DOVirtual.DelayedCall(5f, Shooting);
             }
-            else
+            else {
                 Shooting();
+                ShootStop(false);
+            }
+        } 
+        else
+        {
+            if (isPerformed)
+            { // 축구공은 안가지고 있는데 슈팅 누름
+                AttackEvent?.Invoke();
+            }
         }
     }
 
@@ -122,10 +163,23 @@ public class Player : MonoBehaviour
 
         _ballController.PushBall((transform.forward + transform.up).normalized * currentGauge * PlayerStatSO.shootPower.GetValue() * 30);
         this.Release(_ballController);
+        SoundManager.Instance.PlaySFX(Vector3.zero, _shootingSound);
+
+        _prevShootKeyDown = false;
+        shootTime = Time.time;
+
+        ShootingRunEvent?.Invoke();
+        ShootingEndEvent?.Invoke();
+    }
+
+    private void ShootStop(bool callEvent = true) {
+        if (shootWait == null) return;
+        StopCoroutine(shootWait);
 
         _prevShootKeyDown = false;
 
-        ShootingEndEvent?.Invoke();
+        if (callEvent)
+            ShootingEndEvent?.Invoke();
     }
 
 
@@ -167,11 +221,26 @@ public class Player : MonoBehaviour
         if (_currentSkill.SkillUseAbleCheck())
             _currentSkill.UseSkill();
     }
- 
-    private void OnCollisionEnter(Collision collision)
+    
+    // 강제적으로 공 가져옴
+    public void ForceTakeBall() {
+        this.Registe(_ballController);
+    }
+    // 강제적으로 공 뺏음 ㅅㄱ
+    public void ForceReleseBall() {
+        ShootStop();
+        this.Release(_ballController);
+    }
+
+    private void OnCollisionStay(Collision collision)
     {
-        if (collision.collider.CompareTag(_ballTag) // 공에 닿았고
-           && _ballController.BallIsFree()) // 공이 자유롭다면
+        if (
+            ManagerManager.GetManager<GameManager>().GetMode().IsPlay // 플레이 중이여야 함
+           && collision.collider.CompareTag(_ballTag) // 공에 닿았고
+           && _ballController.BallIsFree() // 공이 자유롭다면
+           && Time.time - shootTime > shootTakeDelay // 잡기 쿨탐
+           && IsLookObject(collision.transform) // 공 보고 있음??
+        )
         {
             this.Registe(_ballController);
         }
@@ -213,6 +282,18 @@ public class Player : MonoBehaviour
         _currentSkill.Init(this);
     }
 
+    [SerializeField] private float allowBallAngle = 60f; // 앞쪽 허용 각도 (60도)
+    public bool IsLookObject(Transform targetTrm) {
+        // 플레이어 위치와 방향
+        Vector3 playerForward = transform.forward;
+        Vector3 directionToTarget = (targetTrm.position - transform.position).normalized;
+        float dot = Vector3.Dot(playerForward, directionToTarget);
+        
+        return dot >= Mathf.Cos(allowBallAngle * Mathf.Deg2Rad);
+    }
 
+    public void BlindSkill(float skillTime)
+    {
+        BlindEvent?.Invoke(skillTime);
+    }
 }
-

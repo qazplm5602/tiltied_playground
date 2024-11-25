@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WhistleSound : MonoBehaviour
+public class WhistleSound : BaseSoundHelper
 {
     [SerializeField] SoundSO gameEndSound;
     [SerializeField] SoundSO ballOutSound;

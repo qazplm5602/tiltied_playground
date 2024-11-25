@@ -41,7 +41,13 @@ public class ResultCamera : MonoBehaviour
         print($"{dir} / {hit.position} / {startCamPos}");
 
         cinemachine.transform.position = new Vector3(startCamPos.x, startCamPos.y + maxY, startCamPos.z);
-        cinemachine.transform.DOLocalMoveY(startCamPos.y, endDuration).SetEase(animEase);
+        cinemachine.transform.DOMoveY(startCamPos.y, endDuration).SetEase(animEase);
+    }
+
+    public void GroundHit() {
+        cinemachine.Follow = null;
+        cinemachine.transform.position = new Vector3(0, 100f, 0);
+        cinemachine.transform.rotation = Quaternion.Euler(new Vector3(90f, 0, 0));
     }
 
     public float GetDuration() => endDuration;

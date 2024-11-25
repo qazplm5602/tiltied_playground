@@ -115,6 +115,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5862436215310584205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2953336407527780590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 906022031098467107}
+  m_Layer: 0
+  m_Name: MaxPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &906022031098467107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2953336407527780590}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 221.4, y: 10, z: 116.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2729728793789550754}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3044047275457492530
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,8 +189,8 @@ GameObject:
   - component: {fileID: 7189188999028822426}
   - component: {fileID: 6054756834750559521}
   - component: {fileID: 5343929085633181038}
-  m_Layer: 0
-  m_Name: Ring Blue.003_JS_Alpha_0
+  m_Layer: 8
+  m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,7 +208,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6767825271968136560}
+  - {fileID: 906022031098467107}
   m_Father: {fileID: 1421363554332144644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7189188999028822426
@@ -320,7 +353,7 @@ GameObject:
   - component: {fileID: 518270918542762099}
   - component: {fileID: 8211491695143076970}
   - component: {fileID: 4271101536253760786}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Goal Sensors.004_JS_Alpha_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -857,6 +890,37 @@ Transform:
   - {fileID: 6838287550808482885}
   m_Father: {fileID: 5862436215310584205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6316680289804820736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6767825271968136560}
+  m_Layer: 0
+  m_Name: MinPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6767825271968136560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6316680289804820736}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -250, y: 10, z: -120}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2729728793789550754}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7598964011109077419
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +985,7 @@ GameObject:
   - component: {fileID: 5862436215310584205}
   - component: {fileID: 721537459263684038}
   - component: {fileID: 3966552724424440411}
+  - component: {fileID: 5205385033870540157}
   m_Layer: 0
   m_Name: Stedium
   m_TagString: Untagged
@@ -984,6 +1049,33 @@ MonoBehaviour:
   _endPoint: {fileID: 5082945673305150784}
   _leftMassSum: 0
   _rightMassSum: 0
+--- !u!54 &5205385033870540157
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7947045998298539539}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1
 --- !u!1 &8585426864388242871
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,7 +1088,7 @@ GameObject:
   - component: {fileID: 935893806226778904}
   - component: {fileID: 2298776165880251113}
   - component: {fileID: 4685346464020400640}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Goal Sensors.002_JS_Alpha_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1227,7 +1319,7 @@ Transform:
   m_GameObject: {fileID: 8893736198428956117}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 53.2, y: 0, z: 0}
+  m_LocalPosition: {x: 66, y: 0, z: 0}
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_ConstrainProportionsScale: 0
   m_Children: []

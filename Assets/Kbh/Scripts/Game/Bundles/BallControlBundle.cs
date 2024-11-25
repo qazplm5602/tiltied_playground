@@ -7,15 +7,9 @@ using UnityEngine;
 public class BallControlBundle : Bundle
 {
    static private bool _isInited = false;
-
-   static private Transform _mapTrm;
    static private SoccerBall _soccerBall;
-   static private Rigidbody _ballRigid;
-   static private Transform _ballVisual;
-
    static private Player _ballOwner = null;
    static private Tween _ballMoveTween = null;
-
 
    private enum BallControlType
    {
@@ -24,7 +18,6 @@ public class BallControlBundle : Bundle
    }
 
    [SerializeField] private BallControlType _ballControlType;
-   
 
    private static void Init()
    {
@@ -36,6 +29,8 @@ public class BallControlBundle : Bundle
       // _ballVisual = _ballRigid.transform.Find("Visual");
    }
 
+   public static Player GetBallOwner() => _ballOwner;
+   public static void SetInit(bool isInit) => _isInited = isInit; 
    public bool BallIsFree() => _ballOwner == null;
    public void PushBall(Vector3 force)
    {
@@ -44,6 +39,10 @@ public class BallControlBundle : Bundle
       //       _ballRigid.AddForce(force, ForceMode.Impulse);
       //   });
       _soccerBall.Kick(force);
+   }
+   public void SetBallRotate(Vector3 dir, float speed) {
+      _soccerBall.BallRotate.SetSpeed(speed);
+      _soccerBall.BallRotate.SetDirection(dir);
    }
 
    public override bool Registe(object obj = null)
@@ -64,6 +63,9 @@ public class BallControlBundle : Bundle
             // _ballRigid.isKinematic = true;
             // _ballRigid.Sleep();
             Transform ballVisual = _soccerBall.TakePlayerBall(_ballOwner, this);
+
+            if (_ballMoveTween is not null && _ballMoveTween.active)
+               _ballMoveTween.Kill();
             _ballMoveTween = ballVisual.DOLocalMove(endValue: new (0, 0.5f, 1.5f), duration: 0.2f).SetRelative(false);
 
             break;
@@ -103,5 +105,4 @@ public class BallControlBundle : Bundle
 
       return true;
    }
-
 }

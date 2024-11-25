@@ -36,7 +36,7 @@ public class VolcanoEventMap : EventMapBase
         _meteorList.Clear();
     }
 
-    public override void MapClear()
+    public override void MapOnClear()
     {
         if (_fallRoutine != null)
             StopCoroutine(_fallRoutine);

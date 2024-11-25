@@ -2,6 +2,11 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+public enum BallState
+{
+    Out,
+    Goal,
+}
 public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
 {
     public GameModeUI IngameUI { get; protected set; }
@@ -13,6 +18,7 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
     private ResultUI resultUI;
     private SoccerCutscene startCutscene;
     private Ground soccerGround;
+    private UI_EffectText currentStateText;
 
     protected override void Awake()
     {
@@ -22,11 +28,13 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
 
         soccerGround = FindAnyObjectByType<Ground>();
         playerManager = ManagerManager.GetManager<PlayerManager>();
+        currentStateText = FindAnyObjectByType<UI_EffectText>();
         resultUI = FindAnyObjectByType<ResultUI>();
         startCutscene = new(this, "StartDirector");
     }
 
-    private void Update() {
+    private void Update()
+    {
         timer.Loop();
     }
 
@@ -37,14 +45,20 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
     public override void GameStart()
     {
         print($"checked Cutscene {startCutscene.IsProgress()}");
+        BallControlBundle.SetInit(false);
         startCutscene.Run();
+        IngameUI.Start();
     }
 
     public void CutsceneFinish()
     {
         // 캠캠캠
-        CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main, () => {
+        CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main, () =>
+        {
             soccerBall.BallReset();
+
+            playerManager.GetPlayer(BallAreaType.Blue)?.gameObject?.SetActive(true);
+            playerManager.GetPlayer(BallAreaType.Red)?.gameObject?.SetActive(true);
             playerManager.ResetPos();
         });
 
@@ -53,31 +67,45 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
         // 시간
         timer.OnFinishTime += GameStop;
 
-        timer.SetTime(60  * 90);
+        timer.SetTime(60 * 90);
         timer.Play();
     }
 
     protected override void HandleBallGoal(BallAreaType type)
     {
         if (type == BallAreaType.Blue)
-            BlueScore ++;
+        {
+            BlueScore++;
+            currentStateText.StartEffect(BallState.Goal.ToString(), Color.blue);
+        }
         else
-            RedScore ++;
+        {
+            RedScore++;
+            currentStateText.StartEffect(BallState.Goal.ToString(), Color.red);
+        }
 
+        // 축구공 소유권 빼기
+        Player ballOwner = BallControlBundle.GetBallOwner();
+        if (ballOwner)
+            ballOwner.ForceReleseBall();
+        
         StartCoroutine(WaitBallReset());
     }
 
     protected override void HandleBallOut()
     {
+        currentStateText.StartEffect(BallState.Out.ToString() , new Color(255,0,255));
         StartCoroutine(WaitBallReset());
     }
 
-    IEnumerator WaitBallReset() {
+    IEnumerator WaitBallReset()
+    {
         IsPlay = false; // 진행 중단 ㄱㄱㄱㄱ
 
         yield return new WaitForSeconds(5f);
 
-        CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main, () => {
+        CameraManager.Instance.Transition.FadeChangeCamNoLive(CameraType.Main, () =>
+        {
             soccerBall.BallReset();
             playerManager.ResetPos();
             soccerGround.ResetGround();
@@ -90,7 +118,13 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
         timer.OnFinishTime -= GameStop;
         IsPlay = false;
 
-        WhistleSound whistle = ManagerManager.GetManager<WhistleSound>();
+        SoundPlayHelper soundPlayHelper = ManagerManager.GetManager<SoundPlayHelper>();
+        
+        WhistleSound whistle = soundPlayHelper.GetHelper<WhistleSound>();
+        GameBGMs gameBGM = soundPlayHelper.GetHelper<GameBGMs>();
+        
+        if (gameBGM)
+            gameBGM.GameEndSound();
         
         if (whistle) // 휘슬 시스템이 있당
             whistle.PlayEndSound();
@@ -100,9 +134,12 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
     }
 
     [ContextMenu("testGameStop")]
-    private void ImmediatelyGameStopTest() {
-        RedScore = UnityEngine.Random.Range(1, 50);
-        BlueScore = UnityEngine.Random.Range(0, 50);
+    private void ImmediatelyGameStopTest()
+    {
+        // RedScore = UnityEngine.Random.Range(1, 50);
+        // BlueScore = UnityEngine.Random.Range(0, 50);
+        RedScore = 5;
+        BlueScore = 5;
 
         timer.SetTime(5);
     }

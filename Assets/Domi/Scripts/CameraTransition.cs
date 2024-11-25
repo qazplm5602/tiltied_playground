@@ -150,4 +150,6 @@ public class CameraTransition : MonoBehaviour
 
         currentCamType = cam;
     }
+
+    public void SetCamType(CameraType cameraType) => currentCamType = cameraType;
 }

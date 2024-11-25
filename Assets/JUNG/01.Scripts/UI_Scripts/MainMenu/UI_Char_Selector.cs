@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UI_Char_Selector : MonoBehaviour
 {
+    [SerializeField] private MenuSoundHelper _soundHelper;
+    
     [SerializeField] private Image _player1PosImg;
     [SerializeField] private Image _player2PosImg;
 
@@ -22,6 +24,10 @@ public class UI_Char_Selector : MonoBehaviour
 
     private int charIndex1 = 0;
     private int charIndex2 = 0;
+    private float charDelay1 = 0;
+    private float charDelay2 = 0;
+
+    private bool isBothSelected = false;
 
     private event Action IsReady;
     private void Start()
@@ -34,6 +40,7 @@ public class UI_Char_Selector : MonoBehaviour
     private void OnEnable()
     {
 
+        isBothSelected = false;
         _inputSO1.ItemUseEvent += HandleSelectCharacter1;
         _inputSO1.MoveEvent += HandleMoveEvent1;
 
@@ -46,36 +53,68 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleCloseUIEvent()
     {
+
         UI_Manager.Instance.UIOpenOrClose(mapSelectUI, false, transform.parent.gameObject);
     }
 
     private void HandleGoToMapSelect()
     {
+        isBothSelected = true;
         UI_Manager.Instance.UIOpenOrClose(mapSelectUI, true, transform.parent.gameObject);
     }
 
     private void HandleMoveEvent1()
     {
+        _soundHelper.ChangeSound();
+        
         if (_characters[charIndex1].IsSelected1)
         {
             return;
         }
+
+        float lastTime = charDelay1;
+        charDelay1 = Time.time;
+
+        if (GamePadSystem.UseGamepad && (Time.time - lastTime) < 0.1f) {
+            return;
+        }
+
         Vector2 dir = _inputSO1.GetMoveDirection().normalized;
+        
+        // bool movePos = Mathf.Abs(dir.x) > 0.3f || Mathf.Abs(dir.y) > 0.3f;
+        // print($"test1: {test1} / movePos: {movePos} / {dir}");
+        // if (!test1) {
+        //     if (!movePos)
+        //         test1 = true;
+
+        //     return;
+        // }
+        // else if (movePos) {
+        //     test1 = false;
+        // }
+
+
         int tmpindex = charIndex1;
         Debug.Log(charIndex1);
-        charIndex1 += (int)dir.x;
-        charIndex1 += rightMaxIdx * -(int)dir.y;  //-1 이 들어오면..
+        charIndex1 += Mathf.RoundToInt(dir.x);
+        charIndex1 += rightMaxIdx * -Mathf.RoundToInt(dir.y);  //-1 이 들어오면..
         if (charIndex1 >= _characters.Length || charIndex1 < 0)
         {
             charIndex1 = tmpindex;
-
         }
         IsOnUp(1);
     }
 
     private void HandleSelectCharacter1()
     {
-        GameDataManager.Instance.player1_StatData = _characters[charIndex1].SelectCharacter1();
+        _soundHelper.SelectSound();
+        
+        if (isBothSelected)
+            return;
+        GameDataManager.Instance.player1_ObjData = _characters[charIndex1].SelectCharacter1();
+        GameDataManager.Instance.player1_StatData = _characters[charIndex1].playerStat;
+
+
         if (_characters[charIndex1].IsSelected1 == true && _characters[charIndex2].IsSelected2 == true)
         {
             IsReady?.Invoke();
@@ -84,14 +123,24 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleMoveEvent2()
     {
+        _soundHelper.ChangeSound();
+
         if (_characters[charIndex2].IsSelected2)
         {
             return;
         }
-        Vector2 dir = _inputSO2.GetMoveDirection();
+
+        Vector2 dir = _inputSO2.GetMoveDirection().normalized;
+        float lastTime = charDelay2;
+        charDelay2 = Time.time;
+
+        if (GamePadSystem.UseGamepad && (Time.time - lastTime) < 0.1f) {
+            return;
+        }
+
         int tmpindex = charIndex2;
-        charIndex2 += (int)dir.x;
-        charIndex2 += rightMaxIdx * -(int)dir.y;  //-1 이 들어오면..
+        charIndex2 += Mathf.RoundToInt(dir.x);
+        charIndex2 += rightMaxIdx * -Mathf.RoundToInt(dir.y);  //-1 이 들어오면..
         if (charIndex2 >= _characters.Length || charIndex2 < 0)
         {
             charIndex2 = tmpindex;
@@ -101,7 +150,12 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void HandleSelectCharacter2()
     {
-        GameDataManager.Instance.player2_StatData = _characters[charIndex2].SelectCharacter2();
+        _soundHelper.SelectSound();
+        
+        if (isBothSelected)
+            return;
+        GameDataManager.Instance.player2_ObjData = _characters[charIndex2].SelectCharacter2();
+        GameDataManager.Instance.player2_StatData = _characters[charIndex2].playerStat;
 
         if (_characters[charIndex1].IsSelected1 == true && _characters[charIndex2].IsSelected2 == true)
         {
@@ -139,6 +193,7 @@ public class UI_Char_Selector : MonoBehaviour
 
     private void OnDisable()
     {
+
         _inputSO1.ItemUseEvent -= HandleSelectCharacter1;
         _inputSO1.MoveEvent -= HandleMoveEvent1;
 

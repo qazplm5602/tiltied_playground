@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bfb8450481d2d488a8a92c05f898a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camMargin: {x: -3, y: 1.5, z: 5}
+  camMargin: {x: -2, y: 3, z: 5}
   maxY: 100
   cinemachine: {fileID: 8976422045272519801}
   endDuration: 5

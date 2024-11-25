@@ -67,6 +67,12 @@ public class ResultUI : MonoBehaviour
             } else {
                 sequence.Join(redScore.DOAnchorPosX(-440 - 60, 0.5f).SetEase(Ease.OutBack));
             }
+        } else {
+            sequence.Append(redScore.DOScale(Vector2.one * 0.8f, 0.3f).SetEase(Ease.OutBack));
+            // sequence.Join(redScore.DOAnchorPosX(-440 + 60, 0.5f).SetEase(Ease.OutBack));
+
+            sequence.Join(blueScore.DOScale(Vector2.one * 0.8f, 0.3f).SetEase(Ease.OutBack));
+            sequence.Join(blueScore.DOAnchorPosX(-193 - 65, 0.5f).SetEase(Ease.OutBack));
         }
     
         // 돌아가기 버튼임
@@ -84,18 +90,25 @@ public class ResultUI : MonoBehaviour
     IEnumerator SceneSequence() {
         GameMode gameMode = ManagerManager.GetManager<GameManager>().GetMode();
         BallAreaType? winTeam = gameMode.GetWinTeam();
-        if (winTeam == null) yield break; // 음.. 무승부는 어케하지
+        // if (winTeam == null) yield break; // 음.. 무승부는 어케하지
 
-        Player winPlayer = ManagerManager.GetManager<PlayerManager>().GetPlayer(winTeam.Value);
 
     
         ingameUI.Hide(1f);
 
         yield return new WaitForSecondsRealtime(5f);
 
+
+        if (winTeam != null) {
+            Player winPlayer = ManagerManager.GetManager<PlayerManager>().GetPlayer(winTeam.Value);
+            resultCam.StartCam(winPlayer.transform);
+        } else {
+            resultCam.GroundHit();
+        }
+
         CameraManager.Instance.Transition.FadeChangeCam(CameraType.Result_Player);
-        resultCam.StartCam(winPlayer.transform);
-        yield return new WaitForSecondsRealtime(resultCam.GetDuration() - 0.5f);
+        
+        yield return new WaitForSecondsRealtime(winTeam == null ? 1f : resultCam.GetDuration() - 0.5f);
 
         ShowResult(gameMode.RedScore, gameMode.BlueScore);
     }

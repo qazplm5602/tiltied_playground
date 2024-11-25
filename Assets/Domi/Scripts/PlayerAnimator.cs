@@ -25,7 +25,7 @@ public class PlayerAnimator : MonoBehaviour
     private void Awake() {
         animHashes = new();
         player = GetComponent<Player>();
-        player.ShootingEndEvent += Kick;
+        player.ShootingRunEvent += Kick;
 
         foreach (PlayerAnimState item in Enum.GetValues(typeof(PlayerAnimState)))
         {
@@ -35,7 +35,7 @@ public class PlayerAnimator : MonoBehaviour
     }
 
     private void OnDestroy() {
-        player.ShootingEndEvent -= Kick;
+        player.ShootingRunEvent -= Kick;
     }
 
     private void ChangeState(PlayerAnimState state) {
@@ -61,7 +61,7 @@ public class PlayerAnimator : MonoBehaviour
         if (currentState != PlayerAnimState.Idle && currentState != PlayerAnimState.Walk) return;
 
         Vector2 inputDir = player.PlayerControlSO.GetMoveDirection();
-        bool running = inputDir.sqrMagnitude > 0.1f;
+        bool running = !Mathf.Approximately(inputDir.sqrMagnitude, 0.0f);
         
         if (running && currentState == PlayerAnimState.Idle) {
             ChangeState(PlayerAnimState.Walk);
