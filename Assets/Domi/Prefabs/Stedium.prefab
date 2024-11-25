@@ -1340,7 +1340,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemSOs:
-  - {fileID: 11400000, guid: f02edaabe5c441542b48b113304e109d, type: 2}
+  - {fileID: 11400000, guid: 1dae750ccab1e424487b56c8f094741f, type: 2}
+  - {fileID: 11400000, guid: d46001e7d3fe2c3409159c89b110eb92, type: 2}
+  - {fileID: 11400000, guid: 4f80eab209b5a3e4d92bcd88f4e7b57b, type: 2}
   _itemSpawnRange: {x: 80, y: 40}
   _itemSpawnDelayTime: {x: 4, y: 10}
   _itemSpawnIteration: {x: 1, y: 2}

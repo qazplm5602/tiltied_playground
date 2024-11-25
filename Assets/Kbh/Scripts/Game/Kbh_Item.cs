@@ -44,7 +44,7 @@ public class Kbh_Item : MonoBehaviour
       _renderer.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
       _renderer.material.SetFloat("_Surface", 1);
       _renderer.material.SetFloat("_AlphaClip", 0);
-      _renderer.material.SetFloat("_Blend", (float)UnityEditor.Rendering.BuiltIn.ShaderGraph.BuiltInBaseShaderGUI.BlendMode.Alpha);
+      _renderer.material.SetFloat("_Blend", 0.0f);
       _renderer.material.SetFloat("_Cull", 0.0f);
       _renderer.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
       // _renderer.material.SetFloat("_SurfaceType", 0.0f);
