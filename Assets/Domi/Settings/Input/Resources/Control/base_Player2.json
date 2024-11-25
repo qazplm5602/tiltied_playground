@@ -3,49 +3,49 @@
     {
       "action": "Player/ItemUse",
       "id": "ee6b114a-4608-4d8b-bfce-de4067129ef2",
-      "path": "<Keyboard>/o",
+      "path": "<Keyboard>/e",
       "interactions": "null",
       "processors": "null"
     },
     {
       "action": "Player/Skill",
       "id": "ba94a56a-7c5b-48a4-8de1-e4b03658d16a",
-      "path": "<Keyboard>/u",
+      "path": "<Keyboard>/q",
       "interactions": "null",
       "processors": "null"
     },
     {
       "action": "Player/Interaction",
       "id": "838024c4-01c5-412d-8f16-602aea7f5654",
-      "path": "<Keyboard>/semicolon",
+      "path": "<Keyboard>/f",
       "interactions": "null",
       "processors": "null"
     },
     {
       "action": "Player/2D Vector/up",
       "id": "35d0cd9b-1f69-47d1-9e31-84d6de282898",
-      "path": "<Keyboard>/i",
+      "path": "<Keyboard>/w",
       "interactions": "null",
       "processors": "null"
     },
     {
       "action": "Player/2D Vector/down",
       "id": "6d2f8442-7822-4d72-a329-c9a8becf7ff6",
-      "path": "<Keyboard>/k",
+      "path": "<Keyboard>/s",
       "interactions": "null",
       "processors": "null"
     },
     {
       "action": "Player/2D Vector/left",
       "id": "e12d3e1e-2ad7-4008-ba4b-1865e1fb8bc9",
-      "path": "<Keyboard>/j",
+      "path": "<Keyboard>/a",
       "interactions": "null",
       "processors": "null"
     },
     {
       "action": "Player/2D Vector/right",
       "id": "736208f2-7b24-4c7e-b7bb-f55b9d38f144",
-      "path": "<Keyboard>/l",
+      "path": "<Keyboard>/d",
       "interactions": "null",
       "processors": "null"
     }

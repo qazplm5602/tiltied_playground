@@ -136,8 +136,10 @@ public class GameModeDefault : GameMode, IGameModeTimer, ICutsceneCallback
     [ContextMenu("testGameStop")]
     private void ImmediatelyGameStopTest()
     {
-        RedScore = UnityEngine.Random.Range(1, 50);
-        BlueScore = UnityEngine.Random.Range(0, 50);
+        // RedScore = UnityEngine.Random.Range(1, 50);
+        // BlueScore = UnityEngine.Random.Range(0, 50);
+        RedScore = 5;
+        BlueScore = 5;
 
         timer.SetTime(5);
     }

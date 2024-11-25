@@ -44,5 +44,11 @@ public class ResultCamera : MonoBehaviour
         cinemachine.transform.DOMoveY(startCamPos.y, endDuration).SetEase(animEase);
     }
 
+    public void GroundHit() {
+        cinemachine.Follow = null;
+        cinemachine.transform.position = new Vector3(0, 100f, 0);
+        cinemachine.transform.rotation = Quaternion.Euler(new Vector3(90f, 0, 0));
+    }
+
     public float GetDuration() => endDuration;
 }

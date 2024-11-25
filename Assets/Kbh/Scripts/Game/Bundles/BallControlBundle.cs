@@ -40,6 +40,10 @@ public class BallControlBundle : Bundle
       //   });
       _soccerBall.Kick(force);
    }
+   public void SetBallRotate(Vector3 dir, float speed) {
+      _soccerBall.BallRotate.SetSpeed(speed);
+      _soccerBall.BallRotate.SetDirection(dir);
+   }
 
    public override bool Registe(object obj = null)
    {

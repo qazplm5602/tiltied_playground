@@ -537,6 +537,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2665950119465807334}
     m_Modifications:
+    - target: {fileID: 1096163187500400793, guid: 029690f30ab1f2a45804d54fc7e910d4, type: 3}
+      propertyPath: m_TextWrappingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301574791842076366, guid: 029690f30ab1f2a45804d54fc7e910d4, type: 3}
+      propertyPath: m_TextWrappingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4763303255125304034, guid: 029690f30ab1f2a45804d54fc7e910d4, type: 3}
       propertyPath: m_Name
       value: IngameUICanvas
