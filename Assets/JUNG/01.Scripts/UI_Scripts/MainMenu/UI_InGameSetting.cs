@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class UI_InGameSetting : MonoBehaviour
 {
-    private PlayerControlSO escapeSO;
+    [SerializeField] private PlayerControlSO escapeSO;
     private GameObject childObj;
-    private bool IsOpenChildObj = false;
     private bool IsDoingOpen = false;
+    private bool IsPop = false;
     void Start()
     {
         childObj = GetComponentInChildren<GameObject>();
@@ -17,26 +17,26 @@ public class UI_InGameSetting : MonoBehaviour
 
     private void HandleOpenOrCloseStop()
     {
-
-        if (IsOpenChildObj && IsDoingOpen == false)
+        if (IsPop == true && IsDoingOpen == false)
         {
             IsDoingOpen = true;
-            childObj.SetActive(true);
+            childObj.transform.DOMoveY(1080f, 0.3f).SetEase(Ease.OutExpo).OnComplete(() =>
+            {
+                IsDoingOpen = false;
+                IsPop = false;
+            });
+        }
+        else if (IsPop == false && IsDoingOpen == false)
+        {
+            IsDoingOpen = true;
             childObj.transform.DOMoveY(0f, 0.3f).SetEase(Ease.OutExpo).OnComplete(() =>
             {
-                IsOpenChildObj = false;
-
+                IsDoingOpen = false;
+                IsPop = true;
             });
 
         }
-        else if (IsOpenChildObj == false && IsDoingOpen == false)
-        {
-            childObj.SetActive(true);
-            childObj.transform.DOLocalMoveY(1080f, 0.3f).SetEase(Ease.OutExpo).OnComplete(() =>
-            {
-                IsOpenChildObj = true;
-            });
-        }
+
 
     }
 
