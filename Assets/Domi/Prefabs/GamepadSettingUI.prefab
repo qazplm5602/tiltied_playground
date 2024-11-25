@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4373176670aa4ea42aa74ff44f84cd16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePadSys: {fileID: 11400000, guid: 97f6c6d62799d45448311588f8bcc609, type: 2}
+  gamePadSys: {fileID: 11400000, guid: 07b6440f8b566ee46ad38a679ad01433, type: 2}
   requireOpen: 1
   controlListTrm: {fileID: 6280950041833304149}
   controlBoxPrefab: {fileID: 803747465248964120, guid: d2a71a0fc70ddf84d995d8d1e7108ebd, type: 3}
