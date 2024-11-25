@@ -564,10 +564,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1237449037}
   m_HandleRect: {fileID: 2058932195}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.001
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1463,10 +1463,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1699517776}
   m_HandleRect: {fileID: 1997574154}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.001
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2043,6 +2043,7 @@ GameObject:
   - component: {fileID: 473432479}
   - component: {fileID: 473432478}
   - component: {fileID: 473432477}
+  - component: {fileID: 473432480}
   m_Layer: 5
   m_Name: ExitUIBtn
   m_TagString: Untagged
@@ -2164,6 +2165,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473432475}
   m_CullTransparentMesh: 1
+--- !u!114 &473432480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473432475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32127d58d911e2b478a1e2157fcec83f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickSound: {fileID: 11400000, guid: 91fbad80a56602244a58dc025c7c4a1d, type: 2}
+  _onSound: {fileID: 11400000, guid: e9a377124c9c0ee45848fcc308e0f419, type: 2}
 --- !u!1 &524232155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2962,8 +2977,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680633225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0151781915, y: 0.84985566, z: 0.026042594, w: -0.5261529}
-  m_LocalPosition: {x: 10.219134, y: 2.153067, z: 3.299084}
+  m_LocalRotation: {x: -0.0014601462, y: -0.98209834, z: 0.007493848, w: 0.18821442}
+  m_LocalPosition: {x: -3.387814, y: 2.779215, z: -1.168917}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5398,6 +5413,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playList:
   - {fileID: 11400000, guid: 158d2aab97da54c4f80c69d31f096dc5, type: 2}
+  - {fileID: 11400000, guid: 54a48399b6850134a9e0be8c4a7ed9bd, type: 2}
+  - {fileID: 11400000, guid: dfbf446f2f006084580d4d93ec8bfa54, type: 2}
+  - {fileID: 11400000, guid: 4cf456ad2e20f914f853dfaf1bc4d8b6, type: 2}
+  - {fileID: 11400000, guid: 9b22c162bd620ff4faedba1828de287a, type: 2}
 --- !u!1 &1108622432
 GameObject:
   m_ObjectHideFlags: 0
@@ -10758,6 +10777,7 @@ GameObject:
   - component: {fileID: 1914443751}
   - component: {fileID: 1914443750}
   - component: {fileID: 1914443749}
+  - component: {fileID: 1914443752}
   m_Layer: 5
   m_Name: MainMenuUIBtn
   m_TagString: Untagged
@@ -10879,6 +10899,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1914443747}
   m_CullTransparentMesh: 1
+--- !u!114 &1914443752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914443747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32127d58d911e2b478a1e2157fcec83f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickSound: {fileID: 11400000, guid: 91fbad80a56602244a58dc025c7c4a1d, type: 2}
+  _onSound: {fileID: 11400000, guid: e9a377124c9c0ee45848fcc308e0f419, type: 2}
 --- !u!1 &1919865265
 GameObject:
   m_ObjectHideFlags: 0
@@ -15856,13 +15890,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig:RightFoot'\n\tTransform 'mixamorig:LeftLeg'\n\tTransform
-    'mixamorig:LeftHand'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:Spine1'\n\tTransform
-    'mixamorig:Spine2'\n\tTransform 'mixamorig:LeftHandPinky3'\n\tTransform 'mixamorig:LeftHandThumb1'\n\tTransform
-    'mixamorig:RightHandPinky3'\n\tTransform 'mixamorig:LeftHandRing2'\n\tand more
-    ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -18118,13 +18146,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig:RightFoot'\n\tTransform 'mixamorig:LeftLeg'\n\tTransform
-    'mixamorig:LeftHand'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:Spine1'\n\tTransform
-    'mixamorig:Spine2'\n\tTransform 'mixamorig:LeftHandPinky3'\n\tTransform 'mixamorig:LeftHandThumb1'\n\tTransform
-    'mixamorig:RightHandPinky3'\n\tTransform 'mixamorig:LeftHandRing2'\n\tand more
-    ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
