@@ -4161,6 +4161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a440a1d53286ab245b747eca3d882a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundHelper: {fileID: 0}
   _charSelectUI: {fileID: 1684619331}
   _inputSO1: {fileID: 11400000, guid: 3b65716b6545d3540bdab38db3501e9b, type: 2}
   _inputSO2: {fileID: 11400000, guid: 0fff30bdbaa22294798e38b62d448d34, type: 2}
@@ -5058,6 +5059,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088878313}
   m_CullTransparentMesh: 1
+--- !u!1 &1096801337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1096801338}
+  - component: {fileID: 1096801339}
+  m_Layer: 0
+  m_Name: PlaylistBGM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1096801338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096801337}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27.623247, y: 37.134144, z: 28.477646}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1096801339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096801337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98538a00ead34af4da85338b34a02a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playList:
+  - {fileID: 11400000, guid: 158d2aab97da54c4f80c69d31f096dc5, type: 2}
+  - {fileID: 11400000, guid: 54a48399b6850134a9e0be8c4a7ed9bd, type: 2}
+  - {fileID: 11400000, guid: dfbf446f2f006084580d4d93ec8bfa54, type: 2}
+  - {fileID: 11400000, guid: 4cf456ad2e20f914f853dfaf1bc4d8b6, type: 2}
+  - {fileID: 11400000, guid: 9b22c162bd620ff4faedba1828de287a, type: 2}
 --- !u!1 &1108622432
 GameObject:
   m_ObjectHideFlags: 0
@@ -7043,6 +7094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027b43e92a9ff094d8669e33e75a28c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundHelper: {fileID: 0}
   _player1PosImg: {fileID: 654833422}
   _player2PosImg: {fileID: 1297709898}
   mapSelectUI: {fileID: 1425735046}
@@ -12014,3 +12066,4 @@ SceneRoots:
   - {fileID: 1339587116}
   - {fileID: 289898650}
   - {fileID: 1572046468}
+  - {fileID: 1096801338}
