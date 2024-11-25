@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 3033994069501878173}
   m_Layer: 0
   m_Name: Player1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
   _ballController:
     isRegisted: 0
     _ballControlType: 0
-  _itemIDs: 
+  _items: []
   _itemImages: []
   isKnockback: 0
 --- !u!114 &2482449241301958918

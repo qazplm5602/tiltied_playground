@@ -4,5 +4,9 @@ using UnityEngine;
 public class ItemSO : ScriptableObject
 {
     public StatType statType;
+    
+    public Texture texture;
     public int value;
+    public Vector3 appendingScale;
+    [Tooltip("지속 시간")] public float lastTime = 2f;
 }

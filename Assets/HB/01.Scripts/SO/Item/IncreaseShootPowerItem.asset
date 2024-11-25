@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: IncreaseShootPowerItem
   m_EditorClassIdentifier: 
   statType: 3
+  texture: {fileID: 2800000, guid: 0ce6f2df93c15c74981ff96b98963efa, type: 3}
   value: 30
+  appendingScale: {x: 1, y: 0, z: 1}
+  lastTime: 5
