@@ -42,6 +42,9 @@ public class Player : MonoBehaviour
     public event Action AttackEvent; // 공 없이 슈팅 누른 경우
     public event Action<float> BlindEvent; // 블라인드 스킬을 맞은 경우
 
+    // 아이템 이벤트
+    public event Action<int, ItemSO> ItemChangedEvent;
+
     private bool _isMeditation = false;
     public bool IsMeditation {
         get => _isMeditation;
@@ -189,10 +192,11 @@ public class Player : MonoBehaviour
 
        var itemInfo = _items[0];
        _items[0] = null;
+        ItemChangedEvent?.Invoke(0, null); // 사용함
 
 
        float easeTime = 0.2f;
-       Vector2 currentScale = transform.localScale;
+       Vector3 currentScale = transform.localScale;
        var tween = transform.DOScale(itemInfo.appendingScale, easeTime).SetRelative();
 
        PlayerStatSO.AddModifier(itemInfo.statType, itemInfo.value);
@@ -212,8 +216,11 @@ public class Player : MonoBehaviour
 
     private void HandleItemChange()
     {
-       if(_currentItemCnt == 2)
-          (_items[0], _items[1]) = (_items[1], _items[0]);
+       if(_currentItemCnt == 2) {
+            (_items[0], _items[1]) = (_items[1], _items[0]);
+            ItemChangedEvent?.Invoke(0, _items[0]);
+            ItemChangedEvent?.Invoke(1, _items[1]);
+       }
     }
     
     private void HandleSkillUse()
@@ -259,6 +266,7 @@ public class Player : MonoBehaviour
             var itemInfo = item.GetItemInfo();  
 
             _items[_currentItemCnt - 1] = itemInfo;
+            ItemChangedEvent?.Invoke(_currentItemCnt - 1, itemInfo);
         }
     }
 

@@ -1151,12 +1151,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemSOs:
-  - {fileID: 11400000, guid: 5e4e57c5c01c3db46abacdf4e8870ac2, type: 2}
-  - {fileID: 11400000, guid: f4c468a49b054314daa75226fbe5a42c, type: 2}
+  - {fileID: 11400000, guid: f02edaabe5c441542b48b113304e109d, type: 2}
   _itemSpawnRange: {x: 80, y: 40}
   _itemSpawnDelayTime: {x: 4, y: 10}
   _itemSpawnIteration: {x: 1, y: 2}
   _itemPrefab: {fileID: 2402754194451819262, guid: e1200a68e5968634b855bd9491f1de83, type: 3}
+  _itemList: []
 --- !u!1 &960402685
 GameObject:
   m_ObjectHideFlags: 0
@@ -5410,3 +5410,4 @@ SceneRoots:
   - {fileID: 1464904578}
   - {fileID: 1880981519}
   - {fileID: 150198958276788586}
+  - {fileID: 1002475614}
