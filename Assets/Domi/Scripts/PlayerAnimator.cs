@@ -12,6 +12,7 @@ public class PlayerAnimator : MonoBehaviour
 {
     private readonly int ANIM_WALK = Animator.StringToHash("Walk");
     private readonly int ANIM_KICK = Animator.StringToHash("Kick");
+    private readonly int ANIM_SPEED = Animator.StringToHash("Speed");
 
     [SerializeField] float kickDuration = 1f;
     [SerializeField] private Animator animator;
@@ -67,6 +68,10 @@ public class PlayerAnimator : MonoBehaviour
             ChangeState(PlayerAnimState.Walk);
         } else if (!running && currentState == PlayerAnimState.Walk) {
             ChangeState(PlayerAnimState.Idle);
+        }
+
+        if (currentState == PlayerAnimState.Walk) {
+            animator.SetFloat(ANIM_SPEED, player.GetNowSpeed() * 0.1f);
         }
     }
     

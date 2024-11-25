@@ -78,7 +78,11 @@ public class Player : MonoBehaviour
       }
    }
 
-
+    public float GetNowSpeed() {
+        Vector2 inputDir = PlayerControlSO.GetMoveDirection();
+        int speedValue = HasBall() ? PlayerStatSO.dribbleSpeed.GetValue() : PlayerStatSO.defaultSpeed.GetValue();
+        return speedValue * ballRotateCurve.Evaluate(inputDir.magnitude);
+    }
 
     private void Movement()
     {
@@ -93,16 +97,12 @@ public class Player : MonoBehaviour
         // inputDir.Normalize();
         Vector3 moveDir = new(inputDir.x, 0, inputDir.y);
 
-
-
-        int speedValue = HasBall() ? PlayerStatSO.dribbleSpeed.GetValue() : PlayerStatSO.defaultSpeed.GetValue();
-
         if (HasBall()) {
             Vector3 rotateDir = new Vector3(moveDir.z, 0, -moveDir.x);
-            Debug.Log($"{Mathf.Max(rotateDir.magnitude, 0.3f)} / {ballRotateCurve.Evaluate(rotateDir.magnitude)} / {speedValue * 20}");
-            _ballController.SetBallRotate(rotateDir.normalized, speedValue * 20 * ballRotateCurve.Evaluate(rotateDir.magnitude));
+            _ballController.SetBallRotate(rotateDir.normalized, GetNowSpeed() * 20);
         }
 
+        int speedValue = HasBall() ? PlayerStatSO.dribbleSpeed.GetValue() : PlayerStatSO.defaultSpeed.GetValue();
         transform.localPosition
            += moveDir * speedValue * Time.fixedDeltaTime;
 
