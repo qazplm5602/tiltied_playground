@@ -708,3 +708,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolManager: {fileID: 11400000, guid: 5ed5dff61c0e8e34c8c7f421bfda1f65, type: 2}
+  _audioMixer: {fileID: 24100000, guid: e5be5776e635f894cbe57afab9695baa, type: 2}
