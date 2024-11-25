@@ -12,7 +12,7 @@ public class UI_Settings : MonoBehaviour
     {
         float t = Mathf.InverseLerp(-60f, 0f, SoundManager.Instance.GetAudioValue("SFX"));
         _sfxSlider.value = Mathf.Lerp(0.001f, 1, t);
-        
+
         t = Mathf.InverseLerp(-60f, 0f, SoundManager.Instance.GetAudioValue("BGM"));
         _bgmSlider.value = Mathf.Lerp(0.001f, 1, t);
 
@@ -32,7 +32,10 @@ public class UI_Settings : MonoBehaviour
 
     private void OnEnable()
     {
-        _inputSO1.CloseUIEvent += HandleCloseUIEvent;
+        if (_inputSO1 != null)
+        {
+            _inputSO1.CloseUIEvent += HandleCloseUIEvent;
+        }
     }
 
     private void HandleCloseUIEvent()
@@ -41,7 +44,10 @@ public class UI_Settings : MonoBehaviour
     }
     private void OnDisable()
     {
-        _inputSO1.CloseUIEvent -= HandleCloseUIEvent;
+        if (_inputSO1 != null)
+        {
+            _inputSO1.CloseUIEvent -= HandleCloseUIEvent;
+        }
     }
 
 }

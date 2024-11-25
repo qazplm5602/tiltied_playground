@@ -1,0 +1,3 @@
+[submodule "Assets/Domi/Sounds/MainBGM"]
+	path = Assets/Domi/Sounds/MainBGM
+	url = https://github.com/qazplm5602/tiltied_playground_mainBGM.git

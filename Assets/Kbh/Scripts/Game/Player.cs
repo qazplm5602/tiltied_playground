@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEditor;
@@ -15,7 +16,8 @@ public class Player : MonoBehaviour
 
 
     private const int MAX_ITEM_COUNT = 2;
-    [SerializeField] private int[] _itemIDs;
+    [SerializeField] private ItemSO[] _items;
+    private int _currentItemCnt = 0;
 
     [Tooltip("아이템 미리보기를 위한 이미지들")]
     [SerializeField] private Sprite[] _itemImages;
@@ -24,8 +26,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float shootTakeDelay = 0.1f; // 슈팅 한 후 공을 가져갈 수 있는 쿨탐
     [SerializeField] private AnimationCurve ballRotateCurve; // 조금 움직였는데 너무 안움직이는 공 떄문에 함 ㅅㄱ
 
-    TagHandle _ballTag;
-    private bool HasBall() => BallControlBundle.GetBallOwner() == this;
+    TagHandle _ballTag, _itemTag;
+    private bool HasBall() => _ballController.isRegisted;
 
     private bool _prevShootKeyDown = false;
     private float _prevShootKeyDownTime = 0.0f;
@@ -53,8 +55,10 @@ public class Player : MonoBehaviour
         PlayerStatSO = Instantiate(PlayerStatSO);
 
         RigidbodyComponent = GetComponent<Rigidbody>();
-        _itemIDs = new int[MAX_ITEM_COUNT];
+        _items = new ItemSO[MAX_ITEM_COUNT];
+
         _ballTag = TagHandle.GetExistingTag("Ball");
+        _itemTag = TagHandle.GetExistingTag("Item");
     }
 
    private void Start() {
@@ -78,7 +82,11 @@ public class Player : MonoBehaviour
       }
    }
 
-
+    public float GetNowSpeed() {
+        Vector2 inputDir = PlayerControlSO.GetMoveDirection();
+        int speedValue = HasBall() ? PlayerStatSO.dribbleSpeed.GetValue() : PlayerStatSO.defaultSpeed.GetValue();
+        return speedValue * ballRotateCurve.Evaluate(inputDir.magnitude);
+    }
 
     private void Movement()
     {
@@ -93,16 +101,12 @@ public class Player : MonoBehaviour
         // inputDir.Normalize();
         Vector3 moveDir = new(inputDir.x, 0, inputDir.y);
 
-
-
-        int speedValue = HasBall() ? PlayerStatSO.dribbleSpeed.GetValue() : PlayerStatSO.defaultSpeed.GetValue();
-
         if (HasBall()) {
             Vector3 rotateDir = new Vector3(moveDir.z, 0, -moveDir.x);
-            Debug.Log($"{Mathf.Max(rotateDir.magnitude, 0.3f)} / {ballRotateCurve.Evaluate(rotateDir.magnitude)} / {speedValue * 20}");
-            _ballController.SetBallRotate(rotateDir.normalized, speedValue * 20 * ballRotateCurve.Evaluate(rotateDir.magnitude));
+            _ballController.SetBallRotate(rotateDir.normalized, GetNowSpeed() * 20);
         }
 
+        int speedValue = HasBall() ? PlayerStatSO.dribbleSpeed.GetValue() : PlayerStatSO.defaultSpeed.GetValue();
         transform.localPosition
            += moveDir * speedValue * Time.fixedDeltaTime;
 
@@ -127,8 +131,7 @@ public class Player : MonoBehaviour
             if (isPerformed)
             {
                 TryInterect();
-
-                shootWait = StartCoroutine(ShootTimer());
+                DOVirtual.DelayedCall(5f, Shooting);
             }
             else {
                 Shooting();
@@ -179,23 +182,38 @@ public class Player : MonoBehaviour
             ShootingEndEvent?.Invoke();
     }
 
-    private IEnumerator ShootTimer()
-    {
-        yield return new WaitForSeconds(4);
-
-        shootWait = null;
-        Shooting();
-    }
 
     private void HandleItemUse()
     {
-        // itemIDs[0]를 사용하고
-        _itemIDs[0] = 0; // 비운다. 
+       if(_currentItemCnt == 0) return;
+
+       var itemInfo = _items[0];
+       _items[0] = null;
+
+
+       float easeTime = 0.2f;
+       Vector2 currentScale = transform.localScale;
+       var tween = transform.DOScale(itemInfo.appendingScale, easeTime).SetRelative();
+
+       PlayerStatSO.AddModifier(itemInfo.statType, itemInfo.value);
+       
+       DOVirtual.DelayedCall(itemInfo.lastTime, () =>
+       {
+           if (tween is not null && tween.IsActive())
+               tween.Kill();
+       
+           PlayerStatSO.RemoveModifier(itemInfo.statType, itemInfo.value);
+           transform.DOScale(currentScale, easeTime);
+       });
+
+       HandleItemChange(); // 아이템 위치를 밀어준다.
+       --_currentItemCnt;
     }
 
     private void HandleItemChange()
     {
-        (_itemIDs[0], _itemIDs[1]) = (_itemIDs[1], _itemIDs[0]);
+       if(_currentItemCnt == 2)
+          (_items[0], _items[1]) = (_items[1], _items[0]);
     }
     
     private void HandleSkillUse()
@@ -226,10 +244,25 @@ public class Player : MonoBehaviour
         {
             this.Registe(_ballController);
         }
-
     }
 
-    public void SetControl(PlayerControlSO control)
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag(_itemTag))
+        {
+           if(_currentItemCnt >= MAX_ITEM_COUNT)
+               return;
+
+            ++_currentItemCnt;
+
+            var item = other.GetComponent<Kbh_Item>();
+            var itemInfo = item.GetItemInfo();  
+
+            _items[_currentItemCnt - 1] = itemInfo;
+        }
+    }
+
+   public void SetControl(PlayerControlSO control)
     {
         PlayerControlSO = control;
     }

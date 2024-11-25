@@ -5,39 +5,45 @@ using UnityEngine.SceneManagement;
 
 public class UI_InGameSetting : MonoBehaviour
 {
-    private PlayerControlSO escapeSO;
-    private GameObject childObj;
-    private bool IsOpenChildObj = false;
+    [SerializeField] private PlayerControlSO escapeSO;
+    [SerializeField] private GameObject baseSettingObj;
+    [SerializeField] private GameObject keyboardSettingObj;
     private bool IsDoingOpen = false;
+    private bool IsPop = false;
     void Start()
     {
-        childObj = GetComponentInChildren<GameObject>();
         escapeSO.CloseUIEvent += HandleOpenOrCloseStop;
     }
 
     private void HandleOpenOrCloseStop()
     {
-
-        if (IsOpenChildObj && IsDoingOpen == false)
+        if (IsPop == true && IsDoingOpen == false)
+        {
+            Time.timeScale = 1;
+            IsDoingOpen = true;
+            keyboardSettingObj.SetActive(false);
+            baseSettingObj.transform.DOLocalMoveY(1080f, 0.5f).SetEase(Ease.OutExpo).OnComplete(() =>
+            {
+                IsDoingOpen = false;
+                IsPop = false;
+            });
+        }
+        else if (IsPop == false && IsDoingOpen == false)
         {
             IsDoingOpen = true;
-            childObj.SetActive(true);
-            childObj.transform.DOMoveY(0f, 0.3f).SetEase(Ease.OutExpo).OnComplete(() =>
+            baseSettingObj.transform.DOLocalMoveY(0f, 0.5f).SetEase(Ease.OutExpo).OnComplete(() =>
             {
-                IsOpenChildObj = false;
-
+                IsDoingOpen = false;
+                IsPop = true;
+                Time.timeScale = 0;
             });
 
         }
-        else if (IsOpenChildObj == false && IsDoingOpen == false)
-        {
-            childObj.SetActive(true);
-            childObj.transform.DOLocalMoveY(1080f, 0.3f).SetEase(Ease.OutExpo).OnComplete(() =>
-            {
-                IsOpenChildObj = true;
-            });
-        }
+    }
 
+    public void OpenKeyBoardSetting()
+    {
+        keyboardSettingObj.SetActive(true);
     }
 
     private void OnDestroy()
