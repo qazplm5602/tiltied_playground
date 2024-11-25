@@ -52,7 +52,8 @@ public class PlayerControlSO : ScriptableObject, Controls.IPlayerActions
         controls.LoadBindingOverridesFromJson(data.ToString());
     }
 
-    public void SetDevices(List<InputDevice> devices) {
+    public void SetDevices(List<InputDevice> devices)
+    {
         Debug.Log($"SetDevices {devices}");
         controls.devices = devices.ToArray();
     }

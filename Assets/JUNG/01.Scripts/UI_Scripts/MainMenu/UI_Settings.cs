@@ -38,7 +38,7 @@ public class UI_Settings : MonoBehaviour
         }
     }
 
-    private void HandleCloseUIEvent()
+    public void HandleCloseUIEvent()
     {
         UI_Manager.Instance.UIOpenOrClose(gameObject, false, gameObject);
     }

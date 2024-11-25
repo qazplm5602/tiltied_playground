@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class UI_InGameSetting : MonoBehaviour
 {
     [SerializeField] private PlayerControlSO escapeSO;
-    private GameObject childObj;
+    [SerializeField] private GameObject baseSettingObj;
+    [SerializeField] private GameObject keyboardSettingObj;
     private bool IsDoingOpen = false;
     private bool IsPop = false;
     void Start()
     {
-        childObj = GetComponentInChildren<GameObject>();
         escapeSO.CloseUIEvent += HandleOpenOrCloseStop;
     }
 
@@ -19,27 +19,31 @@ public class UI_InGameSetting : MonoBehaviour
     {
         if (IsPop == true && IsDoingOpen == false)
         {
+            Time.timeScale = 1;
             IsDoingOpen = true;
-            childObj.transform.DOMoveY(1080f, 0.3f).SetEase(Ease.OutExpo).OnComplete(() =>
+            keyboardSettingObj.SetActive(false);
+            baseSettingObj.transform.DOLocalMoveY(1080f, 0.5f).SetEase(Ease.OutExpo).OnComplete(() =>
             {
                 IsDoingOpen = false;
                 IsPop = false;
-                Time.timeScale = 0;
             });
         }
         else if (IsPop == false && IsDoingOpen == false)
         {
             IsDoingOpen = true;
-            childObj.transform.DOMoveY(0f, 0.3f).SetEase(Ease.OutExpo).OnComplete(() =>
+            baseSettingObj.transform.DOLocalMoveY(0f, 0.5f).SetEase(Ease.OutExpo).OnComplete(() =>
             {
                 IsDoingOpen = false;
                 IsPop = true;
-                Time.timeScale = 1;
+                Time.timeScale = 0;
             });
 
         }
+    }
 
-
+    public void OpenKeyBoardSetting()
+    {
+        keyboardSettingObj.SetActive(true);
     }
 
     private void OnDestroy()

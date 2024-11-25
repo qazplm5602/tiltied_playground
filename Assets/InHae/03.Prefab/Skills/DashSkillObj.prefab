@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData: {fileID: 11400000, guid: 14eb648d46f2aad4ab0b7dcc8a0ed993, type: 2}
-  dashSound: {fileID: 0}
+  dashSound: {fileID: 11400000, guid: 0ab60cfa0241a3b4aa534a9e7dcc9e7c, type: 2}
   dashEffectPrefab: {fileID: 7015326572812637069, guid: 2f554a07419ffd44496704efbc901c68, type: 3}
   _dashDuration: 0.2
   _dashSpeed: 30

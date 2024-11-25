@@ -136,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ffc3e2b6b97f6043b3914ccd938022e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _openingSound: {fileID: 11400000, guid: f8b65695108b8054bb8e022cf8d1cffb, type: 2}
+  _inGameSound: {fileID: 11400000, guid: f4bdaf3b9bbaab943af9ad58ad33c8ae, type: 2}
 --- !u!320 &885842877299434355
 PlayableDirector:
   m_ObjectHideFlags: 0
