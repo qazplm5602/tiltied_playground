@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c5124b423cb66b4ca8f1aebc91b0727, type: 3}
+  m_Name: BlindSkillData
+  m_EditorClassIdentifier: 
+  skillType: 7
+  defaultCool: 9
+  skillIcon: {fileID: 21300000, guid: dacd24304318af24aa3f18c5d48e26f7, type: 3}
+  skillInfo: "\uB208\uC744 \uAC00\uB824 \uC29B\uAC8C\uC774\uC9C0\uB97C \uC548\uBCF4\uC774\uAC8C
+    \uB9CC\uB4E0\uB2E4."

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BlindSkill : SkillBase
 {
+    [SerializeField] private SoundSO _sound;
     [SerializeField] private float _blindTime = 5.0f;
     private Player _otherPlayer;
 
@@ -15,6 +16,7 @@ public class BlindSkill : SkillBase
 
     public override void UseSkill()
     {
+        SoundManager.Instance.PlaySFX(transform.position, _sound);
         _otherPlayer.BlindSkill(_blindTime);
     }
 }
