@@ -98,10 +98,11 @@ public class Player : MonoBehaviour
     {
         Vector2 inputDir = -PlayerControlSO.GetMoveDirection(); // 카메라가 반대라서 인풋도 반대임 ㅋㅋ
         if (inputDir.x == 0 && inputDir.y == 0)
-        {
+        {   
             if (HasBall()) // 공 안굴러 감
                 _ballController.SetBallRotate(Vector3.zero, 0);
 
+            RigidbodyComponent.linearVelocity = Vector3.zero;
             return;
         }
 
@@ -115,8 +116,8 @@ public class Player : MonoBehaviour
         }
 
         int speedValue = HasBall() ? PlayerStatSO.dribbleSpeed.GetValue() : PlayerStatSO.defaultSpeed.GetValue();
-        transform.localPosition
-           += moveDir * speedValue * Time.fixedDeltaTime;
+        RigidbodyComponent.linearVelocity = moveDir * (speedValue * 60f * Time.fixedDeltaTime);
+        //transform.localPosition += moveDir * (speedValue * Time.fixedDeltaTime);
 
         transform.localRotation
            = Quaternion.Lerp(transform.localRotation,
@@ -224,20 +225,20 @@ public class Player : MonoBehaviour
         ItemChangedEvent?.Invoke(0, null); // 사용함
 
 
-        /*float easeTime = 0.2f;
-        Vector3 currentScale = transform.localScale;
-        var tween = transform.DOScale(itemInfo.appendingScale, easeTime).SetRelative();
+        //float easeTime = 0.2f;
+        //Vector3 currentScale = transform.localScale;
+        //var tween = transform.DOScale(itemInfo.appendingScale, easeTime).SetRelative();
 
         PlayerStatSO.AddModifier(itemInfo.statType, itemInfo.value);
 
         DOVirtual.DelayedCall(itemInfo.lastTime, () =>
         {
-            if (tween is not null && tween.IsActive())
-                tween.Kill();
+            //if (tween is not null && tween.IsActive())
+            //tween.Kill();
 
-            PlayerStatSO.RemoveModifier(itemInfo.statType, itemInfo.value);
-            transform.DOScale(currentScale, easeTime);
-        });*/
+            PlayerStatSO.RemoveModifier(itemInfo.statType, itemInfo.value);        
+            //transform.DOScale(currentScale, easeTime);
+        });
 
         HandleItemChange(); // 아이템 위치를 밀어준다.
         --_currentItemCnt;

@@ -23,6 +23,7 @@ public class Item : MonoBehaviour
         for (int i = 0; i < _itemSO.Length; i++)
         {
             player.PlayerStatSO.AddModifier(_itemSO[i].statType, _itemSO[i].value);
+            
         }
 
         yield return new WaitForSeconds(buffTime);
@@ -37,6 +38,7 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.attachedRigidbody)
         {
+            Debug.Log(other.name);
             if (other.TryGetComponent<Player>(out Player player))
             {
                 StartCoroutine(GetItem(player));

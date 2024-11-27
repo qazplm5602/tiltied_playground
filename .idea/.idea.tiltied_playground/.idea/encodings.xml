@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Assets/HB/01.Scripts/Item/Inventory.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/HB/01.Scripts/Item/Item.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/HB/01.Scripts/Item/ItemSO.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/HB/01.Scripts/Skill/Skill.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/HB/01.Scripts/Stat/PlayerStatsSO.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/HB/01.Scripts/UI/ShootGauge.cs" charset="x-windows-949" />

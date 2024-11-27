@@ -61,12 +61,11 @@ public class Kbh_Item : MonoBehaviour
    {
       if (_IsActive && other.CompareTag(_playerTag))
       {
+         Debug.Log(other.name);
          _collider.enabled = false;
          _renderer.enabled = false;
          _IsActive = false;
+         OnDestroy?.Invoke(this);
       }
-
-      OnDestroy?.Invoke(this);
    }
-
 }
