@@ -135,13 +135,13 @@ public class Player : MonoBehaviour
     private void HandleInterect(bool isPerformed)
     {
         if (HasBall())
-        {
-            if (isPerformed)
+        {   
+            if (isPerformed && !_isMeditation)
             {
                 TryInterect();
-                DOVirtual.DelayedCall(5f, Shooting);
+                shootWait = StartCoroutine(ShootWaitRoutine());
             }
-            else
+            else 
             {
                 Shooting();
                 ShootStop(false);
@@ -192,6 +192,28 @@ public class Player : MonoBehaviour
             ShootingEndEvent?.Invoke();
     }
 
+    private IEnumerator ShootWaitRoutine()
+    {
+        float elapseTime = 0f;
+        
+        while (true)
+        {
+            elapseTime += Time.deltaTime;
+
+            if (_isMeditation)
+            {
+                ShootStop();
+                break;
+            }
+            
+            if (elapseTime >= 5)
+            {
+                Shooting();
+                break;
+            }
+            yield return null;
+        }
+    }
 
     private void HandleItemUse()
     {
