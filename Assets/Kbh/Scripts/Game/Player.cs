@@ -46,7 +46,8 @@ public class Player : MonoBehaviour
     public event Action<int, ItemSO> ItemChangedEvent;
 
     private bool _isMeditation = false;
-    public bool IsMeditation {
+    public bool IsMeditation
+    {
         get => _isMeditation;
         set { _isMeditation = value; }
     }
@@ -64,28 +65,30 @@ public class Player : MonoBehaviour
         _itemTag = TagHandle.GetExistingTag("Item");
     }
 
-   private void Start() {
-      PlayerControlSO.ItemChangeEvent += HandleItemChange;
-      PlayerControlSO.ItemUseEvent += HandleItemUse;
-      PlayerControlSO.InteractEvent += HandleInterect;
-      PlayerControlSO.SkillEvent += HandleSkillUse;
-   }
+    private void Start()
+    {
+        PlayerControlSO.ItemChangeEvent += HandleItemChange;
+        PlayerControlSO.ItemUseEvent += HandleItemUse;
+        PlayerControlSO.InteractEvent += HandleInterect;
+        PlayerControlSO.SkillEvent += HandleSkillUse;
+    }
 
-   private void FixedUpdate()
-   {
-      if (_isMeditation) return;
+    private void FixedUpdate()
+    {
+        if (_isMeditation) return;
 
-      if(isKnockback)
-      {
-         // 다른 플레이어로부터 타격을 받았을 경우
-      }
-      else
-      {
-         Movement();
-      }
-   }
+        if (isKnockback)
+        {
+            // 다른 플레이어로부터 타격을 받았을 경우
+        }
+        else
+        {
+            Movement();
+        }
+    }
 
-    public float GetNowSpeed() {
+    public float GetNowSpeed()
+    {
         Vector2 inputDir = PlayerControlSO.GetMoveDirection();
         int speedValue = HasBall() ? PlayerStatSO.dribbleSpeed.GetValue() : PlayerStatSO.defaultSpeed.GetValue();
         return speedValue * ballRotateCurve.Evaluate(inputDir.magnitude);
@@ -94,7 +97,8 @@ public class Player : MonoBehaviour
     private void Movement()
     {
         Vector2 inputDir = -PlayerControlSO.GetMoveDirection(); // 카메라가 반대라서 인풋도 반대임 ㅋㅋ
-        if (inputDir.x == 0 && inputDir.y == 0) {
+        if (inputDir.x == 0 && inputDir.y == 0)
+        {
             if (HasBall()) // 공 안굴러 감
                 _ballController.SetBallRotate(Vector3.zero, 0);
 
@@ -104,7 +108,8 @@ public class Player : MonoBehaviour
         // inputDir.Normalize();
         Vector3 moveDir = new(inputDir.x, 0, inputDir.y);
 
-        if (HasBall()) {
+        if (HasBall())
+        {
             Vector3 rotateDir = new Vector3(moveDir.z, 0, -moveDir.x);
             _ballController.SetBallRotate(rotateDir.normalized, GetNowSpeed() * 20);
         }
@@ -136,11 +141,12 @@ public class Player : MonoBehaviour
                 TryInterect();
                 DOVirtual.DelayedCall(5f, Shooting);
             }
-            else {
+            else
+            {
                 Shooting();
                 ShootStop(false);
             }
-        } 
+        }
         else
         {
             if (isPerformed)
@@ -175,7 +181,8 @@ public class Player : MonoBehaviour
         ShootingEndEvent?.Invoke();
     }
 
-    private void ShootStop(bool callEvent = true) {
+    private void ShootStop(bool callEvent = true)
+    {
         if (shootWait == null) return;
         StopCoroutine(shootWait);
 
@@ -188,53 +195,56 @@ public class Player : MonoBehaviour
 
     private void HandleItemUse()
     {
-       if(_currentItemCnt == 0) return;
+        if (_currentItemCnt == 0) return;
 
-       var itemInfo = _items[0];
-       _items[0] = null;
+        var itemInfo = _items[0];
+        _items[0] = null;
         ItemChangedEvent?.Invoke(0, null); // 사용함
 
 
-       float easeTime = 0.2f;
-       Vector3 currentScale = transform.localScale;
-       var tween = transform.DOScale(itemInfo.appendingScale, easeTime).SetRelative();
+        /*float easeTime = 0.2f;
+        Vector3 currentScale = transform.localScale;
+        var tween = transform.DOScale(itemInfo.appendingScale, easeTime).SetRelative();
 
-       PlayerStatSO.AddModifier(itemInfo.statType, itemInfo.value);
-       
-       DOVirtual.DelayedCall(itemInfo.lastTime, () =>
-       {
-           if (tween is not null && tween.IsActive())
-               tween.Kill();
-       
-           PlayerStatSO.RemoveModifier(itemInfo.statType, itemInfo.value);
-           transform.DOScale(currentScale, easeTime);
-       });
+        PlayerStatSO.AddModifier(itemInfo.statType, itemInfo.value);
 
-       HandleItemChange(); // 아이템 위치를 밀어준다.
-       --_currentItemCnt;
+        DOVirtual.DelayedCall(itemInfo.lastTime, () =>
+        {
+            if (tween is not null && tween.IsActive())
+                tween.Kill();
+
+            PlayerStatSO.RemoveModifier(itemInfo.statType, itemInfo.value);
+            transform.DOScale(currentScale, easeTime);
+        });*/
+
+        HandleItemChange(); // 아이템 위치를 밀어준다.
+        --_currentItemCnt;
     }
 
     private void HandleItemChange()
     {
-       if(_currentItemCnt == 2) {
+        if (_currentItemCnt == 2)
+        {
             (_items[0], _items[1]) = (_items[1], _items[0]);
             ItemChangedEvent?.Invoke(0, _items[0]);
             ItemChangedEvent?.Invoke(1, _items[1]);
-       }
+        }
     }
-    
+
     private void HandleSkillUse()
     {
         if (_currentSkill.SkillUseAbleCheck())
             _currentSkill.UseSkill();
     }
-    
+
     // 강제적으로 공 가져옴
-    public void ForceTakeBall() {
+    public void ForceTakeBall()
+    {
         this.Registe(_ballController);
     }
     // 강제적으로 공 뺏음 ㅅㄱ
-    public void ForceReleseBall() {
+    public void ForceReleseBall()
+    {
         ShootStop();
         this.Release(_ballController);
     }
@@ -255,22 +265,22 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag(_itemTag))
+        if (other.CompareTag(_itemTag))
         {
-           if(_currentItemCnt >= MAX_ITEM_COUNT)
-               return;
+            if (_currentItemCnt >= MAX_ITEM_COUNT)
+                return;
 
             ++_currentItemCnt;
 
             var item = other.GetComponent<Kbh_Item>();
-            var itemInfo = item.GetItemInfo();  
+            var itemInfo = item.GetItemInfo();
 
             _items[_currentItemCnt - 1] = itemInfo;
             ItemChangedEvent?.Invoke(_currentItemCnt - 1, itemInfo);
         }
     }
 
-   public void SetControl(PlayerControlSO control)
+    public void SetControl(PlayerControlSO control)
     {
         PlayerControlSO = control;
     }
@@ -283,20 +293,21 @@ public class Player : MonoBehaviour
 
     private void SkillInit()
     {
-        if(_currentSkill != null)
+        if (_currentSkill != null)
             return;
-        
+
         _currentSkill = Instantiate(SkillManager.Instance.GetSkill(PlayerStatSO.skillData.skillType), transform);
         _currentSkill.Init(this);
     }
 
     [SerializeField] private float allowBallAngle = 60f; // 앞쪽 허용 각도 (60도)
-    public bool IsLookObject(Transform targetTrm) {
+    public bool IsLookObject(Transform targetTrm)
+    {
         // 플레이어 위치와 방향
         Vector3 playerForward = transform.forward;
         Vector3 directionToTarget = (targetTrm.position - transform.position).normalized;
         float dot = Vector3.Dot(playerForward, directionToTarget);
-        
+
         return dot >= Mathf.Cos(allowBallAngle * Mathf.Deg2Rad);
     }
 
