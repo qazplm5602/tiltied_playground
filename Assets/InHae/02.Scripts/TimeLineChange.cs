@@ -14,6 +14,8 @@ public class TimeLineChange : MonoBehaviour
     private void Awake()
     {
         _playableDirector = GetComponent<PlayableDirector>();
+        _playableDirector.playableAsset = _timelineList[_timeLineIdx];
+        _playableDirector.Play();
     }
 
     public void ChangeTrack()

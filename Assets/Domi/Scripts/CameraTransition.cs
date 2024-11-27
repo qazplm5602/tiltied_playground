@@ -27,7 +27,7 @@ public class CameraTransition : MonoBehaviour
     }
 
     private void OnSceneLoad(Scene scene, LoadSceneMode mode) {
-        screen = FindObjectsByType<RawImage>(FindObjectsInactive.Include, FindObjectsSortMode.None).First(v => v.gameObject.name == screenName);
+        screen = FindObjectsByType<RawImage>(FindObjectsInactive.Include, FindObjectsSortMode.None).FirstOrDefault(v => v.gameObject.name == screenName);
 
         if (screen == null)
             Debug.LogWarning("Fade In/Out을 할 RawImage가 없습니다.");
