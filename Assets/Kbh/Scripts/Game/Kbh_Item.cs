@@ -65,7 +65,9 @@ public class Kbh_Item : MonoBehaviour
          _collider.enabled = false;
          _renderer.enabled = false;
          _IsActive = false;
-         OnDestroy?.Invoke(this);
       }
+      
+      if(!other.CompareTag("Ball"))
+         OnDestroy?.Invoke(this);
    }
 }

@@ -19,18 +19,21 @@ public class ShootGauge : MonoBehaviour
     private Tweener _scaleTweener;
     private Tweener _fadeTweener;
 
+    private bool _init;
+
     private void Start()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
-        _player = GetComponentInParent<Player>();
+        _player = GetComponentInParent<Player>(true);
         _fillImage = _fill.GetComponent<Image>();
         _parentWidth = (_fill.parent as RectTransform).sizeDelta.x;
         print($"_parentWidth {_parentWidth}");
-
+        
         _player.ShootingStartEvent += HandleShootingStart;
         _player.ShootingEndEvent += HandleShootingEnd;
         _player.BlindEvent += HandleBlindSkill;
-
+        _init = true;
+        
         _canvasGroup.alpha = 0;
         _fillImage.color = new Color(1, 0, 0);
     }
@@ -103,8 +106,11 @@ public class ShootGauge : MonoBehaviour
 
     private void OnDestroy()
     {
-        _player.ShootingStartEvent -= HandleShootingStart;
-        _player.ShootingEndEvent -= HandleShootingEnd;
+        if (_init)
+        {
+            _player.ShootingStartEvent -= HandleShootingStart;
+            _player.ShootingEndEvent -= HandleShootingEnd;
+        }
 
         _colorSequence?.Kill();
         _scaleTweener?.Kill();

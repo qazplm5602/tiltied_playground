@@ -51,6 +51,10 @@ public class UI_Settings : MonoBehaviour
         }
     }
 
-    public void HandleMainMenu() => SceneManager.LoadScene("MainScene");
-
+    //public void HandleMainMenu() => LoadingManager.LoadScene("MainScene");
+    public void HandleMainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainScene");
+    }
 }

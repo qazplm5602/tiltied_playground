@@ -17,6 +17,8 @@ public class SoccerBall : MonoBehaviour
     private BallControlBundle ownerControl;
     private BallGoalSimulateManager ballSimulater;
 
+    private bool _init;
+
     private void Awake() {
         rigid = GetComponent<Rigidbody>();
         ballSimulater = ManagerManager.GetManager<BallGoalSimulateManager>();
@@ -24,6 +26,7 @@ public class SoccerBall : MonoBehaviour
         BallRotate = visual.GetComponent<SoccerBallRotate>();
 
         spawnPoint = GameObject.Find(spawnPointName)?.transform;
+        _init = true;
 
         if (spawnPoint == null)
             Debug.LogWarning("Not Found Ball Spawn Point");
@@ -35,7 +38,11 @@ public class SoccerBall : MonoBehaviour
         transform.position = visual.position;
     }
 
-    public void BallReset() {
+    public void BallReset()
+    {
+        if (rigid == null)
+            return;
+        
         rigid.linearVelocity = rigid.angularVelocity = Vector3.zero;
         transform.position = spawnPoint.position;
         OnReset?.Invoke();
