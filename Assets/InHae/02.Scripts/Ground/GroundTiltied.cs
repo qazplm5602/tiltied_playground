@@ -51,9 +51,8 @@ public class GroundTiltied : MonoBehaviour, IGroundCompo
         ApplyRotate();
     }
 
-    // 차이에 따른 
     private void ApplyRotate()
-    {
+    {   
         float rotValue = Mathf.Abs(_leftMassSum - _rightMassSum) * _rotWeight;
         _rotTime = Mathf.Clamp(rotValue * 0.5f, 1, 4);
         
